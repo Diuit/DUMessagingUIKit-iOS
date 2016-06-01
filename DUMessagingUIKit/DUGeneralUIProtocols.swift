@@ -14,7 +14,7 @@ public protocol BackGroundColor { var myBackgroundColor: UIColor { get } }
 public protocol TintColor       { var myTintColor: UIColor       { get } }
 
 // UIBarButton
-@objc public enum UIBarButtonType: Int {
+public enum UIBarButtonType {
     case imageButton, textButton, noButton
 }
 
@@ -24,22 +24,38 @@ public protocol BarButton {
 public protocol RightBarButton: BarButton {
     var rightBarButtonImage: UIImage? { get }
     var rightBarButtonText: String? { get }
+    var didClickRightBarButton: Void->Void { get }
 }
 
 
 // UINavigationBar
 public protocol NavigationBarStyle {
     var myBarTintColor: UIColor? { get }
-    var myNavigationBarTitle: String { get }
     var myNavigationBarTextColor: UIColor { get }
+    var myNavigationBartTextFont: UIFont { get }
 }
 
-// adopt ui protocol
-public protocol DUMessagingUIProtocol {
+public protocol NavigationBarTitle {
+    var myBarTitle: String { get }
+}
+
+// method to adopt ui protocol
+public protocol UIProtocolAdoption {
     func adoptProtocolUIApperance()
 }
 
 // Global UI with default setting
+public protocol GlobalUISetting: NavigationBarStyle, TintColor {}
+// FIXME: global setting value should return from an sharedInstance struct (or class?)
+public extension GlobalUISetting {
+    var myBarTintColor: UIColor? { return nil }
+    var myNavigationBarTextColor: UIColor { return UIColor.DUWaterBlueColor() }
+    var myNavigationBartTextFont: UIFont { return UIFont.DUNavigationFont()! }
+    
+    var myTintColor: UIColor { return UIColor.DUWaterBlueColor() }
+}
+
+
 public protocol GlobalTheme: TintColor, NavigationBarStyle { }
 public extension GlobalTheme {
     var myTintColor: UIColor { return UIColor.DUWaterBlueColor() }
@@ -47,8 +63,11 @@ public extension GlobalTheme {
     var myBarTintColor: UIColor? { return nil }
     
     var myNavigationBarTextColor: UIColor { return UIColor.DUWaterBlueColor() }
+    // FIXME: delete later
+    var myNavigationBartTextFont: UIFont { return UIFont.DUNavigationFont()! }
 }
 
+// TODO: this may be unneccesary?
 public extension UIApplicationDelegate {
     func adoptGlobalUIApperance() {
         if let mySelf = self as? GlobalTheme {

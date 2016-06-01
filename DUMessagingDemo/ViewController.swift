@@ -10,11 +10,15 @@ import UIKit
 import DUMessagingUIKit
 import DUMessaging
 
-class ViewController: DUChatListTableViewController {
-    override var myNavigationBarTitle: String { return "custom from client" }
-
+class ViewController: UITableViewController, DUChatListViewController {
+    var chatData: [DUChatData] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        // adopt UI protocol
+        adoptProtocolUIApperance()
+        
+        // retrieve chat list
         DUMessaging.loginWithAuthToken("pofat_04") { error, result in
             guard error == nil else {
                 print("aut error:\(error!.localizedDescription)")
@@ -26,6 +30,7 @@ class ViewController: DUChatListTableViewController {
                     return
                 }
                 print("fetch chat list from client")
+                // You must use .map to assign array, for Swift still cannot check type one by one in an array before bridging to NSArray
                 self?.chatData = chats!.map({$0 as DUChatData})
                 self?.finishGettingChatData()
             }
