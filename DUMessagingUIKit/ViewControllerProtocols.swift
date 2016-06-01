@@ -10,18 +10,17 @@ import Foundation
 import UIKit
 import DTTableViewManager
 
-public protocol DUChatListViewController: GlobalUISetting, UIProtocolAdoption, NavigationBarTitle, RightBarButton, DTTableViewManageable {
+// MARK: DUChatList View Controller Protocol
+public protocol DUChatListViewController: GlobalUIProtocol, UIProtocolAdoption, NavigationBarTitle, RightBarButton, BarButtonReaction, DTTableViewManageable {
     var chatData: [DUChatData] { get set }
+    func didSelectCell(atIndexPath indexPath: NSIndexPath)
 }
 public extension DUChatListViewController where Self: UIViewController {
-    var myBarTitle: String { return "Chats from protocol" }
+    var myBarTitle: String { return "Chats" }
     
     var myBarButtonType: UIBarButtonType { return .imageButton }
     var rightBarButtonImage: UIImage? { return UIImage.DUNewChatButtonImage() }
     var rightBarButtonText: String? { return nil }
-    // FIXME: find a correct way to implement click event
-    var didClickRightBarButton: Void->Void { return { assert(false, "please over") }}
-    
     
     func adoptProtocolUIApperance() {
         navigationController?.navigationBar.barTintColor = self.myBarTintColor
@@ -33,30 +32,31 @@ public extension DUChatListViewController where Self: UIViewController {
             navigationItem.rightBarButtonItem = UIBarButtonItem.init(image: self.rightBarButtonImage?.imageWithRenderingMode(.AlwaysOriginal) , style: .Plain, target: self, action: nil)
         case .textButton:
             navigationItem.rightBarButtonItem = UIBarButtonItem.init(title: self.rightBarButtonText, style: .Plain, target: self, action: nil)
+            navigationItem.rightBarButtonItem?.tintColor = self.myTintColor
         default:
             navigationItem.rightBarButtonItem = nil
         }
         
         if navigationItem.rightBarButtonItem != nil {
-            // FIXME: implement click event
-            //navigationItem.rightBarButtonItem?.action = didClickRightBarButton
+            navigationItem.rightBarButtonItem?.action = #selector(Self.didClickRightBarButton(_:))
         }
-        // FIXME: how to setup all tint color?
-        view.tintColor = self.myTintColor
+        // set global tint color
+        UIApplication.sharedApplication().delegate?.window??.tintColor = self.myTintColor
         
-        // do tableview setup
-        if tableView == nil {
-            assert(false, "You either user an UITableViewController or an UITableView in an UIViewController")
-        }
-        // FIXME: customize?
-        tableView.rowHeight = 92.0
-        tableView.tableFooterView = UIView()
-        
-        // FIXME: possible to customize NSBundle? register Cell? and register nibName?
+        // TODO: possible to customize NSBundle? register Cell? and register nibName?
         manager.startManagingWithDelegate(self)
         manager.viewBundle = NSBundle(identifier: Constants.bundleIdentifier)!
-        manager.registerCellClass(DUChatCell)
+        manager.registerCellClass(DUChatCell.self) { [weak self] (_, model, indexPath) in
+            self?.didSelectCell(atIndexPath:indexPath)
+        }
         manager.registerNibNamed("DUChatCell", forCellClass: DUChatCell.self)
+        // FIXME: customizable?
+        tableView.rowHeight = 92.0
+        tableView.tableFooterView = UIView()
+    }
+    
+    func didSelectCell(atIndexPath indexPath: NSIndexPath) {
+        assert(false, "Error! You must implement method: \(#function)")
     }
     
     final func finishGettingChatData() {

@@ -11,3 +11,16 @@ import Foundation
 public struct Constants {
     static let bundleIdentifier = "com.duolc.DUMessagingUIKit"
 }
+
+
+// Global Theme setting
+public class GlobalUISettings {
+    // navigation bar settings
+    static var navBarTintColor: UIColor? = nil
+    static var navBarTitleTextColof: UIColor = UIColor.DUWaterBlueColor()
+    static var navBarTitleFont: UIFont = UIFont.DUNavigationFont()!
+    
+    // theme color
+    static var tintColor: UIColor = UIColor.DUWaterBlueColor()
+    static var indicatingStatusColor: UIColor = UIColor.DUWaterBlueColor()
+}

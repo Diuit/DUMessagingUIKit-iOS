@@ -24,7 +24,10 @@ public protocol BarButton {
 public protocol RightBarButton: BarButton {
     var rightBarButtonImage: UIImage? { get }
     var rightBarButtonText: String? { get }
-    var didClickRightBarButton: Void->Void { get }
+}
+
+@objc public protocol BarButtonReaction {
+    func didClickRightBarButton(sender: UIBarButtonItem?)
 }
 
 
@@ -45,65 +48,14 @@ public protocol UIProtocolAdoption {
 }
 
 // Global UI with default setting
-public protocol GlobalUISetting: NavigationBarStyle, TintColor {}
-// FIXME: global setting value should return from an sharedInstance struct (or class?)
-public extension GlobalUISetting {
-    var myBarTintColor: UIColor? { return nil }
-    var myNavigationBarTextColor: UIColor { return UIColor.DUWaterBlueColor() }
-    var myNavigationBartTextFont: UIFont { return UIFont.DUNavigationFont()! }
+public protocol GlobalUIProtocol: NavigationBarStyle, TintColor {}
+public extension GlobalUIProtocol {
+    var myBarTintColor: UIColor? { return GlobalUISettings.navBarTintColor }
+    var myNavigationBarTextColor: UIColor { return GlobalUISettings.navBarTitleTextColof }
+    var myNavigationBartTextFont: UIFont { return GlobalUISettings.navBarTitleFont }
     
-    var myTintColor: UIColor { return UIColor.DUWaterBlueColor() }
+    var myTintColor: UIColor { return GlobalUISettings.tintColor }
 }
 
-
-public protocol GlobalTheme: TintColor, NavigationBarStyle { }
-public extension GlobalTheme {
-    var myTintColor: UIColor { return UIColor.DUWaterBlueColor() }
-    
-    var myBarTintColor: UIColor? { return nil }
-    
-    var myNavigationBarTextColor: UIColor { return UIColor.DUWaterBlueColor() }
-    // FIXME: delete later
-    var myNavigationBartTextFont: UIFont { return UIFont.DUNavigationFont()! }
-}
-
-// TODO: this may be unneccesary?
-public extension UIApplicationDelegate {
-    func adoptGlobalUIApperance() {
-        if let mySelf = self as? GlobalTheme {
-            window??.tintColor = mySelf.myTintColor
-            UINavigationBar.appearance().barTintColor = mySelf.myBarTintColor
-            UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName: mySelf.myNavigationBarTextColor]
-        }
-    }
-}
-/*
-extension UIView: DUMessagingUIProtocol {
-    public override func awakeFromNib() {
-        super.awakeFromNib()
-        adoptProtocolUIApperance()
-    }
-    
-    public func adoptProtocolUIApperance() {
-        if let mySelf = self as? BackGroundColor { backgroundColor = mySelf.myBackgroundColor }
-        if let mySelf = self as? TintColor       { tintColor       = mySelf.myTintColor       }
-    }
-}
- */
-
-// FIXME: when do we use it?
-/*
-extension UINavigationBar {
-    override public func adoptProtocolUIApperance() {
-        super.adoptProtocolUIApperance()
-        
-        if let mySelf = self as? BackGroundColor { barTintColor = mySelf.myBackgroundColor }
-        if let mySelf = self as? NavigationBarStyle {
-            barTintColor = mySelf.myBarTintColor
-            topItem?.title = mySelf.myNavigationBarTitle
-        }
-    }
-}
- */
 
 

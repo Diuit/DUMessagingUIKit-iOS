@@ -11,8 +11,17 @@ import DUMessagingUIKit
 import DUMessaging
 
 class ViewController: UITableViewController, DUChatListViewController {
+    // MARK: followings are propeties and methods that you should implement
     var chatData: [DUChatData] = []
     
+    func didClickRightBarButton(sender: UIBarButtonItem?) {
+        // handle righbtBarButton click event
+    }
+    func didSelectCell(atIndexPath indexPath: NSIndexPath) {
+        // handle cell selection event
+    }
+    
+    // MARK: life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         // adopt UI protocol
@@ -36,5 +45,6 @@ class ViewController: UITableViewController, DUChatListViewController {
             }
         }
     }
+    
 }
 

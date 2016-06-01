@@ -13,12 +13,8 @@ public class DUAvatarImageFactory: NSObject {
     public static let kAvataImageDefaultDiameterInChatsList: CGFloat = 66.0
     public static let kAvatarImageDefualtDiameterInMessags: CGFloat = 32.0
     
-    /// return an UIImage instance of default user avatar
-    //public static let defaultUserAvatarImage: UIImage = UIImage.DUDefaultUserAvatarImage()!
-    
+    /// Create an avatar with given text and diameter
     public static func avatarImageWithString(text: String, backgroundColor: UIColor = UIColor.DUAvatarBgDefaultColor(), textColor: UIColor = UIColor.whiteColor(), font: UIFont, diameter: CGFloat) -> UIImage? {
-        //assert(text != nil, "Source string can not be nil")
-        //assert(font != nil, "Font can not be nil")
         assert(diameter > 0, "diameter of avatar image must be greater than 0")
         
         let frame: CGRect = CGRectMake(0.0, 0.0, diameter, diameter)
