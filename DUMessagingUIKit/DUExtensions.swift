@@ -142,6 +142,10 @@ public extension UIImage {
         return UIImage(named: "defaultAvatar", inBundle: NSBundle(identifier: Constants.bundleIdentifier) , compatibleWithTraitCollection: nil)!
     }
     
+    class func DUAddUserImage() -> UIImage {
+        return UIImage(named: "addUser", inBundle: NSBundle(identifier: Constants.bundleIdentifier) , compatibleWithTraitCollection: nil)!
+    }
+    
     class func imageWithColor(color: UIColor) -> UIImage {
         let rect: CGRect = CGRectMake(0.0, 0.0, 1.0, 1.0)
         UIGraphicsBeginImageContext(rect.size)

@@ -19,8 +19,11 @@ class ViewController: UITableViewController, DUChatListViewController {
     }
     func didSelectCell(atIndexPath indexPath: NSIndexPath) {
         // handle cell selection event
+        selectedChat = chatData[indexPath.row]
+        self.performSegueWithIdentifier("toSettingSegue", sender: nil)
     }
     
+    var selectedChat: DUChatData? = nil
     // MARK: life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,6 +46,12 @@ class ViewController: UITableViewController, DUChatListViewController {
                 self?.chatData = chats!.map({$0 as DUChatData})
                 self?.finishGettingChatData()
             }
+        }
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if let vc = segue.destinationViewController as? DUChatSettingViewController {
+            vc.chatDataForSetting = selectedChat
         }
     }
     

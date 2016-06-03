@@ -69,46 +69,6 @@ public class DUChatCell: UITableViewCell, ModelTransfer {
  
     }
     
-    /*
-    public func bindChat(chatItem:DUChatData) {
-        self.hasUnread = chatItem.hasUnreadMessage
-
-        self.chatAvatarImageView.layer.cornerRadius = self.chatAvatarImageView.frame.size.width/2
-        self.chatAvatarImageView.clipsToBounds = true
-        self.chatAvatarImageView.image = chatItem.avatarPlaceholderImage
-        // async load image
-        chatItem.loadImage() { [ weak self ] in
-            self?.chatAvatarImageView.image = chatItem.imageValue
-        }
-        
-        // set up data
-        self.chatTitleLabel.text = chatItem.chatTitle
-        self.chatDetailLabel.text = chatItem.chatDetailText
-        self.chatAccessoryLabel.text = chatItem.chatAccessoryText
-        
-        if self.hasUnread {
-            self.chatTitleLabel.font = UIFont.DUUnreadTitleFont()
-            // FIXME: switch to use global main color
-            self.chatTitleLabel.textColor = UIColor.DUUnreadBlackColor()
-            
-            self.chatAccessoryLabel.font = UIFont.DUBodyTimeUnreadFont()
-            self.chatAccessoryLabel.textColor = UIColor.DUWaterBlueColor()
-            
-            self.unreadView.hidden = false
-            self.unreadView.layer.cornerRadius = self.unreadView.frame.size.width/2
-            self.unreadView.clipsToBounds = true
-            self.unreadView.image = UIImage.imageWithColor(UIColor.DUWaterBlueColor())
-        } else {
-            self.chatTitleLabel.font = UIFont.DUSubheadFont()
-            self.chatTitleLabel.textColor = UIColor.blackColor()
-            
-            self.chatAccessoryLabel.font = UIFont.DUBodyTimeFont()
-            self.chatAccessoryLabel.textColor = UIColor.DUDarkGreyColor()
-            
-            self.unreadView.hidden = true
-        }
-    }
-    */
     // MARK: private method
     private func setSelectedBackgroundView() {
         let selectedBgView = UIView()

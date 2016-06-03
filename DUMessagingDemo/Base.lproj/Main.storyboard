@@ -29,10 +29,31 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Root View Controller" id="Pht-v1-uva"/>
+                    <connections>
+                        <segue destination="Tst-YQ-FcY" kind="show" identifier="toSettingSegue" id="DNf-zv-rnO"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Vlc-ff-lw8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="991" y="458"/>
+        </scene>
+        <!--Chat Setting View Controller-->
+        <scene sceneID="qVn-ZR-elw">
+            <objects>
+                <viewController id="Tst-YQ-FcY" customClass="DUChatSettingViewController" customModule="DUMessagingUIKit" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="iPE-yx-ASK"/>
+                        <viewControllerLayoutGuide type="bottom" id="6HZ-67-Nma"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="L8k-68-m86">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="wCH-uq-5VW" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1644" y="451"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="F2V-DD-RT1">

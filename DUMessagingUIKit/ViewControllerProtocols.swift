@@ -11,7 +11,7 @@ import UIKit
 import DTTableViewManager
 
 // MARK: DUChatList View Controller Protocol
-public protocol DUChatListViewController: GlobalUIProtocol, UIProtocolAdoption, NavigationBarTitle, RightBarButton, BarButtonReaction, DTTableViewManageable {
+public protocol DUChatListViewController: GlobalUIProtocol, UIProtocolAdoption, NavigationBarTitle, RightBarButton, DTTableViewManageable {
     var chatData: [DUChatData] { get set }
     func didSelectCell(atIndexPath indexPath: NSIndexPath)
 }
@@ -23,25 +23,7 @@ public extension DUChatListViewController where Self: UIViewController {
     var rightBarButtonText: String? { return nil }
     
     func adoptProtocolUIApperance() {
-        navigationController?.navigationBar.barTintColor = self.myBarTintColor
-        navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: self.myNavigationBarTextColor, NSFontAttributeName: self.myNavigationBartTextFont]
-        navigationItem.title = self.myBarTitle
-        
-        switch self.myBarButtonType {
-        case .imageButton:
-            navigationItem.rightBarButtonItem = UIBarButtonItem.init(image: self.rightBarButtonImage?.imageWithRenderingMode(.AlwaysOriginal) , style: .Plain, target: self, action: nil)
-        case .textButton:
-            navigationItem.rightBarButtonItem = UIBarButtonItem.init(title: self.rightBarButtonText, style: .Plain, target: self, action: nil)
-            navigationItem.rightBarButtonItem?.tintColor = self.myTintColor
-        default:
-            navigationItem.rightBarButtonItem = nil
-        }
-        
-        if navigationItem.rightBarButtonItem != nil {
-            navigationItem.rightBarButtonItem?.action = #selector(Self.didClickRightBarButton(_:))
-        }
-        // set global tint color
-        UIApplication.sharedApplication().delegate?.window??.tintColor = self.myTintColor
+        setupInheritedProtocolUI()
         
         // TODO: possible to customize NSBundle? register Cell? and register nibName?
         manager.startManagingWithDelegate(self)
@@ -60,6 +42,6 @@ public extension DUChatListViewController where Self: UIViewController {
     }
     
     final func finishGettingChatData() {
-        manager.memoryStorage.addItems(chatData)
+        manager.memoryStorage.setItems(chatData)
     }
 }

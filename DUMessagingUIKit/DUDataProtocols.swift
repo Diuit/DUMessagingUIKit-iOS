@@ -18,6 +18,12 @@ public protocol DUChatData: DUImageResource {
     var chatAccessoryText: String { get }
     var chatSettingPageType: DUChatType { get }
     var chatMembers: [String] { get }
+    var isBlocked: Bool { get }
+}
+
+/// Data source for displaying user info
+public protocol DUUserData: DUImageResource {
+    var displayName: String { get }
 }
 
 // MARK: Default behavior 
@@ -27,7 +33,7 @@ public protocol DUChatData: DUImageResource {
 ///     lastMessage  -> chatDetailLaabel
 ///     meta["url"]  -> chatAvatarImageView; otherwise will be uppercased first letter
 extension DUChat: DUChatData {
-    public var imagePath: String { return self.meta!["url"] as? String ?? "" }
+    public var imagePath: String? { return self.meta!["url"] as? String ?? "" }
     /// if chat room type is Direct, placeholer will be a person avatar; otherwise will be text avatar of uppercase initial
     public var placeholderImage: UIImage {
         switch self.type {
@@ -56,4 +62,5 @@ extension DUChat: DUChatData {
     }
     public var chatSettingPageType: DUChatType { return self.type }
     public var chatMembers: [String] { return self.members ?? [] }
+    public var isBlocked: Bool { return self.isBlockedByMe }
 }
