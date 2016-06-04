@@ -9,12 +9,13 @@
 import Foundation
 
 class UserData: DUUserData {
-    var displayName: String
+    var userDisplayName: String
     var imagePath: String?
     var placeholderImage: UIImage
+    var userMeta: [String:AnyObject] = [:]
 
     init(name: String, imagePath: String?) {
-        displayName = name
+        userDisplayName = name
         self.imagePath = imagePath
         let initial = name.substringToIndex(name.startIndex.advancedBy(1)).uppercaseString
         placeholderImage = DUAvatarImageFactory.makeAvatarImage(initial, backgroundColor: UIColor.DUAvatarBgDefaultColor(), textColor: UIColor.whiteColor(), font: UIFont.DUUnreadTitleFont()!, diameter: 32.0)!

@@ -13,7 +13,12 @@ import DTModelStorage
 
 /// Custom UITableViewCell for displaying information of a DUChat instance
 public class DUChatCell: UITableViewCell, ModelTransfer {
-    @IBOutlet weak var chatAvatarImageView: UIImageView!
+    @IBOutlet weak var chatAvatarImageView: UIImageView! {
+        didSet {
+            chatAvatarImageView.layer.cornerRadius = self.chatAvatarImageView.frame.size.width/2
+            chatAvatarImageView.clipsToBounds = true
+        }
+    }
     @IBOutlet weak var chatTitleLabel: UILabel!
     @IBOutlet weak var chatDetailLabel: UILabel!
     @IBOutlet weak var chatAccessoryLabel: UILabel!
@@ -30,10 +35,6 @@ public class DUChatCell: UITableViewCell, ModelTransfer {
     }
     
     public func updateWithModel(model: DUChatData) {
-        //self.textLabel?.text = model.chatTitle
-        
-        self.chatAvatarImageView.layer.cornerRadius = self.chatAvatarImageView.frame.size.width/2
-        self.chatAvatarImageView.clipsToBounds = true
         self.chatAvatarImageView.image = model.avatarPlaceholderImage
         // async load image
         model.loadImage() { [ weak self ] in
@@ -56,7 +57,7 @@ public class DUChatCell: UITableViewCell, ModelTransfer {
             self.unreadView.hidden = false
             self.unreadView.layer.cornerRadius = self.unreadView.frame.size.width/2
             self.unreadView.clipsToBounds = true
-            self.unreadView.image = UIImage.imageWithColor(UIColor.DUWaterBlueColor())
+            self.unreadView.image = UIImage.imageWith(backgroundColor: UIColor.DUWaterBlueColor())
         } else {
             self.chatTitleLabel.font = UIFont.DUSubheadFont()
             self.chatTitleLabel.textColor = UIColor.blackColor()

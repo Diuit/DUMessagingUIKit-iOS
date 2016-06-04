@@ -10,7 +10,7 @@ import UIKit
 import DUMessagingUIKit
 import DUMessaging
 
-class ViewController: UITableViewController, DUChatListViewController {
+class ViewController: UITableViewController, DUChatListProtocolForViewController {
     // MARK: followings are propeties and methods that you should implement
     var chatData: [DUChatData] = []
     
