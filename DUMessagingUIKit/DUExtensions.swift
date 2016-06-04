@@ -104,6 +104,12 @@ public extension UIFont {
 
 // MARK: functions
 extension NSDate {
+    /**
+        Convert NSDate instance to a String indicating time with specif format:
+            - 7:33PM : Display hour and minute if the time is today
+            - April 11 : Display date if the time lies in this year
+            - 2015/04/11 : Display complete date if the time is even earlier
+     */
     var messageTimeLabelString: String {
         get {
             let cal = NSCalendar.currentCalendar()
@@ -146,7 +152,10 @@ public extension UIImage {
         return UIImage(named: "addUser", inBundle: NSBundle(identifier: Constants.bundleIdentifier) , compatibleWithTraitCollection: nil)!
     }
     
-    class func imageWithColor(color: UIColor) -> UIImage {
+    /**
+        Return an UIImage instance with size 1.0 * 1.0 of given background UIColor
+     */
+    class func imageWith(backgroundColor color: UIColor) -> UIImage {
         let rect: CGRect = CGRectMake(0.0, 0.0, 1.0, 1.0)
         UIGraphicsBeginImageContext(rect.size)
         let context = UIGraphicsGetCurrentContext()
@@ -161,10 +170,11 @@ public extension UIImage {
 
 // NSStringFromClass for Swift version
 public extension NSObject{
+    /// Return class string
     public class var nameOfClass: String{
         return NSStringFromClass(self).componentsSeparatedByString(".").last!
     }
-    
+    /// Return dynamic type string of the instance
     public var nameOfClass: String{
         return NSStringFromClass(self.dynamicType).componentsSeparatedByString(".").last!
     }

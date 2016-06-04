@@ -6,16 +6,18 @@
 //  Copyright © 2016年 duolC. All rights reserved.
 //
 
+// TODO: add documentation
+
 import Foundation
 import UIKit
 import DTTableViewManager
 
 // MARK: DUChatList View Controller Protocol
-public protocol DUChatListViewController: GlobalUIProtocol, UIProtocolAdoption, NavigationBarTitle, RightBarButton, DTTableViewManageable {
+public protocol DUChatListProtocolForViewController: GlobalUIProtocol, UIProtocolAdoption, NavigationBarTitle, RightBarButton, DTTableViewManageable {
     var chatData: [DUChatData] { get set }
     func didSelectCell(atIndexPath indexPath: NSIndexPath)
 }
-public extension DUChatListViewController where Self: UIViewController {
+public extension DUChatListProtocolForViewController where Self: UIViewController {
     var myBarTitle: String { return "Chats" }
     
     var myBarButtonType: UIBarButtonType { return .imageButton }

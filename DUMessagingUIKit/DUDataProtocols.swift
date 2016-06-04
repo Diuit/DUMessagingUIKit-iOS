@@ -9,29 +9,42 @@
 import Foundation
 import DUMessaging
 
-/// Data source for disaplaying chat info for chat list and chat settings
+/**
+    Data protocol for disaplaying chat information for list chats and setting
+
+    - seealso `DUChatListProtocolForViewController`, `DUChatSettingViewController`
+ */
 public protocol DUChatData: DUImageResource {
+    /// If this chat has unread message
     var hasUnreadMessage: Bool { get }
+    /// User for avatar before completely loading the real image
     var avatarPlaceholderImage: UIImage { get }
+    /// Title for a chat room, will be displayed in chatTitleLabel of DUChatCell
     var chatTitle: String { get }
+    /// Detail text for a chat, will be the content of last message and displayed in chatDetailLabel of DUChatCell
     var chatDetailText: String { get }
+    /// This text will be diaplayed in chatAccessoryLabel of DUChatCell
     var chatAccessoryText: String { get }
+    /// Indicate if this chat is a group chat for DUChatSettingViewController to determine its displaying UI
     var chatSettingPageType: DUChatType { get }
+    /// Members of this caht
     var chatMembers: [String] { get }
+    /// Only availabe in a direct mesage chat room. Indicate if the opponent is blocke by current user
     var isBlocked: Bool { get }
 }
 
-/// Data source for displaying user info
+/**
+    Data protocol for displaying user information
+ 
+    - Seealso `DUChatSettingViewController`
+ */
 public protocol DUUserData: DUImageResource {
-    var displayName: String { get }
+    var userDisplayName: String { get }
+    var userMeta: [String: AnyObject] { get }
 }
 
 // MARK: Default behavior 
-
-/// Use default setting to link data with UI elements
-///     meta["name"] -> chatTitleLabel
-///     lastMessage  -> chatDetailLaabel
-///     meta["url"]  -> chatAvatarImageView; otherwise will be uppercased first letter
+/// extend DUChat to conform to DUChatData protocol
 extension DUChat: DUChatData {
     public var imagePath: String? { return self.meta!["url"] as? String ?? "" }
     /// if chat room type is Direct, placeholer will be a person avatar; otherwise will be text avatar of uppercase initial
@@ -40,7 +53,7 @@ extension DUChat: DUChatData {
         case .Direct:
             return UIImage.DUDefaultPersonAvatarImage()
         default:
-            return DUAvatarImageFactory.avatarImageWithString(String(self.chatTitle[chatTitle.startIndex]).uppercaseString, font: UIFont.DUChatAvatarFont()!, diameter: DUAvatarImageFactory.kAvataImageDefaultDiameterInChatsList)!
+            return DUAvatarImageFactory.makeAvatarImage(String(self.chatTitle[chatTitle.startIndex]).uppercaseString, font: UIFont.DUChatAvatarFont()!, diameter: DUAvatarImageFactory.kAvataImageDefaultDiameterInChatsList)!
         }
     }
     public var hasUnreadMessage: Bool { return (self.unreadMessageCount > 0) }

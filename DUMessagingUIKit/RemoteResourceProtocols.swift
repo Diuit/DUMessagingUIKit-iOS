@@ -14,12 +14,15 @@ public protocol DURemoteResource {
     func load(url: String, completion: (Bool -> Void)? )
 }
 
-// protocol for loading mediat resource
+/// Protocol for loading image resource
 public protocol DUImageResource: DURemoteResource {
+    /// URL of image resource
     var imagePath: String? { get }
+    /// Placeholder image for displaying before image is fully loaded
     var placeholderImage: UIImage { get }
 }
 extension DUImageResource {
+    /// Load the image resource from imagePath
     public func load(url: String, completion: (Bool -> Void)? ) {
         guard imagePath != nil else {
             print("image path is nil")
@@ -50,7 +53,8 @@ extension DUImageResource {
         }
     }
     
-    /// Beware your completion closure will be executed in main queue, so do not deal with time-consuming stuff here
+    /// Send a completion handler to this function and trigger the image loading procedure.
+    /// Beware your completion closure will be executed in main queue, so do not deal with time-consuming stuff here.
     func loadImage(completion: (Void -> Void)? ) {
         guard self.imagePath != nil else { return }
         self.load(self.imagePath!) { success in
@@ -60,14 +64,14 @@ extension DUImageResource {
         }
     }
     
-    /// return cached image for given URL
+    /// Return cached image for given URL
     func imageForURL(url: String) -> UIImage? {
         let imgManager = SDWebImageManager.sharedManager()
         let indexKey = imgManager.cacheKeyForURL(NSURL(string: url))
         return imgManager.imageCache.imageFromMemoryCacheForKey(indexKey)
     }
     
-    /// get UIImage value
+    /// get UIImage instance, return placeholderImage if remote resource failed to load
     var imageValue: UIImage? {
         if self.imagePath == nil { return nil }
         if let img = self.imageForURL(self.imagePath!) {
