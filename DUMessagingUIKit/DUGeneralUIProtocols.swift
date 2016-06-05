@@ -39,7 +39,7 @@ public protocol NavigationBarTitle {
     var myBarTitle: String { get }
 }
 
-// method to adopt ui protocol
+/// Method to adopt ui protocol
 public protocol UIProtocolAdoption {
     func setupInheritedProtocolUI()
     func adoptProtocolUIApperance()
@@ -75,7 +75,7 @@ public extension UIProtocolAdoption where Self: UIViewController {
     }
 }
 
-// Global UI with default setting
+/// Global UI with default setting
 public protocol GlobalUIProtocol: NavigationBarStyle, TintColor {}
 public extension GlobalUIProtocol where Self: UIViewController {
     var myBarTintColor: UIColor? { return GlobalUISettings.navBarTintColor }

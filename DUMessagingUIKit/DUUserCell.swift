@@ -9,6 +9,7 @@
 import UIKit
 import DTModelStorage
 
+/// Display user information
 class DUUserCell: UITableViewCell, ModelTransfer {
 
     @IBOutlet weak var userAvatarImage: UIImageView! {

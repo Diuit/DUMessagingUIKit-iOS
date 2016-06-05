@@ -8,10 +8,17 @@
 
 import Foundation
 
+/**
+    This class conforms to protocol `DUUserData`, in order to display user information in `DUChatSettingViewController` correctly.
+ */
 class UserData: DUUserData {
+    /// The display name of the user
     var userDisplayName: String
+    /// URL of user avatar image
     var imagePath: String?
+    /// Placeholder image before the avatar is fully loaded
     var placeholderImage: UIImage
+    /// Metadata of the user
     var userMeta: [String:AnyObject] = [:]
 
     init(name: String, imagePath: String?) {

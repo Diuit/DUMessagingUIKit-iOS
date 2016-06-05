@@ -13,6 +13,9 @@ import DTTableViewManager
 // global constant
 public let DUTableViewCellReuseIdentifier = "DUTableViewCellReuseIdentifier"
 
+/**
+    The `DUChatSettingViewController` class is an abstract class for displaying information of a chat room and configuring chat data with customize methods.
+ */
 public class DUChatSettingViewController: UIViewController, DUChatSettingUIProtocol, DTTableViewManageable, DUBlockDelegate {
 
     @IBOutlet weak var chatAvatarImageView: UIImageView! {

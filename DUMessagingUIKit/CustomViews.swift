@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 
+/// This is a customized UILabel where their text alway align in top vertically
 @IBDesignable class TopAlignedLabel: UILabel {
     override func drawTextInRect(rect: CGRect) {
         if let stringText = text {

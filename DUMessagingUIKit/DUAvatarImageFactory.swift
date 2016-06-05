@@ -17,10 +17,10 @@ public class DUAvatarImageFactory: NSObject {
     /**
         Create an UIImage instance of avatar with given text and diameter
         
-        - Parameters:
+        - parameters:
             - text: The displaying text at the center of avatar image. Better use short and uppercasted text.
      
-        - Returns:
+        - returns:
             An UIImage instance of avatar, or `nil` if creation failed
      */
     public static func makeAvatarImage(text: String, backgroundColor: UIColor = UIColor.DUAvatarBgDefaultColor(), textColor: UIColor = UIColor.whiteColor(), font: UIFont, diameter: CGFloat) -> UIImage? {

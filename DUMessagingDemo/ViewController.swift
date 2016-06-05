@@ -17,6 +17,7 @@ class ViewController: UITableViewController, DUChatListProtocolForViewController
     func didClickRightBarButton(sender: UIBarButtonItem?) {
         // handle righbtBarButton click event
     }
+    
     func didSelectCell(atIndexPath indexPath: NSIndexPath) {
         // handle cell selection event
         selectedChat = chatData[indexPath.row]

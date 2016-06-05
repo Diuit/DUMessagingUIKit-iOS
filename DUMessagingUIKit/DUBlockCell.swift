@@ -15,6 +15,7 @@ protocol DUBlockDelegate {
     func unblock()
 }
 
+/// Display direct user chat room
 class DUBlockCell: UITableViewCell, ModelTransfer {
     
     @IBOutlet weak var blockSwitch: UISwitch!
