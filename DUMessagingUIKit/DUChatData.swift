@@ -33,15 +33,6 @@ public protocol DUChatData: DUImageResource {
     var isBlocked: Bool { get }
 }
 
-/**
-    Data protocol for displaying user information
- 
-    - Seealso `DUChatSettingViewController`
- */
-public protocol DUUserData: DUImageResource {
-    var userDisplayName: String { get }
-    var userMeta: [String: AnyObject] { get }
-}
 
 // MARK: Default behavior 
 /// extend DUChat to conform to DUChatData protocol

@@ -1,4 +1,6 @@
 PODS:
+  - DTCollectionViewManager (4.7.0):
+    - DTModelStorage (~> 2.6.0)
   - DTModelStorage (2.6.1):
     - DTModelStorage/Core (= 2.6.1)
   - DTModelStorage/Core (2.6.1)
@@ -12,11 +14,13 @@ PODS:
   - Socket.IO-Client-Swift (5.3.3)
 
 DEPENDENCIES:
+  - DTCollectionViewManager
   - DTTableViewManager
   - DUMessaging_Dev
   - SDWebImage
 
 SPEC CHECKSUMS:
+  DTCollectionViewManager: e84c73ed2de4a4a0fb76d5e934f03755ad0dc504
   DTModelStorage: 04e4ffc68c1bb364d1374139e688f097858a7bd5
   DTTableViewManager: 4a961b5ffaa9a57387ccff7f9280d001c9c64082
   DUMessaging_Dev: a091b73c18810141206528ec5f1b68d10a53b5e1

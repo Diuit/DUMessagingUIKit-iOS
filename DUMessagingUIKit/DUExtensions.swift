@@ -54,8 +54,6 @@ public extension UIColor {
 
 public extension UIFont {
     class func DUBodyTimeFriendFont() -> UIFont? {
-        //TODO: fix custom font return nil
-        //return UIFont(name: "Roboto-Regular", size: 22.0)
         return UIFont(name: "Helvetica", size: 22.0)
     }
     
@@ -67,9 +65,11 @@ public extension UIFont {
         return UIFont(name: "Helvetica", size: 16.0)
     }
     
+    class func DUMessageSenderFont() -> UIFont? {
+        return UIFont(name: "Helvetica", size: 12.0)
+    }
+    
     class func DUUnreadTitleFont() -> UIFont? {
-        //TODO: fix custom font return nil
-        //return UIFont(name: "Roboto-Bold", size: 16.0)
         return UIFont(name: "Helvetica-Bold", size: 16.0)
     }
     
