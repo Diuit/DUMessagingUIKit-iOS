@@ -11,25 +11,14 @@ Pod::Spec.new do |s|
 
   s.platform     = :ios, "8.0"
 
-  s.source       = { :git => "http://EXAMPLE/DUMessagingUIKit-iOS.git" }
+  s.source       = { :git => "http://github.com/Diuit/DUMessagingUIKit-iOS.git" }
 
   s.source_files  = 'DUMessagingUIKit/*.swift'
-
-  # s.framework  = "SomeFramework"
-  # s.frameworks = "SomeFramework", "AnotherFramework"
-
-  # s.library   = "iconv"
-  # s.libraries = "iconv", "xml2"
-
-
-  # ――― Project Settings ――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
-  #
-  #  If your library depends on compiler flags you can set them in the xcconfig hash
-  #  where they will only apply to your library. If you depend on other Podspecs
-  #  you can include multiple dependencies to ensure it works.
 
   s.requires_arc = true
 
   s.dependency "DTTableViewManager", "~> 4.7.0"
+  s.dependency "DUMessaging", "~> 1.0.2"
+  s.dependency "SDWebImage"
 
 end
