@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 // UIView
-public protocol BackGroundColor { var myBackgroundColor: UIColor { get } }
+public protocol BackgroundColor { var myBackgroundColor: UIColor { get } }
 public protocol TintColor       { var myTintColor: UIColor       { get } }
 
 // UIBarButton
@@ -38,6 +38,10 @@ public protocol NavigationBarStyle {
 public protocol NavigationBarTitle {
     var myBarTitle: String { get }
 }
+
+// Customize appearance using closure
+public typealias ProtocolUICustomClosure = () -> Void
+public protocol CustomClosure      { var pCustomClosure:ProtocolUICustomClosure    { get } }
 
 // method to adopt ui protocol
 public protocol UIProtocolAdoption {
@@ -85,5 +89,30 @@ public extension GlobalUIProtocol where Self: UIViewController {
     var myTintColor: UIColor { return GlobalUISettings.tintColor }
 }
 
+// MARK: adoption method for ecah UIKit
+extension UIView: UIProtocolAdoption {
+    
+    public override func awakeFromNib() {
+        
+        super.awakeFromNib()
+        adoptProtocolUIApperance()
+    }
+    
+    public func adoptProtocolUIApperance() {
+        // UIView
+        if let aSelf = self as? BackgroundColor { backgroundColor       = aSelf.myBackgroundColor }
+        if let aSelf = self as? TintColor       { tintColor             = aSelf.myTintColor }
+        
+        // Custom Closure
+        if let aSelf = self as? CustomClosure   { aSelf.pCustomClosure() }
+    }
+    
+    public func setupInheritedProtocolUI() {
+        // do nothing for UIView
+    }
+    public override func prepareForInterfaceBuilder() {
+        adoptProtocolUIApperance()
+    }
+}
 
 

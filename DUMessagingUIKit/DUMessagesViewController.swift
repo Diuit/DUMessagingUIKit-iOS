@@ -8,7 +8,7 @@
 
 import UIKit
 
-public class DUMessagesViewController: UIViewController, UITextViewDelegate, DUMessagInputToolbarDelegate {
+public class DUMessagesViewController: UIViewController, UITextViewDelegate, DUMessagInputToolbarDelegate, DUMessagesUIProtocol {
 
     public static var nib: UINib { return UINib.init(nibName: String(DUMessagesViewController), bundle: NSBundle(identifier: Constants.bundleIdentifier)) }
     
@@ -32,7 +32,8 @@ public class DUMessagesViewController: UIViewController, UITextViewDelegate, DUM
         inputToolbar.pressEventDelegate = self
         inputToolbar.contentView?.inputTextView.delegate = self
         // To make inputToolbar no parent view, so that it can be added onto inputAccessoryView
-        self.inputToolbar.removeFromSuperview()
+        inputToolbar.removeFromSuperview()
+        inputToolbar.toggleSendButtonEnabled()
     }
     
     // MARK: Input
@@ -74,11 +75,23 @@ public class DUMessagesViewController: UIViewController, UITextViewDelegate, DUM
     }
     
     // MARK: DUMessages ViewController
-    func didPressSendButton(sender: UIButton, withText: String) {
+    public func didPressSendButton(sender: UIButton, withText: String) {
         assert(false, "Error! You must implement method: \(#function)")
     }
     
-    func didPressAccessorySendButton(sender: UIButton) {
+    public func didPressAccessorySendButton(sender: UIButton) {
         assert(false, "Error! You must implement method: \(#function)")
+    }
+}
+
+
+// MARK: UI Protocol
+public protocol DUMessagesUIProtocol: GlobalUIProtocol, UIProtocolAdoption, NavigationBarTitle {}
+extension DUMessagesUIProtocol {
+    public var myBarTitle: String { return "Messages" }
+    
+    public func adoptProtocolUIApperance() {
+        // setup all inherited UI protocols
+        setupInheritedProtocolUI()
     }
 }
