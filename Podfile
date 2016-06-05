@@ -3,7 +3,7 @@ use_frameworks!
 
 target 'DUMessagingUIKit' do
     pod 'DUMessaging_Dev'
-    pod 'DTTableViewManager'
+    pod 'DTTableViewManager', ~> '4.7.0'
     pod 'SDWebImage'
 end
 

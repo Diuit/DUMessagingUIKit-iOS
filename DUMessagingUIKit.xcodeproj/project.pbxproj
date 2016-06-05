@@ -37,6 +37,7 @@
 		FA5B994E1D017E3A00786C6B /* DUBlockCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA5B994C1D017E3A00786C6B /* DUBlockCell.xib */; };
 		FA5B99501D0183A800786C6B /* CustomViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5B994F1D0183A800786C6B /* CustomViews.swift */; };
 		FA5B99531D0187E100786C6B /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5B99521D0187E100786C6B /* UserData.swift */; };
+		FA6D46CB1D04BD66002F8DEB /* DUMessagingUIKit.podspec in Resources */ = {isa = PBXBuildFile; fileRef = FA6D46CA1D04BD66002F8DEB /* DUMessagingUIKit.podspec */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -98,6 +99,7 @@
 		FA5B994C1D017E3A00786C6B /* DUBlockCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DUBlockCell.xib; sourceTree = "<group>"; };
 		FA5B994F1D0183A800786C6B /* CustomViews.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomViews.swift; sourceTree = "<group>"; };
 		FA5B99521D0187E100786C6B /* UserData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
+		FA6D46CA1D04BD66002F8DEB /* DUMessagingUIKit.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = DUMessagingUIKit.podspec; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -158,6 +160,7 @@
 		FA2D83191CFE0BE20060A6B8 = {
 			isa = PBXGroup;
 			children = (
+				FA6D46CA1D04BD66002F8DEB /* DUMessagingUIKit.podspec */,
 				FA2D83251CFE0BE20060A6B8 /* DUMessagingUIKit */,
 				FA2D83311CFE0BE30060A6B8 /* DUMessagingUIKitTests */,
 				FA2D83CF1CFE762B0060A6B8 /* DUMessagingDemo */,
@@ -420,6 +423,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FA2D83561CFE0DE00060A6B8 /* DUChatCell.xib in Resources */,
+				FA6D46CB1D04BD66002F8DEB /* DUMessagingUIKit.podspec in Resources */,
 				FA1FD2321D00A2FF0066BC7C /* DUUserCell.xib in Resources */,
 				FA1FD22A1D007FF10066BC7C /* DUChatSettingViewController.xib in Resources */,
 				FA2D83581CFE0FAB0060A6B8 /* Resources.xcassets in Resources */,
