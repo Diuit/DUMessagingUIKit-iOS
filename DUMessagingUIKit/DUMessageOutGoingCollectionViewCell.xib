@@ -45,7 +45,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rSS-7p-iV7" userLabel="Avatar container">
-                        <rect key="frame" x="325" y="40" width="32" height="32"/>
+                        <rect key="frame" x="343" y="40" width="32" height="32"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="deg-aa-7Aa" userLabel="Avatar Image View">
                                 <rect key="frame" x="0.0" y="0.0" width="32" height="32"/>
@@ -62,13 +62,13 @@
                         </constraints>
                     </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8jw-ND-dot" userLabel="bubble container">
-                        <rect key="frame" x="73" y="40" width="244" height="94"/>
+                        <rect key="frame" x="73" y="40" width="262" height="94"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OvX-kD-FEe" userLabel="Bubble Image View">
-                                <rect key="frame" x="0.0" y="0.0" width="244" height="94"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="OvX-kD-FEe" userLabel="Bubble Image View">
+                                <rect key="frame" x="0.0" y="0.0" width="262" height="94"/>
                             </imageView>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="xzT-DK-48p" customClass="DUMessageCellTextView" customModule="DUMessagingUIKit" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="244" height="94"/>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="xzT-DK-48p" customClass="DUMessageCellTextView" customModule="DUMessagingUIKit" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="262" height="94"/>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -76,7 +76,15 @@
                         </subviews>
                         <color key="backgroundColor" red="0.93333333730697632" green="0.93333333730697632" blue="0.93333333730697632" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="244" id="5aF-hu-quQ"/>
+                            <constraint firstAttribute="width" constant="262" id="5aF-hu-quQ"/>
+                            <constraint firstItem="OvX-kD-FEe" firstAttribute="leading" secondItem="8jw-ND-dot" secondAttribute="leading" id="E5X-VE-QeF"/>
+                            <constraint firstItem="xzT-DK-48p" firstAttribute="trailing" secondItem="OvX-kD-FEe" secondAttribute="trailing" id="UNg-nV-a9e"/>
+                            <constraint firstItem="xzT-DK-48p" firstAttribute="top" secondItem="OvX-kD-FEe" secondAttribute="top" id="XB3-dr-I7p"/>
+                            <constraint firstItem="xzT-DK-48p" firstAttribute="bottom" secondItem="OvX-kD-FEe" secondAttribute="bottom" id="b9n-Yr-opi"/>
+                            <constraint firstItem="OvX-kD-FEe" firstAttribute="top" secondItem="8jw-ND-dot" secondAttribute="top" id="d6U-Y6-G1V"/>
+                            <constraint firstAttribute="bottom" secondItem="OvX-kD-FEe" secondAttribute="bottom" id="o1U-oY-LiA"/>
+                            <constraint firstItem="xzT-DK-48p" firstAttribute="leading" secondItem="OvX-kD-FEe" secondAttribute="leading" id="pSo-wo-utU"/>
+                            <constraint firstAttribute="trailing" secondItem="OvX-kD-FEe" secondAttribute="trailing" id="zly-6O-ItX"/>
                         </constraints>
                     </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="11:37AM" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ByO-gV-G7d" userLabel="time label">
@@ -98,7 +106,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IcI-Cu-Goj" userLabel="resend button">
-                        <rect key="frame" x="325" y="102" width="32" height="32"/>
+                        <rect key="frame" x="343" y="102" width="32" height="32"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="32" id="6Om-1C-kJy"/>
                             <constraint firstAttribute="width" constant="32" id="6bM-6E-PnL"/>
@@ -124,7 +132,7 @@
                 <constraint firstItem="8jw-ND-dot" firstAttribute="leading" secondItem="ByO-gV-G7d" secondAttribute="trailing" constant="8" id="dgf-2j-uWh"/>
                 <constraint firstItem="HUB-es-YRh" firstAttribute="top" secondItem="lQ9-aH-htB" secondAttribute="bottom" id="fPH-Z6-UM2"/>
                 <constraint firstItem="D6d-ir-lQA" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="jGJ-Ew-fgI"/>
-                <constraint firstAttribute="trailing" secondItem="rSS-7p-iV7" secondAttribute="trailing" constant="18" id="mtM-em-Run"/>
+                <constraint firstAttribute="trailing" secondItem="rSS-7p-iV7" secondAttribute="trailing" id="mtM-em-Run"/>
                 <constraint firstItem="qyA-yJ-WEs" firstAttribute="top" secondItem="IcI-Cu-Goj" secondAttribute="bottom" id="oaU-7H-WiN"/>
                 <constraint firstAttribute="trailing" secondItem="lQ9-aH-htB" secondAttribute="trailing" id="qTC-vF-3Lc"/>
                 <constraint firstItem="8jw-ND-dot" firstAttribute="top" secondItem="HUB-es-YRh" secondAttribute="bottom" id="wem-T6-1KI"/>

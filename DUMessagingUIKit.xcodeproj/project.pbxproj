@@ -49,6 +49,7 @@
 		FA976E981D047F9800F844E5 /* DUMessageCellTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA976E971D047F9800F844E5 /* DUMessageCellTextView.swift */; };
 		FA976E9A1D048FE800F844E5 /* DUUserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA976E991D048FE800F844E5 /* DUUserData.swift */; };
 		FA976E9C1D0492D600F844E5 /* DUMessageData.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA976E9B1D0492D600F844E5 /* DUMessageData.swift */; };
+		FA976EA11D04A34800F844E5 /* DUMessageCollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA976EA01D04A34800F844E5 /* DUMessageCollectionViewFlowLayout.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -122,6 +123,7 @@
 		FA976E971D047F9800F844E5 /* DUMessageCellTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DUMessageCellTextView.swift; sourceTree = "<group>"; };
 		FA976E991D048FE800F844E5 /* DUUserData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DUUserData.swift; sourceTree = "<group>"; };
 		FA976E9B1D0492D600F844E5 /* DUMessageData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DUMessageData.swift; sourceTree = "<group>"; };
+		FA976EA01D04A34800F844E5 /* DUMessageCollectionViewFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DUMessageCollectionViewFlowLayout.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -206,6 +208,7 @@
 		FA2D83251CFE0BE20060A6B8 /* DUMessagingUIKit */ = {
 			isa = PBXGroup;
 			children = (
+				FA976E9F1D04A31D00F844E5 /* Layout */,
 				FA5B99511D01857E00786C6B /* Models */,
 				FA2D83401CFE0C5D0060A6B8 /* Utilities */,
 				FA2D833E1CFE0C440060A6B8 /* Views */,
@@ -312,6 +315,14 @@
 				FA5B99521D0187E100786C6B /* UserData.swift */,
 			);
 			name = Models;
+			sourceTree = "<group>";
+		};
+		FA976E9F1D04A31D00F844E5 /* Layout */ = {
+			isa = PBXGroup;
+			children = (
+				FA976EA01D04A34800F844E5 /* DUMessageCollectionViewFlowLayout.swift */,
+			);
+			name = Layout;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -580,6 +591,7 @@
 				FA2D83491CFE0CF10060A6B8 /* DUAvatarImageFactory.swift in Sources */,
 				FA5B99531D0187E100786C6B /* UserData.swift in Sources */,
 				FA2D834A1CFE0CF10060A6B8 /* DUButtonFactory.swift in Sources */,
+				FA976EA11D04A34800F844E5 /* DUMessageCollectionViewFlowLayout.swift in Sources */,
 				FA976E9A1D048FE800F844E5 /* DUUserData.swift in Sources */,
 				FA976E8A1D03ECFD00F844E5 /* DUMessageInputTextView.swift in Sources */,
 				FA1FD2311D00A2FF0066BC7C /* DUUserCell.swift in Sources */,
