@@ -1,5 +1,5 @@
 //
-//  DUInputToolBarContentView.swift
+//  DUInputToolbarContentView.swift
 //  DUMessagingUIKit
 //
 //  Created by Pofat Diuit on 2016/6/5.
@@ -8,11 +8,11 @@
 
 import UIKit
 
-public class DUInputToolBarContentView: UIView {
+public class DUInputToolbarContentView: UIView {
     @IBOutlet weak var accessorySendButton: UIButton!
     @IBOutlet weak var inputTextView: DUMessageInputTextView!
     @IBOutlet weak var sendButton: UIButton!
     
-    static public let nib: UINib = UINib.init(nibName: String(DUInputToolBarContentView), bundle: NSBundle(identifier: Constants.bundleIdentifier))
+    static public let nib: UINib = UINib.init(nibName: String(DUInputToolbarContentView), bundle: NSBundle(identifier: Constants.bundleIdentifier))
     
 }

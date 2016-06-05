@@ -37,10 +37,10 @@
 		FA5B994E1D017E3A00786C6B /* DUBlockCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA5B994C1D017E3A00786C6B /* DUBlockCell.xib */; };
 		FA5B99501D0183A800786C6B /* CustomViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5B994F1D0183A800786C6B /* CustomViews.swift */; };
 		FA5B99531D0187E100786C6B /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5B99521D0187E100786C6B /* UserData.swift */; };
-		FA976E861D03E40D00F844E5 /* DUInputToolBarContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA976E851D03E40D00F844E5 /* DUInputToolBarContentView.swift */; };
-		FA976E881D03E9AB00F844E5 /* DUInputToolBarContentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA976E871D03E9AB00F844E5 /* DUInputToolBarContentView.xib */; };
+		FA976E861D03E40D00F844E5 /* DUInputToolbarContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA976E851D03E40D00F844E5 /* DUInputToolbarContentView.swift */; };
+		FA976E881D03E9AB00F844E5 /* DUInputToolbarContentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA976E871D03E9AB00F844E5 /* DUInputToolbarContentView.xib */; };
 		FA976E8A1D03ECFD00F844E5 /* DUMessageInputTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA976E891D03ECFD00F844E5 /* DUMessageInputTextView.swift */; };
-		FA976E8C1D03FB7900F844E5 /* DUMessageInputToolBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA976E8B1D03FB7900F844E5 /* DUMessageInputToolBar.swift */; };
+		FA976E8C1D03FB7900F844E5 /* DUMessageInputToolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA976E8B1D03FB7900F844E5 /* DUMessageInputToolbar.swift */; };
 		FA976E8F1D04152800F844E5 /* DUMessagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA976E8D1D04152800F844E5 /* DUMessagesViewController.swift */; };
 		FA976E901D04152800F844E5 /* DUMessagesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA976E8E1D04152800F844E5 /* DUMessagesViewController.xib */; };
 /* End PBXBuildFile section */
@@ -104,10 +104,10 @@
 		FA5B994C1D017E3A00786C6B /* DUBlockCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DUBlockCell.xib; sourceTree = "<group>"; };
 		FA5B994F1D0183A800786C6B /* CustomViews.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomViews.swift; sourceTree = "<group>"; };
 		FA5B99521D0187E100786C6B /* UserData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
-		FA976E851D03E40D00F844E5 /* DUInputToolBarContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DUInputToolBarContentView.swift; sourceTree = "<group>"; };
-		FA976E871D03E9AB00F844E5 /* DUInputToolBarContentView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DUInputToolBarContentView.xib; sourceTree = "<group>"; };
+		FA976E851D03E40D00F844E5 /* DUInputToolbarContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DUInputToolbarContentView.swift; sourceTree = "<group>"; };
+		FA976E871D03E9AB00F844E5 /* DUInputToolbarContentView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DUInputToolbarContentView.xib; sourceTree = "<group>"; };
 		FA976E891D03ECFD00F844E5 /* DUMessageInputTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DUMessageInputTextView.swift; sourceTree = "<group>"; };
-		FA976E8B1D03FB7900F844E5 /* DUMessageInputToolBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DUMessageInputToolBar.swift; sourceTree = "<group>"; };
+		FA976E8B1D03FB7900F844E5 /* DUMessageInputToolbar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DUMessageInputToolbar.swift; sourceTree = "<group>"; };
 		FA976E8D1D04152800F844E5 /* DUMessagesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DUMessagesViewController.swift; sourceTree = "<group>"; };
 		FA976E8E1D04152800F844E5 /* DUMessagesViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DUMessagesViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -237,10 +237,10 @@
 				FA5B994B1D017E3A00786C6B /* DUBlockCell.swift */,
 				FA5B994C1D017E3A00786C6B /* DUBlockCell.xib */,
 				FA5B994F1D0183A800786C6B /* CustomViews.swift */,
-				FA976E851D03E40D00F844E5 /* DUInputToolBarContentView.swift */,
-				FA976E871D03E9AB00F844E5 /* DUInputToolBarContentView.xib */,
+				FA976E851D03E40D00F844E5 /* DUInputToolbarContentView.swift */,
+				FA976E871D03E9AB00F844E5 /* DUInputToolbarContentView.xib */,
 				FA976E891D03ECFD00F844E5 /* DUMessageInputTextView.swift */,
-				FA976E8B1D03FB7900F844E5 /* DUMessageInputToolBar.swift */,
+				FA976E8B1D03FB7900F844E5 /* DUMessageInputToolbar.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -440,7 +440,7 @@
 				FA2D83561CFE0DE00060A6B8 /* DUChatCell.xib in Resources */,
 				FA1FD2321D00A2FF0066BC7C /* DUUserCell.xib in Resources */,
 				FA976E901D04152800F844E5 /* DUMessagesViewController.xib in Resources */,
-				FA976E881D03E9AB00F844E5 /* DUInputToolBarContentView.xib in Resources */,
+				FA976E881D03E9AB00F844E5 /* DUInputToolbarContentView.xib in Resources */,
 				FA1FD22A1D007FF10066BC7C /* DUChatSettingViewController.xib in Resources */,
 				FA2D83581CFE0FAB0060A6B8 /* Resources.xcassets in Resources */,
 				FA5B994E1D017E3A00786C6B /* DUBlockCell.xib in Resources */,
@@ -557,7 +557,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FA2D83F11CFEE7700060A6B8 /* ViewControllerProtocols.swift in Sources */,
-				FA976E861D03E40D00F844E5 /* DUInputToolBarContentView.swift in Sources */,
+				FA976E861D03E40D00F844E5 /* DUInputToolbarContentView.swift in Sources */,
 				FA2D83491CFE0CF10060A6B8 /* DUAvatarImageFactory.swift in Sources */,
 				FA5B99531D0187E100786C6B /* UserData.swift in Sources */,
 				FA2D834A1CFE0CF10060A6B8 /* DUButtonFactory.swift in Sources */,
@@ -569,7 +569,7 @@
 				FA2D83551CFE0DE00060A6B8 /* DUChatCell.swift in Sources */,
 				FA1FD2291D007FF10066BC7C /* DUChatSettingViewController.swift in Sources */,
 				FA2D83C61CFE712B0060A6B8 /* DUGeneralUIProtocols.swift in Sources */,
-				FA976E8C1D03FB7900F844E5 /* DUMessageInputToolBar.swift in Sources */,
+				FA976E8C1D03FB7900F844E5 /* DUMessageInputToolbar.swift in Sources */,
 				FA2D834E1CFE0D7B0060A6B8 /* Constants.swift in Sources */,
 				FA2D83461CFE0CE90060A6B8 /* DUExtensions.swift in Sources */,
 				FA5B99501D0183A800786C6B /* CustomViews.swift in Sources */,

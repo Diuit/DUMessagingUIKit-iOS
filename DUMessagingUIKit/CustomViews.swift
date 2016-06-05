@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 
+/// A cusomized UILabel whose text is aligned top vertically 
 @IBDesignable class TopAlignedLabel: UILabel {
     override func drawTextInRect(rect: CGRect) {
         if let stringText = text {

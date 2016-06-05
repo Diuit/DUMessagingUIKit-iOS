@@ -128,43 +128,6 @@ public class DUMessageInputTextView: UITextView {
         setNeedsDisplay()
     }
     
-    // MARK: UIMenuController
-    /*
-    override public func canBecomeFirstResponder() -> Bool {
-        return super.canBecomeFirstResponder()
-    }
-    
-    override public func becomeFirstResponder() -> Bool {
-        return super.becomeFirstResponder()
-    }
-    
-    override public func canPerformAction(action: Selector, withSender sender: AnyObject?) -> Bool {
-        UIMenuController.sharedMenuController().menuItems = nil
-        
-        if text.characters.count == 0 {
-            if action == #selector(NSObject.paste(_:)) {
-                return true
-            }
-        } else {
-            if selectedRange.length > 0 {
-                if action == #selector(NSObject.cut(_:)) || action == #selector(NSObject.copy(_:))
-                || action == #selector(NSObject.select(_:)) || action == #selector(NSObject.selectAll(_:))
-                || action == #selector(NSObject.paste(_:)) || action == #selector(NSObject.delete(_:)) {
-                    return true
-                }
-            } else {
-                if action == #selector(NSObject.select(_:)) || action == #selector(NSObject.selectAll(_:))
-                    || action == #selector(NSObject.paste(_:)) {
-                    return true
-                }
-            }
-        }
-        
-        return false
-    }
-    
-    */
-    
     // MARK: private helper
     private var placeholderAttributes: [String: AnyObject] {
         get {

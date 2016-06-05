@@ -7,7 +7,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DUMessagesViewController" customModule="DUMessagingUIKit" customModuleProvider="target">
             <connections>
-                <outlet property="inputToolBar" destination="zpH-UG-wS6" id="exk-Nb-H4b"/>
+                <outlet property="inputToolbar" destination="zpH-UG-wS6" id="Krb-X6-FPQ"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -16,7 +16,7 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zpH-UG-wS6" customClass="DUMessageInputToolBar" customModule="DUMessagingUIKit" customModuleProvider="target">
+                <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zpH-UG-wS6" userLabel="input tool bar" customClass="DUMessageInputToolbar" customModule="DUMessagingUIKit" customModuleProvider="target">
                     <rect key="frame" x="0.0" y="623" width="375" height="44"/>
                     <items/>
                 </toolbar>
