@@ -13,7 +13,7 @@ import UIKit
     override func drawTextInRect(rect: CGRect) {
         if let stringText = text {
             let stringTextAsNSString = stringText as NSString
-            var labelStringSize = stringTextAsNSString.boundingRectWithSize(CGSizeMake(CGRectGetWidth(self.frame), CGFloat.max),
+            let labelStringSize = stringTextAsNSString.boundingRectWithSize(CGSizeMake(CGRectGetWidth(self.frame), CGFloat.max),
                                                                             options: NSStringDrawingOptions.UsesLineFragmentOrigin,
                                                                             attributes: [NSFontAttributeName: font],
                                                                             context: nil).size

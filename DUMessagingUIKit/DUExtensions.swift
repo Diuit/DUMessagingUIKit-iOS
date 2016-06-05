@@ -168,8 +168,28 @@ public extension UIImage {
     }
 }
 
-// NSStringFromClass for Swift version
-public extension NSObject{
+public extension UIView {
+    /// Add NSLayoutConstraints to make subview as same as current view in size
+    func pingAlledge(ofSubview subview: UIView) {
+        self.ping(subview: subview, toEdge: .Top)
+        self.ping(subview: subview, toEdge: .Leading)
+        self.ping(subview: subview, toEdge: .Bottom)
+        self.ping(subview: subview, toEdge: .Trailing)
+    }
+    /// Ping one edge of subview with given attribut onto current view's edge
+    func ping(subview subview:UIView, toEdge attribute: NSLayoutAttribute) {
+        self.addConstraint(NSLayoutConstraint(item: self, attribute: attribute, relatedBy: .Equal, toItem: subview, attribute: attribute, multiplier: 1.0, constant: 0.0))
+    }
+}
+
+public extension String {
+    /// Return a `String` with all white space trimmed
+    func du_trimingWhitespace() -> String {
+        return self.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
+    }
+}
+
+public extension NSObject {
     /// Return class string
     public class var nameOfClass: String{
         return NSStringFromClass(self).componentsSeparatedByString(".").last!
