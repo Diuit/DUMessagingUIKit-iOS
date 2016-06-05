@@ -16,11 +16,13 @@ class ViewController: UITableViewController, DUChatListProtocolForViewController
     
     func didClickRightBarButton(sender: UIBarButtonItem?) {
         // handle righbtBarButton click event
+        self.performSegueWithIdentifier("toMessagesSegue", sender: nil)
     }
     func didSelectCell(atIndexPath indexPath: NSIndexPath) {
         // handle cell selection event
         selectedChat = chatData[indexPath.row]
-        self.performSegueWithIdentifier("toSettingSegue", sender: nil)
+        //self.performSegueWithIdentifier("toSettingSegue", sender: nil)
+         self.performSegueWithIdentifier("toMessagesSegue", sender: nil)
     }
     
     var selectedChat: DUChatData? = nil

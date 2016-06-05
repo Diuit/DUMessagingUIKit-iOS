@@ -8,28 +8,30 @@
 
 import UIKit
 
-public protocol DUMessagInputToolBarDelegate {
+public protocol DUMessagInputToolBarDelegate: UIToolbarDelegate {
     func didPressSendButton()
     func didPressAccessorySendButton()
 }
 
 public class DUMessageInputToolBar: UIToolbar {
     
-    public internal(set) weak var contentView: DUInputToolBarContentView?
+    //public internal(set) weak var contentView: DUInputToolBarContentView?
+    dynamic public weak var delegate: DUMessagInputToolBarDelegate?
     
     override public func awakeFromNib() {
         super.awakeFromNib()
         
-        contentView = NSBundle(identifier: Constants.bundleIdentifier)?.loadNibNamed(String(DUInputToolBarContentView), owner: nil, options: nil).first as? DUInputToolBarContentView
+        let toolBarContentView = NSBundle(identifier: Constants.bundleIdentifier)?.loadNibNamed(String(DUInputToolBarContentView), owner: nil, options: nil).first as? DUInputToolBarContentView
         
-        guard contentView != nil else {
+        guard toolBarContentView != nil else {
             assert(false, "contentView has loaded failed")
             return
         }
-        contentView?.frame = frame
-        addSubview(contentView!)
-        pingAlledge(ofSubview: contentView!)
+        toolBarContentView?.frame = bounds
+        addSubview(toolBarContentView!)
+        pingAlledge(ofSubview: toolBarContentView!)
         setNeedsUpdateConstraints()
+        contentView = toolBarContentView
     }
     
     // MARK: tool bar button

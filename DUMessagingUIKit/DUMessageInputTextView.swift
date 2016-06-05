@@ -20,12 +20,8 @@ public class DUMessageInputTextView: UITextView {
     
     // MARK: UITextView
     override public var text: String! {
-        get {
-            return self.text
-        }
-        set {
-            self.text = newValue
-            self.setNeedsDisplay()
+        didSet {
+            setNeedsDisplay()
         }
     }
     
@@ -44,7 +40,7 @@ public class DUMessageInputTextView: UITextView {
         
         if text == "" {
             let p = placeholder as NSString
-            p.drawInRect(CGRectInset(rect, 7.0, 3.0), withAttributes: placeholderAttributes)
+            p.drawInRect(CGRectInset(rect, 7.0, 7.0), withAttributes: placeholderAttributes)
         }
     }
     
@@ -72,14 +68,14 @@ public class DUMessageInputTextView: UITextView {
     private func setupTextView() {
         translatesAutoresizingMaskIntoConstraints = false
         backgroundColor = UIColor.whiteColor()
-        textContainerInset = UIEdgeInsetsMake(4.0, 2.0, 4.0, 2.0)
-        contentInset = UIEdgeInsetsMake(1.0, 0.0, 1.0, 0.0)
+        textContainerInset = UIEdgeInsetsMake(5.0, 2.0, 5.0, 2.0)
+        contentInset = UIEdgeInsetsMake(2.0, 0.0, 2.0, 0.0)
         scrollEnabled = true
         scrollsToTop = false
         userInteractionEnabled = true
         
         font = UIFont.DUChatBodyFriendFont()
-        textColor = UIColor.blueColor()
+        textColor = UIColor.blackColor()
         textAlignment = .Natural
         
         dataDetectorTypes = .None
@@ -87,11 +83,20 @@ public class DUMessageInputTextView: UITextView {
         keyboardType = .Default
         returnKeyType = .Default
         
-        text = ""
+        text = nil
+        
+        // add notifiction for events
+        addTextViewNotificationObservers()
+        
+        bindConstraints()
+    }
+    
+    deinit {
+        removeTextViewNotificationObservers()
     }
     
     // iterate all constraints in xib and link variable with correct constrains
-    private func linkConstraints() {
+    private func bindConstraints() {
         for c in constraints {
             if c.firstAttribute == .Height {
                 switch c.relation {
@@ -106,18 +111,25 @@ public class DUMessageInputTextView: UITextView {
         }
     }
     
-    // MARK: private helper
-    private var placeholderAttributes: [String: AnyObject] {
-        get {
-            let paragraphStyle: NSMutableParagraphStyle = NSMutableParagraphStyle()
-            paragraphStyle.lineBreakMode = .ByTruncatingTail
-            paragraphStyle.alignment = textAlignment
-            
-            return [NSFontAttributeName: UIFont.DUBodyFont()!, NSForegroundColorAttributeName: UIColor.DUDarkGreyColor(), NSParagraphStyleAttributeName: paragraphStyle]
-        }
+    // MARK: NSNotifications
+    private func addTextViewNotificationObservers() {
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(DUMessageInputTextView.didReceiveTextViewNotification), name: UITextViewTextDidChangeNotification, object: self)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(DUMessageInputTextView.didReceiveTextViewNotification), name: UITextViewTextDidBeginEditingNotification, object: self)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(DUMessageInputTextView.didReceiveTextViewNotification), name: UITextViewTextDidEndEditingNotification, object: self)
+    }
+    
+    private func removeTextViewNotificationObservers() {
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: UITextViewTextDidChangeNotification, object: self)
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: UITextViewTextDidBeginEditingNotification, object: self)
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: UITextViewTextDidEndEditingNotification, object: self)
+    }
+    
+    @objc private func didReceiveTextViewNotification() {
+        setNeedsDisplay()
     }
     
     // MARK: UIMenuController
+    /*
     override public func canBecomeFirstResponder() -> Bool {
         return super.canBecomeFirstResponder()
     }
@@ -149,5 +161,18 @@ public class DUMessageInputTextView: UITextView {
         }
         
         return false
+    }
+    
+    */
+    
+    // MARK: private helper
+    private var placeholderAttributes: [String: AnyObject] {
+        get {
+            let paragraphStyle: NSMutableParagraphStyle = NSMutableParagraphStyle()
+            paragraphStyle.lineBreakMode = .ByTruncatingTail
+            paragraphStyle.alignment = textAlignment
+            
+            return [NSFontAttributeName: UIFont.DUBodyFont()!, NSForegroundColorAttributeName: UIColor.DUDarkGreyColor(), NSParagraphStyleAttributeName: paragraphStyle]
+        }
     }
 }
