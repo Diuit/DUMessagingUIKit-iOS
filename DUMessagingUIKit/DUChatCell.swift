@@ -13,12 +13,7 @@ import DTModelStorage
 
 /// Custom UITableViewCell for displaying information of a DUChat instance
 public class DUChatCell: UITableViewCell, ModelTransfer {
-    @IBOutlet weak var chatAvatarImageView: UIImageView! {
-        didSet {
-            chatAvatarImageView.layer.cornerRadius = self.chatAvatarImageView.frame.size.width/2
-            chatAvatarImageView.clipsToBounds = true
-        }
-    }
+    @IBOutlet weak var chatAvatarImageView: DUAvatarImageView!
     @IBOutlet weak var chatTitleLabel: UILabel!
     @IBOutlet weak var chatDetailLabel: UILabel!
     @IBOutlet weak var chatAccessoryLabel: UILabel!
@@ -36,11 +31,8 @@ public class DUChatCell: UITableViewCell, ModelTransfer {
     
     public func updateWithModel(model: DUChatData) {
         self.chatAvatarImageView.image = model.avatarPlaceholderImage
-        // async load image
-        model.loadImage() { [ weak self ] in
-            self?.chatAvatarImageView.image = model.imageValue
-        }
-        
+        self.chatAvatarImageView.imagePath = model.imagePath
+
         // set up data
         self.chatTitleLabel.text = model.chatTitle
         self.chatDetailLabel.text = model.chatDetailText

@@ -14,7 +14,7 @@ import UIKit
     override func drawTextInRect(rect: CGRect) {
         if let stringText = text {
             let stringTextAsNSString = stringText as NSString
-            var labelStringSize = stringTextAsNSString.boundingRectWithSize(CGSizeMake(CGRectGetWidth(self.frame), CGFloat.max),
+            let labelStringSize = stringTextAsNSString.boundingRectWithSize(CGSizeMake(CGRectGetWidth(self.frame), CGFloat.max),
                                                                             options: NSStringDrawingOptions.UsesLineFragmentOrigin,
                                                                             attributes: [NSFontAttributeName: font],
                                                                             context: nil).size
@@ -27,5 +27,18 @@ import UIKit
         super.prepareForInterfaceBuilder()
         layer.borderWidth = 1
         layer.borderColor = UIColor.blackColor().CGColor
+    }
+}
+
+@IBDesignable class DUAvatarImageView: UIImageView, CircleShapeView, DUImageResource {
+    // Automatically load the image right after its url is set
+    var imagePath: String? = "" {
+        didSet {
+            if self.imagePath != "" {
+                self.loadImage() { [weak self] in
+                    self?.image = self?.imageValue
+                }
+            }
+        }
     }
 }

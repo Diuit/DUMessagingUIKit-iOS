@@ -18,14 +18,15 @@ public let DUTableViewCellReuseIdentifier = "DUTableViewCellReuseIdentifier"
  */
 public class DUChatSettingViewController: UIViewController, DUChatSettingUIProtocol, DTTableViewManageable, DUBlockDelegate {
 
-    @IBOutlet weak var chatAvatarImageView: UIImageView! {
+    @IBOutlet weak var chatAvatarImageView: DUAvatarImageView! {
         didSet {
-            chatAvatarImageView.layer.cornerRadius = chatAvatarImageView.frame.size.width/2
-            chatAvatarImageView.clipsToBounds = true
             chatAvatarImageView.image = chatDataForSetting?.avatarPlaceholderImage ?? UIImage.DUDefaultPersonAvatarImage()
+            chatAvatarImageView.imagePath = chatDataForSetting?.imagePath
+            /*
             chatDataForSetting?.loadImage() { [weak self] in
                 self?.chatAvatarImageView.image = self?.chatDataForSetting?.imageValue ?? UIImage.DUDefaultPersonAvatarImage()
             }
+ */
         }
     }
     @IBOutlet weak var chatNameLabel: UILabel! {

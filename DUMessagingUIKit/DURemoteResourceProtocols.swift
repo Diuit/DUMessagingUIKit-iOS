@@ -20,7 +20,7 @@ public protocol DUImageResource: DURemoteResource {
     /// URL of image resource
     var imagePath: String? { get }
     /// Placeholder image for displaying before image is fully loaded
-    var placeholderImage: UIImage { get }
+    //var placeholderImage: UIImage { get }
 }
 extension DUImageResource {
     /// Load the image resource from imagePath
@@ -109,7 +109,7 @@ extension DUImageResource {
         if let img = self.imageForURL(self.imagePath!) {
             return img
         } else {
-            return self.placeholderImage
+            return nil
         }
         
     }

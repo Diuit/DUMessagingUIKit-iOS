@@ -12,12 +12,7 @@ import DTModelStorage
 /// Display user information
 class DUUserCell: UITableViewCell, ModelTransfer {
 
-    @IBOutlet weak var userAvatarImage: UIImageView! {
-        didSet {
-            userAvatarImage.layer.cornerRadius = userAvatarImage.frame.width/2
-            userAvatarImage.clipsToBounds = true
-        }
-    }
+    @IBOutlet weak var userAvatarImage: DUAvatarImageView!
     @IBOutlet weak var userNameLabel: UILabel!
 
     func updateWithModel(model: DUUserData) {
@@ -25,7 +20,9 @@ class DUUserCell: UITableViewCell, ModelTransfer {
             self.selectionStyle = .None
         }
         userNameLabel.text = model.userDisplayName
-        userAvatarImage.image = model.placeholderImage
+        if model.imagePath != nil {
+            userAvatarImage.imagePath = model.imagePath
+        }
     }
     
 }

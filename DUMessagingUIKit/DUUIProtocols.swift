@@ -9,9 +9,17 @@
 import Foundation
 import UIKit
 
-// UIView
-public protocol BackGroundColor { var myBackgroundColor: UIColor { get } }
-public protocol TintColor       { var myTintColor: UIColor       { get } }
+// MARK: UI properties
+// UIView-related protocols
+public protocol BackGroundColor   { var myBackgroundColor: UIColor { get } }
+public protocol TintColor         { var myTintColor: UIColor       { get } }
+public protocol MasksToBoundsTRUE {}
+public protocol CornerRadius       { var du_CornerRadius: CGFloat   { get } }
+
+public protocol CircleShapeView: CornerRadius {}
+extension CircleShapeView where Self: UIView {
+    var du_CornerRadius: CGFloat { return bounds.size.width/2 }
+}
 
 // UIBarButton
 public enum UIBarButtonType {
@@ -39,11 +47,14 @@ public protocol NavigationBarTitle {
     var myBarTitle: String { get }
 }
 
+// MARK: UI adoption
 /// Method to adopt ui protocol
 public protocol UIProtocolAdoption {
     func setupInheritedProtocolUI()
     func adoptProtocolUIApperance()
 }
+
+// UIViewController
 public extension UIProtocolAdoption where Self: UIViewController {
     /// Build parent UI protocols, do this first in adoptProtocolUI()
     func setupInheritedProtocolUI() {
@@ -86,4 +97,25 @@ public extension GlobalUIProtocol where Self: UIViewController {
 }
 
 
-
+// UIView
+extension UIView: UIProtocolAdoption {
+    public override func awakeFromNib() {
+        super.awakeFromNib()
+        adoptProtocolUIApperance()
+    }
+    
+    public func adoptProtocolUIApperance() {
+        
+        // CALayer
+        if let mySelf = self as? CornerRadius      { layer.cornerRadius  = mySelf.du_CornerRadius }
+        if self is MasksToBoundsTRUE               { layer.masksToBounds = true }
+        
+        // UIView
+        if let mySelf = self as? BackGroundColor   { backgroundColor    = mySelf.myBackgroundColor }
+        if let mySelf = self as? TintColor         { tintColor          = mySelf.myTintColor }
+    }
+    
+    public func setupInheritedProtocolUI() {
+        // do nothing here
+    }
+}

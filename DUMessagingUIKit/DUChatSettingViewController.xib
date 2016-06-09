@@ -24,7 +24,7 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xup-0t-23z" userLabel="UpperBgView">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="300"/>
                     <subviews>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="defaultAvatar" translatesAutoresizingMaskIntoConstraints="NO" id="BS9-rs-XN7">
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="defaultAvatar" translatesAutoresizingMaskIntoConstraints="NO" id="BS9-rs-XN7" customClass="DUAvatarImageView" customModule="DUMessagingUIKit" customModuleProvider="target">
                             <rect key="frame" x="140" y="103" width="94" height="94"/>
                             <constraints>
                                 <constraint firstAttribute="width" secondItem="BS9-rs-XN7" secondAttribute="height" multiplier="1:1" id="WCl-Zl-8qK"/>
@@ -36,7 +36,7 @@
                                 <constraint firstAttribute="height" constant="48" id="6Pc-Bm-0ts"/>
                             </constraints>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                     </subviews>

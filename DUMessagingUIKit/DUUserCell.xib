@@ -16,7 +16,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Hoj-3z-47r">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="defaultAvatar" translatesAutoresizingMaskIntoConstraints="NO" id="Hoj-3z-47r" customClass="DUAvatarImageView" customModule="DUMessagingUIKit" customModuleProvider="target">
                         <rect key="frame" x="15" y="6" width="32" height="32"/>
                         <constraints>
                             <constraint firstAttribute="width" secondItem="Hoj-3z-47r" secondAttribute="height" multiplier="1:1" id="EAA-et-CIt"/>
@@ -29,7 +29,7 @@
                             <constraint firstAttribute="height" constant="21" id="888-tI-Aa4"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
@@ -47,4 +47,7 @@
             </connections>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="defaultAvatar" width="66" height="66"/>
+    </resources>
 </document>
