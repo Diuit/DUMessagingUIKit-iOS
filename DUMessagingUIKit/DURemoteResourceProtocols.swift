@@ -7,7 +7,8 @@
 //
 
 import Foundation
-import SDWebImage
+
+let imageCache = NSCache()
 
 /// Base protocol for remote resources
 public protocol DURemoteResource {
@@ -24,12 +25,34 @@ public protocol DUImageResource: DURemoteResource {
 extension DUImageResource {
     /// Load the image resource from imagePath
     public func load(url: String, completion: (Bool -> Void)? ) {
-        guard imagePath != nil else {
-            print("image path is nil")
+        guard imagePath != nil && imagePath != "" else {
+            print("image path is nil or empty")
             completion?(false)
             return
         }
         print("Fetching remote resources from \(url)")
+        
+        if let _ = imageCache.objectForKey(url) as? NSData {
+            completion?(true)
+        } else {
+            let session = NSURLSession.sharedSession()
+            let u = NSURL(string: url)
+            let downloadTask = session.dataTaskWithURL(u!, completionHandler: { data, response, error in
+                guard error == nil else {
+                    completion?(false)
+                    return
+                }
+                if data != nil {
+                    imageCache.setObject(data!, forKey: url)
+                    completion?(true)
+                }
+            })
+            downloadTask.resume()
+        }
+        
+        
+        
+        /*
         let imgManager = SDWebImageManager.sharedManager()
         let indexKey = imgManager.cacheKeyForURL(NSURL(string: url))
         let cachedImage = imgManager.imageCache.imageFromMemoryCacheForKey(indexKey)
@@ -51,6 +74,7 @@ extension DUImageResource {
                 }
             }
         }
+ */
     }
     
     /// Send a completion handler to this function and trigger the image loading procedure.
@@ -66,9 +90,17 @@ extension DUImageResource {
     
     /// Return cached image for given URL
     func imageForURL(url: String) -> UIImage? {
+        let cachedData = imageCache.objectForKey(url) as? NSData
+        if let _ = cachedData {
+            return UIImage(data: cachedData!)
+        } else {
+            return nil
+        }
+        /*
         let imgManager = SDWebImageManager.sharedManager()
         let indexKey = imgManager.cacheKeyForURL(NSURL(string: url))
         return imgManager.imageCache.imageFromMemoryCacheForKey(indexKey)
+ */
     }
     
     /// get UIImage instance, return placeholderImage if remote resource failed to load
