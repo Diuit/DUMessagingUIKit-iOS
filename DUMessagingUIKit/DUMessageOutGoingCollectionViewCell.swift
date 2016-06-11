@@ -7,12 +7,17 @@
 //
 
 import UIKit
+import DTModelStorage
 
-public class DUMessageOutGoingCollectionViewCell: DUMessageCollectionViewCell {
+public class DUMessageOutGoingCollectionViewCell: DUMessageCollectionViewCell, ModelTransfer {
     public override func awakeFromNib() {
         super.awakeFromNib()
         messageBubbleTopLabel.textAlignment = .Right
         cellBottomLabel.textAlignment = .Right
+    }
+    
+    public func updateWithModel(model: DUMessageData) {
+        self.cellTextView.text = "hi"
     }
 
 }
