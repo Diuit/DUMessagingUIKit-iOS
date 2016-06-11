@@ -21,12 +21,8 @@ public class DUChatSettingViewController: UIViewController, DUChatSettingUIProto
     @IBOutlet weak var chatAvatarImageView: DUAvatarImageView! {
         didSet {
             chatAvatarImageView.image = chatDataForSetting?.avatarPlaceholderImage ?? UIImage.DUDefaultPersonAvatarImage()
+            // XXX(Pofat) set image path will load the image
             chatAvatarImageView.imagePath = chatDataForSetting?.imagePath
-            /*
-            chatDataForSetting?.loadImage() { [weak self] in
-                self?.chatAvatarImageView.image = self?.chatDataForSetting?.imageValue ?? UIImage.DUDefaultPersonAvatarImage()
-            }
- */
         }
     }
     @IBOutlet weak var chatNameLabel: UILabel! {
