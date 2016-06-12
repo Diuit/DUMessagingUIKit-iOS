@@ -187,6 +187,12 @@ public extension String {
     func du_trimingWhitespace() -> String {
         return self.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
     }
+    /// Calculate the minimum rectangle which contains the given text, with given width and font.
+    func rectWithConstrainedWidth(width: CGFloat, font: UIFont) -> CGRect {
+        let constraintRect = CGSize(width: width, height: CGFloat.max)
+        let boundingRect = self.boundingRectWithSize(constraintRect, options: .UsesLineFragmentOrigin, attributes: [NSFontAttributeName: font], context: nil)
+        return boundingRect
+    }
 }
 
 public extension NSObject {

@@ -14,6 +14,9 @@
 		FA11E2141D0C562B005C7EEB /* DUMessageCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA11E2131D0C562B005C7EEB /* DUMessageCollectionView.swift */; };
 		FA11E2191D0CF58C005C7EEB /* DUMessageIncomingCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA11E2171D0CF58C005C7EEB /* DUMessageIncomingCollectionViewCell.swift */; };
 		FA11E21A1D0CF58C005C7EEB /* DUMessageIncomingCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA11E2181D0CF58C005C7EEB /* DUMessageIncomingCollectionViewCell.xib */; };
+		FA11E21C1D0D2B17005C7EEB /* DUMessageSizeCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA11E21B1D0D2B17005C7EEB /* DUMessageSizeCalculator.swift */; };
+		FA11E21E1D0D4FA4005C7EEB /* DUMessageCollectioinViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA11E21D1D0D4FA4005C7EEB /* DUMessageCollectioinViewDataSource.swift */; };
+		FA11E2201D0D5BFD005C7EEB /* DUMessageCollectionViewFlowLayoutDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA11E21F1D0D5BFD005C7EEB /* DUMessageCollectionViewFlowLayoutDelegate.swift */; };
 		FA1FD2291D007FF10066BC7C /* DUChatSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA1FD2271D007FF10066BC7C /* DUChatSettingViewController.swift */; };
 		FA1FD22A1D007FF10066BC7C /* DUChatSettingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA1FD2281D007FF10066BC7C /* DUChatSettingViewController.xib */; };
 		FA1FD2311D00A2FF0066BC7C /* DUUserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA1FD22F1D00A2FF0066BC7C /* DUUserCell.swift */; };
@@ -86,6 +89,9 @@
 		FA11E2131D0C562B005C7EEB /* DUMessageCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DUMessageCollectionView.swift; sourceTree = "<group>"; };
 		FA11E2171D0CF58C005C7EEB /* DUMessageIncomingCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DUMessageIncomingCollectionViewCell.swift; sourceTree = "<group>"; };
 		FA11E2181D0CF58C005C7EEB /* DUMessageIncomingCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DUMessageIncomingCollectionViewCell.xib; sourceTree = "<group>"; };
+		FA11E21B1D0D2B17005C7EEB /* DUMessageSizeCalculator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DUMessageSizeCalculator.swift; sourceTree = "<group>"; };
+		FA11E21D1D0D4FA4005C7EEB /* DUMessageCollectioinViewDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DUMessageCollectioinViewDataSource.swift; sourceTree = "<group>"; };
+		FA11E21F1D0D5BFD005C7EEB /* DUMessageCollectionViewFlowLayoutDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DUMessageCollectionViewFlowLayoutDelegate.swift; sourceTree = "<group>"; };
 		FA1FD2271D007FF10066BC7C /* DUChatSettingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DUChatSettingViewController.swift; sourceTree = "<group>"; };
 		FA1FD2281D007FF10066BC7C /* DUChatSettingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DUChatSettingViewController.xib; sourceTree = "<group>"; };
 		FA1FD22F1D00A2FF0066BC7C /* DUUserCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DUUserCell.swift; sourceTree = "<group>"; };
@@ -250,6 +256,8 @@
 				FA2D83411CFE0CA30060A6B8 /* DUChatData.swift */,
 				FA976E991D048FE800F844E5 /* DUUserData.swift */,
 				FA976E9B1D0492D600F844E5 /* DUMessageData.swift */,
+				FA11E21D1D0D4FA4005C7EEB /* DUMessageCollectioinViewDataSource.swift */,
+				FA11E21F1D0D5BFD005C7EEB /* DUMessageCollectionViewFlowLayoutDelegate.swift */,
 			);
 			name = Protocols;
 			sourceTree = "<group>";
@@ -336,6 +344,7 @@
 			children = (
 				FA976EA01D04A34800F844E5 /* DUMessageCollectionViewFlowLayout.swift */,
 				FA11E20B1D0BC7BE005C7EEB /* DUCollectionViewLayouAttributes.swift */,
+				FA11E21B1D0D2B17005C7EEB /* DUMessageSizeCalculator.swift */,
 			);
 			name = Layout;
 			sourceTree = "<group>";
@@ -602,6 +611,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FA11E21C1D0D2B17005C7EEB /* DUMessageSizeCalculator.swift in Sources */,
+				FA11E2201D0D5BFD005C7EEB /* DUMessageCollectionViewFlowLayoutDelegate.swift in Sources */,
 				FA2D83F11CFEE7700060A6B8 /* ViewControllerProtocols.swift in Sources */,
 				FA11E2191D0CF58C005C7EEB /* DUMessageIncomingCollectionViewCell.swift in Sources */,
 				FA976E861D03E40D00F844E5 /* DUInputToolbarContentView.swift in Sources */,
@@ -613,6 +624,7 @@
 				FA976E9A1D048FE800F844E5 /* DUUserData.swift in Sources */,
 				FA976E8A1D03ECFD00F844E5 /* DUMessageInputTextView.swift in Sources */,
 				FA1FD2311D00A2FF0066BC7C /* DUUserCell.swift in Sources */,
+				FA11E21E1D0D4FA4005C7EEB /* DUMessageCollectioinViewDataSource.swift in Sources */,
 				FA976E931D04677D00F844E5 /* DUMessageOutGoingCollectionViewCell.swift in Sources */,
 				FA5B994D1D017E3A00786C6B /* DUBlockCell.swift in Sources */,
 				FA976E981D047F9800F844E5 /* DUMessageCellTextView.swift in Sources */,

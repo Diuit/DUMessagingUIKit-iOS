@@ -74,8 +74,8 @@ public class DUCollectionViewLayouAttributes: UICollectionViewLayoutAttributes {
     /// The font of textView within the message cell.
     public var messageBubbleFont: UIFont = UIFont.DUChatBodyFriendFont()!
     /// The inset of the frame of the textView in `DUMessageCollectionViewCell`
-    public private(set) var cellTextViewFrameInset: UIEdgeInsets =  UIEdgeInsetsMake(0, 0, 0, 0)
+    public var cellTextViewFrameInset: UIEdgeInsets =  UIEdgeInsetsMake(0, 0, 0, 0)
     /// The inset of the text container in textView of `DUMessageCollectionViewCell`
-    public private(set) var textViewTextContainerInsets: UIEdgeInsets = UIEdgeInsetsMake(7.0, 14.0, 7.0, 14.0)
+    public var textViewTextContainerInsets: UIEdgeInsets = UIEdgeInsetsMake(7.0, 14.0, 7.0, 14.0)
 }
 

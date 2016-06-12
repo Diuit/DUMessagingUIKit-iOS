@@ -11,7 +11,7 @@ import UIKit
 /**
     Protocol `DUMessageCollectionViewCellDelegate` defines the interface of what you can interact with the collection view cell
  */
-public protocol DUMessageCollectionViewCellDelegate {
+public protocol DUMessageCollectionViewCellDelegate: class {
     /**
         AvatarImageView of the cell has been tapped.
     
@@ -63,7 +63,7 @@ public class DUMessageCollectionViewCell: UICollectionViewCell {
     @IBOutlet public weak var timeLabel: UILabel!
     
     /// Delegate for all cell tap events.
-    public var delegate: DUMessageCollectionViewCellDelegate?
+    public weak var delegate: DUMessageCollectionViewCellDelegate?
     
     public var messageMediaView: UIView? = nil
     {
