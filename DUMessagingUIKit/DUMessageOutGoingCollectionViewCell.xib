@@ -9,10 +9,10 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="DUMessageOutGoingCollectionViewCell" customModule="DUMessagingUIKit" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="375" height="154"/>
+            <rect key="frame" x="0.0" y="0.0" width="375" height="134"/>
             <autoresizingMask key="autoresizingMask"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                <rect key="frame" x="0.0" y="0.0" width="375" height="154"/>
+                <rect key="frame" x="0.0" y="0.0" width="375" height="134"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="top label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lQ9-aH-htB">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="20"/>
@@ -29,16 +29,6 @@
                         <color key="backgroundColor" red="0.60000002384185791" green="0.60000002384185791" blue="0.60000002384185791" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="20" id="YDC-TZ-0a4" userLabel="message top label height constraint"/>
-                        </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                        <nil key="highlightedColor"/>
-                    </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="bottom label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qyA-yJ-WEs">
-                        <rect key="frame" x="0.0" y="134" width="375" height="20"/>
-                        <color key="backgroundColor" red="0.60000002379999995" green="0.60000002379999995" blue="0.60000002379999995" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="20" id="4Eu-HF-toL" userLabel="cell bottom label height constraint"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -108,8 +98,8 @@
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IcI-Cu-Goj" userLabel="resend button">
                         <rect key="frame" x="343" y="102" width="32" height="32"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="32" id="6Om-1C-kJy"/>
                             <constraint firstAttribute="width" constant="32" id="6bM-6E-PnL"/>
+                            <constraint firstAttribute="width" secondItem="IcI-Cu-Goj" secondAttribute="height" multiplier="1:1" id="wAg-Jl-Z46"/>
                         </constraints>
                         <state key="normal" image="resendButton"/>
                     </button>
@@ -122,37 +112,36 @@
                 <constraint firstItem="IcI-Cu-Goj" firstAttribute="centerX" secondItem="deg-aa-7Aa" secondAttribute="centerX" id="4xT-E6-Trf"/>
                 <constraint firstItem="rSS-7p-iV7" firstAttribute="top" secondItem="HUB-es-YRh" secondAttribute="bottom" id="7HO-yY-7bZ"/>
                 <constraint firstAttribute="trailing" secondItem="HUB-es-YRh" secondAttribute="trailing" id="7Kj-Rm-VzZ"/>
+                <constraint firstAttribute="bottom" secondItem="ByO-gV-G7d" secondAttribute="bottom" constant="-1" id="Bch-ZR-tOH"/>
                 <constraint firstItem="lQ9-aH-htB" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="ERQ-VS-XHe"/>
                 <constraint firstItem="lQ9-aH-htB" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="Ock-WZ-ugc"/>
                 <constraint firstItem="ByO-gV-G7d" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="Y6N-2E-ud2"/>
+                <constraint firstAttribute="bottom" secondItem="IcI-Cu-Goj" secondAttribute="bottom" id="ZJK-q6-yLW"/>
                 <constraint firstItem="8jw-ND-dot" firstAttribute="leading" secondItem="D6d-ir-lQA" secondAttribute="trailing" constant="8" id="amd-Eg-0fV"/>
-                <constraint firstItem="qyA-yJ-WEs" firstAttribute="top" secondItem="ByO-gV-G7d" secondAttribute="bottom" constant="-1" id="bHj-Nf-MyO"/>
-                <constraint firstItem="qyA-yJ-WEs" firstAttribute="top" secondItem="8jw-ND-dot" secondAttribute="bottom" id="bol-Il-UvS"/>
-                <constraint firstAttribute="trailing" secondItem="qyA-yJ-WEs" secondAttribute="trailing" id="cBE-ms-R3H"/>
+                <constraint firstAttribute="bottom" secondItem="8jw-ND-dot" secondAttribute="bottom" id="bwp-uy-HaX"/>
                 <constraint firstItem="8jw-ND-dot" firstAttribute="leading" secondItem="ByO-gV-G7d" secondAttribute="trailing" constant="8" id="dgf-2j-uWh"/>
                 <constraint firstItem="HUB-es-YRh" firstAttribute="top" secondItem="lQ9-aH-htB" secondAttribute="bottom" id="fPH-Z6-UM2"/>
                 <constraint firstItem="D6d-ir-lQA" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="jGJ-Ew-fgI"/>
                 <constraint firstAttribute="trailing" secondItem="rSS-7p-iV7" secondAttribute="trailing" id="mtM-em-Run"/>
-                <constraint firstItem="qyA-yJ-WEs" firstAttribute="top" secondItem="IcI-Cu-Goj" secondAttribute="bottom" id="oaU-7H-WiN"/>
                 <constraint firstAttribute="trailing" secondItem="lQ9-aH-htB" secondAttribute="trailing" id="qTC-vF-3Lc"/>
                 <constraint firstItem="8jw-ND-dot" firstAttribute="top" secondItem="HUB-es-YRh" secondAttribute="bottom" id="wem-T6-1KI"/>
                 <constraint firstItem="rSS-7p-iV7" firstAttribute="leading" secondItem="8jw-ND-dot" secondAttribute="trailing" constant="8" id="wtZ-Ya-KPM"/>
-                <constraint firstItem="qyA-yJ-WEs" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="xhk-YZ-hek"/>
-                <constraint firstAttribute="bottom" secondItem="qyA-yJ-WEs" secondAttribute="bottom" id="zf1-fe-12m"/>
             </constraints>
             <connections>
                 <outlet property="avatarContainer" destination="rSS-7p-iV7" id="r1o-lu-W9R"/>
+                <outlet property="avatarContainerViewWidthConstraint" destination="XeL-ga-ynx" id="zzj-a0-upA"/>
                 <outlet property="avatarImageView" destination="deg-aa-7Aa" id="iOp-wS-8tG"/>
                 <outlet property="bubbleContainer" destination="8jw-ND-dot" id="1mY-zJ-JEb"/>
+                <outlet property="bubbleContainerViewWidthConstraint" destination="5aF-hu-quQ" id="589-wX-bUX"/>
                 <outlet property="bubbleImageView" destination="OvX-kD-FEe" id="C6N-9b-cpf"/>
                 <outlet property="bubbleTopLabelHeightConstraint" destination="YDC-TZ-0a4" id="MRZ-Qz-cHQ"/>
-                <outlet property="cellBottomHeightConstraint" destination="4Eu-HF-toL" id="GOO-LA-fSW"/>
-                <outlet property="cellBottomLabel" destination="qyA-yJ-WEs" id="pAY-82-3Do"/>
                 <outlet property="cellTextView" destination="xzT-DK-48p" id="hV4-YV-Rvb"/>
                 <outlet property="cellTopLabel" destination="lQ9-aH-htB" id="NiO-kM-cMA"/>
                 <outlet property="cellTopLabelHeightConstraint" destination="HpU-Vn-aQd" id="TKm-qf-KqX"/>
                 <outlet property="messageBubbleTopLabel" destination="HUB-es-YRh" id="yFk-DL-R54"/>
-                <outlet property="resendButton" destination="D6d-ir-lQA" id="16R-z4-RG8"/>
+                <outlet property="readLabel" destination="D6d-ir-lQA" id="fjD-6b-ZEp"/>
+                <outlet property="resendButton" destination="IcI-Cu-Goj" id="7sn-sH-MJi"/>
+                <outlet property="resendButtonWidthConstraint" destination="6bM-6E-PnL" id="tGi-1f-bM2"/>
                 <outlet property="timeLabel" destination="ByO-gV-G7d" id="hN4-tb-XSR"/>
             </connections>
             <point key="canvasLocation" x="281.5" y="207"/>

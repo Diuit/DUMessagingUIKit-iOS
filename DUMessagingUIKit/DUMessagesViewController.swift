@@ -7,26 +7,20 @@
 //
 
 import UIKit
-import DTCollectionViewManager
 
-public class DUMessagesViewController: UIViewController, UITextViewDelegate, DUMessagInputToolbarDelegate, DUMessagesUIProtocol, DTCollectionViewManageable {
+public class DUMessagesViewController: UIViewController, UITextViewDelegate, DUMessagInputToolbarDelegate, DUMessagesUIProtocol {
 
     public static var nib: UINib { return UINib.init(nibName: String(DUMessagesViewController), bundle: NSBundle(identifier: Constants.bundleIdentifier)) }
     
     @IBOutlet weak var inputToolbar: DUMessageInputToolbar!
-    @IBOutlet public weak var collectionView: UICollectionView?
+    @IBOutlet public weak var collectionView: DUMessageCollectionView?
 
     override public func viewDidLoad() {
         super.viewDidLoad()
         
         DUMessagesViewController.nib.instantiateWithOwner(self, options: nil)
         setupMessagesViewController()
-        manager.startManagingWithDelegate(self)
-        manager.viewBundle = NSBundle(identifier: Constants.bundleIdentifier)!
-        manager.registerCellClass(DUMessageOutGoingCollectionViewCell)
-        manager.registerNibNamed("DUMessageOutGoingCollectionViewCell", forCellClass: DUMessageOutGoingCollectionViewCell.self)
-        let messages = [MessageData(), MessageData(), MessageData()]
-        manager.memoryStorage.addItems(messages)
+
     }
     
     deinit {

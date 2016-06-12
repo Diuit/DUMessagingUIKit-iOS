@@ -7,17 +7,39 @@
 //
 
 import UIKit
-import DTModelStorage
 
-public class DUMessageOutGoingCollectionViewCell: DUMessageCollectionViewCell, ModelTransfer {
+public class DUMessageOutGoingCollectionViewCell: DUMessageCollectionViewCell {
+    /// Button to resend the message.
+    @IBOutlet weak var resendButton: UIButton!
+    /// Label to indicate the status of message being read
+    @IBOutlet weak var readLabel: UILabel!
+    
+    override public var backgroundColor: UIColor? {
+        didSet {
+            cellTopLabel.backgroundColor = backgroundColor
+            messageBubbleTopLabel.backgroundColor = backgroundColor
+            timeLabel.backgroundColor = backgroundColor
+            readLabel.backgroundColor = backgroundColor
+            
+            bubbleImageView.backgroundColor = backgroundColor
+            avatarImageView.backgroundColor = backgroundColor
+            
+            bubbleContainer.backgroundColor = backgroundColor
+            avatarContainer.backgroundColor = backgroundColor
+        }
+    }
+
     public override func awakeFromNib() {
         super.awakeFromNib()
         messageBubbleTopLabel.textAlignment = .Right
-        cellBottomLabel.textAlignment = .Right
+        timeLabel.textAlignment = .Right
+        readLabel.textAlignment = .Right
+        
+        resendButton.hidden = true
     }
     
-    public func updateWithModel(model: DUMessageData) {
-        self.cellTextView.text = "hi"
+    public override func prepareForReuse() {
+        super.prepareForReuse()
+        resendButton.hidden = true
     }
-
 }

@@ -172,7 +172,6 @@ private extension DUMessageCollectionViewFlowLayout {
         // celltopheight
         // bubblemessage top
         // cell bottom height
-        attrs.cellBottomLabelHeight = 20.0
         attrs.cellTopLabelHeight = 20.0
         attrs.messageBubbleTopLabelHeight = 20.0
         attrs.messageBubbleContainerViewWidth = 230.0
