@@ -16,12 +16,11 @@ class ViewController: UITableViewController, DUChatListProtocolForViewController
     
     func didClickRightBarButton(sender: UIBarButtonItem?) {
         // handle righbtBarButton click event
-        self.performSegueWithIdentifier("toMessagesSegue", sender: nil)
+        self.performSegueWithIdentifier("toSettingSegue", sender: nil)
     }
     func didSelectCell(atIndexPath indexPath: NSIndexPath) {
         // handle cell selection event
         selectedChat = chatData[indexPath.row]
-        //self.performSegueWithIdentifier("toSettingSegue", sender: nil)
          self.performSegueWithIdentifier("toMessagesSegue", sender: nil)
     }
     
@@ -54,6 +53,12 @@ class ViewController: UITableViewController, DUChatListProtocolForViewController
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if let vc = segue.destinationViewController as? DUChatSettingViewController {
             vc.chatDataForSetting = selectedChat
+        } else if let vc = segue.destinationViewController as? DemoMessagesViewController {
+            let chat = selectedChat as! DUChat
+            chat.listMessagesBefore() { error, messages in
+                vc.messageData = messages!.map({$0})
+                vc.messageReceived()
+            }
         }
     }
     

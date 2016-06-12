@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import DUMessaging
 
 public class DUMessagesViewController: UIViewController, UITextViewDelegate, DUMessagInputToolbarDelegate, DUMessagesUIProtocol, DUMessageCollectionViewFlowLayoutDelegate, DUMessageCollectionViewDataSource, DUMessageCollectionViewCellDelegate {
     
@@ -60,14 +61,15 @@ public class DUMessagesViewController: UIViewController, UITextViewDelegate, DUM
     override public func canBecomeFirstResponder() -> Bool { return true }
     
     // MARK: DUMessagInputToolbarDelegate
-    public func didPressSendButton(sender: UIButton, ofToolbar toolbar: DUMessageInputToolbar) {
+    /// This is the delegate from `DUMessageInputToolbar`, indicating that if the send button is tapped.
+    final public func didPressSendButton(sender: UIButton, ofToolbar toolbar: DUMessageInputToolbar) {
         guard toolbar.contentView?.inputTextView.text.du_trimingWhitespace().characters.count > 0 else {
             return
         }
         didPressSendButton(sender, withText: toolbar.contentView!.inputTextView.text)
     }
-    
-    public func didPressAccessorySendButton(sender: UIButton, ofToolbar toolbar: DUMessageInputToolbar) {
+    /// This is the delegate from `DUMessageInputToolbar`, indicating that if the accessory button is tapped.
+    final public func didPressAccessorySendButton(sender: UIButton, ofToolbar toolbar: DUMessageInputToolbar) {
         didPressAccessorySendButton(sender)
     }
     
@@ -104,8 +106,8 @@ public class DUMessagesViewController: UIViewController, UITextViewDelegate, DUM
         cell.cellTextView.text = messageItem.contentText
         cell.cellTextView.dataDetectorTypes = .All
         
-        assert(du_collectionView.du_dataSource != nil, "DataSource is nil, couldn't get correct layout attributes")
-        let duDataSource = du_collectionView.du_dataSource!
+        assert(du_collectionView.dataSource != nil, "DataSource is nil, couldn't get correct layout attributes")
+        let duDataSource = du_collectionView.dataSource as! DUMessageCollectionViewDataSource
         cell.bubbleImageView.image = duDataSource.messageBubbleImage(atIndexPath: indexPath, forCollectionView: du_collectionView)
         
         // Do not show avatar of outgoing messages
@@ -159,12 +161,43 @@ public class DUMessagesViewController: UIViewController, UITextViewDelegate, DUM
     }
     
     // MARK: DUMessages ViewController
+    /// Override this method to deal with send button tapped event
     public func didPressSendButton(sender: UIButton, withText: String) {
-        assert(false, "Error! You must implement method: \(#function)")
+        assert(false, "Error! You must override this method: \(#function)")
+    }
+    /// Overrid this method to deal with the event of sending media message
+    public func didPressAccessorySendButton(sender: UIButton) {
+        assert(false, "Error! You must override this method: \(#function)")
     }
     
-    public func didPressAccessorySendButton(sender: UIButton) {
-        assert(false, "Error! You must implement method: \(#function)")
+    /// Call this method when you finished receiving message(s). Any demanding of scrolling will be animated.
+    final public func messageReceived() {
+        messageReceived(animated:true)
+    }
+    
+    /// Call this method when you finished receiving message(s).
+    /// - parameter animated: Set this value to enable/disable animation
+    final public func messageReceived(animated animated: Bool) {
+        collectionView?.collectionViewLayout.invalidateLayoutWithContext(UICollectionViewFlowLayoutInvalidationContext())
+        collectionView?.reloadData()
+        
+        scrollToBottom(animated: animated)
+    }
+    
+    /// Scroll to the bottom of message collection view
+    final public func scrollToBottom(animated animated: Bool) {
+        guard collectionView?.numberOfSections() != 0 else { return }
+        
+        let lastIndexPath: NSIndexPath = NSIndexPath(forItem: collectionView!.numberOfItemsInSection(0) - 1, inSection: 0)
+        scrollTo(indexPath: lastIndexPath, animated: animated)
+    }
+    
+    private func scrollTo(indexPath indexPath: NSIndexPath, animated: Bool) {
+        guard collectionView?.numberOfSections() > indexPath.section else {
+            return
+        }
+        
+        collectionView?.scrollToItemAtIndexPath(indexPath, atScrollPosition: .Bottom, animated: animated)
     }
 }
 
@@ -238,7 +271,8 @@ public extension DUMessageCollectionViewDataSource where Self: DUMessagesViewCon
     
     public func attributedTextForTiemLabel(atIndexPath indexPath: NSIndexPath, forCollectionView collectionView: DUMessageCollectionView) -> NSAttributedString? {
         let messageItem = messageData[indexPath.row]
-        return NSAttributedString(string: messageItem.date.messageTimeLabelString)
+        let dateStr = messageItem.date?.messageTimeLabelString ?? ""
+        return NSAttributedString(string: dateStr)
     }
     // TODO: complete this when API support read function
     public func attributedTextForReadLabel(atIndexPath indexPath: NSIndexPath, forCollectionView collectionView: DUMessageCollectionView) -> NSAttributedString? {
@@ -261,6 +295,26 @@ public extension DUMessageCollectionViewCellDelegate where Self: DUMessagesViewC
     }
 }
 
+// MARK: message data helper
+public extension DUMessageData {
+    var isOutgoingMessage: Bool {
+        if self is DUMessage {
+            guard DUMessaging.currentUser != nil else {
+                return false
+            }
+            
+            let mySelf = self as! DUMessage
+            guard mySelf.senderUser != nil else {
+                return false
+            }
+            
+            if mySelf.senderUser!.serial == DUMessaging.currentUser!.serial {
+                return true
+            }
+        }
+        return false
+    }
+}
 
 // MARK: UI Protocol
 public protocol DUMessagesUIProtocol: GlobalUIProtocol, UIProtocolAdoption, NavigationBarTitle {}

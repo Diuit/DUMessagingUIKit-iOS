@@ -175,11 +175,10 @@ public extension DUMessageCollectionViewFlowLayout {
         }
         
         let du_collectionView = self.collectionView as! DUMessageCollectionView
-        let messageItem = du_collectionView.du_dataSource?.messageData(atIndexPath: indexPath, forCollectionView: du_collectionView)
+        let du_dataSource = du_collectionView.dataSource as! DUMessageCollectionViewDataSource
+        let messageItem = du_dataSource.messageData(atIndexPath: indexPath, forCollectionView: du_collectionView)
         
-        if messageItem == nil { return CGSizeZero }
-        
-        return bubbleSizeCalculator.messageBubbleSize(forMessageData: messageItem!, atIndexPath: indexPath, withLayout: self)
+        return bubbleSizeCalculator.messageBubbleSize(forMessageData: messageItem, atIndexPath: indexPath, withLayout: self)
     }
     
     func sizeForItem(atIndexPath indexPath: NSIndexPath) -> CGSize {
@@ -221,7 +220,8 @@ private extension DUMessageCollectionViewFlowLayout {
         attrs.cellTopLabelHeight = 20.0
         attrs.messageBubbleTopLabelHeight = 20.0
         if let du_collectionView = self.collectionView as? DUMessageCollectionView {
-            if let delegate = du_collectionView.layoutDelegate {
+            if let delegate = du_collectionView.delegate {
+                let delegate = delegate as! DUMessageCollectionViewFlowLayoutDelegate
                 attrs.cellTopLabelHeight = delegate.heightForCellTopLabel(atIndexPath: indexPath, withLayout: self, inCollectionView: du_collectionView)
                 attrs.messageBubbleTopLabelHeight = delegate.heightForMessageBubbleTopLabel(atIndexPath: indexPath, withLayout: self, inCollectionView: du_collectionView)
             }

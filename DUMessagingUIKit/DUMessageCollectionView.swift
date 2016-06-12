@@ -12,8 +12,8 @@ import UIKit
 /// This collection view holds and displays message items with given customized layout.
 public class DUMessageCollectionView: UICollectionView {
     
-    public weak var du_dataSource: DUMessageCollectionViewDataSource?
-    public weak var layoutDelegate: DUMessageCollectionViewFlowLayoutDelegate?
+    //public weak var du_dataSource: DUMessageCollectionViewDataSource?
+    //public weak var layoutDelegate: DUMessageCollectionViewFlowLayoutDelegate?
 
     override public init(frame: CGRect, collectionViewLayout layout: UICollectionViewLayout) {
         super.init(frame: frame, collectionViewLayout: layout)

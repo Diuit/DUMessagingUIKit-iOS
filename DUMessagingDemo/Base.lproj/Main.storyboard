@@ -56,10 +56,10 @@
             </objects>
             <point key="canvasLocation" x="1644" y="451"/>
         </scene>
-        <!--Messages View Controller-->
+        <!--Demo Messages View Controller-->
         <scene sceneID="LAx-fW-xl2">
             <objects>
-                <viewController id="YW2-ge-ipD" customClass="DUMessagesViewController" customModule="DUMessagingUIKit" sceneMemberID="viewController">
+                <viewController id="YW2-ge-ipD" customClass="DemoMessagesViewController" customModule="DUMessagingDemo" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="s4H-Sp-P0f"/>
                         <viewControllerLayoutGuide type="bottom" id="eIQ-oT-47m"/>
@@ -72,7 +72,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BYr-Wb-2im" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1676" y="-57"/>
+            <point key="canvasLocation" x="1644" y="-223"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="F2V-DD-RT1">

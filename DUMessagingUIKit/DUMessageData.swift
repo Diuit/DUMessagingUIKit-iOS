@@ -22,7 +22,7 @@ public protocol DUMessageData {
     /// - returns: The display name of the sender
     var senderDisplayName: String { get }
     /// - returns: The NSDate instance indicating when the message created
-    var date: NSDate { get }
+    var date: NSDate? { get }
     /// - returns: If this message is a media message.
     var isMediaMessage: Bool { get }
     /// - returns: If this message is sent by self.
@@ -30,6 +30,22 @@ public protocol DUMessageData {
     /// - returns: Content text of a text message.
     var contentText: String? { get }
     /// - returns: Hash value for message layout cache.
-    var hashValue: UInt { get }
-    
+    var hashValue: Int { get }
+}
+
+extension DUMessage: DUMessageData {
+    public var messageID: Int { return self.id }
+    public var senderIdentifier: String { return self.senderUser?.serial ?? "Diuit-System-Sender" }
+    public var senderDisplayName: String {
+        if let meta = self.senderUser?.meta {
+            return meta["name"] as? String ?? senderUser!.serial
+        } else {
+            return "System"
+        }
+    }
+    public var date: NSDate? { return self.createdAt }
+    // FIXME: use MIMEType struct
+    public var isMediaMessage: Bool { return (self.mime! != "text/plain") }
+    public var contentText: String? { return self.data }
+    override public var hashValue: Int { return messageID.hashValue }
 }

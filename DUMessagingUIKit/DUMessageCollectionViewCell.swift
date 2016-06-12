@@ -98,7 +98,9 @@ public class DUMessageCollectionViewCell: UICollectionViewCell {
         }
     }
 
-    override public var backgroundColor: UIColor? {
+    //override public var backgroundColor: UIColor?
+    /*
+    {
         didSet {
             cellTopLabel.backgroundColor = backgroundColor
             messageBubbleTopLabel.backgroundColor = backgroundColor
@@ -111,6 +113,7 @@ public class DUMessageCollectionViewCell: UICollectionViewCell {
             avatarContainer.backgroundColor = backgroundColor
         }
     }
+ */
     // constraints
     @IBOutlet private weak var cellTopLabelHeightConstraint: NSLayoutConstraint!
     @IBOutlet private weak var bubbleTopLabelHeightConstraint: NSLayoutConstraint!

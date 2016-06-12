@@ -65,7 +65,7 @@ public extension DUMessageSizeCalculator {
         let totalHorizontalInsets = spacingBetweenAvatarAndBubble + totalTextFrameHorizontalInsets + totalTextContainerHorizontalInsets
         let maxTextWidth = layout.itemWidth - avatarImageDiameter - layout.messageBubbleHorizontalMargin - totalHorizontalInsets
         
-        let textRect = messageData.contentText.rectWithConstrainedWidth(maxTextWidth, font: layout.messageBodyFont)
+        let textRect = messageData.contentText!.rectWithConstrainedWidth(maxTextWidth, font: layout.messageBodyFont)
         let textSize = CGRectIntegral(textRect).size
         
         let totalTextFrameVerticalInsets: CGFloat = layout.messageBubbleTextViewFrameInsets.top + layout.messageBubbleTextViewFrameInsets.bottom
