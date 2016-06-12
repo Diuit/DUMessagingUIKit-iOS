@@ -23,4 +23,8 @@ public class GlobalUISettings {
     // theme color
     static var tintColor: UIColor = UIColor.DUWaterBlueColor()
     static var indicatingStatusColor: UIColor = UIColor.DUWaterBlueColor()
+    
+    // Message bubble color
+    static var outgoingMessageBubbleBackgroundColor: UIColor = UIColor.DUWaterBlueColor()
+    static var incomingMessageBubbleBackgroundColor: UIColor = UIColor.DULightgreyColor()
 }

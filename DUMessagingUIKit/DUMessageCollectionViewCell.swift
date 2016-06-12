@@ -53,6 +53,12 @@ public class DUMessageCollectionViewCell: UICollectionViewCell {
     @IBOutlet public weak var avatarContainer: UIView!
     /// ImageView which displays avatar image.
     @IBOutlet public weak var avatarImageView: UIImageView!
+    {
+        // Default corner radius value
+        didSet {
+            layer.cornerRadius = 14.0
+        }
+    }
     /// Container view for message bubble image and cell textView
     @IBOutlet public weak var bubbleContainer: UIView!
     /// ImageView for bubble image.

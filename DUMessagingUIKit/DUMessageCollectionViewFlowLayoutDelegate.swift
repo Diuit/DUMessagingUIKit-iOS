@@ -10,7 +10,7 @@ import Foundation
 
 
 /// This delegate helps to manage all UILabels' layout infomration in `DUMessageCollectionViewCell`.
-public protocol DUMessageCollectionViewFlowLayoutDelegate: class {
+public protocol DUMessageCollectionViewFlowLayoutDelegate: UICollectionViewDelegateFlowLayout {
     /**
         Ask for the height of `cellTopLabel` at certain collevtionView cell.
      

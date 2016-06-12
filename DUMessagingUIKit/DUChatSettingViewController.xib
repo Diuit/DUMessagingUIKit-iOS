@@ -80,6 +80,7 @@
                 <constraint firstItem="9j2-kM-aa6" firstAttribute="top" secondItem="Xup-0t-23z" secondAttribute="bottom" id="yA6-b3-qha"/>
                 <constraint firstItem="cdp-BL-QvT" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="yt0-cy-GXk"/>
             </constraints>
+            <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
             <point key="canvasLocation" x="439.5" y="244.5"/>
         </view>

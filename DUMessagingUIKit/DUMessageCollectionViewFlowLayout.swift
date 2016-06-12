@@ -162,11 +162,39 @@ public extension DUMessageCollectionViewFlowLayout {
             }
         }
     }
+    
+    func messageBubbleSizeForItem(atIndexPath indexPath: NSIndexPath) -> CGSize {
+        guard self.collectionView != nil else {
+            print("collectionView does not exist")
+            return CGSizeZero
+        }
+        
+        guard self.collectionView!.isKindOfClass(DUMessageCollectionView) else {
+            print("The collectionView this layout belongs to is not an instance of `DUMessageCollectionView`")
+            return CGSizeZero
+        }
+        
+        let du_collectionView = self.collectionView as! DUMessageCollectionView
+        let messageItem = du_collectionView.du_dataSource?.messageData(atIndexPath: indexPath, forCollectionView: du_collectionView)
+        
+        if messageItem == nil { return CGSizeZero }
+        
+        return bubbleSizeCalculator.messageBubbleSize(forMessageData: messageItem!, atIndexPath: indexPath, withLayout: self)
+    }
+    
+    func sizeForItem(atIndexPath indexPath: NSIndexPath) -> CGSize {
+        let messageBubbleSize = self.messageBubbleSizeForItem(atIndexPath: indexPath)
+        
+        let attributes: DUCollectionViewLayouAttributes = self.layoutAttributesForItemAtIndexPath(indexPath) as! DUCollectionViewLayouAttributes
+        let finalHeight = messageBubbleSize.height + attributes.cellTopLabelHeight + attributes.messageBubbleTopLabelHeight
+        
+        return CGSizeMake(itemWidth, finalHeight)
+    }
 }
 
 // message cell layouts
 
-// private methods
+// MARK: Private methods
 private extension DUMessageCollectionViewFlowLayout {
     func setupFlowLayout() {
         // TODO: delete itemSize later
@@ -198,33 +226,5 @@ private extension DUMessageCollectionViewFlowLayout {
                 attrs.messageBubbleTopLabelHeight = delegate.heightForMessageBubbleTopLabel(atIndexPath: indexPath, withLayout: self, inCollectionView: du_collectionView)
             }
         }
-    }
-    
-    func messageBubbleSizeForItem(atIndexPath indexPath: NSIndexPath) -> CGSize {
-        guard self.collectionView != nil else {
-            print("collectionView does not exist")
-            return CGSizeZero
-        }
-        
-        guard self.collectionView!.isKindOfClass(DUMessageCollectionView) else {
-            print("The collectionView this layout belongs to is not an instance of `DUMessageCollectionView`")
-            return CGSizeZero
-        }
-        
-        let du_collectionView = self.collectionView as! DUMessageCollectionView
-        let messageItem = du_collectionView.du_dataSource?.messageData(atIndexPath: indexPath, forCollectionView: du_collectionView)
-        
-        if messageItem == nil { return CGSizeZero }
-        
-        return bubbleSizeCalculator.messageBubbleSize(forMessageData: messageItem!, atIndexPath: indexPath, withLayout: self)
-    }
-    
-    func sizeForItem(atIndexPath indexPath: NSIndexPath) -> CGSize {
-        let messageBubbleSize = self.messageBubbleSizeForItem(atIndexPath: indexPath)
-        
-        let attributes: DUCollectionViewLayouAttributes = self.layoutAttributesForItemAtIndexPath(indexPath) as! DUCollectionViewLayouAttributes
-        let finalHeight = messageBubbleSize.height + attributes.cellTopLabelHeight + attributes.messageBubbleTopLabelHeight
-        
-        return CGSizeMake(itemWidth, finalHeight)
     }
 }

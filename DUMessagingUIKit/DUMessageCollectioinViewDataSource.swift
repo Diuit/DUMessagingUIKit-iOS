@@ -10,7 +10,7 @@ import Foundation
 
 
 /// This dataSource requests for the data for each UI elements in the `DUMessageCollectionViewCell`.
-public protocol DUMessageCollectionViewDataSource: class {
+public protocol DUMessageCollectionViewDataSource: UICollectionViewDataSource {
 
     /**
         Ask for the message data corresponding to the ginve location.

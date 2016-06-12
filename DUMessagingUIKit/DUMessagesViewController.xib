@@ -37,6 +37,7 @@
                 <constraint firstAttribute="bottom" secondItem="6SO-o7-84Y" secondAttribute="bottom" id="iGr-uf-VyT"/>
                 <constraint firstAttribute="trailing" secondItem="zpH-UG-wS6" secondAttribute="trailing" id="teX-hS-bC9"/>
             </constraints>
+            <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
         </view>
     </objects>

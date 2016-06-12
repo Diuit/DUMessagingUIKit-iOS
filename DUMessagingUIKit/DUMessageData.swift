@@ -21,14 +21,14 @@ public protocol DUMessageData {
     var senderIdentifier: String { get }
     /// - returns: The display name of the sender
     var senderDisplayName: String { get }
-    /// - returns: The NSDate instance indicating when the message createdg
-    var messageCreationDate: NSDate { get }
+    /// - returns: The NSDate instance indicating when the message created
+    var date: NSDate { get }
     /// - returns: If this message is a media message.
     var isMediaMessage: Bool { get }
     /// - returns: If this message is sent by self.
     var isOutgoingMessage: Bool { get }
     /// - returns: Content text of a text message.
-    var contentText: String { get }
+    var contentText: String? { get }
     /// - returns: Hash value for message layout cache.
     var hashValue: UInt { get }
     
