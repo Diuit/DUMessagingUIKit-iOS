@@ -18,7 +18,7 @@ public class DUMessageCollectionView: UICollectionView {
     }
     
     required public init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        super.init(coder: aDecoder)
     }
     
     override public func awakeFromNib() {
@@ -35,8 +35,10 @@ private extension DUMessageCollectionView {
         alwaysBounceVertical = true
         bounces = true
         
-        // TODO: register nib for all cell class
+        registerNib(DUMessageOutGoingCollectionViewCell.nib, forCellWithReuseIdentifier: DUMessageOutGoingCollectionViewCell.cellReuseIdentifier)
+        registerNib(DUMessageOutGoingCollectionViewCell.nib, forCellWithReuseIdentifier: DUMessageOutGoingCollectionViewCell.mediaCellReuseIdentifier)
         
-        
+        registerNib(DUMessageIncomingCollectionViewCell.nib, forCellWithReuseIdentifier: DUMessageIncomingCollectionViewCell.cellReuseIdentifier)
+        registerNib(DUMessageIncomingCollectionViewCell.nib, forCellWithReuseIdentifier: DUMessageIncomingCollectionViewCell.mediaCellReuseIdentifier)
     }
 }

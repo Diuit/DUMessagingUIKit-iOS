@@ -65,28 +65,30 @@ public class DUMessageCollectionViewCell: UICollectionViewCell {
     /// Delegate for all cell tap events.
     public var delegate: DUMessageCollectionViewCellDelegate?
     
-    public var messageMediaView: UIView {
+    public var messageMediaView: UIView? = nil
+    {
         didSet {
-            bubbleImageView.removeFromSuperview()
-            cellTextView.removeFromSuperview()
-            
-            messageMediaView.frame = bubbleContainer.bounds
-            messageMediaView.translatesAutoresizingMaskIntoConstraints = false
-            
-            bubbleContainer.addSubview(messageMediaView)
-            bubbleContainer.pingAlledge(ofSubview: messageMediaView)
-            
-            // For the reason of cell reuse, there may already be an antoher media view. Remove all message media subviews except current one.
-            dispatch_async(dispatch_get_main_queue(), {[weak self] in
-                if let _ = self?.bubbleContainer.subviews {
-                    for sv in self!.bubbleContainer.subviews {
-                        if sv != self?.messageMediaView {
-                            sv.removeFromSuperview()
+            if messageMediaView != nil {
+                bubbleImageView.removeFromSuperview()
+                cellTextView.removeFromSuperview()
+                
+                messageMediaView!.frame = bubbleContainer.bounds
+                messageMediaView!.translatesAutoresizingMaskIntoConstraints = false
+                
+                bubbleContainer.addSubview(messageMediaView!)
+                bubbleContainer.pingAlledge(ofSubview: messageMediaView!)
+                
+                // For the reason of cell reuse, there may already be an antoher media view. Remove all message media subviews except current one.
+                dispatch_async(dispatch_get_main_queue(), {[weak self] in
+                    if let _ = self?.bubbleContainer.subviews {
+                        for sv in self!.bubbleContainer.subviews {
+                            if sv != self?.messageMediaView {
+                                sv.removeFromSuperview()
+                            }
                         }
                     }
-                }
-            })
-            
+                    })
+            }
         }
     }
 
@@ -145,7 +147,6 @@ public extension DUMessageCollectionViewCell {
         cellTopLabel.text = nil
         messageBubbleTopLabel.text = nil
         timeLabel.text = nil
-        readLabel.text = nil
         
         cellTextView.dataDetectorTypes = .None
         cellTextView.text = nil

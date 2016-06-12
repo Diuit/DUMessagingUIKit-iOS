@@ -9,11 +9,15 @@
 import UIKit
 
 public class DUMessagesViewController: UIViewController, UITextViewDelegate, DUMessagInputToolbarDelegate, DUMessagesUIProtocol {
-
-    public static var nib: UINib { return UINib.init(nibName: String(DUMessagesViewController), bundle: NSBundle(identifier: Constants.bundleIdentifier)) }
     
     @IBOutlet weak var inputToolbar: DUMessageInputToolbar!
     @IBOutlet public weak var collectionView: DUMessageCollectionView?
+    
+    public var messageData: [DUMessageData] = [DUMessageData]()
+    
+    private let ougoingCellIdentifier = DUMessageOutGoingCollectionViewCell.cellReuseIdentifier
+    private let incomingCellIdentifier = DUMessageIncomingCollectionViewCell.cellReuseIdentifier
+
 
     override public func viewDidLoad() {
         super.viewDidLoad()
@@ -45,6 +49,9 @@ public class DUMessagesViewController: UIViewController, UITextViewDelegate, DUM
         // To make inputToolbar no parent view, so that it can be added onto inputAccessoryView
         inputToolbar.removeFromSuperview()
         inputToolbar.toggleSendButtonEnabled()
+        
+        collectionView?.dataSource = self
+        collectionView?.delegate = self
     }
     
     // MARK: Input
@@ -95,6 +102,44 @@ public class DUMessagesViewController: UIViewController, UITextViewDelegate, DUM
     }
 }
 
+
+extension DUMessagesViewController: UICollectionViewDataSource {
+    public func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+        return 1
+    }
+    
+    public func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return messageData.count
+    }
+    
+    public func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+        let message = messageData[indexPath.item]
+        
+        // TODO: modify this, for this is just a test
+        let cellIdentifier: String = self.ougoingCellIdentifier
+        
+        let cell: DUMessageOutGoingCollectionViewCell = collectionView.dequeueReusableCellWithReuseIdentifier(cellIdentifier, forIndexPath: indexPath) as! DUMessageOutGoingCollectionViewCell
+        
+        cell.prepareForReuse()
+        cell.cellTextView.text = message.senderDisplayName
+        cell.cellTextView.textColor = UIColor.redColor()
+        
+        return cell
+        
+    }
+    
+    
+}
+
+extension DUMessagesViewController: UICollectionViewDelegate {
+    
+}
+
+
+// Class method
+public extension DUMessagesViewController {
+    static var nib: UINib { return UINib.init(nibName: self.nameOfClass, bundle: NSBundle(identifier: Constants.bundleIdentifier)) }
+}
 
 // MARK: UI Protocol
 public protocol DUMessagesUIProtocol: GlobalUIProtocol, UIProtocolAdoption, NavigationBarTitle {}

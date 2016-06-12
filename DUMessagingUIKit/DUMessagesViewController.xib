@@ -20,7 +20,7 @@
                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="6SO-o7-84Y" customClass="DUMessageCollectionView" customModule="DUMessagingUIKit" customModuleProvider="target">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                    <collectionViewLayout key="collectionViewLayout" id="LPf-64-ZGL" customClass="DUMessageCollectionViewFlowLayout" customModule="DUMessagingUIKit" customModuleProvider="target"/>
+                    <collectionViewLayout key="collectionViewLayout" id="Pby-RF-6EX" customClass="DUMessageCollectionViewFlowLayout" customModule="DUMessagingUIKit" customModuleProvider="target"/>
                 </collectionView>
                 <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zpH-UG-wS6" userLabel="input tool bar" customClass="DUMessageInputToolbar" customModule="DUMessagingUIKit" customModuleProvider="target">
                     <rect key="frame" x="0.0" y="623" width="375" height="44"/>

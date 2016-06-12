@@ -141,7 +141,6 @@
                 <outlet property="messageBubbleTopLabel" destination="HUB-es-YRh" id="yFk-DL-R54"/>
                 <outlet property="readLabel" destination="D6d-ir-lQA" id="fjD-6b-ZEp"/>
                 <outlet property="resendButton" destination="IcI-Cu-Goj" id="7sn-sH-MJi"/>
-                <outlet property="resendButtonWidthConstraint" destination="6bM-6E-PnL" id="tGi-1f-bM2"/>
                 <outlet property="timeLabel" destination="ByO-gV-G7d" id="hN4-tb-XSR"/>
             </connections>
             <point key="canvasLocation" x="281.5" y="207"/>

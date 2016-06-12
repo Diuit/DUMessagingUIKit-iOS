@@ -13,7 +13,6 @@ public class DUMessageIncomingCollectionViewCell: DUMessageCollectionViewCell {
         super.awakeFromNib()
         messageBubbleTopLabel.textAlignment = .Left
         timeLabel.textAlignment = .Left
-        readLabel.textAlignment = .Left
     }
 
 }

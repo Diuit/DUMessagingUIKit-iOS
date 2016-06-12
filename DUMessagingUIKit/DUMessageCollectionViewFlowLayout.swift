@@ -153,7 +153,8 @@ public extension DUMessageCollectionViewFlowLayout {
 // private methods
 private extension DUMessageCollectionViewFlowLayout {
     func setupFlowLayout() {
-        itemSize = CGSizeMake(375.0, 154.0)
+        // TODO: delete itemSize later
+        itemSize = CGSizeMake(250.0, 154.0)
         scrollDirection = .Vertical
         sectionInset = UIEdgeInsetsMake(10.0, 15.0, 10.0, 15.0)
         minimumLineSpacing = 15.0
