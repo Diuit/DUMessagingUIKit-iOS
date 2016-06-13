@@ -12,7 +12,6 @@ public class DUMessageCellTextView: UITextView {
     override public func awakeFromNib() {
         super.awakeFromNib()
         
-        textColor = UIColor.whiteColor()
         editable = false
         selectable = true
         userInteractionEnabled = true

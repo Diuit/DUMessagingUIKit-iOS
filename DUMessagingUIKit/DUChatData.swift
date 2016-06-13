@@ -15,22 +15,24 @@ import DUMessaging
     - seealso `DUChatListProtocolForViewController`, `DUChatSettingViewController`
  */
 public protocol DUChatData: DUImageResource {
-    /// If this chat has unread message
+    /// If this chat has unread message.
     var hasUnreadMessage: Bool { get }
-    /// User for avatar before completely loading the real image
+    /// User for avatar before completely loading the real image.
     var avatarPlaceholderImage: UIImage { get }
-    /// Title for a chat room, will be displayed in chatTitleLabel of DUChatCell
+    /// Title for a chat room, will be displayed in chatTitleLabel of DUChatCell.
     var chatTitle: String { get }
-    /// Detail text for a chat, will be the content of last message and displayed in chatDetailLabel of DUChatCell
+    /// Detail text for a chat, will be the content of last message and displayed in chatDetailLabel of DUChatCell.
     var chatDetailText: String { get }
-    /// This text will be diaplayed in chatAccessoryLabel of DUChatCell
+    /// This text will be diaplayed in chatAccessoryLabel of DUChatCell.
     var chatAccessoryText: String { get }
-    /// Indicate if this chat is a group chat for DUChatSettingViewController to determine its displaying UI
+    /// Indicate if this chat is a group chat for DUChatSettingViewController to determine its displaying UI.
     var chatSettingPageType: DUChatType { get }
     /// Members of this caht
     var chatMembers: [String] { get }
-    /// Only availabe in a direct mesage chat room. Indicate if the opponent is blocke by current user
+    /// Only availabe in a direct mesage chat room. Indicate if the opponent is blocke by current user.
     var isBlocked: Bool { get }
+    /// Return original `DUChat` instance if the `DUChataData` is extended from a DUChat instance. Return `nil` if you customize DUChatData with other class.
+    var duChatInstance: DUChat? { get }
 }
 
 
@@ -67,4 +69,5 @@ extension DUChat: DUChatData {
     public var chatSettingPageType: DUChatType { return self.type }
     public var chatMembers: [String] { return self.members ?? [] }
     public var isBlocked: Bool { return self.isBlockedByMe }
+    public var duChatInstance: DUChat? { return self }
 }

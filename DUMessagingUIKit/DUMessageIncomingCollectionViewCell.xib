@@ -24,7 +24,7 @@
                         <color key="textColor" red="0.60000002384185791" green="0.60000002384185791" blue="0.60000002384185791" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="message bubble top label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kGM-B0-JlS">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="message bubble top label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kGM-B0-JlS" customClass="DUEdgeInsetableLabel" customModule="DUMessagingUIKit" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="20" width="375" height="20"/>
                         <color key="backgroundColor" red="0.80000001190000003" green="0.80000001190000003" blue="0.80000001190000003" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
@@ -106,6 +106,20 @@
                 <constraint firstItem="kGM-B0-JlS" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="jQY-5n-Yt2"/>
                 <constraint firstItem="7XM-aU-XaB" firstAttribute="width" secondItem="7XM-aU-XaB" secondAttribute="height" multiplier="1:1" id="toy-XY-tgc"/>
             </constraints>
+            <connections>
+                <outlet property="avatarContainer" destination="7XM-aU-XaB" id="skB-uy-kEL"/>
+                <outlet property="avatarContainerViewWidthConstraint" destination="3TL-NG-Ku9" id="SVu-VS-ruU"/>
+                <outlet property="avatarImageView" destination="Ceh-PP-N5X" id="hW2-x3-2rj"/>
+                <outlet property="bubbleContainer" destination="ZZh-AY-86F" id="23v-6e-t7D"/>
+                <outlet property="bubbleContainerViewWidthConstraint" destination="qSy-5a-9Xa" id="Mmt-mS-Dbe"/>
+                <outlet property="bubbleImageView" destination="KCb-OK-AYg" id="geB-94-prf"/>
+                <outlet property="bubbleTopLabelHeightConstraint" destination="Ah6-Z6-hKS" id="pML-hp-nvx"/>
+                <outlet property="cellTextView" destination="cI2-Bi-HYk" id="j0y-aD-YOB"/>
+                <outlet property="cellTopLabel" destination="ZyF-RZ-fjt" id="JZg-j7-8w0"/>
+                <outlet property="cellTopLabelHeightConstraint" destination="ebB-21-9Bl" id="LDW-fB-nBr"/>
+                <outlet property="messageBubbleTopLabel" destination="kGM-B0-JlS" id="Isq-ZS-EfQ"/>
+                <outlet property="timeLabel" destination="GJ9-vR-VgR" id="3Dz-Ys-qpK"/>
+            </connections>
         </collectionViewCell>
     </objects>
 </document>

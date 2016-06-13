@@ -26,5 +26,7 @@ public class GlobalUISettings {
     
     // Message bubble color
     static var outgoingMessageBubbleBackgroundColor: UIColor = UIColor.DUWaterBlueColor()
+    static var outgoingMessageTextColor: UIColor = UIColor.whiteColor()
     static var incomingMessageBubbleBackgroundColor: UIColor = UIColor.DULightgreyColor()
+    static var incomingMessageTextColor: UIColor = UIColor.blackColor()
 }

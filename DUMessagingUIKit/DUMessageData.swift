@@ -45,7 +45,7 @@ extension DUMessage: DUMessageData {
     }
     public var date: NSDate? { return self.createdAt }
     // FIXME: use MIMEType struct
-    public var isMediaMessage: Bool { return (self.mime! != "text/plain") }
+    public var isMediaMessage: Bool { return false }
     public var contentText: String? { return self.data }
     override public var hashValue: Int { return messageID.hashValue }
 }

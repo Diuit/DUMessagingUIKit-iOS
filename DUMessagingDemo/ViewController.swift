@@ -54,11 +54,7 @@ class ViewController: UITableViewController, DUChatListProtocolForViewController
         if let vc = segue.destinationViewController as? DUChatSettingViewController {
             vc.chatDataForSetting = selectedChat
         } else if let vc = segue.destinationViewController as? DemoMessagesViewController {
-            let chat = selectedChat as! DUChat
-            chat.listMessagesBefore() { error, messages in
-                vc.messageData = messages!.map({$0})
-                vc.messageReceived()
-            }
+            vc.chat = selectedChat
         }
     }
     

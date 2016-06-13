@@ -48,23 +48,32 @@ public class DUMessageCollectionViewCell: UICollectionViewCell {
     /// The label locates at the top of the cell, normally for timestamp display.
     @IBOutlet public weak var cellTopLabel: UILabel!
     /// The label beneath `cellTopLabel` and above message bubble container view, normally for sender information display.
-    @IBOutlet public weak var messageBubbleTopLabel: UILabel!
+    @IBOutlet public weak var messageBubbleTopLabel: DUEdgeInsetableLabel!
     /// Container view for avatarImageView of the cell. This view is highly related to the layout, you should not do layout-related operation with the view.
     @IBOutlet public weak var avatarContainer: UIView!
     /// ImageView which displays avatar image.
     @IBOutlet public weak var avatarImageView: UIImageView!
-    {
-        // Default corner radius value
-        didSet {
-            layer.cornerRadius = 14.0
-        }
-    }
     /// Container view for message bubble image and cell textView
     @IBOutlet public weak var bubbleContainer: UIView!
     /// ImageView for bubble image.
     @IBOutlet public weak var bubbleImageView: UIImageView!
+    {
+        // Default corner radius value
+        didSet {
+            bubbleImageView.layer.cornerRadius = 14.0
+            bubbleImageView.clipsToBounds = true
+        }
+    }
     /// TextView contains the message text.
-    @IBOutlet public weak var cellTextView: DUMessageCellTextView!
+    @IBOutlet public weak var cellTextView: DUMessageCellTextView!  {
+        didSet {
+            if self.isKindOfClass(DUMessageOutGoingCollectionViewCell) {
+                cellTextView.textColor = GlobalUISettings.outgoingMessageTextColor
+            } else {
+                cellTextView.textColor = GlobalUISettings.incomingMessageTextColor
+            }
+        }
+    }
     /// Label which displays timestamp information.
     @IBOutlet public weak var timeLabel: UILabel!
     
@@ -98,8 +107,7 @@ public class DUMessageCollectionViewCell: UICollectionViewCell {
         }
     }
 
-    //override public var backgroundColor: UIColor?
-    /*
+    override public var backgroundColor: UIColor?
     {
         didSet {
             cellTopLabel.backgroundColor = backgroundColor
@@ -113,7 +121,7 @@ public class DUMessageCollectionViewCell: UICollectionViewCell {
             avatarContainer.backgroundColor = backgroundColor
         }
     }
- */
+ 
     // constraints
     @IBOutlet private weak var cellTopLabelHeightConstraint: NSLayoutConstraint!
     @IBOutlet private weak var bubbleTopLabelHeightConstraint: NSLayoutConstraint!
@@ -155,6 +163,7 @@ public extension DUMessageCollectionViewCell {
         
         cellTopLabel.text = nil
         messageBubbleTopLabel.text = nil
+        messageBubbleTopLabel.textEdgeInsets = UIEdgeInsetsZero
         timeLabel.text = nil
         
         cellTextView.dataDetectorTypes = .None

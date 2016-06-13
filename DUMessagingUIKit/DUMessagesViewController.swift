@@ -14,6 +14,7 @@ public class DUMessagesViewController: UIViewController, UITextViewDelegate, DUM
     @IBOutlet weak var inputToolbar: DUMessageInputToolbar!
     @IBOutlet public weak var collectionView: DUMessageCollectionView?
     
+    public var chat: DUChatData? = nil
     public var messageData: [DUMessageData] = []
     
     private let outgoingCellIdentifier = DUMessageOutGoingCollectionViewCell.cellReuseIdentifier
@@ -33,6 +34,18 @@ public class DUMessagesViewController: UIViewController, UITextViewDelegate, DUM
         
         DUMessagesViewController.nib.instantiateWithOwner(self, options: nil)
         setupMessagesViewController()
+        
+        // FIXME: for test, may think a better way
+        if chat != nil {
+            chat?.duChatInstance?.listMessagesBefore() { [weak self] error, messages in
+                guard let _ : [DUMessage] = messages where error == nil else {
+                    return
+                }
+                
+                self?.messageData = messages!.map({$0})
+                self?.messageReceived()
+            }
+        }
 
     }
     
@@ -92,6 +105,7 @@ public class DUMessagesViewController: UIViewController, UITextViewDelegate, DUM
         }
         
         let du_collectionView = collectionView as! DUMessageCollectionView
+        let du_collectionViewLayout = du_collectionView.collectionViewLayout as! DUMessageCollectionViewFlowLayout
         
         var cellIdentifier: String = ""
         if messageItem.isOutgoingMessage {
@@ -110,22 +124,38 @@ public class DUMessagesViewController: UIViewController, UITextViewDelegate, DUM
         let duDataSource = du_collectionView.dataSource as! DUMessageCollectionViewDataSource
         cell.bubbleImageView.image = duDataSource.messageBubbleImage(atIndexPath: indexPath, forCollectionView: du_collectionView)
         
-        // Do not show avatar of outgoing messages
-        if messageItem.isOutgoingMessage {
-            cell.avatarImageView.image = nil
-        } else {
+        var hasAvatar: Bool = true
+        if messageItem.isOutgoingMessage && du_collectionViewLayout.outgoingAvatarImageViewDiameter == 0.0 {
+            hasAvatar = false
+        } else if !messageItem.isOutgoingMessage && du_collectionViewLayout.incomingAvatarImageViewDiameter == 0.0 {
+            hasAvatar = false
+        }
+        
+        // To make the text in message bubble top labl align to the edge (which closest to the avatar) of bubble conatiner
+        var messageBubbleTopLabelInset: CGFloat = 0
+
+        if hasAvatar {
             cell.avatarImageView.image = duDataSource.avatarImage(atIndexPath: indexPath, forCollectionView: du_collectionView)
+            
+            messageBubbleTopLabelInset += (messageItem.isOutgoingMessage) ? du_collectionViewLayout.outgoingAvatarImageViewDiameter : du_collectionViewLayout.incomingAvatarImageViewDiameter
+            // XXX: 8 is the space between avatar container and bubble container (if there has avatar). Check the collection view cell nib.
+            messageBubbleTopLabelInset += 8.0
+        } else {
+            cell.avatarImageView.image = nil
         }
         
         cell.cellTopLabel.attributedText = duDataSource.attributedTextForCellTopLabel(atIndexPath: indexPath, forCollectionView: du_collectionView)
         cell.messageBubbleTopLabel.attributedText = duDataSource.attributedTextForMessageBubbleTopLabel(atIndexPath: indexPath, forCollectionView: du_collectionView)
         cell.timeLabel.attributedText = duDataSource.attributedTextForTiemLabel(atIndexPath: indexPath, forCollectionView: du_collectionView)
-        
+
         if messageItem.isOutgoingMessage {
             let cell = cell as! DUMessageOutGoingCollectionViewCell
             cell.readLabel.attributedText = duDataSource.attributedTextForReadLabel(atIndexPath: indexPath, forCollectionView: du_collectionView)
+            cell.messageBubbleTopLabel.textEdgeInsets = UIEdgeInsetsMake(0, 0, 0, messageBubbleTopLabelInset)
             // FIXME: make this work when API supports
             cell.resendButton.hidden = true
+        } else {
+            cell.messageBubbleTopLabel.textEdgeInsets = UIEdgeInsetsMake(0, messageBubbleTopLabelInset, 0, 0)
         }
 
         return cell
