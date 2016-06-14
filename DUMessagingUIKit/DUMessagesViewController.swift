@@ -144,6 +144,11 @@ public class DUMessagesViewController: UIViewController, UITextViewDelegate, DUM
             cell.avatarImageView.image = nil
         }
         
+        // to align the text in message bubble text view
+        messageBubbleTopLabelInset += (messageItem.isOutgoingMessage) ?
+            (du_collectionViewLayout.messageBubbleTextViewFrameInsets.right + du_collectionViewLayout.messageBubbleTextViewTextContainerInsets.right) :
+            (du_collectionViewLayout.messageBubbleTextViewFrameInsets.left + du_collectionViewLayout.messageBubbleTextViewTextContainerInsets.left)
+
         cell.cellTopLabel.attributedText = duDataSource.attributedTextForCellTopLabel(atIndexPath: indexPath, forCollectionView: du_collectionView)
         cell.messageBubbleTopLabel.attributedText = duDataSource.attributedTextForMessageBubbleTopLabel(atIndexPath: indexPath, forCollectionView: du_collectionView)
         cell.timeLabel.attributedText = duDataSource.attributedTextForTiemLabel(atIndexPath: indexPath, forCollectionView: du_collectionView)
@@ -158,6 +163,10 @@ public class DUMessagesViewController: UIViewController, UITextViewDelegate, DUM
             cell.messageBubbleTopLabel.textEdgeInsets = UIEdgeInsetsMake(0, messageBubbleTopLabelInset, 0, 0)
         }
 
+        // FIXME: this is a workraound for attribute did not change NSLayoutContsraint
+        cell.cellTopLabelHeightConstraint.constant = self.heightForCellTopLabel(at: indexPath, with: du_collectionViewLayout, collectionView: du_collectionView)
+        cell.bubbleTopLabelHeightConstraint.constant = self.heightForMessageBubbleTopLabel(at: indexPath, with: du_collectionViewLayout, collectionView: du_collectionView)
+        cell.avatarContainerViewWidthConstraint.constant = self.diameterForAvatarContainer(at: indexPath, with: du_collectionViewLayout, collectionView: du_collectionView)
         return cell
     }
     
@@ -240,14 +249,20 @@ public extension DUMessagesViewController {
 
 // MARK: DUMessageCollectionViewFlowLayout Delegate - Default behavior
 public extension DUMessageCollectionViewFlowLayoutDelegate where Self: DUMessagesViewController {
-    public func heightForCellTopLabel(atIndexPath indexPath: NSIndexPath, withLayout layout: DUMessageCollectionViewFlowLayout, inCollectionView collectionView: DUMessageCollectionView) -> CGFloat {
+    public func heightForCellTopLabel(at indexPath: NSIndexPath, with layout: DUMessageCollectionViewFlowLayout, collectionView: DUMessageCollectionView) -> CGFloat {
         return 0.0
     }
     
-    public func heightForMessageBubbleTopLabel(atIndexPath indexPath: NSIndexPath, withLayout layout: DUMessageCollectionViewFlowLayout, inCollectionView collectionView: DUMessageCollectionView) -> CGFloat {
-        let messageItem = messageData[indexPath.row]
+    public func heightForMessageBubbleTopLabel(at indexPath: NSIndexPath, with layout: DUMessageCollectionViewFlowLayout, collectionView: DUMessageCollectionView) -> CGFloat {
+        let messageItem = messageData[indexPath.item]
         if messageItem.isOutgoingMessage { return 0.0 }
         else { return 20.0 }
+    }
+    
+    public func diameterForAvatarContainer(at indexPath: NSIndexPath, with layout: DUMessageCollectionViewFlowLayout, collectionView: DUMessageCollectionView) -> CGFloat {
+        let messageItem = messageData[indexPath.item]
+        if messageItem.isOutgoingMessage { return 0.0 }
+        else { return DUAvatarImageFactory.kAvatarImageDefualtDiameterInMessags }
     }
 }
 

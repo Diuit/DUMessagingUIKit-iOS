@@ -206,7 +206,7 @@ private extension DUMessageCollectionViewFlowLayout {
     func configure(cellLayoutAttributes attrs: DUCollectionViewLayouAttributes) {
         
         let indexPath = attrs.indexPath
-        
+        // XXX: This is why we need cache, right after getting the size, layou configure will be executed. And we need to calculate it again!
         let messageBubbleSize: CGSize = messageBubbleSizeForItem(atIndexPath: indexPath)
         
         attrs.messageBubbleContainerViewWidth = messageBubbleSize.width
@@ -216,9 +216,7 @@ private extension DUMessageCollectionViewFlowLayout {
         attrs.outgoingAvatarImageViewDiameter = self.outgoingAvatarImageViewDiameter
         attrs.messageBubbleFont = self.messageBodyFont
         
-        // default value
-        attrs.cellTopLabelHeight = 20.0
-        attrs.messageBubbleTopLabelHeight = 20.0
+        // from delegate
         if let du_collectionView = self.collectionView as? DUMessageCollectionView {
             if let delegate = du_collectionView.delegate {
                 let delegate = delegate as! DUMessageCollectionViewFlowLayoutDelegate

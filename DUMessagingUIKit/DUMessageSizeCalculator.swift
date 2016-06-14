@@ -63,19 +63,19 @@ public extension DUMessageSizeCalculator {
         let totalTextContainerHorizontalInsets: CGFloat = layout.messageBubbleTextViewTextContainerInsets.left + layout.messageBubbleTextViewTextContainerInsets.right
         
         let totalHorizontalInsets = spacingBetweenAvatarAndBubble + totalTextFrameHorizontalInsets + totalTextContainerHorizontalInsets
-        let maxTextWidth = layout.itemWidth - avatarImageDiameter - layout.messageBubbleHorizontalMargin - totalHorizontalInsets
+        // XXX:(Pofat) - need to fix evaluate result of String. The offset it +10. However, consider the case that may exceed maxWidth, we minus this 10 pt before we evaluate the string size. And add that 10 back.
+        let maxTextWidth = layout.itemWidth - avatarImageDiameter - layout.messageBubbleHorizontalMargin - totalHorizontalInsets - 10
         
         let textRect = messageData.contentText!.rectWithConstrainedWidth(maxTextWidth, font: layout.messageBodyFont)
-        let textSize = CGRectIntegral(textRect).size
+        let textSize = CGSizeMake(textRect.size.width + 10, textRect.size.height)
         
         let totalTextFrameVerticalInsets: CGFloat = layout.messageBubbleTextViewFrameInsets.top + layout.messageBubbleTextViewFrameInsets.bottom
         let totalTextContainerVerticalInsets: CGFloat = layout.messageBubbleTextViewTextContainerInsets.top + layout.messageBubbleTextViewTextContainerInsets.bottom
         
         // TODO: may need to fix the size offset caused by `bouncingRectWithSize`
         let totalVerticalInsets = totalTextFrameVerticalInsets + totalTextContainerVerticalInsets
-        
-        let finalWidth: CGFloat = max(textSize.width, self.minBubbleWidth)
-        finalSize = CGSizeMake(finalWidth, textRect.height + totalVerticalInsets)
+        let finalWidth: CGFloat = max(textSize.width + totalHorizontalInsets, self.minBubbleWidth)
+        finalSize = CGSizeMake(finalWidth, textSize.height + totalVerticalInsets)
         
         return finalSize
     }

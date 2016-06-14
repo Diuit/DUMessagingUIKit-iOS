@@ -123,17 +123,17 @@ public class DUMessageCollectionViewCell: UICollectionViewCell {
     }
  
     // constraints
-    @IBOutlet private weak var cellTopLabelHeightConstraint: NSLayoutConstraint!
-    @IBOutlet private weak var bubbleTopLabelHeightConstraint: NSLayoutConstraint!
-    @IBOutlet private weak var bubbleContainerViewWidthConstraint: NSLayoutConstraint!
-    
-    @IBOutlet private weak var avatarContainerViewWidthConstraint: NSLayoutConstraint!
+    @IBOutlet weak var cellTopLabelHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var bubbleTopLabelHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var bubbleContainerViewWidthConstraint: NSLayoutConstraint!
+    @IBOutlet weak var avatarContainerViewWidthConstraint: NSLayoutConstraint!
     
     private weak var tapGestureRecognize: UITapGestureRecognizer?
     
     // MARK: life cycle
     override public func awakeFromNib() {
         super.awakeFromNib()
+        translatesAutoresizingMaskIntoConstraints = false
         setupCellViews()
         
     }

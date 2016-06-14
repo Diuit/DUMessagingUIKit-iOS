@@ -96,7 +96,6 @@
                 <constraint firstAttribute="trailing" secondItem="ZyF-RZ-fjt" secondAttribute="trailing" id="9rE-1r-9Pn"/>
                 <constraint firstAttribute="bottom" secondItem="GJ9-vR-VgR" secondAttribute="bottom" id="Cav-gK-02X"/>
                 <constraint firstItem="ZZh-AY-86F" firstAttribute="top" secondItem="kGM-B0-JlS" secondAttribute="bottom" id="HBW-HO-Lle"/>
-                <constraint firstItem="7XM-aU-XaB" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="40" id="Sbr-Qc-Jik"/>
                 <constraint firstAttribute="trailing" secondItem="kGM-B0-JlS" secondAttribute="trailing" id="UQc-vK-LIu"/>
                 <constraint firstItem="ZyF-RZ-fjt" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="XW4-lF-ST6"/>
                 <constraint firstAttribute="bottom" secondItem="ZZh-AY-86F" secondAttribute="bottom" id="acm-lk-bli"/>
@@ -105,6 +104,7 @@
                 <constraint firstItem="ZyF-RZ-fjt" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="iU0-yN-YXp"/>
                 <constraint firstItem="kGM-B0-JlS" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="jQY-5n-Yt2"/>
                 <constraint firstItem="7XM-aU-XaB" firstAttribute="width" secondItem="7XM-aU-XaB" secondAttribute="height" multiplier="1:1" id="toy-XY-tgc"/>
+                <constraint firstItem="7XM-aU-XaB" firstAttribute="top" secondItem="ZZh-AY-86F" secondAttribute="top" id="wt6-DV-pUO"/>
             </constraints>
             <connections>
                 <outlet property="avatarContainer" destination="7XM-aU-XaB" id="skB-uy-kEL"/>

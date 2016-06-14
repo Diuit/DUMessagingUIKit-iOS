@@ -191,7 +191,7 @@ public extension String {
     func rectWithConstrainedWidth(width: CGFloat, font: UIFont) -> CGRect {
         let constraintRect = CGSize(width: width, height: CGFloat.max)
         let boundingRect = self.boundingRectWithSize(constraintRect, options: .UsesLineFragmentOrigin, attributes: [NSFontAttributeName: font], context: nil)
-        return boundingRect
+        return CGRectIntegral(boundingRect)
     }
 }
 

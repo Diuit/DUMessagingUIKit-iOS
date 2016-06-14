@@ -15,7 +15,13 @@ var id: Int = 0
 class DemoMessagesViewController: DUMessagesViewController {
     
     override func didPressSendButton(sender: UIButton, withText: String) {
-        let newMessage = messageModel(sendText: withText)
+        let newMessage = messageModel(sendText: withText, isOutgoing: true)
+        self.messageData.append(newMessage)
+        self.collectionView?.reloadData()
+    }
+    
+    override func didPressAccessorySendButton(sender: UIButton) {
+        let newMessage = messageModel(sendText: "GG", isOutgoing: false)
         self.messageData.append(newMessage)
         self.collectionView?.reloadData()
     }
@@ -36,18 +42,19 @@ class messageModel: DUMessageData {
     var senderDisplayName: String = "MySelf"
     var messageID: Int
     var isMediaMessage: Bool { return false }
-    var isOutgoingMessage: Bool { return true }
+    var isOutgoingMessage: Bool
     var date: NSDate?
     var contentText: String?
     var hashValue: Int
     var duChatInstance: DUChat?
     
-    init(sendText: String) {
+    init(sendText: String, isOutgoing: Bool) {
         messageID = id
         id += 1
         date = NSDate()
         contentText = sendText
         hashValue = id.hashValue
         duChatInstance = nil
+        isOutgoingMessage = isOutgoing
     }
 }
