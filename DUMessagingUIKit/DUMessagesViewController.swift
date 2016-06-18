@@ -163,10 +163,6 @@ public class DUMessagesViewController: UIViewController, UITextViewDelegate, DUM
             cell.messageBubbleTopLabel.textEdgeInsets = UIEdgeInsetsMake(0, messageBubbleTopLabelInset, 0, 0)
         }
 
-        // FIXME: this is a workraound for attribute did not change NSLayoutContsraint
-        cell.cellTopLabelHeightConstraint.constant = self.heightForCellTopLabel(at: indexPath, with: du_collectionViewLayout, collectionView: du_collectionView)
-        cell.bubbleTopLabelHeightConstraint.constant = self.heightForMessageBubbleTopLabel(at: indexPath, with: du_collectionViewLayout, collectionView: du_collectionView)
-        cell.avatarContainerViewWidthConstraint.constant = self.diameterForAvatarContainer(at: indexPath, with: du_collectionViewLayout, collectionView: du_collectionView)
         return cell
     }
     

@@ -8,18 +8,24 @@
 
 import UIKit
 
-private let defaultMinBubbleWidth: CGFloat = 48.0
+// XXX: Minimum width is total horizontal text container edge insets
+private let defaultMinimumBubbleWidth: CGFloat = 28.0
+// XXX: Minimum width can not be less than avatar, otherwise avatar will be cut. Set to default avatar size 32.0
+private let defaultMinimumBubbleHeight: CGFloat = 32.0
+
 
 public class DUMessageSizeCalculator: NSObject {
     
     private var sizeCache: NSCache
     private var minBubbleWidth: CGFloat
+    private var minBubbleHeight: CGFloat
     
-    public init(cache: NSCache, minimumBubbleWidth: CGFloat) {
+    public init(cache: NSCache, minimumBubbleWidth: CGFloat, minimumBubbleHeight: CGFloat) {
         assert(minimumBubbleWidth > 0, "minimum message bubble width can not be less than 0")
         
         sizeCache = cache
         minBubbleWidth = minimumBubbleWidth
+        minBubbleHeight = minimumBubbleHeight
         super.init()
     }
     
@@ -27,7 +33,7 @@ public class DUMessageSizeCalculator: NSObject {
         let cache = NSCache()
         cache.name = "DUMessageSizeCalculator.cache"
         cache.countLimit = 200
-        self.init(cache: cache, minimumBubbleWidth: defaultMinBubbleWidth)
+        self.init(cache: cache, minimumBubbleWidth: defaultMinimumBubbleWidth, minimumBubbleHeight: defaultMinimumBubbleHeight)
     }
 }
 
@@ -58,24 +64,25 @@ public extension DUMessageSizeCalculator {
         // TODO: add media message calculation
         let avatarImageDiameter: CGFloat = (messageData.isOutgoingMessage) ? layout.outgoingAvatarImageViewDiameter : layout.incomingAvatarImageViewDiameter
         // Avatar container is 8.0 point away from bubble container view in horizontal, check xib for detail.
-        let spacingBetweenAvatarAndBubble: CGFloat = 8.0
+        // FIXME: I think spacing is not included
+        let spacingBetweenAvatarAndBubble: CGFloat = 0.0
         let totalTextFrameHorizontalInsets: CGFloat = layout.messageBubbleTextViewFrameInsets.left + layout.messageBubbleTextViewFrameInsets.right
         let totalTextContainerHorizontalInsets: CGFloat = layout.messageBubbleTextViewTextContainerInsets.left + layout.messageBubbleTextViewTextContainerInsets.right
         
         let totalHorizontalInsets = spacingBetweenAvatarAndBubble + totalTextFrameHorizontalInsets + totalTextContainerHorizontalInsets
         // XXX:(Pofat) - need to fix evaluate result of String. The offset it +10. However, consider the case that may exceed maxWidth, we minus this 10 pt before we evaluate the string size. And add that 10 back.
-        let maxTextWidth = layout.itemWidth - avatarImageDiameter - layout.messageBubbleHorizontalMargin - totalHorizontalInsets - 10
+        let maxTextWidth = layout.itemWidth - avatarImageDiameter - layout.messageBubbleHorizontalMargin - totalHorizontalInsets
         
         let textRect = messageData.contentText!.rectWithConstrainedWidth(maxTextWidth, font: layout.messageBodyFont)
-        let textSize = CGSizeMake(textRect.size.width + 10, textRect.size.height)
+        let textSize = CGSizeMake(textRect.size.width, textRect.size.height)
         
         let totalTextFrameVerticalInsets: CGFloat = layout.messageBubbleTextViewFrameInsets.top + layout.messageBubbleTextViewFrameInsets.bottom
         let totalTextContainerVerticalInsets: CGFloat = layout.messageBubbleTextViewTextContainerInsets.top + layout.messageBubbleTextViewTextContainerInsets.bottom
         
-        // TODO: may need to fix the size offset caused by `bouncingRectWithSize`
         let totalVerticalInsets = totalTextFrameVerticalInsets + totalTextContainerVerticalInsets
         let finalWidth: CGFloat = max(textSize.width + totalHorizontalInsets, self.minBubbleWidth)
-        finalSize = CGSizeMake(finalWidth, textSize.height + totalVerticalInsets)
+        let finalHeight: CGFloat = max(textSize.height + totalVerticalInsets, self.minBubbleHeight)
+        finalSize = CGSizeMake(finalWidth, finalHeight)
         
         return finalSize
     }

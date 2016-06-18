@@ -220,8 +220,8 @@ private extension DUMessageCollectionViewFlowLayout {
         if let du_collectionView = self.collectionView as? DUMessageCollectionView {
             if let delegate = du_collectionView.delegate {
                 let delegate = delegate as! DUMessageCollectionViewFlowLayoutDelegate
-                attrs.cellTopLabelHeight = delegate.heightForCellTopLabel(atIndexPath: indexPath, withLayout: self, inCollectionView: du_collectionView)
-                attrs.messageBubbleTopLabelHeight = delegate.heightForMessageBubbleTopLabel(atIndexPath: indexPath, withLayout: self, inCollectionView: du_collectionView)
+                attrs.cellTopLabelHeight = delegate.heightForCellTopLabel(at: indexPath, with: self, collectionView: du_collectionView)
+                attrs.messageBubbleTopLabelHeight = delegate.heightForMessageBubbleTopLabel(at: indexPath, with: self, collectionView: du_collectionView)
             }
         }
     }

@@ -77,5 +77,50 @@ public class DUCollectionViewLayouAttributes: UICollectionViewLayoutAttributes {
     public var cellTextViewFrameInset: UIEdgeInsets =  UIEdgeInsetsMake(0, 0, 0, 0)
     /// The inset of the text container in textView of `DUMessageCollectionViewCell`
     public var textViewTextContainerInsets: UIEdgeInsets = UIEdgeInsetsMake(7.0, 14.0, 7.0, 14.0)
+    
+    // MARK: NSCopying
+    override public func copyWithZone(zone: NSZone) -> AnyObject {
+        let copy = super.copyWithZone(zone) as! DUCollectionViewLayouAttributes
+        
+        guard copy.representedElementCategory == .Cell else {
+            return copy
+        }
+        
+        copy.cellTopLabelHeight = self.cellTopLabelHeight
+        copy.messageBubbleTopLabelHeight = self.messageBubbleTopLabelHeight
+        copy.messageBubbleContainerViewWidth = self.messageBubbleContainerViewWidth
+        copy.outgoingAvatarImageViewDiameter = self.outgoingAvatarImageViewDiameter
+        copy.incomingAvatarImageViewDiameter = self.incomingAvatarImageViewDiameter
+        copy.messageBubbleFont = self.messageBubbleFont
+        copy.cellTextViewFrameInset = self.cellTextViewFrameInset
+        copy.textViewTextContainerInsets = self.textViewTextContainerInsets
+
+        return copy
+    }
+    
+    override public func isEqual(object: AnyObject?) -> Bool {
+        guard object is DUCollectionViewLayouAttributes else {
+            return false
+        }
+        
+        if object === self { return true }
+        
+        if self.representedElementCategory == .Cell {
+            let layoutAttributes = object as! DUCollectionViewLayouAttributes
+            let condition: Bool = (Int(layoutAttributes.cellTopLabelHeight) != Int(self.cellTopLabelHeight)) ||
+                                  (Int(layoutAttributes.messageBubbleTopLabelHeight) != Int(self.messageBubbleTopLabelHeight)) ||
+                                  (Int(layoutAttributes.messageBubbleContainerViewWidth) != Int(self.messageBubbleContainerViewWidth)) ||
+                (Int(layoutAttributes.outgoingAvatarImageViewDiameter) != Int(self.outgoingAvatarImageViewDiameter)) ||
+                                  (Int(layoutAttributes.incomingAvatarImageViewDiameter) != Int(self.incomingAvatarImageViewDiameter)) ||
+                                  !(layoutAttributes.messageBubbleFont.isEqual(self.messageBubbleFont)) ||
+                                  !UIEdgeInsetsEqualToEdgeInsets(layoutAttributes.cellTextViewFrameInset, self.cellTextViewFrameInset) ||
+                                  !UIEdgeInsetsEqualToEdgeInsets(layoutAttributes.textViewTextContainerInsets, self.textViewTextContainerInsets)
+            
+            if condition { return false }
+            
+        }
+        
+        return super.isEqual(object)
+    }
 }
 
