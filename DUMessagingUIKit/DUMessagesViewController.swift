@@ -36,8 +36,9 @@ public class DUMessagesViewController: UIViewController, UITextViewDelegate, DUM
         
         DUMessagesViewController.nib.instantiateWithOwner(self, options: nil)
         setupMessagesViewController()
+        registerForNotification()
         
-        // FIXME: for test, may think a better way
+        // FIXME: for test conveniences, delete this after done
         if chat != nil {
             chat?.duChatInstance?.listMessagesBefore() { [weak self] error, messages in
                 guard let _ : [DUMessage] = messages where error == nil else {
@@ -51,6 +52,12 @@ public class DUMessagesViewController: UIViewController, UITextViewDelegate, DUM
 
     }
     
+    
+    // FIXME: for current controller can not be released due to unfound retain cycle, we remove notification in viewDidDisappear for temporary
+    override public func viewDidDisappear(animated: Bool) {
+        super.viewDidDisappear(animated)
+        clearForNotification()
+    }
     deinit {
         collectionView?.delegate = nil
         collectionView?.dataSource = nil
@@ -69,6 +76,8 @@ public class DUMessagesViewController: UIViewController, UITextViewDelegate, DUM
         
         collectionView?.dataSource = self
         collectionView?.delegate = self
+        
+        updateCollectionViewInsets(top: self.topLayoutGuide.length, bottom: CGRectGetMaxY(collectionView!.frame) - CGRectGetMinY(self.inputToolbar!.frame))
     }
     
     // MARK: Input
@@ -100,7 +109,6 @@ public class DUMessagesViewController: UIViewController, UITextViewDelegate, DUM
     }
     
     public func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        var messageItem = messageData[indexPath.item]
         guard let _ = collectionView as? DUMessageCollectionView else {
             assert(false, "Error collectionView class : \(collectionView.nameOfClass), supposed to be \(DUMessageCollectionView.nameOfClass)")
             return UICollectionViewCell() // this line will not be executed for previous assertion
@@ -108,6 +116,8 @@ public class DUMessagesViewController: UIViewController, UITextViewDelegate, DUM
         
         let du_collectionView = collectionView as! DUMessageCollectionView
         let du_collectionViewLayout = du_collectionView.collectionViewLayout as! DUMessageCollectionViewFlowLayout
+        
+        var messageItem = messageData(atIndexPath: indexPath, forCollectionView: du_collectionView)
         
         var cellIdentifier: String = ""
         if messageItem.isOutgoingMessage {
@@ -126,7 +136,7 @@ public class DUMessagesViewController: UIViewController, UITextViewDelegate, DUM
         
         let cell: DUMessageCollectionViewCell = collectionView.dequeueReusableCellWithReuseIdentifier(cellIdentifier, forIndexPath: indexPath) as! DUMessageCollectionViewCell
         cell.delegate = self
-        // TODO: add media cell
+
         if messageItem.isMediaMessage {
             cell.messageMediaView = messageItem.mediaItem?.getMediaContentView() ?? messageItem.mediaItem?.placeholderView
         } else {
@@ -236,6 +246,7 @@ public class DUMessagesViewController: UIViewController, UITextViewDelegate, DUM
     /// Scroll to the bottom of message collection view
     final public func scrollToBottom(animated animated: Bool) {
         guard collectionView?.numberOfSections() != 0 else { return }
+        guard collectionView?.numberOfItemsInSection(0) != 0 else { return }
         
         let lastIndexPath: NSIndexPath = NSIndexPath(forItem: collectionView!.numberOfItemsInSection(0) - 1, inSection: 0)
         scrollTo(indexPath: lastIndexPath, animated: animated)
@@ -254,6 +265,43 @@ public class DUMessagesViewController: UIViewController, UITextViewDelegate, DUM
 // MARK: Class method
 public extension DUMessagesViewController {
     static var nib: UINib { return UINib.init(nibName: self.nameOfClass, bundle: NSBundle(identifier: Constants.bundleIdentifier)) }
+}
+
+// MARK: private helper
+private extension DUMessagesViewController {
+    func updateCollectionViewInsets(top top: CGFloat, bottom: CGFloat) {
+        let insets: UIEdgeInsets = UIEdgeInsetsMake(top, 0.0, bottom, 0.0)
+        self.collectionView?.contentInset = insets
+        self.collectionView?.scrollIndicatorInsets = insets
+    }
+    
+    func registerForNotification() {
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(didReceiveKeyboardWillChangeFrame(_:)), name: UIKeyboardWillChangeFrameNotification, object: nil)
+    }
+    
+    func clearForNotification() {
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillChangeFrameNotification, object: nil)
+    }
+    
+    @objc func didReceiveKeyboardWillChangeFrame(notification: NSNotification) {
+        let userInfo = notification.userInfo!
+        let keyboardFinalFrame: CGRect? = userInfo[UIKeyboardFrameEndUserInfoKey]!.CGRectValue
+        if keyboardFinalFrame == nil { return }
+        
+        var animateOption: UIViewAnimationOptions
+        if let animationCurveInt = (userInfo[UIKeyboardAnimationCurveUserInfoKey] as? NSNumber)?.unsignedIntegerValue {
+            animateOption = UIViewAnimationOptions(rawValue: animationCurveInt<<16)
+        } else {
+            // FIXME: a random default animate option
+            animateOption = UIViewAnimationOptions.CurveEaseOut
+        }
+        
+        let animateDuration = (userInfo[UIKeyboardAnimationDurationUserInfoKey] as? NSNumber)?.doubleValue
+        
+        UIView.animateWithDuration(animateDuration!, delay: 0.0, options: animateOption, animations: { [unowned self] in
+            self.updateCollectionViewInsets(top: self.collectionView!.contentInset.top, bottom: CGRectGetHeight(keyboardFinalFrame!))
+            }, completion: nil)
+    }
 }
 
 
