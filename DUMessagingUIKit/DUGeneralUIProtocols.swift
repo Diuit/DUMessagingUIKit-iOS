@@ -12,6 +12,11 @@ import UIKit
 // UIView
 public protocol BackgroundColor { var myBackgroundColor: UIColor { get } }
 public protocol TintColor       { var myTintColor: UIColor       { get } }
+public protocol BorderWidth     { var myBorderWidth: CGFloat     { get } }
+public protocol BorderColor     { var myBorderColor: UIColor     { get } }
+public protocol CornerRadius    { var myCornerRadius:CGFloat     { get } }
+public protocol MasksToBoundsTRUE {}
+
 
 // UIBarButton
 public enum UIBarButtonType {
@@ -41,7 +46,7 @@ public protocol NavigationBarTitle {
 
 // Customize appearance using closure
 public typealias ProtocolUICustomClosure = () -> Void
-public protocol CustomClosure      { var pCustomClosure:ProtocolUICustomClosure    { get } }
+public protocol CustomClosure      { var myCustomClosure:ProtocolUICustomClosure    { get } }
 
 // method to adopt ui protocol
 public protocol UIProtocolAdoption {
@@ -89,6 +94,15 @@ public extension GlobalUIProtocol where Self: UIViewController {
     var myTintColor: UIColor { return GlobalUISettings.tintColor }
 }
 
+// MARK: Aggregate UI protocol
+public protocol PlaceholderStyle: BackgroundColor, BorderWidth, CornerRadius, MasksToBoundsTRUE {}
+extension PlaceholderStyle {
+    public var myBackgroundColor: UIColor { return UIColor.whiteColor() }
+    public var myBorderWidth: CGFloat     { return 1.0 }
+    public var myCornerRadius: CGFloat    { return 14.0 }
+    public var myBorderColor: UIColor     { return UIColor.DULightgreyColor() }
+}
+
 // MARK: adoption method for ecah UIKit
 extension UIView: UIProtocolAdoption {
     
@@ -100,11 +114,16 @@ extension UIView: UIProtocolAdoption {
     
     public func adoptProtocolUIApperance() {
         // UIView
-        if let aSelf = self as? BackgroundColor { backgroundColor       = aSelf.myBackgroundColor }
-        if let aSelf = self as? TintColor       { tintColor             = aSelf.myTintColor }
+        if let mySelf = self as? BackgroundColor   { backgroundColor       = mySelf.myBackgroundColor }
+        if let mySelf = self as? TintColor         { tintColor             = mySelf.myTintColor   }
+        if let mySelf = self as? BorderWidth       { layer.borderWidth     = mySelf.myBorderWidth }
+        if let mySelf = self as? BorderColor       { layer.borderColor     = mySelf.myBorderColor.CGColor }
+        if let mySelf = self as? CornerRadius      { layer.cornerRadius    = mySelf.myCornerRadius}
+        if self is MasksToBoundsTRUE               { layer.masksToBounds = true }
+        
         
         // Custom Closure
-        if let aSelf = self as? CustomClosure   { aSelf.pCustomClosure() }
+        if let mySelf = self as? CustomClosure   { mySelf.myCustomClosure() }
     }
     
     public func setupInheritedProtocolUI() {

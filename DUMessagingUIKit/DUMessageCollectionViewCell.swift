@@ -79,13 +79,13 @@ public class DUMessageCollectionViewCell: UICollectionViewCell {
     
     /// Delegate for all cell tap events.
     public weak var delegate: DUMessageCollectionViewCellDelegate?
-    
+    /// This view weill be displayed when the message is a media message.
     public var messageMediaView: UIView? = nil
     {
         didSet {
             if messageMediaView != nil {
-                bubbleImageView.removeFromSuperview()
-                cellTextView.removeFromSuperview()
+                bubbleImageView?.removeFromSuperview()
+                cellTextView?.removeFromSuperview()
                 
                 messageMediaView!.frame = bubbleContainer.bounds
                 messageMediaView!.translatesAutoresizingMaskIntoConstraints = false
@@ -166,9 +166,9 @@ public extension DUMessageCollectionViewCell {
         messageBubbleTopLabel.textEdgeInsets = UIEdgeInsetsZero
         timeLabel.text = nil
         
-        cellTextView.dataDetectorTypes = .None
-        cellTextView.text = nil
-        cellTextView.attributedText = nil
+        cellTextView?.dataDetectorTypes = .None
+        cellTextView?.text = nil
+        cellTextView?.attributedText = nil
         
         avatarImageView.image = nil
     }
@@ -182,11 +182,11 @@ public extension DUMessageCollectionViewCell {
         
         let duLayoutAttributes = layoutAttributes as! DUCollectionViewLayouAttributes
         
-        if cellTextView.font != duLayoutAttributes.messageBubbleFont {
-            cellTextView.font = duLayoutAttributes.messageBubbleFont
+        if cellTextView?.font != duLayoutAttributes.messageBubbleFont {
+            cellTextView?.font = duLayoutAttributes.messageBubbleFont
         }
         
-        cellTextView.textContainerInset = duLayoutAttributes.textViewTextContainerInsets
+        cellTextView?.textContainerInset = duLayoutAttributes.textViewTextContainerInsets
         
         update(layoutConstraint: cellTopLabelHeightConstraint, withConstant: duLayoutAttributes.cellTopLabelHeight)
         update(layoutConstraint: bubbleTopLabelHeightConstraint, withConstant: duLayoutAttributes.messageBubbleTopLabelHeight)

@@ -59,6 +59,10 @@
 		FA976E9A1D048FE800F844E5 /* DUUserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA976E991D048FE800F844E5 /* DUUserData.swift */; };
 		FA976E9C1D0492D600F844E5 /* DUMessageData.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA976E9B1D0492D600F844E5 /* DUMessageData.swift */; };
 		FA976EA11D04A34800F844E5 /* DUMessageCollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA976EA01D04A34800F844E5 /* DUMessageCollectionViewFlowLayout.swift */; };
+		FAD5E14F1D173A6E00F7521B /* DUMediaItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD5E14E1D173A6E00F7521B /* DUMediaItem.swift */; };
+		FAD5E1511D173F1200F7521B /* DUMediaPlaceholderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD5E1501D173F1200F7521B /* DUMediaPlaceholderView.swift */; };
+		FAD5E1551D17505800F7521B /* DUMediaContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD5E1541D17505800F7521B /* DUMediaContentView.swift */; };
+		FAD5E1571D17607100F7521B /* DUMediaContentViewFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD5E1561D17607100F7521B /* DUMediaContentViewFactory.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -77,6 +81,19 @@
 			remoteInfo = DUMessagingDemo;
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		FA5542E91D17CE6200150513 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		00C94C116F7733CBBCE78BE9 /* Pods_DUMessagingUIKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DUMessagingUIKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -142,6 +159,10 @@
 		FA976E991D048FE800F844E5 /* DUUserData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DUUserData.swift; sourceTree = "<group>"; };
 		FA976E9B1D0492D600F844E5 /* DUMessageData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DUMessageData.swift; sourceTree = "<group>"; };
 		FA976EA01D04A34800F844E5 /* DUMessageCollectionViewFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DUMessageCollectionViewFlowLayout.swift; sourceTree = "<group>"; };
+		FAD5E14E1D173A6E00F7521B /* DUMediaItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DUMediaItem.swift; sourceTree = "<group>"; };
+		FAD5E1501D173F1200F7521B /* DUMediaPlaceholderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DUMediaPlaceholderView.swift; sourceTree = "<group>"; };
+		FAD5E1541D17505800F7521B /* DUMediaContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DUMediaContentView.swift; sourceTree = "<group>"; };
+		FAD5E1561D17607100F7521B /* DUMediaContentViewFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DUMediaContentViewFactory.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -286,6 +307,8 @@
 				FA11E2171D0CF58C005C7EEB /* DUMessageIncomingCollectionViewCell.swift */,
 				FA11E2181D0CF58C005C7EEB /* DUMessageIncomingCollectionViewCell.xib */,
 				FA11E24A1D0E4955005C7EEB /* DUEdgeInsetableLabel.swift */,
+				FAD5E1501D173F1200F7521B /* DUMediaPlaceholderView.swift */,
+				FAD5E1541D17505800F7521B /* DUMediaContentView.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -307,6 +330,7 @@
 				FA2D83451CFE0CE90060A6B8 /* DUExtensions.swift */,
 				FA2D83471CFE0CF10060A6B8 /* DUAvatarImageFactory.swift */,
 				FA11E2211D0D8AE7005C7EEB /* DUMessageBubbleImageFactory.swift */,
+				FAD5E1561D17607100F7521B /* DUMediaContentViewFactory.swift */,
 			);
 			name = Utilities;
 			sourceTree = "<group>";
@@ -338,6 +362,7 @@
 			isa = PBXGroup;
 			children = (
 				FA5B99521D0187E100786C6B /* UserData.swift */,
+				FAD5E14E1D173A6E00F7521B /* DUMediaItem.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -414,6 +439,7 @@
 				FA2D83CC1CFE762B0060A6B8 /* Resources */,
 				B481F916A491C108B12D966A /* Embed Pods Frameworks */,
 				66C2F630835D67315148A5DE /* Copy Pods Resources */,
+				FA5542E91D17CE6200150513 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -634,12 +660,16 @@
 				FA11E20C1D0BC7BE005C7EEB /* DUCollectionViewLayouAttributes.swift in Sources */,
 				FA2D83421CFE0CA30060A6B8 /* DUChatData.swift in Sources */,
 				FA2D83441CFE0CAC0060A6B8 /* RemoteResourceProtocols.swift in Sources */,
+				FAD5E1551D17505800F7521B /* DUMediaContentView.swift in Sources */,
+				FAD5E14F1D173A6E00F7521B /* DUMediaItem.swift in Sources */,
 				FA2D83551CFE0DE00060A6B8 /* DUChatCell.swift in Sources */,
 				FA1FD2291D007FF10066BC7C /* DUChatSettingViewController.swift in Sources */,
 				FA2D83C61CFE712B0060A6B8 /* DUGeneralUIProtocols.swift in Sources */,
+				FAD5E1511D173F1200F7521B /* DUMediaPlaceholderView.swift in Sources */,
 				FA976E8C1D03FB7900F844E5 /* DUMessageInputToolbar.swift in Sources */,
 				FA2D834E1CFE0D7B0060A6B8 /* Constants.swift in Sources */,
 				FA976E9C1D0492D600F844E5 /* DUMessageData.swift in Sources */,
+				FAD5E1571D17607100F7521B /* DUMediaContentViewFactory.swift in Sources */,
 				FA2D83461CFE0CE90060A6B8 /* DUExtensions.swift in Sources */,
 				FA5B99501D0183A800786C6B /* CustomViews.swift in Sources */,
 				FA976E8F1D04152800F844E5 /* DUMessagesViewController.swift in Sources */,
@@ -809,6 +839,10 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = DUMessagingUIKit/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -828,6 +862,10 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = DUMessagingUIKit/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -862,6 +900,10 @@
 			baseConfigurationReference = 0BF73D5FEEF48118C97C3F49 /* Pods-DUMessagingDemo.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = DUMessagingDemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.duolc.DUMessagingDemo;
@@ -874,6 +916,10 @@
 			baseConfigurationReference = A163F8A2822A07A54571279E /* Pods-DUMessagingDemo.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = DUMessagingDemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.duolc.DUMessagingDemo;

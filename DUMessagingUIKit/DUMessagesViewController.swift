@@ -18,7 +18,9 @@ public class DUMessagesViewController: UIViewController, UITextViewDelegate, DUM
     public var messageData: [DUMessageData] = []
     
     private let outgoingCellIdentifier = DUMessageOutGoingCollectionViewCell.cellReuseIdentifier
+    private let outgoingMediaCellIdentifier = DUMessageOutGoingCollectionViewCell.mediaCellReuseIdentifier
     private let incomingCellIdentifier = DUMessageIncomingCollectionViewCell.cellReuseIdentifier
+    private let incomingMediaCellIdentifier = DUMessageIncomingCollectionViewCell.mediaCellReuseIdentifier
     // Defualt bubble images
     private let defaultOutgoingBubbleImage: UIImage = DUMessageBubbleImageFactory.makeMessageBubbleImage(GlobalUISettings.outgoingMessageBubbleBackgroundColor)
     private let defaultIncomingBubbleImage: UIImage = DUMessageBubbleImageFactory.makeMessageBubbleImage(GlobalUISettings.incomingMessageBubbleBackgroundColor)
@@ -109,20 +111,32 @@ public class DUMessagesViewController: UIViewController, UITextViewDelegate, DUM
         
         var cellIdentifier: String = ""
         if messageItem.isOutgoingMessage {
-            cellIdentifier = self.outgoingCellIdentifier
+            if messageItem.isMediaMessage {
+                cellIdentifier = self.outgoingMediaCellIdentifier
+            } else {
+                cellIdentifier = self.outgoingCellIdentifier
+            }
         } else {
-            cellIdentifier = self.incomingCellIdentifier
+            if messageItem.isMediaMessage {
+                cellIdentifier = self.incomingMediaCellIdentifier
+            } else {
+                cellIdentifier = self.incomingCellIdentifier
+            }
         }
         
         let cell: DUMessageCollectionViewCell = collectionView.dequeueReusableCellWithReuseIdentifier(cellIdentifier, forIndexPath: indexPath) as! DUMessageCollectionViewCell
         cell.delegate = self
         // TODO: add media cell
-        cell.cellTextView.text = messageItem.contentText
-        cell.cellTextView.dataDetectorTypes = .All
+        if messageItem.isMediaMessage {
+            cell.messageMediaView = messageItem.mediaItem?.mediaContent ?? messageItem.mediaItem?.placeholder
+        } else {
+            cell.cellTextView.text = messageItem.contentText
+            cell.cellTextView.dataDetectorTypes = .All
+        }
         
         assert(du_collectionView.dataSource != nil, "DataSource is nil, couldn't get correct layout attributes")
         let duDataSource = du_collectionView.dataSource as! DUMessageCollectionViewDataSource
-        cell.bubbleImageView.image = duDataSource.messageBubbleImage(atIndexPath: indexPath, forCollectionView: du_collectionView)
+        cell.bubbleImageView?.image = duDataSource.messageBubbleImage(atIndexPath: indexPath, forCollectionView: du_collectionView)
         
         var hasAvatar: Bool = true
         if messageItem.isOutgoingMessage && du_collectionViewLayout.outgoingAvatarImageViewDiameter == 0.0 {
