@@ -100,7 +100,7 @@ public class DUMessagesViewController: UIViewController, UITextViewDelegate, DUM
     }
     
     public func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let messageItem = messageData[indexPath.item]
+        var messageItem = messageData[indexPath.item]
         guard let _ = collectionView as? DUMessageCollectionView else {
             assert(false, "Error collectionView class : \(collectionView.nameOfClass), supposed to be \(DUMessageCollectionView.nameOfClass)")
             return UICollectionViewCell() // this line will not be executed for previous assertion
@@ -128,7 +128,7 @@ public class DUMessagesViewController: UIViewController, UITextViewDelegate, DUM
         cell.delegate = self
         // TODO: add media cell
         if messageItem.isMediaMessage {
-            cell.messageMediaView = messageItem.mediaItem?.mediaContent ?? messageItem.mediaItem?.placeholder
+            cell.messageMediaView = messageItem.mediaItem?.getMediaContentView() ?? messageItem.mediaItem?.placeholderView
         } else {
             cell.cellTextView.text = messageItem.contentText
             cell.cellTextView.dataDetectorTypes = .All

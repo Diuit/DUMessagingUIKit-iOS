@@ -95,12 +95,24 @@ public extension GlobalUIProtocol where Self: UIViewController {
 }
 
 // MARK: Aggregate UI protocol
-public protocol PlaceholderStyle: BackgroundColor, BorderWidth, CornerRadius, MasksToBoundsTRUE {}
-extension PlaceholderStyle {
-    public var myBackgroundColor: UIColor { return UIColor.whiteColor() }
+/**
+ *  UI style for placehold view of media messages.
+ */
+public protocol PlaceholderStyle: BackgroundColor, BorderWidth, CornerRadius, BorderColor, MasksToBoundsTRUE {}
+public extension PlaceholderStyle {
+    public var myBackgroundColor: UIColor { return UIColor.DULightgreyColor() }
     public var myBorderWidth: CGFloat     { return 1.0 }
     public var myCornerRadius: CGFloat    { return 14.0 }
     public var myBorderColor: UIColor     { return UIColor.DULightgreyColor() }
+}
+
+/**
+ *  UI style for content UIView of media messages.
+ */
+public protocol MediaContentStyle: BackgroundColor, CornerRadius, MasksToBoundsTRUE {}
+extension MediaContentStyle {
+    public var myBackgroundColor: UIColor { return UIColor.DULightgreyColor() }
+    public var myCornerRadius: CGFloat    { return 14.0 }
 }
 
 // MARK: adoption method for ecah UIKit

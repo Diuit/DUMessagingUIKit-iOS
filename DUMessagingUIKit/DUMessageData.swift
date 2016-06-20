@@ -26,7 +26,7 @@ public protocol DUMessageData {
     /// If this message is a media message.
     var isMediaMessage: Bool { get }
     /// Return an instance of `DUMediaItem` if this is a mediat message.
-    var mediaItem: DUMediaItem? { get }
+    var mediaItem: DUMediaItem? { get set }
     /// If this message is sent by self.
     var isOutgoingMessage: Bool { get }
     /// Content text of a text message.
@@ -65,21 +65,26 @@ extension DUMessage: DUMessageData {
         }
     }
     public var mediaItem: DUMediaItem? {
-        // no MIME type will be regarded as text message
-        guard self.mime != nil else {
-            return nil
+        get {
+            // no MIME type will be regarded as text message
+            guard self.mime != nil else {
+                return nil
+            }
+            
+            switch self.mime! {
+            case DUMIMEType.textPlain, DUMIMEType.system:
+                return nil
+            case DUMIMEType.imageBMP, DUMIMEType.imageGIF, DUMIMEType.imageJPG, DUMIMEType.imagePNG, DUMIMEType.imageTIFF:
+                return DUMediaItem.init(fromImage: nil)
+            // FIXME: general file is now regarded as text message
+            case DUMIMEType.general:
+                return nil
+            default:
+                return nil
+            }
         }
-        
-        switch self.mime! {
-        case DUMIMEType.textPlain, DUMIMEType.system:
-            return nil
-        case DUMIMEType.imageBMP, DUMIMEType.imageGIF, DUMIMEType.imageJPG, DUMIMEType.imagePNG, DUMIMEType.imageTIFF:
-            return DUMediaItem.init(type: .Image, mediaSource: nil)
-        // FIXME: general file is now regarded as text message
-        case DUMIMEType.general:
-            return nil
-        default:
-            return nil
+        set {
+            
         }
     }
     public var contentText: String? { return self.data }

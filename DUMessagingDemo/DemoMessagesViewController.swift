@@ -37,7 +37,7 @@ class DemoMessagesViewController: DUMessagesViewController {
 
 
 // FIXME: This is a test-only class, delete when test done
-class messageModel: DUMessageData {
+struct messageModel: DUMessageData {
     var senderIdentifier: String = "me"
     var senderDisplayName: String = "MySelf"
     var messageID: Int
@@ -61,7 +61,7 @@ class messageModel: DUMessageData {
         if !isMedia {
             mediaItem = nil
         } else {
-            mediaItem = DUMediaItem.init(type: .Image, mediaSource: UIImage(named: "dna"))
+            mediaItem = DUMediaItem.init(fromImage: UIImage(named: "dna"))
         }
     }
 }

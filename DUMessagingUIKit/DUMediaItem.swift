@@ -46,26 +46,93 @@ public struct DUMediaItem {
     
     // MARK: Stored Properties
     /// Type of the media message
-    var type: Type
+    public var type: Type
     ///  An UIView instance for placeholder.
-    var placeholder: UIView
-    /// An UIview of acutal meida content, will be diffrent in layout for each type.
-    var mediaContent: UIView? = nil
+    public var placeholderView: UIView { return _cachedPlaceholderView }
+    /// Instance of media content, may be an UIImage
+    public var mediaContentData: AnyObject? = nil
     
-    public init(type: Type, mediaSource: AnyObject?) {
-        self.type = type
-        self.placeholder = DUMediaPlaceholderView.init()
-        // FIXME: do a real content view
-        if type == .Image {
-            let imageSource = mediaSource as? UIImage
-            if imageSource == nil {
-                self.mediaContent = nil
-            } else {
-                self.mediaContent = DUMediaContentViewFactory.makeImageContentView(imageSource!, frame: nil)
-                self.mediaContent?.frame.size = self.mediaDisplaySize
-            }
+    private var _cachedMediaContentView: UIView? = nil
+    private var _cachedPlaceholderView: DUMediaPlaceholderView
+    
+    // MARK: Initialize
+    /**
+     Init an image mediaItem
+     
+     - parameter image: Main image, could be `nil` if you have not retrieved the image yet.
+     
+     - returns: An instance of `DUMediaItem` of image type
+     */
+    public init(fromImage image: UIImage?) {
+        self.type = .Image
+        self.mediaContentData = image
+        _cachedPlaceholderView = DUMediaPlaceholderView.init(frame:CGRectZero)
+        _cachedPlaceholderView.frame = CGRectMake(0, 0, mediaDisplaySize.width, mediaDisplaySize.height)
+    }
+    /**
+     Init a video mediaItem
+     
+     - parameter url: URL string of video file path
+     
+     - returns: An instance of `DUMediaItem` of video type
+     */
+    public init(fromVideoURL url: String) {
+        self.type = .Video
+        _cachedPlaceholderView = DUMediaPlaceholderView.init(frame:CGRectZero)
+        _cachedPlaceholderView.frame = CGRectMake(0, 0, mediaDisplaySize.width, mediaDisplaySize.height)
+    }
+    
+    /**
+     Init a file mediaItem
+     
+     - parameter url: URL string of file path
+     
+     - returns: An instance of `DUMediaItem` of file type
+     
+     - note: This file is neither playable video or playable audio
+     */
+    public init(fromFileURL url: String) {
+        self.type = .File
+        _cachedPlaceholderView = DUMediaPlaceholderView.init(frame:CGRectZero)
+        _cachedPlaceholderView.frame = CGRectMake(0, 0, mediaDisplaySize.width, mediaDisplaySize.height)
+    }
+    
+    /**
+     Init a URL preview mediaItem
+     
+     - parameter url: URL string
+     
+     - returns: An instance of `DUMediaItem` of URL type
+     
+     - note: You can get a preview from web page's open graph (if they have)
+     */
+    public init(fromURL url: String) {
+        self.type = .URL
+        _cachedPlaceholderView = DUMediaPlaceholderView.init(frame:CGRectZero)
+        _cachedPlaceholderView.frame = CGRectMake(0, 0, mediaDisplaySize.width, mediaDisplaySize.height)
+    }
+
+    /**
+     Get media contnet view. Return `nil` if there is no media data
+     
+     - returns: A media content view. May be UIImageView or composed UIView
+     */
+    public mutating func getMediaContentView() -> UIView? {
+        if mediaContentData == nil {
+            return nil
         }
         
-        self.placeholder.frame.size = self.mediaDisplaySize
+        if _cachedMediaContentView != nil {
+            return _cachedMediaContentView
+        }
+        
+        switch type {
+        case .Image:
+            _cachedMediaContentView = DUMediaContentViewFactory.makeImageContentView(mediaContentData as? UIImage, frame:CGRectMake(0, 0, mediaDisplaySize.width, mediaDisplaySize.height))
+            return _cachedMediaContentView
+        default:
+            return nil
+        }
     }
+
 }
