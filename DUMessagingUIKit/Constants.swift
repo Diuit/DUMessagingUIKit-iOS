@@ -26,4 +26,10 @@ public class GlobalUISettings {
     /// Tint color for whole app
     static var tintColor: UIColor = UIColor.DUWaterBlueColor()
     static var indicatingStatusColor: UIColor = UIColor.DUWaterBlueColor()
+    
+    // Message bubble color
+    static var outgoingMessageBubbleBackgroundColor: UIColor = UIColor.DUWaterBlueColor()
+    static var outgoingMessageTextColor: UIColor = UIColor.whiteColor()
+    static var incomingMessageBubbleBackgroundColor: UIColor = UIColor.DULightgreyColor()
+    static var incomingMessageTextColor: UIColor = UIColor.blackColor()
 }

@@ -31,6 +31,7 @@
                     <navigationItem key="navigationItem" title="Root View Controller" id="Pht-v1-uva"/>
                     <connections>
                         <segue destination="Tst-YQ-FcY" kind="show" identifier="toSettingSegue" id="DNf-zv-rnO"/>
+                        <segue destination="YW2-ge-ipD" kind="show" identifier="toMessagesSegue" id="2NJ-t0-QUd"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Vlc-ff-lw8" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -54,6 +55,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wCH-uq-5VW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1644" y="451"/>
+        </scene>
+        <!--Demo Messages View Controller-->
+        <scene sceneID="LAx-fW-xl2">
+            <objects>
+                <viewController id="YW2-ge-ipD" customClass="DemoMessagesViewController" customModule="DUMessagingDemo" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="s4H-Sp-P0f"/>
+                        <viewControllerLayoutGuide type="bottom" id="eIQ-oT-47m"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="PRO-jm-LRw">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="BYr-Wb-2im" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1644" y="-223"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="F2V-DD-RT1">

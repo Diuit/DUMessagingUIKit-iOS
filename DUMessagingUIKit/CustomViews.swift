@@ -10,8 +10,8 @@ import Foundation
 import UIKit
 
 /// This is a customized UILabel where their text alway align in top vertically
-@IBDesignable class TopAlignedLabel: UILabel {
-    override func drawTextInRect(rect: CGRect) {
+@IBDesignable public class TopAlignedLabel: UILabel {
+    override public func drawTextInRect(rect: CGRect) {
         if let stringText = text {
             let stringTextAsNSString = stringText as NSString
             let labelStringSize = stringTextAsNSString.boundingRectWithSize(CGSizeMake(CGRectGetWidth(self.frame), CGFloat.max),
@@ -23,16 +23,16 @@ import UIKit
             super.drawTextInRect(rect)
         }
     }
-    override func prepareForInterfaceBuilder() {
+    override public func prepareForInterfaceBuilder() {
         super.prepareForInterfaceBuilder()
         layer.borderWidth = 1
         layer.borderColor = UIColor.blackColor().CGColor
     }
 }
 
-@IBDesignable class DUAvatarImageView: UIImageView, CircleShapeView, DUImageResource {
+@IBDesignable public class DUAvatarImageView: UIImageView, CircleShapeView, DUImageResource {
     // Automatically load the image right after its url is set
-    var imagePath: String? = "" {
+    public var imagePath: String? = "" {
         didSet {
             if self.imagePath != "" {
                 self.loadImage() { [weak self] in

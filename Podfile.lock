@@ -9,7 +9,6 @@ PODS:
   - Socket.IO-Client-Swift (5.3.3)
 
 DEPENDENCIES:
-  - DTTableViewManager
   - DTTableViewManager (~> 4.7.0)
   - DUMessaging
 

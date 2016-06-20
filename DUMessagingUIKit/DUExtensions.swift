@@ -54,8 +54,6 @@ public extension UIColor {
 
 public extension UIFont {
     class func DUBodyTimeFriendFont() -> UIFont? {
-        //TODO: fix custom font return nil
-        //return UIFont(name: "Roboto-Regular", size: 22.0)
         return UIFont(name: "Helvetica", size: 22.0)
     }
     
@@ -67,9 +65,11 @@ public extension UIFont {
         return UIFont(name: "Helvetica", size: 16.0)
     }
     
+    class func DUMessageSenderFont() -> UIFont? {
+        return UIFont(name: "Helvetica", size: 12.0)
+    }
+    
     class func DUUnreadTitleFont() -> UIFont? {
-        //TODO: fix custom font return nil
-        //return UIFont(name: "Roboto-Bold", size: 16.0)
         return UIFont(name: "Helvetica-Bold", size: 16.0)
     }
     
@@ -168,8 +168,34 @@ public extension UIImage {
     }
 }
 
-// NSStringFromClass for Swift version
-public extension NSObject{
+public extension UIView {
+    /// Add NSLayoutConstraints to make subview as same as current view in size
+    func pingAlledge(ofSubview subview: UIView) {
+        self.ping(subview: subview, toEdge: .Top)
+        self.ping(subview: subview, toEdge: .Leading)
+        self.ping(subview: subview, toEdge: .Bottom)
+        self.ping(subview: subview, toEdge: .Trailing)
+    }
+    /// Ping one edge of subview with given attribut onto current view's edge
+    func ping(subview subview:UIView, toEdge attribute: NSLayoutAttribute) {
+        self.addConstraint(NSLayoutConstraint(item: self, attribute: attribute, relatedBy: .Equal, toItem: subview, attribute: attribute, multiplier: 1.0, constant: 0.0))
+    }
+}
+
+public extension String {
+    /// Return a `String` with all white space trimmed
+    func du_trimingWhitespace() -> String {
+        return self.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
+    }
+    /// Calculate the minimum rectangle which contains the given text, with given width and font.
+    func rectWithConstrainedWidth(width: CGFloat, font: UIFont) -> CGRect {
+        let constraintRect = CGSize(width: width, height: CGFloat.max)
+        let boundingRect = self.boundingRectWithSize(constraintRect, options: .UsesLineFragmentOrigin, attributes: [NSFontAttributeName: font], context: nil)
+        return CGRectIntegral(boundingRect)
+    }
+}
+
+public extension NSObject {
     /// Return class string
     public class var nameOfClass: String{
         return NSStringFromClass(self).componentsSeparatedByString(".").last!

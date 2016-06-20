@@ -12,5 +12,5 @@ end
 
 target 'DUMessagingDemo' do
     pod 'DUMessaging'
-    pod 'DTTableViewManager'
+    pod 'DTTableViewManager', '~> 4.7.0'
 end

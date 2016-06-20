@@ -11,14 +11,16 @@ import UIKit
 
 // MARK: UI properties
 // UIView-related protocols
-public protocol BackGroundColor   { var myBackgroundColor: UIColor { get } }
+public protocol BackgroundColor   { var myBackgroundColor: UIColor { get } }
 public protocol TintColor         { var myTintColor: UIColor       { get } }
+public protocol BorderWidth       { var myBorderWidth: CGFloat     { get } }
+public protocol BorderColor       { var myBorderColor: UIColor     { get } }
 public protocol MasksToBoundsTRUE {}
-public protocol CornerRadius       { var du_CornerRadius: CGFloat   { get } }
+public protocol CornerRadius      { var myCornerRadius: CGFloat   { get } }
 
-public protocol CircleShapeView: CornerRadius {}
+public protocol CircleShapeView: CornerRadius, MasksToBoundsTRUE {}
 extension CircleShapeView where Self: UIView {
-    var du_CornerRadius: CGFloat { return bounds.size.width/2 }
+    public var myCornerRadius: CGFloat { return bounds.size.width/2 }
 }
 
 // UIBarButton
@@ -96,26 +98,51 @@ public extension GlobalUIProtocol where Self: UIViewController {
     var myTintColor: UIColor { return GlobalUISettings.tintColor }
 }
 
+// MARK: Aggregate UI protocol
+/**
+ *  UI style for placehold view of media messages.
+ */
+public protocol PlaceholderStyle: BackgroundColor, BorderWidth, CornerRadius, BorderColor, MasksToBoundsTRUE {}
+public extension PlaceholderStyle {
+    public var myBackgroundColor: UIColor { return UIColor.DULightgreyColor() }
+    public var myBorderWidth: CGFloat     { return 1.0 }
+    public var myCornerRadius: CGFloat    { return 14.0 }
+    public var myBorderColor: UIColor     { return UIColor.DULightgreyColor() }
+}
 
-// UIView
+/**
+ *  UI style for content UIView of media messages.
+ */
+public protocol MediaContentStyle: BackgroundColor, CornerRadius, MasksToBoundsTRUE {}
+extension MediaContentStyle {
+    public var myBackgroundColor: UIColor { return UIColor.DULightgreyColor() }
+    public var myCornerRadius: CGFloat    { return 14.0 }
+}
+
+// MARK: adoption method for ecah UIKit
 extension UIView: UIProtocolAdoption {
+    
     public override func awakeFromNib() {
+        
         super.awakeFromNib()
         adoptProtocolUIApperance()
     }
     
     public func adoptProtocolUIApperance() {
-        
-        // CALayer
-        if let mySelf = self as? CornerRadius      { layer.cornerRadius  = mySelf.du_CornerRadius }
+        // UIView
+        if let mySelf = self as? BackgroundColor   { backgroundColor       = mySelf.myBackgroundColor }
+        if let mySelf = self as? TintColor         { tintColor             = mySelf.myTintColor   }
+        if let mySelf = self as? BorderWidth       { layer.borderWidth     = mySelf.myBorderWidth }
+        if let mySelf = self as? BorderColor       { layer.borderColor     = mySelf.myBorderColor.CGColor }
+        if let mySelf = self as? CornerRadius      { layer.cornerRadius    = mySelf.myCornerRadius}
         if self is MasksToBoundsTRUE               { layer.masksToBounds = true }
         
-        // UIView
-        if let mySelf = self as? BackGroundColor   { backgroundColor    = mySelf.myBackgroundColor }
-        if let mySelf = self as? TintColor         { tintColor          = mySelf.myTintColor }
     }
     
     public func setupInheritedProtocolUI() {
-        // do nothing here
+        // do nothing for UIView
+    }
+    public override func prepareForInterfaceBuilder() {
+        adoptProtocolUIApperance()
     }
 }

@@ -9,23 +9,28 @@
 /* Begin PBXBuildFile section */
 		1D97D9442B13464E3C7A4E9A /* Pods_DUMessagingDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 908723A5F6D7335D2D163909 /* Pods_DUMessagingDemo.framework */; };
 		32D3036D83E377447BDC9E26 /* Pods_DUMessagingUIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C94C116F7733CBBCE78BE9 /* Pods_DUMessagingUIKit.framework */; };
-		FA1FD2291D007FF10066BC7C /* DUChatSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA1FD2271D007FF10066BC7C /* DUChatSettingViewController.swift */; };
+		FA11E20C1D0BC7BE005C7EEB /* DUCollectionViewLayouAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA11E20B1D0BC7BE005C7EEB /* DUCollectionViewLayouAttributes.swift */; };
+		FA11E2141D0C562B005C7EEB /* DUMessageCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA11E2131D0C562B005C7EEB /* DUMessageCollectionView.swift */; };
+		FA11E2191D0CF58C005C7EEB /* DUMessageIncomingCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA11E2171D0CF58C005C7EEB /* DUMessageIncomingCollectionViewCell.swift */; };
+		FA11E21A1D0CF58C005C7EEB /* DUMessageIncomingCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA11E2181D0CF58C005C7EEB /* DUMessageIncomingCollectionViewCell.xib */; };
+		FA11E21C1D0D2B17005C7EEB /* DUMessageSizeCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA11E21B1D0D2B17005C7EEB /* DUMessageSizeCalculator.swift */; };
+		FA11E21E1D0D4FA4005C7EEB /* DUMessageCollectioinViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA11E21D1D0D4FA4005C7EEB /* DUMessageCollectioinViewDataSource.swift */; };
+		FA11E2201D0D5BFD005C7EEB /* DUMessageCollectionViewFlowLayoutDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA11E21F1D0D5BFD005C7EEB /* DUMessageCollectionViewFlowLayoutDelegate.swift */; };
+		FA11E2221D0D8AE7005C7EEB /* DUMessageBubbleImageFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA11E2211D0D8AE7005C7EEB /* DUMessageBubbleImageFactory.swift */; };
+		FA11E2261D0DA84B005C7EEB /* DemoMessagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA11E2251D0DA84B005C7EEB /* DemoMessagesViewController.swift */; };
+		FA11E24B1D0E4955005C7EEB /* DUEdgeInsetableLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA11E24A1D0E4955005C7EEB /* DUEdgeInsetableLabel.swift */; };
 		FA1FD22A1D007FF10066BC7C /* DUChatSettingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA1FD2281D007FF10066BC7C /* DUChatSettingViewController.xib */; };
 		FA1FD2311D00A2FF0066BC7C /* DUUserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA1FD22F1D00A2FF0066BC7C /* DUUserCell.swift */; };
 		FA1FD2321D00A2FF0066BC7C /* DUUserCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA1FD2301D00A2FF0066BC7C /* DUUserCell.xib */; };
 		FA2D83271CFE0BE20060A6B8 /* DUMessagingUIKit.h in Headers */ = {isa = PBXBuildFile; fileRef = FA2D83261CFE0BE20060A6B8 /* DUMessagingUIKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		FA2D832E1CFE0BE30060A6B8 /* DUMessagingUIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA2D83231CFE0BE20060A6B8 /* DUMessagingUIKit.framework */; };
 		FA2D83331CFE0BE30060A6B8 /* DUMessagingUIKitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2D83321CFE0BE30060A6B8 /* DUMessagingUIKitTests.swift */; };
-		FA2D83421CFE0CA30060A6B8 /* DUDataProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2D83411CFE0CA30060A6B8 /* DUDataProtocols.swift */; };
 		FA2D83441CFE0CAC0060A6B8 /* DURemoteResourceProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2D83431CFE0CAC0060A6B8 /* DURemoteResourceProtocols.swift */; };
 		FA2D83461CFE0CE90060A6B8 /* DUExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2D83451CFE0CE90060A6B8 /* DUExtensions.swift */; };
 		FA2D83491CFE0CF10060A6B8 /* DUAvatarImageFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2D83471CFE0CF10060A6B8 /* DUAvatarImageFactory.swift */; };
-		FA2D834A1CFE0CF10060A6B8 /* DUButtonFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2D83481CFE0CF10060A6B8 /* DUButtonFactory.swift */; };
 		FA2D834E1CFE0D7B0060A6B8 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2D834D1CFE0D7B0060A6B8 /* Constants.swift */; };
-		FA2D83551CFE0DE00060A6B8 /* DUChatCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2D83531CFE0DE00060A6B8 /* DUChatCell.swift */; };
 		FA2D83561CFE0DE00060A6B8 /* DUChatCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA2D83541CFE0DE00060A6B8 /* DUChatCell.xib */; };
 		FA2D83581CFE0FAB0060A6B8 /* Resources.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FA2D83571CFE0FAB0060A6B8 /* Resources.xcassets */; };
-		FA2D83C61CFE712B0060A6B8 /* DUUIProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2D83C51CFE712B0060A6B8 /* DUUIProtocols.swift */; };
 		FA2D83D11CFE762B0060A6B8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2D83D01CFE762B0060A6B8 /* AppDelegate.swift */; };
 		FA2D83D31CFE762B0060A6B8 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2D83D21CFE762B0060A6B8 /* ViewController.swift */; };
 		FA2D83D61CFE762B0060A6B8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA2D83D41CFE762B0060A6B8 /* Main.storyboard */; };
@@ -33,11 +38,31 @@
 		FA2D83DB1CFE762B0060A6B8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA2D83D91CFE762B0060A6B8 /* LaunchScreen.storyboard */; };
 		FA2D83E61CFE762B0060A6B8 /* DUMessagingDemoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2D83E51CFE762B0060A6B8 /* DUMessagingDemoUITests.swift */; };
 		FA2D83F11CFEE7700060A6B8 /* DUViewControllerProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2D83F01CFEE7700060A6B8 /* DUViewControllerProtocols.swift */; };
+		FA481AAA1D187BEC00BC007F /* DUChatData.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA481AA91D187BEC00BC007F /* DUChatData.swift */; };
+		FA481AAE1D187E1400BC007F /* DUUIProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA481AAD1D187E1400BC007F /* DUUIProtocols.swift */; };
+		FA481AB01D187E4C00BC007F /* DUChatCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA481AAF1D187E4C00BC007F /* DUChatCell.swift */; };
+		FA481AB21D187E8C00BC007F /* DUChatSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA481AB11D187E8C00BC007F /* DUChatSettingViewController.swift */; };
 		FA5B994D1D017E3A00786C6B /* DUBlockCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5B994B1D017E3A00786C6B /* DUBlockCell.swift */; };
 		FA5B994E1D017E3A00786C6B /* DUBlockCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA5B994C1D017E3A00786C6B /* DUBlockCell.xib */; };
 		FA5B99501D0183A800786C6B /* CustomViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5B994F1D0183A800786C6B /* CustomViews.swift */; };
 		FA5B99531D0187E100786C6B /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5B99521D0187E100786C6B /* UserData.swift */; };
 		FA6D46CB1D04BD66002F8DEB /* DUMessagingUIKit.podspec in Resources */ = {isa = PBXBuildFile; fileRef = FA6D46CA1D04BD66002F8DEB /* DUMessagingUIKit.podspec */; };
+		FA976E861D03E40D00F844E5 /* DUInputToolbarContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA976E851D03E40D00F844E5 /* DUInputToolbarContentView.swift */; };
+		FA976E881D03E9AB00F844E5 /* DUInputToolbarContentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA976E871D03E9AB00F844E5 /* DUInputToolbarContentView.xib */; };
+		FA976E8A1D03ECFD00F844E5 /* DUMessageInputTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA976E891D03ECFD00F844E5 /* DUMessageInputTextView.swift */; };
+		FA976E8C1D03FB7900F844E5 /* DUMessageInputToolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA976E8B1D03FB7900F844E5 /* DUMessageInputToolbar.swift */; };
+		FA976E8F1D04152800F844E5 /* DUMessagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA976E8D1D04152800F844E5 /* DUMessagesViewController.swift */; };
+		FA976E901D04152800F844E5 /* DUMessagesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA976E8E1D04152800F844E5 /* DUMessagesViewController.xib */; };
+		FA976E931D04677D00F844E5 /* DUMessageOutGoingCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA976E911D04677D00F844E5 /* DUMessageOutGoingCollectionViewCell.swift */; };
+		FA976E941D04677D00F844E5 /* DUMessageOutGoingCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA976E921D04677D00F844E5 /* DUMessageOutGoingCollectionViewCell.xib */; };
+		FA976E961D047DE400F844E5 /* DUMessageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA976E951D047DE400F844E5 /* DUMessageCollectionViewCell.swift */; };
+		FA976E981D047F9800F844E5 /* DUMessageCellTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA976E971D047F9800F844E5 /* DUMessageCellTextView.swift */; };
+		FA976E9C1D0492D600F844E5 /* DUMessageData.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA976E9B1D0492D600F844E5 /* DUMessageData.swift */; };
+		FA976EA11D04A34800F844E5 /* DUMessageCollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA976EA01D04A34800F844E5 /* DUMessageCollectionViewFlowLayout.swift */; };
+		FAD5E14F1D173A6E00F7521B /* DUMediaItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD5E14E1D173A6E00F7521B /* DUMediaItem.swift */; };
+		FAD5E1511D173F1200F7521B /* DUMediaPlaceholderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD5E1501D173F1200F7521B /* DUMediaPlaceholderView.swift */; };
+		FAD5E1551D17505800F7521B /* DUMediaContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD5E1541D17505800F7521B /* DUMediaContentView.swift */; };
+		FAD5E1571D17607100F7521B /* DUMediaContentViewFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD5E1561D17607100F7521B /* DUMediaContentViewFactory.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +82,19 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		FA5542E91D17CE6200150513 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		00C94C116F7733CBBCE78BE9 /* Pods_DUMessagingUIKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DUMessagingUIKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0BF73D5FEEF48118C97C3F49 /* Pods-DUMessagingDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DUMessagingDemo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DUMessagingDemo/Pods-DUMessagingDemo.debug.xcconfig"; sourceTree = "<group>"; };
@@ -64,7 +102,16 @@
 		71F8DFD4B69502C2E61060B1 /* Pods-DUMessagingUIKit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DUMessagingUIKit.release.xcconfig"; path = "Pods/Target Support Files/Pods-DUMessagingUIKit/Pods-DUMessagingUIKit.release.xcconfig"; sourceTree = "<group>"; };
 		908723A5F6D7335D2D163909 /* Pods_DUMessagingDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DUMessagingDemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A163F8A2822A07A54571279E /* Pods-DUMessagingDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DUMessagingDemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-DUMessagingDemo/Pods-DUMessagingDemo.release.xcconfig"; sourceTree = "<group>"; };
-		FA1FD2271D007FF10066BC7C /* DUChatSettingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DUChatSettingViewController.swift; sourceTree = "<group>"; };
+		FA11E20B1D0BC7BE005C7EEB /* DUCollectionViewLayouAttributes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DUCollectionViewLayouAttributes.swift; sourceTree = "<group>"; };
+		FA11E2131D0C562B005C7EEB /* DUMessageCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DUMessageCollectionView.swift; sourceTree = "<group>"; };
+		FA11E2171D0CF58C005C7EEB /* DUMessageIncomingCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DUMessageIncomingCollectionViewCell.swift; sourceTree = "<group>"; };
+		FA11E2181D0CF58C005C7EEB /* DUMessageIncomingCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DUMessageIncomingCollectionViewCell.xib; sourceTree = "<group>"; };
+		FA11E21B1D0D2B17005C7EEB /* DUMessageSizeCalculator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DUMessageSizeCalculator.swift; sourceTree = "<group>"; };
+		FA11E21D1D0D4FA4005C7EEB /* DUMessageCollectioinViewDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DUMessageCollectioinViewDataSource.swift; sourceTree = "<group>"; };
+		FA11E21F1D0D5BFD005C7EEB /* DUMessageCollectionViewFlowLayoutDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DUMessageCollectionViewFlowLayoutDelegate.swift; sourceTree = "<group>"; };
+		FA11E2211D0D8AE7005C7EEB /* DUMessageBubbleImageFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DUMessageBubbleImageFactory.swift; sourceTree = "<group>"; };
+		FA11E2251D0DA84B005C7EEB /* DemoMessagesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DemoMessagesViewController.swift; sourceTree = "<group>"; };
+		FA11E24A1D0E4955005C7EEB /* DUEdgeInsetableLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DUEdgeInsetableLabel.swift; sourceTree = "<group>"; };
 		FA1FD2281D007FF10066BC7C /* DUChatSettingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DUChatSettingViewController.xib; sourceTree = "<group>"; };
 		FA1FD22F1D00A2FF0066BC7C /* DUUserCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DUUserCell.swift; sourceTree = "<group>"; };
 		FA1FD2301D00A2FF0066BC7C /* DUUserCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DUUserCell.xib; sourceTree = "<group>"; };
@@ -74,16 +121,12 @@
 		FA2D832D1CFE0BE30060A6B8 /* DUMessagingUIKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DUMessagingUIKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA2D83321CFE0BE30060A6B8 /* DUMessagingUIKitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DUMessagingUIKitTests.swift; sourceTree = "<group>"; };
 		FA2D83341CFE0BE30060A6B8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		FA2D83411CFE0CA30060A6B8 /* DUDataProtocols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DUDataProtocols.swift; sourceTree = "<group>"; };
 		FA2D83431CFE0CAC0060A6B8 /* DURemoteResourceProtocols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DURemoteResourceProtocols.swift; sourceTree = "<group>"; };
 		FA2D83451CFE0CE90060A6B8 /* DUExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DUExtensions.swift; sourceTree = "<group>"; };
 		FA2D83471CFE0CF10060A6B8 /* DUAvatarImageFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DUAvatarImageFactory.swift; sourceTree = "<group>"; };
-		FA2D83481CFE0CF10060A6B8 /* DUButtonFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DUButtonFactory.swift; sourceTree = "<group>"; };
 		FA2D834D1CFE0D7B0060A6B8 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		FA2D83531CFE0DE00060A6B8 /* DUChatCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DUChatCell.swift; sourceTree = "<group>"; };
 		FA2D83541CFE0DE00060A6B8 /* DUChatCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DUChatCell.xib; sourceTree = "<group>"; };
 		FA2D83571CFE0FAB0060A6B8 /* Resources.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Resources.xcassets; sourceTree = "<group>"; };
-		FA2D83C51CFE712B0060A6B8 /* DUUIProtocols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DUUIProtocols.swift; sourceTree = "<group>"; };
 		FA2D83CE1CFE762B0060A6B8 /* DUMessagingDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DUMessagingDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA2D83D01CFE762B0060A6B8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FA2D83D21CFE762B0060A6B8 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -95,11 +138,31 @@
 		FA2D83E51CFE762B0060A6B8 /* DUMessagingDemoUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DUMessagingDemoUITests.swift; sourceTree = "<group>"; };
 		FA2D83E71CFE762B0060A6B8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FA2D83F01CFEE7700060A6B8 /* DUViewControllerProtocols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DUViewControllerProtocols.swift; sourceTree = "<group>"; };
+		FA481AA91D187BEC00BC007F /* DUChatData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DUChatData.swift; sourceTree = "<group>"; };
+		FA481AAD1D187E1400BC007F /* DUUIProtocols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DUUIProtocols.swift; sourceTree = "<group>"; };
+		FA481AAF1D187E4C00BC007F /* DUChatCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DUChatCell.swift; sourceTree = "<group>"; };
+		FA481AB11D187E8C00BC007F /* DUChatSettingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DUChatSettingViewController.swift; sourceTree = "<group>"; };
 		FA5B994B1D017E3A00786C6B /* DUBlockCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DUBlockCell.swift; sourceTree = "<group>"; };
 		FA5B994C1D017E3A00786C6B /* DUBlockCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DUBlockCell.xib; sourceTree = "<group>"; };
 		FA5B994F1D0183A800786C6B /* CustomViews.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomViews.swift; sourceTree = "<group>"; };
 		FA5B99521D0187E100786C6B /* UserData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
 		FA6D46CA1D04BD66002F8DEB /* DUMessagingUIKit.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = DUMessagingUIKit.podspec; sourceTree = "<group>"; };
+		FA976E851D03E40D00F844E5 /* DUInputToolbarContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DUInputToolbarContentView.swift; sourceTree = "<group>"; };
+		FA976E871D03E9AB00F844E5 /* DUInputToolbarContentView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DUInputToolbarContentView.xib; sourceTree = "<group>"; };
+		FA976E891D03ECFD00F844E5 /* DUMessageInputTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DUMessageInputTextView.swift; sourceTree = "<group>"; };
+		FA976E8B1D03FB7900F844E5 /* DUMessageInputToolbar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DUMessageInputToolbar.swift; sourceTree = "<group>"; };
+		FA976E8D1D04152800F844E5 /* DUMessagesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DUMessagesViewController.swift; sourceTree = "<group>"; };
+		FA976E8E1D04152800F844E5 /* DUMessagesViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DUMessagesViewController.xib; sourceTree = "<group>"; };
+		FA976E911D04677D00F844E5 /* DUMessageOutGoingCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DUMessageOutGoingCollectionViewCell.swift; sourceTree = "<group>"; };
+		FA976E921D04677D00F844E5 /* DUMessageOutGoingCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DUMessageOutGoingCollectionViewCell.xib; sourceTree = "<group>"; };
+		FA976E951D047DE400F844E5 /* DUMessageCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DUMessageCollectionViewCell.swift; sourceTree = "<group>"; };
+		FA976E971D047F9800F844E5 /* DUMessageCellTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DUMessageCellTextView.swift; sourceTree = "<group>"; };
+		FA976E9B1D0492D600F844E5 /* DUMessageData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DUMessageData.swift; sourceTree = "<group>"; };
+		FA976EA01D04A34800F844E5 /* DUMessageCollectionViewFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DUMessageCollectionViewFlowLayout.swift; sourceTree = "<group>"; };
+		FAD5E14E1D173A6E00F7521B /* DUMediaItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DUMediaItem.swift; sourceTree = "<group>"; };
+		FAD5E1501D173F1200F7521B /* DUMediaPlaceholderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DUMediaPlaceholderView.swift; sourceTree = "<group>"; };
+		FAD5E1541D17505800F7521B /* DUMediaContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DUMediaContentView.swift; sourceTree = "<group>"; };
+		FAD5E1561D17607100F7521B /* DUMediaContentViewFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DUMediaContentViewFactory.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -185,6 +248,7 @@
 		FA2D83251CFE0BE20060A6B8 /* DUMessagingUIKit */ = {
 			isa = PBXGroup;
 			children = (
+				FA976E9F1D04A31D00F844E5 /* Layout */,
 				FA5B99511D01857E00786C6B /* Models */,
 				FA2D83401CFE0C5D0060A6B8 /* Utilities */,
 				FA2D833E1CFE0C440060A6B8 /* Views */,
@@ -210,10 +274,13 @@
 		FA2D833D1CFE0C3B0060A6B8 /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
-				FA2D83C51CFE712B0060A6B8 /* DUUIProtocols.swift */,
-				FA2D83411CFE0CA30060A6B8 /* DUDataProtocols.swift */,
+				FA481AAD1D187E1400BC007F /* DUUIProtocols.swift */,
+				FA481AA91D187BEC00BC007F /* DUChatData.swift */,
 				FA2D83431CFE0CAC0060A6B8 /* DURemoteResourceProtocols.swift */,
 				FA2D83F01CFEE7700060A6B8 /* DUViewControllerProtocols.swift */,
+				FA976E9B1D0492D600F844E5 /* DUMessageData.swift */,
+				FA11E21D1D0D4FA4005C7EEB /* DUMessageCollectioinViewDataSource.swift */,
+				FA11E21F1D0D5BFD005C7EEB /* DUMessageCollectionViewFlowLayoutDelegate.swift */,
 			);
 			name = Protocols;
 			sourceTree = "<group>";
@@ -221,13 +288,27 @@
 		FA2D833E1CFE0C440060A6B8 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				FA2D83531CFE0DE00060A6B8 /* DUChatCell.swift */,
+				FA481AAF1D187E4C00BC007F /* DUChatCell.swift */,
 				FA2D83541CFE0DE00060A6B8 /* DUChatCell.xib */,
 				FA1FD22F1D00A2FF0066BC7C /* DUUserCell.swift */,
 				FA1FD2301D00A2FF0066BC7C /* DUUserCell.xib */,
 				FA5B994B1D017E3A00786C6B /* DUBlockCell.swift */,
 				FA5B994C1D017E3A00786C6B /* DUBlockCell.xib */,
 				FA5B994F1D0183A800786C6B /* CustomViews.swift */,
+				FA976E851D03E40D00F844E5 /* DUInputToolbarContentView.swift */,
+				FA976E871D03E9AB00F844E5 /* DUInputToolbarContentView.xib */,
+				FA976E891D03ECFD00F844E5 /* DUMessageInputTextView.swift */,
+				FA976E8B1D03FB7900F844E5 /* DUMessageInputToolbar.swift */,
+				FA976E971D047F9800F844E5 /* DUMessageCellTextView.swift */,
+				FA11E2131D0C562B005C7EEB /* DUMessageCollectionView.swift */,
+				FA976E951D047DE400F844E5 /* DUMessageCollectionViewCell.swift */,
+				FA976E911D04677D00F844E5 /* DUMessageOutGoingCollectionViewCell.swift */,
+				FA976E921D04677D00F844E5 /* DUMessageOutGoingCollectionViewCell.xib */,
+				FA11E2171D0CF58C005C7EEB /* DUMessageIncomingCollectionViewCell.swift */,
+				FA11E2181D0CF58C005C7EEB /* DUMessageIncomingCollectionViewCell.xib */,
+				FA11E24A1D0E4955005C7EEB /* DUEdgeInsetableLabel.swift */,
+				FAD5E1501D173F1200F7521B /* DUMediaPlaceholderView.swift */,
+				FAD5E1541D17505800F7521B /* DUMediaContentView.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -235,8 +316,10 @@
 		FA2D833F1CFE0C4A0060A6B8 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				FA1FD2271D007FF10066BC7C /* DUChatSettingViewController.swift */,
+				FA481AB11D187E8C00BC007F /* DUChatSettingViewController.swift */,
 				FA1FD2281D007FF10066BC7C /* DUChatSettingViewController.xib */,
+				FA976E8D1D04152800F844E5 /* DUMessagesViewController.swift */,
+				FA976E8E1D04152800F844E5 /* DUMessagesViewController.xib */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -246,7 +329,8 @@
 			children = (
 				FA2D83451CFE0CE90060A6B8 /* DUExtensions.swift */,
 				FA2D83471CFE0CF10060A6B8 /* DUAvatarImageFactory.swift */,
-				FA2D83481CFE0CF10060A6B8 /* DUButtonFactory.swift */,
+				FA11E2211D0D8AE7005C7EEB /* DUMessageBubbleImageFactory.swift */,
+				FAD5E1561D17607100F7521B /* DUMediaContentViewFactory.swift */,
 			);
 			name = Utilities;
 			sourceTree = "<group>";
@@ -256,6 +340,7 @@
 			children = (
 				FA2D83D01CFE762B0060A6B8 /* AppDelegate.swift */,
 				FA2D83D21CFE762B0060A6B8 /* ViewController.swift */,
+				FA11E2251D0DA84B005C7EEB /* DemoMessagesViewController.swift */,
 				FA2D83D41CFE762B0060A6B8 /* Main.storyboard */,
 				FA2D83D71CFE762B0060A6B8 /* Assets.xcassets */,
 				FA2D83D91CFE762B0060A6B8 /* LaunchScreen.storyboard */,
@@ -277,8 +362,19 @@
 			isa = PBXGroup;
 			children = (
 				FA5B99521D0187E100786C6B /* UserData.swift */,
+				FAD5E14E1D173A6E00F7521B /* DUMediaItem.swift */,
 			);
 			name = Models;
+			sourceTree = "<group>";
+		};
+		FA976E9F1D04A31D00F844E5 /* Layout */ = {
+			isa = PBXGroup;
+			children = (
+				FA976EA01D04A34800F844E5 /* DUMessageCollectionViewFlowLayout.swift */,
+				FA11E20B1D0BC7BE005C7EEB /* DUCollectionViewLayouAttributes.swift */,
+				FA11E21B1D0D2B17005C7EEB /* DUMessageSizeCalculator.swift */,
+			);
+			name = Layout;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -343,6 +439,7 @@
 				FA2D83CC1CFE762B0060A6B8 /* Resources */,
 				B481F916A491C108B12D966A /* Embed Pods Frameworks */,
 				66C2F630835D67315148A5DE /* Copy Pods Resources */,
+				FA5542E91D17CE6200150513 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -425,6 +522,10 @@
 				FA2D83561CFE0DE00060A6B8 /* DUChatCell.xib in Resources */,
 				FA6D46CB1D04BD66002F8DEB /* DUMessagingUIKit.podspec in Resources */,
 				FA1FD2321D00A2FF0066BC7C /* DUUserCell.xib in Resources */,
+				FA976E901D04152800F844E5 /* DUMessagesViewController.xib in Resources */,
+				FA976E881D03E9AB00F844E5 /* DUInputToolbarContentView.xib in Resources */,
+				FA976E941D04677D00F844E5 /* DUMessageOutGoingCollectionViewCell.xib in Resources */,
+				FA11E21A1D0CF58C005C7EEB /* DUMessageIncomingCollectionViewCell.xib in Resources */,
 				FA1FD22A1D007FF10066BC7C /* DUChatSettingViewController.xib in Resources */,
 				FA2D83581CFE0FAB0060A6B8 /* Resources.xcassets in Resources */,
 				FA5B994E1D017E3A00786C6B /* DUBlockCell.xib in Resources */,
@@ -541,19 +642,39 @@
 			buildActionMask = 2147483647;
 			files = (
 				FA2D83F11CFEE7700060A6B8 /* DUViewControllerProtocols.swift in Sources */,
+				FA11E21C1D0D2B17005C7EEB /* DUMessageSizeCalculator.swift in Sources */,
+				FA11E2201D0D5BFD005C7EEB /* DUMessageCollectionViewFlowLayoutDelegate.swift in Sources */,
+				FA11E2221D0D8AE7005C7EEB /* DUMessageBubbleImageFactory.swift in Sources */,
+				FA11E2191D0CF58C005C7EEB /* DUMessageIncomingCollectionViewCell.swift in Sources */,
+				FA976E861D03E40D00F844E5 /* DUInputToolbarContentView.swift in Sources */,
 				FA2D83491CFE0CF10060A6B8 /* DUAvatarImageFactory.swift in Sources */,
 				FA5B99531D0187E100786C6B /* UserData.swift in Sources */,
-				FA2D834A1CFE0CF10060A6B8 /* DUButtonFactory.swift in Sources */,
+				FA11E2141D0C562B005C7EEB /* DUMessageCollectionView.swift in Sources */,
+				FA481AB01D187E4C00BC007F /* DUChatCell.swift in Sources */,
+				FA976EA11D04A34800F844E5 /* DUMessageCollectionViewFlowLayout.swift in Sources */,
+				FA481AAE1D187E1400BC007F /* DUUIProtocols.swift in Sources */,
+				FA976E8A1D03ECFD00F844E5 /* DUMessageInputTextView.swift in Sources */,
 				FA1FD2311D00A2FF0066BC7C /* DUUserCell.swift in Sources */,
+				FA11E21E1D0D4FA4005C7EEB /* DUMessageCollectioinViewDataSource.swift in Sources */,
+				FA976E931D04677D00F844E5 /* DUMessageOutGoingCollectionViewCell.swift in Sources */,
+				FA481AB21D187E8C00BC007F /* DUChatSettingViewController.swift in Sources */,
 				FA5B994D1D017E3A00786C6B /* DUBlockCell.swift in Sources */,
-				FA2D83421CFE0CA30060A6B8 /* DUDataProtocols.swift in Sources */,
 				FA2D83441CFE0CAC0060A6B8 /* DURemoteResourceProtocols.swift in Sources */,
-				FA2D83551CFE0DE00060A6B8 /* DUChatCell.swift in Sources */,
-				FA1FD2291D007FF10066BC7C /* DUChatSettingViewController.swift in Sources */,
-				FA2D83C61CFE712B0060A6B8 /* DUUIProtocols.swift in Sources */,
+				FA976E981D047F9800F844E5 /* DUMessageCellTextView.swift in Sources */,
+				FA11E20C1D0BC7BE005C7EEB /* DUCollectionViewLayouAttributes.swift in Sources */,
+				FAD5E1551D17505800F7521B /* DUMediaContentView.swift in Sources */,
+				FAD5E14F1D173A6E00F7521B /* DUMediaItem.swift in Sources */,
+				FAD5E1511D173F1200F7521B /* DUMediaPlaceholderView.swift in Sources */,
+				FA976E8C1D03FB7900F844E5 /* DUMessageInputToolbar.swift in Sources */,
 				FA2D834E1CFE0D7B0060A6B8 /* Constants.swift in Sources */,
+				FA976E9C1D0492D600F844E5 /* DUMessageData.swift in Sources */,
+				FAD5E1571D17607100F7521B /* DUMediaContentViewFactory.swift in Sources */,
 				FA2D83461CFE0CE90060A6B8 /* DUExtensions.swift in Sources */,
 				FA5B99501D0183A800786C6B /* CustomViews.swift in Sources */,
+				FA481AAA1D187BEC00BC007F /* DUChatData.swift in Sources */,
+				FA976E8F1D04152800F844E5 /* DUMessagesViewController.swift in Sources */,
+				FA11E24B1D0E4955005C7EEB /* DUEdgeInsetableLabel.swift in Sources */,
+				FA976E961D047DE400F844E5 /* DUMessageCollectionViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -570,6 +691,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FA2D83D31CFE762B0060A6B8 /* ViewController.swift in Sources */,
+				FA11E2261D0DA84B005C7EEB /* DemoMessagesViewController.swift in Sources */,
 				FA2D83D11CFE762B0060A6B8 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -717,6 +839,10 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = DUMessagingUIKit/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -736,6 +862,10 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = DUMessagingUIKit/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -770,6 +900,10 @@
 			baseConfigurationReference = 0BF73D5FEEF48118C97C3F49 /* Pods-DUMessagingDemo.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = DUMessagingDemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.duolc.DUMessagingDemo;
@@ -782,6 +916,10 @@
 			baseConfigurationReference = A163F8A2822A07A54571279E /* Pods-DUMessagingDemo.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = DUMessagingDemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.duolc.DUMessagingDemo;
