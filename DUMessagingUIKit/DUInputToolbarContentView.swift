@@ -9,9 +9,9 @@
 import UIKit
 
 public class DUInputToolbarContentView: UIView {
-    @IBOutlet weak var accessorySendButton: UIButton!
-    @IBOutlet weak var inputTextView: DUMessageInputTextView!
-    @IBOutlet weak var sendButton: UIButton! {
+    @IBOutlet public weak var accessorySendButton: UIButton!
+    @IBOutlet public weak var inputTextView: DUMessageInputTextView!
+    @IBOutlet public weak var sendButton: UIButton! {
         didSet {
             sendButton.tintColor = GlobalUISettings.tintColor
         }

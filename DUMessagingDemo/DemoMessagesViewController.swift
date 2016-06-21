@@ -15,15 +15,21 @@ var id: Int = 0
 class DemoMessagesViewController: DUMessagesViewController {
     
     override func didPressSendButton(sender: UIButton, withText: String) {
-        let newMessage = messageModel(sendText: withText, isOutgoing: true, isMedia: false)
+        let newMessage = messageModel(sendText: withText, isOutgoing: true)
         self.messageData.append(newMessage)
         self.collectionView?.reloadData()
     }
     
     override func didPressAccessorySendButton(sender: UIButton) {
+        self.inputToolbar.contentView?.inputTextView.resignFirstResponder()
+        
+        let actionSheet = UIActionSheet.init(title: "Meida messages", delegate: self, cancelButtonTitle: "Cancel", destructiveButtonTitle: nil, otherButtonTitles: "Send image", "Send URL")
+        actionSheet.showFromToolbar(self.inputToolbar)
+        /*
         let newMessage = messageModel(sendText: "GG", isOutgoing: false, isMedia: true)
         self.messageData.append(newMessage)
         self.collectionView?.reloadData()
+ */
     }
 
     override func viewDidLoad() {
@@ -35,6 +41,28 @@ class DemoMessagesViewController: DUMessagesViewController {
 
 }
 
+extension DemoMessagesViewController: UIActionSheetDelegate {
+    
+    func actionSheet(actionSheet: UIActionSheet, didDismissWithButtonIndex buttonIndex: Int) {
+        if buttonIndex == actionSheet.cancelButtonIndex {
+            self.inputToolbar.contentView?.inputTextView.becomeFirstResponder()
+            return
+        }
+        
+        switch buttonIndex {
+        case 1:
+            let newMessage = messageModel(sendImage: UIImage(named:"dna")!, isOutgoing: true)
+            self.messageData.append(newMessage)
+            self.collectionView?.reloadData()
+        case 2:
+            let newMessage = messageModel(sendURL: "https://onboardmag.com/videos/web-series/sixty-minute-sessions-karl-anton-svensson.html", isOutgoing: true)
+            self.messageData.append(newMessage)
+            self.collectionView?.reloadData()
+        default:
+            return
+        }
+    }
+}
 
 // FIXME: This is a test-only class, delete when test done
 struct messageModel: DUMessageData {
@@ -49,7 +77,7 @@ struct messageModel: DUMessageData {
     var hashValue: Int
     var duChatInstance: DUChat?
     
-    init(sendText: String?, isOutgoing: Bool, isMedia: Bool) {
+    init(sendText: String?, isOutgoing: Bool) {
         messageID = id
         id += 1
         date = NSDate()
@@ -57,12 +85,31 @@ struct messageModel: DUMessageData {
         hashValue = id.hashValue
         duChatInstance = nil
         isOutgoingMessage = isOutgoing
-        isMediaMessage = isMedia
-        if !isMedia {
-            mediaItem = nil
-        } else {
-            //mediaItem = DUMediaItem.init(fromImage: UIImage(named: "dna"))
-            mediaItem = DUMediaItem.init(fromURL: "https://onboardmag.com/videos/web-series/sixty-minute-sessions-karl-anton-svensson.html")
-        }
+        isMediaMessage = false
+        mediaItem = nil
+    }
+    
+    init(sendURL: String, isOutgoing: Bool) {
+        messageID = id
+        id += 1
+        date = NSDate()
+        contentText = nil
+        hashValue = id.hashValue
+        duChatInstance = nil
+        isOutgoingMessage = isOutgoing
+        isMediaMessage = true
+        mediaItem = DUMediaItem.init(fromURL: sendURL)
+    }
+    
+    init(sendImage: UIImage, isOutgoing: Bool) {
+        messageID = id
+        id += 1
+        date = NSDate()
+        contentText = nil
+        hashValue = id.hashValue
+        duChatInstance = nil
+        isOutgoingMessage = isOutgoing
+        isMediaMessage = true
+        mediaItem = DUMediaItem.init(fromImage: sendImage)
     }
 }

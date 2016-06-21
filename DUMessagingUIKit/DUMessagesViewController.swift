@@ -11,7 +11,7 @@ import DUMessaging
 
 public class DUMessagesViewController: UIViewController, UITextViewDelegate, DUMessagInputToolbarDelegate, DUMessagesUIProtocol, DUMessageCollectionViewFlowLayoutDelegate, DUMessageCollectionViewDataSource, DUMessageCollectionViewCellDelegate {
     
-    @IBOutlet weak var inputToolbar: DUMessageInputToolbar!
+    @IBOutlet public weak var inputToolbar: DUMessageInputToolbar!
     @IBOutlet public weak var collectionView: DUMessageCollectionView?
     
     public var chat: DUChatData? = nil
