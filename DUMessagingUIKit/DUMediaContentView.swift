@@ -44,3 +44,15 @@ public class DUURLMediaContentView: UIView, URLMediaContentStyle {
         adoptProtocolUIApperance()
     }
 }
+/// Content view for file message.
+public class DUFileMediaContentView: UIView, URLMediaContentStyle {
+    public override init(frame: CGRect) {
+        super.init(frame: frame)
+        adoptProtocolUIApperance()
+    }
+    
+    required public init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        adoptProtocolUIApperance()
+    }
+}

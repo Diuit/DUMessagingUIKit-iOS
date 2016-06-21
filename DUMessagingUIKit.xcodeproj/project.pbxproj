@@ -38,6 +38,7 @@
 		FA2D83DB1CFE762B0060A6B8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA2D83D91CFE762B0060A6B8 /* LaunchScreen.storyboard */; };
 		FA2D83E61CFE762B0060A6B8 /* DUMessagingDemoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2D83E51CFE762B0060A6B8 /* DUMessagingDemoUITests.swift */; };
 		FA2D83F11CFEE7700060A6B8 /* DUViewControllerProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2D83F01CFEE7700060A6B8 /* DUViewControllerProtocols.swift */; };
+		FA4638FE1D19203200BF6070 /* WWDC_419.pdf in Resources */ = {isa = PBXBuildFile; fileRef = FA4638FD1D19203200BF6070 /* WWDC_419.pdf */; };
 		FA481AAA1D187BEC00BC007F /* DUChatData.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA481AA91D187BEC00BC007F /* DUChatData.swift */; };
 		FA481AAE1D187E1400BC007F /* DUUIProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA481AAD1D187E1400BC007F /* DUUIProtocols.swift */; };
 		FA481AB01D187E4C00BC007F /* DUChatCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA481AAF1D187E4C00BC007F /* DUChatCell.swift */; };
@@ -138,6 +139,7 @@
 		FA2D83E51CFE762B0060A6B8 /* DUMessagingDemoUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DUMessagingDemoUITests.swift; sourceTree = "<group>"; };
 		FA2D83E71CFE762B0060A6B8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FA2D83F01CFEE7700060A6B8 /* DUViewControllerProtocols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DUViewControllerProtocols.swift; sourceTree = "<group>"; };
+		FA4638FD1D19203200BF6070 /* WWDC_419.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = WWDC_419.pdf; sourceTree = "<group>"; };
 		FA481AA91D187BEC00BC007F /* DUChatData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DUChatData.swift; sourceTree = "<group>"; };
 		FA481AAD1D187E1400BC007F /* DUUIProtocols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DUUIProtocols.swift; sourceTree = "<group>"; };
 		FA481AAF1D187E4C00BC007F /* DUChatCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DUChatCell.swift; sourceTree = "<group>"; };
@@ -343,6 +345,7 @@
 				FA11E2251D0DA84B005C7EEB /* DemoMessagesViewController.swift */,
 				FA2D83D41CFE762B0060A6B8 /* Main.storyboard */,
 				FA2D83D71CFE762B0060A6B8 /* Assets.xcassets */,
+				FA4638FD1D19203200BF6070 /* WWDC_419.pdf */,
 				FA2D83D91CFE762B0060A6B8 /* LaunchScreen.storyboard */,
 				FA2D83DC1CFE762B0060A6B8 /* Info.plist */,
 			);
@@ -545,6 +548,7 @@
 			files = (
 				FA2D83DB1CFE762B0060A6B8 /* LaunchScreen.storyboard in Resources */,
 				FA2D83D81CFE762B0060A6B8 /* Assets.xcassets in Resources */,
+				FA4638FE1D19203200BF6070 /* WWDC_419.pdf in Resources */,
 				FA2D83D61CFE762B0060A6B8 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

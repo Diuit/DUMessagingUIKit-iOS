@@ -160,6 +160,10 @@ public extension UIImage {
         return UIImage(named: "addUser", inBundle: NSBundle(identifier: Constants.bundleIdentifier) , compatibleWithTraitCollection: nil)!
     }
     
+    class func DUFileIconImage() -> UIImage {
+        return UIImage(named: "fileIcon", inBundle: NSBundle(identifier: Constants.bundleIdentifier) , compatibleWithTraitCollection: nil)!
+    }
+    
     /**
         Return an UIImage instance with size 1.0 * 1.0 of given background UIColor
      */

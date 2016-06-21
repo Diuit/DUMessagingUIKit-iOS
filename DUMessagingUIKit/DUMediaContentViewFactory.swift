@@ -30,7 +30,14 @@ public class DUMediaContentViewFactory {
         imageView.highlightedImage = highlightedImage
         return imageView
     }
-    
+    /**
+     Generate contetn view of an URL message.
+     
+     - parameter url:   URL string.
+     - parameter frame: Content view frame.
+     
+     - returns: A composed UIView of URL preview result.
+     */
     public static func makeURLContentView(url: String, frame: CGRect) -> DUURLMediaContentView {
         let contentView = DUURLMediaContentView.init(frame: frame)
         
@@ -73,4 +80,15 @@ public class DUMediaContentViewFactory {
     }
     
     
+    public static func makeFileContentView(name: String, frame: CGRect) -> DUFileMediaContentView {
+        let contentView = DUFileMediaContentView.init(frame: frame)
+        
+        let imageView = UIImageView.init(frame: CGRectMake(12, 9, 32, 36))
+        imageView.contentMode = .ScaleAspectFill
+        imageView.image = UIImage.DUFileIconImage()
+        contentView.addSubview(imageView)
+        
+        let fileNameLabel = UILabel
+        
+    }
 }
