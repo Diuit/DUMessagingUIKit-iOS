@@ -51,10 +51,15 @@ public struct DUMediaItem {
     public var placeholderView: UIView { return _cachedPlaceholderView }
     /// Instance of media content, may be an UIImage
     public var mediaContentData: AnyObject? = nil
+    /// URL of media source. Used by file, URL, video and audio message.
+    public var mediaSourceURL: String? = nil
+    /// Display name of the file on media content view.
+    public var fileDisplayName: String? = nil
+    /// Detail description of file, default value is `nil`.
+    public var fileDescription: String? = nil
     
     private var _cachedMediaContentView: UIView? = nil
     private var _cachedPlaceholderView: DUMediaPlaceholderView
-    private var _mediaSourceURL: String? = nil
     
     // MARK: Initialize
     /**
@@ -79,8 +84,8 @@ public struct DUMediaItem {
      */
     public init(fromVideoURL url: String) {
         self.type = .Video
+        self.mediaSourceURL = url
         
-        _mediaSourceURL = url
         _cachedPlaceholderView = DUMediaPlaceholderView.init(frame:CGRectZero)
         _cachedPlaceholderView.frame = CGRectMake(0, 0, mediaDisplaySize.width, mediaDisplaySize.height)
     }
@@ -96,8 +101,8 @@ public struct DUMediaItem {
      */
     public init(fromFileURL url: String) {
         self.type = .File
+        self.mediaSourceURL = url
         
-        _mediaSourceURL = url
         _cachedPlaceholderView = DUMediaPlaceholderView.init(frame:CGRectZero)
         _cachedPlaceholderView.frame = CGRectMake(0, 0, mediaDisplaySize.width, mediaDisplaySize.height)
     }
@@ -113,8 +118,8 @@ public struct DUMediaItem {
      */
     public init(fromURL url: String) {
         self.type = .URL
+        self.mediaSourceURL = url
         
-        _mediaSourceURL = url
         _cachedPlaceholderView = DUMediaPlaceholderView.init(frame:CGRectZero)
         _cachedPlaceholderView.frame = CGRectMake(0, 0, mediaDisplaySize.width, mediaDisplaySize.height)
     }
@@ -125,7 +130,7 @@ public struct DUMediaItem {
      - returns: A media content view. May be UIImageView or composed UIView
      */
     public mutating func getMediaContentView() -> UIView? {
-        if mediaContentData == nil && _mediaSourceURL == nil {
+        if mediaContentData == nil && mediaSourceURL == nil {
             return nil
         }
         
@@ -138,8 +143,10 @@ public struct DUMediaItem {
             _cachedMediaContentView = DUMediaContentViewFactory.makeImageContentView(mediaContentData as? UIImage, frame:CGRectMake(0, 0, mediaDisplaySize.width, mediaDisplaySize.height))
             return _cachedMediaContentView
         case .URL:
-            _cachedMediaContentView = DUMediaContentViewFactory.makeURLContentView(_mediaSourceURL!, frame: CGRectMake(0, 0, mediaDisplaySize.width, mediaDisplaySize.height))
+            _cachedMediaContentView = DUMediaContentViewFactory.makeURLContentView(mediaSourceURL!, frame: CGRectMake(0, 0, mediaDisplaySize.width, mediaDisplaySize.height))
             return _cachedMediaContentView
+        case .File:
+            _cachedMediaContentView = DUMediaContentViewFactory.makeFileContentView(fileDisplayName ?? "File", description: fileDescription, frame: CGRectMake(0, 0, mediaDisplaySize.width, mediaDisplaySize.height))
         default:
             return nil
         }

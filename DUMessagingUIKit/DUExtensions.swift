@@ -77,6 +77,10 @@ public extension UIFont {
         return UIFont(name: "Helvetica-Bold", size: 14.0)
     }
     
+    class func DUFileTitleFont() -> UIFont {
+        return UIFont(name: "Helvetica-Bold", size: 15.0)!
+    }
+    
     class func DUBodyFont() -> UIFont? {
         return UIFont(name: "Helvetica", size: 14.0)
     }
@@ -158,6 +162,10 @@ public extension UIImage {
     
     class func DUAddUserImage() -> UIImage {
         return UIImage(named: "addUser", inBundle: NSBundle(identifier: Constants.bundleIdentifier) , compatibleWithTraitCollection: nil)!
+    }
+    
+    class func DUFileIconImage() -> UIImage {
+        return UIImage(named: "fileIcon", inBundle: NSBundle(identifier: Constants.bundleIdentifier) , compatibleWithTraitCollection: nil)!
     }
     
     /**

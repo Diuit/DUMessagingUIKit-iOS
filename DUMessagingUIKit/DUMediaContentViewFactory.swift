@@ -8,6 +8,7 @@
 
 import UIKit
 import URLEmbeddedView
+import MisterFusion
 
 let kMaximumURLCharacterNumbersInURLMediaContentView: Int = 23
 /// Generate media content views for each media message type.
@@ -30,7 +31,14 @@ public class DUMediaContentViewFactory {
         imageView.highlightedImage = highlightedImage
         return imageView
     }
-    
+    /**
+     Generate contetn view of an URL message.
+     
+     - parameter url:   URL string.
+     - parameter frame: Content view frame.
+     
+     - returns: A composed UIView of URL preview result.
+     */
     public static func makeURLContentView(url: String, frame: CGRect) -> DUURLMediaContentView {
         let contentView = DUURLMediaContentView.init(frame: frame)
         
@@ -73,4 +81,41 @@ public class DUMediaContentViewFactory {
     }
     
     
+    public static func makeFileContentView(name: String, description: String?, frame: CGRect) -> DUFileMediaContentView {
+        let contentView = DUFileMediaContentView.init(frame: frame)
+        
+        let imageView = UIImageView.init(image: UIImage.DUFileIconImage())
+        imageView.contentMode = .ScaleAspectFill
+        
+        let fileNameLabel = UILabel.init()
+        fileNameLabel.font = UIFont.DUFileTitleFont()
+        fileNameLabel.text = name
+        
+        let fileDescLabel = UILabel.init()
+        fileDescLabel.font = UIFont.DUBodyTimeUnreadFont()!
+        fileDescLabel.text = description ?? ""
+        
+        contentView.addLayoutSubview(imageView, andConstraints:
+            imageView.Top    |+| 9,
+            imageView.Left   |+| 12,
+            imageView.Width  |==| 32,
+            imageView.Height |==| 36
+        )
+        
+        contentView.addLayoutSubview(fileNameLabel, andConstraints:
+            fileNameLabel.Top    |+| 9,
+            fileNameLabel.Left   |==| imageView.Right |+| 18,
+            fileNameLabel.Right  |-| 12,
+            fileNameLabel.Height |==| 20
+        )
+        
+        contentView.addLayoutSubview(fileDescLabel, andConstraints:
+            fileDescLabel.Top    |==| fileNameLabel.Bottom |+| 2,
+            fileDescLabel.Left   |==| imageView.Right |+| 18,
+            fileDescLabel.Right  |-| 12,
+            fileDescLabel.Height |==| 14
+        )
+        
+        return contentView
+    }
 }
