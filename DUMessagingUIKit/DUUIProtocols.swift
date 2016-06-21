@@ -119,6 +119,13 @@ extension MediaContentStyle {
     public var myCornerRadius: CGFloat    { return 14.0 }
 }
 
+public protocol URLMediaContentStyle: MediaContentStyle, BorderWidth, BorderColor {}
+extension URLMediaContentStyle {
+    public var myBorderColor: UIColor     { return UIColor.DULightgreyColor() }
+    public var myBorderWidth: CGFloat     { return 1.0 }
+    public var myBackgroundColor: UIColor { return UIColor.whiteColor() }
+}
+
 // MARK: adoption method for ecah UIKit
 extension UIView: UIProtocolAdoption {
     

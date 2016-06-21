@@ -61,7 +61,8 @@ struct messageModel: DUMessageData {
         if !isMedia {
             mediaItem = nil
         } else {
-            mediaItem = DUMediaItem.init(fromImage: UIImage(named: "dna"))
+            //mediaItem = DUMediaItem.init(fromImage: UIImage(named: "dna"))
+            mediaItem = DUMediaItem.init(fromURL: "https://onboardmag.com/videos/web-series/sixty-minute-sessions-karl-anton-svensson.html")
         }
     }
 }

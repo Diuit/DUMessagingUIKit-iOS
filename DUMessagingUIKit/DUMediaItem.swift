@@ -54,6 +54,7 @@ public struct DUMediaItem {
     
     private var _cachedMediaContentView: UIView? = nil
     private var _cachedPlaceholderView: DUMediaPlaceholderView
+    private var _mediaSourceURL: String? = nil
     
     // MARK: Initialize
     /**
@@ -78,6 +79,8 @@ public struct DUMediaItem {
      */
     public init(fromVideoURL url: String) {
         self.type = .Video
+        
+        _mediaSourceURL = url
         _cachedPlaceholderView = DUMediaPlaceholderView.init(frame:CGRectZero)
         _cachedPlaceholderView.frame = CGRectMake(0, 0, mediaDisplaySize.width, mediaDisplaySize.height)
     }
@@ -93,6 +96,8 @@ public struct DUMediaItem {
      */
     public init(fromFileURL url: String) {
         self.type = .File
+        
+        _mediaSourceURL = url
         _cachedPlaceholderView = DUMediaPlaceholderView.init(frame:CGRectZero)
         _cachedPlaceholderView.frame = CGRectMake(0, 0, mediaDisplaySize.width, mediaDisplaySize.height)
     }
@@ -108,6 +113,8 @@ public struct DUMediaItem {
      */
     public init(fromURL url: String) {
         self.type = .URL
+        
+        _mediaSourceURL = url
         _cachedPlaceholderView = DUMediaPlaceholderView.init(frame:CGRectZero)
         _cachedPlaceholderView.frame = CGRectMake(0, 0, mediaDisplaySize.width, mediaDisplaySize.height)
     }
@@ -118,7 +125,7 @@ public struct DUMediaItem {
      - returns: A media content view. May be UIImageView or composed UIView
      */
     public mutating func getMediaContentView() -> UIView? {
-        if mediaContentData == nil {
+        if mediaContentData == nil && _mediaSourceURL == nil {
             return nil
         }
         
@@ -129,6 +136,9 @@ public struct DUMediaItem {
         switch type {
         case .Image:
             _cachedMediaContentView = DUMediaContentViewFactory.makeImageContentView(mediaContentData as? UIImage, frame:CGRectMake(0, 0, mediaDisplaySize.width, mediaDisplaySize.height))
+            return _cachedMediaContentView
+        case .URL:
+            _cachedMediaContentView = DUMediaContentViewFactory.makeURLContentView(_mediaSourceURL!, frame: CGRectMake(0, 0, mediaDisplaySize.width, mediaDisplaySize.height))
             return _cachedMediaContentView
         default:
             return nil

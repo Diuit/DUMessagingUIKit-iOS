@@ -7,7 +7,9 @@
 //
 
 import UIKit
+import URLEmbeddedView
 
+let kMaximumURLCharacterNumbersInURLMediaContentView: Int = 23
 /// Generate media content views for each media message type.
 public class DUMediaContentViewFactory {
     /**
@@ -27,6 +29,47 @@ public class DUMediaContentViewFactory {
         imageView.image = image
         imageView.highlightedImage = highlightedImage
         return imageView
+    }
+    
+    public static func makeURLContentView(url: String, frame: CGRect) -> DUURLMediaContentView {
+        let contentView = DUURLMediaContentView.init(frame: frame)
+        
+        let urlFrame: CGRect = CGRectMake(0, 33, frame.size.width, frame.size.height - 33)
+        let urlView = URLEmbeddedView.init(frame: urlFrame)
+        contentView.addSubview(urlView)
+        
+        urlView.cornerRaidus = 0
+        urlView.backgroundColor = UIColor.whiteColor()
+        urlView.borderWidth = 0
+        urlView.textProvider[.Title].font = UIFont.DUURLPreviewTitleFont()
+        urlView.textProvider[.Description].font = UIFont.DUURLPreviewDescriptionFont()
+        urlView.loadURL(url)
+        
+        let textFrame: CGRect = CGRectMake(0, 0, frame.size.width, 33)
+        let textView: UITextView = UITextView.init(frame: textFrame)
+        contentView.addSubview(textView)
+        
+        textView.scrollEnabled = false
+        textView.editable = false
+        textView.backgroundColor = UIColor.DULightgreyColor()
+        textView.textContainerInset = UIEdgeInsetsMake(7, 14, 7, 14)
+        textView.font = UIFont.DUBodyFont()!
+        
+        // FIXME: truncate too long url string, a stupid way
+        var truncatedString: String = ""
+        if url.characters.count > kMaximumURLCharacterNumbersInURLMediaContentView {
+            truncatedString = url.substringToIndex(url.startIndex.advancedBy(kMaximumURLCharacterNumbersInURLMediaContentView - 1))
+            truncatedString += "..."
+        } else {
+            truncatedString = url
+        }
+        let underline = NSUnderlineStyle.StyleSingle.rawValue | NSUnderlineStyle.PatternSolid.rawValue
+        textView.attributedText = NSAttributedString(string: truncatedString, attributes:
+            [  NSForegroundColorAttributeName : UIColor.blueColor(),
+               NSFontAttributeName: UIFont.DUBodyFont()!,
+               NSUnderlineStyleAttributeName: underline])
+        
+        return contentView
     }
     
     

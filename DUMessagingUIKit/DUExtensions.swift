@@ -100,6 +100,14 @@ public extension UIFont {
     class func DUChatAvatarFont() -> UIFont? {
         return UIFont (name: "Helvetica Neue", size: 30)
     }
+    
+    class func DUURLPreviewTitleFont() -> UIFont {
+        return UIFont(name: "Helvetica", size: 12.0)!
+    }
+
+    class func DUURLPreviewDescriptionFont() -> UIFont {
+        return UIFont(name: "Helvetica-Light", size: 10.0)!
+    }
 }
 
 // MARK: functions
@@ -205,5 +213,6 @@ public extension NSObject {
         return NSStringFromClass(self.dynamicType).componentsSeparatedByString(".").last!
     }
 }
+
 
 

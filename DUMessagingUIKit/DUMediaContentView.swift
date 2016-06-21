@@ -32,3 +32,15 @@ public class DUMediaContentImageView: UIImageView, MediaContentStyle {
         adoptProtocolUIApperance()
     }
 }
+/// Content view for URL preview display.
+public class DUURLMediaContentView: UIView, URLMediaContentStyle {
+    public override init(frame: CGRect) {
+        super.init(frame: frame)
+        adoptProtocolUIApperance()
+    }
+    
+    required public init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        adoptProtocolUIApperance()
+    }
+}
