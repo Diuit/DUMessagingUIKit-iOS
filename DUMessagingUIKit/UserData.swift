@@ -11,7 +11,7 @@ import Foundation
 /**
     This class conforms to protocol `DUUserData`, in order to display user information in `DUChatSettingViewController` correctly.
  */
-class UserData: DUUserData {
+struct UserData: DUUserData {
     /// The display name of the user
     var userDisplayName: String
     /// URL of user avatar image

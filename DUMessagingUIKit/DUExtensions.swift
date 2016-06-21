@@ -168,6 +168,10 @@ public extension UIImage {
         return UIImage(named: "fileIcon", inBundle: NSBundle(identifier: Constants.bundleIdentifier) , compatibleWithTraitCollection: nil)!
     }
     
+    class func DUPlayIcon() -> UIImage {
+        return UIImage(named:"playIcon", inBundle: NSBundle(identifier: Constants.bundleIdentifier) , compatibleWithTraitCollection: nil)!
+    }
+    
     /**
         Return an UIImage instance with size 1.0 * 1.0 of given background UIColor
      */
@@ -181,6 +185,24 @@ public extension UIImage {
         let resultImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         return resultImage
+    }
+    
+    func masked(withColor color: UIColor) -> UIImage {
+        let imageRect = CGRectMake(0, 0, self.size.width, self.size.height)
+        var maskedImage: UIImage! = nil
+        
+        UIGraphicsBeginImageContextWithOptions(imageRect.size, false, self.scale)
+        let context = UIGraphicsGetCurrentContext()
+        CGContextScaleCTM(context, 1.0, -1.0)
+        
+        CGContextClipToMask(context, imageRect, self.CGImage)
+        CGContextSetFillColorWithColor(context, color.CGColor)
+        CGContextFillRect(context, imageRect)
+        
+        maskedImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        return maskedImage
     }
 }
 

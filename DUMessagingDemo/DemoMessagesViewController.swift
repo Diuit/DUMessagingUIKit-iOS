@@ -22,9 +22,7 @@ class DemoMessagesViewController: DUMessagesViewController {
     
     override func didPressAccessorySendButton(sender: UIButton) {
         self.inputToolbar.contentView?.inputTextView.resignFirstResponder()
-        
-        let actionSheet = UIActionSheet.init(title: "Meida messages", delegate: self, cancelButtonTitle: "Cancel", destructiveButtonTitle: nil, otherButtonTitles: "Send image", "Send URL", "Send file")
-        actionSheet.showFromToolbar(self.inputToolbar)
+        presentActionSheet()
     }
 
     override func viewDidLoad() {
@@ -36,30 +34,44 @@ class DemoMessagesViewController: DUMessagesViewController {
 
 }
 
-extension DemoMessagesViewController: UIActionSheetDelegate {
+private extension DemoMessagesViewController {
     
-    func actionSheet(actionSheet: UIActionSheet, didDismissWithButtonIndex buttonIndex: Int) {
-        if buttonIndex == actionSheet.cancelButtonIndex {
-            self.inputToolbar.contentView?.inputTextView.becomeFirstResponder()
-            return
-        }
+    func presentActionSheet() {
+        let actionController = UIAlertController.init(title: "Media message", message: "Choose one to demo", preferredStyle: .ActionSheet)
         
-        switch buttonIndex {
-        case 1:
+        let sendImageAction = UIAlertAction.init(title: "Send image", style: .Default){ action in
             let newMessage = messageModel(image: UIImage(named:"dna")!, isOutgoing: true)
             self.messageData.append(newMessage)
             self.collectionView?.reloadData()
-        case 2:
+        }
+        
+        let sendVideoAction = UIAlertAction.init(title: "Send vidoe", style: .Default){ action in
+            let newMessage = messageModel(videoURL: "file://", previewImage: UIImage(named: "videoThumbnail"), isOutgoing: true)
+            self.messageData.append(newMessage)
+            self.collectionView?.reloadData()
+        }
+        
+        let sendURLAction = UIAlertAction.init(title: "Send a link", style: .Default){ action in
             let newMessage = messageModel(url: "https://onboardmag.com/videos/web-series/sixty-minute-sessions-karl-anton-svensson.html", isOutgoing: true)
             self.messageData.append(newMessage)
             self.collectionView?.reloadData()
-        case 3:
+        }
+        
+        let sendFileAction = UIAlertAction.init(title: "Send a file", style: .Default){ action in
             let newMessage = messageModel(fileURL: NSBundle.mainBundle().pathForResource("WWDC_419", ofType: "pdf")!, fileName: "WWDC_419.pdf", fileDescription: "Session 419 slide", isOutgoing: true)
             self.messageData.append(newMessage)
             self.collectionView?.reloadData()
-        default:
-            return
         }
+        
+        actionController.addAction(sendImageAction)
+        actionController.addAction(sendVideoAction)
+        actionController.addAction(sendURLAction)
+        actionController.addAction(sendFileAction)
+        actionController.addAction(UIAlertAction.init(title: "Cancel", style: .Cancel) { [unowned self] action in
+            self.inputToolbar.contentView?.inputTextView.becomeFirstResponder()
+        })
+        
+        self.presentViewController(actionController, animated: true, completion: nil)
     }
 }
 
@@ -122,5 +134,17 @@ struct messageModel: DUMessageData {
         isOutgoingMessage = isOutgoing
         isMediaMessage = true
         mediaItem = DUMediaItem.init(fromFileURL: fileURL, fileName: fileName, fileDescription: fileDescription)
+    }
+    
+    init(videoURL: String, previewImage: UIImage?, isOutgoing: Bool) {
+        messageID = id
+        id += 1
+        date = NSDate()
+        contentText = nil
+        hashValue = id.hashValue
+        duChatInstance = nil
+        isOutgoingMessage = isOutgoing
+        isMediaMessage = true
+        mediaItem = DUMediaItem.init(fromVideoURL: videoURL, withPreviewImage: previewImage)
     }
 }

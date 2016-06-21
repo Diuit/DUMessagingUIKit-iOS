@@ -79,12 +79,16 @@ public struct DUMediaItem {
      Init a video mediaItem
      
      - parameter url: URL string of video file path
+     - parameter image: Preive image of the video.
      
      - returns: An instance of `DUMediaItem` of video type
+     
+     - note: If you initialize with a preview image, `mediaContentData` will be used to save it.
      */
-    public init(fromVideoURL url: String) {
+    public init(fromVideoURL url: String, withPreviewImage image: UIImage?) {
         self.type = .Video
         self.mediaSourceURL = url
+        self.mediaContentData = image
         
         _cachedPlaceholderView = DUMediaPlaceholderView.init(frame:CGRectZero)
         _cachedPlaceholderView.frame = CGRectMake(0, 0, mediaDisplaySize.width, mediaDisplaySize.height)
@@ -152,9 +156,21 @@ public struct DUMediaItem {
         case .File:
             _cachedMediaContentView = DUMediaContentViewFactory.makeFileContentView(fileDisplayName ?? "File", description: fileDescription, frame: CGRectMake(0, 0, mediaDisplaySize.width, mediaDisplaySize.height))
             return _cachedMediaContentView
+        case .Video:
+            _cachedMediaContentView = DUMediaContentViewFactory.makeVideoContentView(mediaContentData as? UIImage, frame: CGRectMake(0, 0, mediaDisplaySize.width, mediaDisplaySize.height))
+            return _cachedMediaContentView
         default:
             return nil
         }
+    }
+    
+    /**
+     Set a media content view on your own. Rememer your customized view will be displayed with default size for each type of media message.
+     
+     - parameter view: Your customized media content view.
+     */
+    public mutating func set(mediaContentView view: UIView) {
+        _cachedMediaContentView = view
     }
 
 }
