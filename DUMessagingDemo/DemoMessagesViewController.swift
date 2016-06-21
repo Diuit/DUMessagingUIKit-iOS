@@ -15,7 +15,7 @@ var id: Int = 0
 class DemoMessagesViewController: DUMessagesViewController {
     
     override func didPressSendButton(sender: UIButton, withText: String) {
-        let newMessage = messageModel(sendText: withText, isOutgoing: true)
+        let newMessage = messageModel(text: withText, isOutgoing: true)
         self.messageData.append(newMessage)
         self.collectionView?.reloadData()
     }
@@ -23,13 +23,8 @@ class DemoMessagesViewController: DUMessagesViewController {
     override func didPressAccessorySendButton(sender: UIButton) {
         self.inputToolbar.contentView?.inputTextView.resignFirstResponder()
         
-        let actionSheet = UIActionSheet.init(title: "Meida messages", delegate: self, cancelButtonTitle: "Cancel", destructiveButtonTitle: nil, otherButtonTitles: "Send image", "Send URL")
+        let actionSheet = UIActionSheet.init(title: "Meida messages", delegate: self, cancelButtonTitle: "Cancel", destructiveButtonTitle: nil, otherButtonTitles: "Send image", "Send URL", "Send file")
         actionSheet.showFromToolbar(self.inputToolbar)
-        /*
-        let newMessage = messageModel(sendText: "GG", isOutgoing: false, isMedia: true)
-        self.messageData.append(newMessage)
-        self.collectionView?.reloadData()
- */
     }
 
     override func viewDidLoad() {
@@ -51,11 +46,15 @@ extension DemoMessagesViewController: UIActionSheetDelegate {
         
         switch buttonIndex {
         case 1:
-            let newMessage = messageModel(sendImage: UIImage(named:"dna")!, isOutgoing: true)
+            let newMessage = messageModel(image: UIImage(named:"dna")!, isOutgoing: true)
             self.messageData.append(newMessage)
             self.collectionView?.reloadData()
         case 2:
-            let newMessage = messageModel(sendURL: "https://onboardmag.com/videos/web-series/sixty-minute-sessions-karl-anton-svensson.html", isOutgoing: true)
+            let newMessage = messageModel(url: "https://onboardmag.com/videos/web-series/sixty-minute-sessions-karl-anton-svensson.html", isOutgoing: true)
+            self.messageData.append(newMessage)
+            self.collectionView?.reloadData()
+        case 3:
+            let newMessage = messageModel(fileURL: NSBundle.mainBundle().pathForResource("WWDC_419", ofType: "pdf")!, fileName: "WWDC_419.pdf", fileDescription: "Session 419 slide", isOutgoing: true)
             self.messageData.append(newMessage)
             self.collectionView?.reloadData()
         default:
@@ -77,11 +76,11 @@ struct messageModel: DUMessageData {
     var hashValue: Int
     var duChatInstance: DUChat?
     
-    init(sendText: String?, isOutgoing: Bool) {
+    init(text: String?, isOutgoing: Bool) {
         messageID = id
         id += 1
         date = NSDate()
-        contentText = sendText
+        contentText = text
         hashValue = id.hashValue
         duChatInstance = nil
         isOutgoingMessage = isOutgoing
@@ -89,7 +88,7 @@ struct messageModel: DUMessageData {
         mediaItem = nil
     }
     
-    init(sendURL: String, isOutgoing: Bool) {
+    init(url: String, isOutgoing: Bool) {
         messageID = id
         id += 1
         date = NSDate()
@@ -98,10 +97,10 @@ struct messageModel: DUMessageData {
         duChatInstance = nil
         isOutgoingMessage = isOutgoing
         isMediaMessage = true
-        mediaItem = DUMediaItem.init(fromURL: sendURL)
+        mediaItem = DUMediaItem.init(fromURL: url)
     }
     
-    init(sendImage: UIImage, isOutgoing: Bool) {
+    init(image: UIImage, isOutgoing: Bool) {
         messageID = id
         id += 1
         date = NSDate()
@@ -110,6 +109,18 @@ struct messageModel: DUMessageData {
         duChatInstance = nil
         isOutgoingMessage = isOutgoing
         isMediaMessage = true
-        mediaItem = DUMediaItem.init(fromImage: sendImage)
+        mediaItem = DUMediaItem.init(fromImage: image)
+    }
+    
+    init(fileURL: String, fileName: String, fileDescription: String?, isOutgoing: Bool) {
+        messageID = id
+        id += 1
+        date = NSDate()
+        contentText = nil
+        hashValue = id.hashValue
+        duChatInstance = nil
+        isOutgoingMessage = isOutgoing
+        isMediaMessage = true
+        mediaItem = DUMediaItem.init(fromFileURL: fileURL, fileName: fileName, fileDescription: fileDescription)
     }
 }

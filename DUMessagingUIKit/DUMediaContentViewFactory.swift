@@ -92,7 +92,7 @@ public class DUMediaContentViewFactory {
         fileNameLabel.text = name
         
         let fileDescLabel = UILabel.init()
-        fileDescLabel.font = UIFont.DUBodyTimeUnreadFont()!
+        fileDescLabel.font = UIFont.DUBodyTimeFont()!
         fileDescLabel.text = description ?? ""
         
         contentView.addLayoutSubview(imageView, andConstraints:

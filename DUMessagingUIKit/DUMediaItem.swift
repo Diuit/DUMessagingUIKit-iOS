@@ -93,15 +93,19 @@ public struct DUMediaItem {
     /**
      Init a file mediaItem
      
-     - parameter url: URL string of file path
+     - parameter url:             URL string of file path
+     - parameter fileName:        File name string.
+     - parameter fileDescription: File information, such as file size. Default value is `nil`.
      
      - returns: An instance of `DUMediaItem` of file type
      
      - note: This file is neither playable video or playable audio
      */
-    public init(fromFileURL url: String) {
+    public init(fromFileURL url: String, fileName: String, fileDescription: String?) {
         self.type = .File
         self.mediaSourceURL = url
+        self.fileDisplayName = fileName
+        self.fileDescription = fileDescription
         
         _cachedPlaceholderView = DUMediaPlaceholderView.init(frame:CGRectZero)
         _cachedPlaceholderView.frame = CGRectMake(0, 0, mediaDisplaySize.width, mediaDisplaySize.height)
@@ -147,6 +151,7 @@ public struct DUMediaItem {
             return _cachedMediaContentView
         case .File:
             _cachedMediaContentView = DUMediaContentViewFactory.makeFileContentView(fileDisplayName ?? "File", description: fileDescription, frame: CGRectMake(0, 0, mediaDisplaySize.width, mediaDisplaySize.height))
+            return _cachedMediaContentView
         default:
             return nil
         }
