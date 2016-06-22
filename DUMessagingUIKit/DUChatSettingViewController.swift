@@ -70,7 +70,7 @@ public class DUChatSettingViewController: UIViewController, DUChatSettingUIProto
         } else {
             manager.registerCellClass(DUUserCell.self)
             manager.registerNibNamed("DUUserCell", forCellClass: DUUserCell.self)
-            let addUser: UserData = UserData.init(name: "Add People", imagePath: nil)
+            var addUser: UserData = UserData.init(name: "Add People", imagePath: nil)
             addUser.placeholderImage = UIImage.DUAddUserImage()
             manager.memoryStorage.setItems([addUser], forSectionIndex: 0)
             var membersArray: [UserData] = []

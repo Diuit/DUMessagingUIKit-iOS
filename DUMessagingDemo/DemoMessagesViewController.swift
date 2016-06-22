@@ -27,11 +27,8 @@ class DemoMessagesViewController: DUMessagesViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        
+        self.enableRefreshControl = true
     }
-
-
 }
 
 private extension DemoMessagesViewController {

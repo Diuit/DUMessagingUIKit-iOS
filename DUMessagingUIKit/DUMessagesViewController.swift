@@ -10,12 +10,32 @@ import UIKit
 import DUMessaging
 
 public class DUMessagesViewController: UIViewController, UITextViewDelegate, DUMessagInputToolbarDelegate, DUMessagesUIProtocol, DUMessageCollectionViewFlowLayoutDelegate, DUMessageCollectionViewDataSource, DUMessageCollectionViewCellDelegate {
-    
+    /// Input tool bar object
     @IBOutlet public weak var inputToolbar: DUMessageInputToolbar!
+    /// Messages collection view object
     @IBOutlet public weak var collectionView: DUMessageCollectionView?
-    
+    /// Chat room object, must conform to protocol `DUChatData`
     public var chat: DUChatData? = nil
+    /// Message data array. You may put the messages you want to display in this array.
     public var messageData: [DUMessageData] = []
+    /// Set to `true` if you want to enable pull to refresh function. Default value is false.
+    /// - important: If you enable this, you also have to override `loadEarlierMessages` with your custome method to load earlier messages
+    public var enableRefreshControl: Bool = false
+    {
+        didSet {
+            if enableRefreshControl {
+                refreshControl = UIRefreshControl()
+                refreshControl?.tintColor = UIColor.DUDarkGreyColor()
+                refreshControl!.attributedTitle = NSAttributedString(string: "Loading earlier messages", attributes: [NSFontAttributeName: UIFont.DUChatroomDateFont()!, NSForegroundColorAttributeName: UIColor.DUDarkGreyColor()])
+                refreshControl!.addTarget(self, action: #selector(loadEarlierMessages), forControlEvents: .ValueChanged)
+                collectionView?.addSubview(refreshControl!)
+            } else {
+                refreshControl?.removeFromSuperview()
+                refreshControl = nil
+            }
+            
+        }
+    }
     
     private let outgoingCellIdentifier = DUMessageOutGoingCollectionViewCell.cellReuseIdentifier
     private let outgoingMediaCellIdentifier = DUMessageOutGoingCollectionViewCell.mediaCellReuseIdentifier
@@ -29,6 +49,7 @@ public class DUMessagesViewController: UIViewController, UITextViewDelegate, DUM
     // Cache for cell top label. The first message of the date will have its cell top label display the date. Still this is an easy way.
     private var theseDatesHaveMessagesCache: [String] = []
 
+    var refreshControl: UIRefreshControl? = nil
 
     // MARK: Life Cycle
     override public func viewDidLoad() {
@@ -225,9 +246,28 @@ public class DUMessagesViewController: UIViewController, UITextViewDelegate, DUM
     public func didPressSendButton(sender: UIButton, withText: String) {
         assert(false, "Error! You must override this method: \(#function)")
     }
-    /// Overrid this method to deal with the event of sending media message
+    /// Override this method to deal with the event of sending media message
     public func didPressAccessorySendButton(sender: UIButton) {
         assert(false, "Error! You must override this method: \(#function)")
+    }
+    
+    /**
+     Override this function with your "loading earlier messages" method. This method is triggered by UIRefreshControl in the message collection view.
+     
+     - important: Make sure to call `endLoadingEarlierMessages` after you complete loading earlier messages to end animation of refresh control.
+     
+     - seealso: `endLoadingEarlierMessages`
+     */
+    public func loadEarlierMessages() {
+        print("loading earlier messages")
+        endLoadingEarlierMessages()
+    }
+    
+    /**
+     Make sure this method is called after you complete loading earlier messages
+     */
+    final public func endLoadingEarlierMessages() {
+        refreshControl?.endRefreshing()
     }
     
     /// Call this method when you finished receiving message(s). Any demanding of scrolling will be animated.
