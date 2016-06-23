@@ -14,13 +14,13 @@ var id: Int = 0
 
 class DemoMessagesViewController: DUMessagesViewController {
     
-    override func didPressSendButton(sender: UIButton, withText: String) {
+    override func didPress(sendButton button: UIButton, withText: String) {
         let newMessage = messageModel(text: withText, isOutgoing: true)
         self.messageData.append(newMessage)
         self.endSendingMessage()
     }
     
-    override func didPressAccessorySendButton(sender: UIButton) {
+    override func didPress(accessoryButton button: UIButton) {
         self.inputToolbar.contentView?.inputTextView.resignFirstResponder()
         presentActionSheet()
     }

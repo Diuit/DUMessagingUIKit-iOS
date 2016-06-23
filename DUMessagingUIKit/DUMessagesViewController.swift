@@ -37,6 +37,7 @@ public class DUMessagesViewController: UIViewController, UITextViewDelegate, DUM
         }
     }
     
+    /// Set to `true` to show typing indicator and `false` to hide it.
     public var displayTypingIndicator: Bool = false
     {
         didSet {
@@ -95,13 +96,13 @@ public class DUMessagesViewController: UIViewController, UITextViewDelegate, DUM
         collectionView?.delegate = nil
         collectionView?.dataSource = nil
 
-        inputToolbar.pressEventDelegate = self
+        inputToolbar.inputToolbarDelegate = self
         inputToolbar.contentView?.inputTextView.delegate = nil
     }
     
     // MARK: Initialization
     private func setupMessagesViewController() {
-        inputToolbar.pressEventDelegate = self
+        inputToolbar.inputToolbarDelegate = self
         inputToolbar.contentView?.inputTextView.delegate = self
         // To make inputToolbar no parent view, so that it can be added onto inputAccessoryView
         inputToolbar.removeFromSuperview()
@@ -114,20 +115,22 @@ public class DUMessagesViewController: UIViewController, UITextViewDelegate, DUM
     }
     
     // MARK: Input
+    
     override public var inputAccessoryView: UIView? { return self.inputToolbar }
+    
     override public func canBecomeFirstResponder() -> Bool { return true }
     
     // MARK: DUMessagInputToolbarDelegate
     /// This is the delegate from `DUMessageInputToolbar`, indicating that if the send button is tapped.
-    final public func didPressSendButton(sender: UIButton, ofToolbar toolbar: DUMessageInputToolbar) {
+    func didPressSendButton(sender: UIButton, ofToolbar toolbar: DUMessageInputToolbar) {
         guard toolbar.contentView?.inputTextView.text.du_trimingWhitespace().characters.count > 0 else {
             return
         }
-        didPressSendButton(sender, withText: toolbar.contentView!.inputTextView.text)
+        didPress(sendButton: sender, withText: toolbar.contentView!.inputTextView.text)
     }
     /// This is the delegate from `DUMessageInputToolbar`, indicating that if the accessory button is tapped.
-    final public func didPressAccessorySendButton(sender: UIButton, ofToolbar toolbar: DUMessageInputToolbar) {
-        didPressAccessorySendButton(sender)
+    func didPressAccessorySendButton(sender: UIButton, ofToolbar toolbar: DUMessageInputToolbar) {
+        didPress(accessoryButton:sender)
     }
     
     
@@ -269,12 +272,21 @@ public class DUMessagesViewController: UIViewController, UITextViewDelegate, DUM
     }
     
     // MARK: DUMessages ViewController
-    /// Override this method to deal with send button tapped event
-    public func didPressSendButton(sender: UIButton, withText: String) {
+    /**
+     This method is called when you clicked send text button in the `inputToolbar`. Overriding this is required.
+     
+     - parameter sender:   The send button clicked.
+     - parameter withText: The text contnet in `inputTextView`.
+     */
+    public func didPress(sendButton button: UIButton, withText: String) {
         assert(false, "Error! You must override this method: \(#function)")
     }
-    /// Override this method to deal with the event of sending media message
-    public func didPressAccessorySendButton(sender: UIButton) {
+    /**
+     This method is called when you clicked accessory button in the `inputToolbar`. Overriding this is required.
+     
+     - parameter sender: The accessory button clicked.
+     */
+    public func didPress(accessoryButton button: UIButton) {
         assert(false, "Error! You must override this method: \(#function)")
     }
     
@@ -323,6 +335,7 @@ public class DUMessagesViewController: UIViewController, UITextViewDelegate, DUM
         
         scrollToBottom(animated)
     }
+    
     /**
      You must call this method after you receive a new message ( append the new message to your message data source ). This method does:
      1. Hide the typing indicator.
@@ -340,7 +353,6 @@ public class DUMessagesViewController: UIViewController, UITextViewDelegate, DUM
         scrollToBottom(animated)
     }
     
-    // FIXME: better api name
     /// Scroll to the bottom of message collection view with or without animation.
     /// - parameter animated: Set this value to enable or disable animation
     final public func scrollToBottom(animated: Bool) {
@@ -356,14 +368,22 @@ public class DUMessagesViewController: UIViewController, UITextViewDelegate, DUM
             return
         }
         
-        collectionView?.scrollToItemAtIndexPath(indexPath, atScrollPosition: .Bottom, animated: animated)
+        // XXX: When the content height is smaller than collection view height, scoll to indexPath does not work well.
+        //      so scroll to the bootom instead.
+        let layout = collectionView?.collectionViewLayout as! DUMessageCollectionViewFlowLayout
+        if layout.collectionViewContentSize().height < collectionView?.bounds.size.height {
+            collectionView?.scrollRectToVisible(CGRectMake(0, layout.collectionViewContentSize().height - 1, 1, 1), animated: animated)
+            return
+        }
+        
+        collectionView?.scrollToItemAtIndexPath(indexPath, atScrollPosition: .Top, animated: animated)
     }
-    
 }
 
 
 // MARK: Class method
 public extension DUMessagesViewController {
+    /// Return UINib object of `DUMessagesViewController`.
     static var nib: UINib { return UINib.init(nibName: self.nameOfClass, bundle: NSBundle(identifier: Constants.bundleIdentifier)) }
 }
 

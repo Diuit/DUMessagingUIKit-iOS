@@ -12,7 +12,7 @@ private var kDUMessageInputToolbarKeyValueObserverContext = 0
 /**
     This protocol defines methods for interacting with a `DUMessageInputToolbarDelegate` object
  */
-public protocol DUMessagInputToolbarDelegate {
+protocol DUMessagInputToolbarDelegate {
     /**
         Tells the delegate that toolar's `sendButton` has been pressed.
      
@@ -35,7 +35,7 @@ public protocol DUMessagInputToolbarDelegate {
 public class DUMessageInputToolbar: UIToolbar {
     
     public internal(set) weak var contentView: DUInputToolbarContentView?
-    public var pressEventDelegate: DUMessagInputToolbarDelegate?
+    var inputToolbarDelegate: DUMessagInputToolbarDelegate?
     
     override public func awakeFromNib() {
         super.awakeFromNib()
@@ -64,11 +64,11 @@ public class DUMessageInputToolbar: UIToolbar {
     }
     
     @objc private func sendButtonPressed(sender: UIButton) {
-        self.pressEventDelegate?.didPressSendButton(sender, ofToolbar: self)
+        self.inputToolbarDelegate?.didPressSendButton(sender, ofToolbar: self)
     }
     
     @objc private func accessorySendButtonPressed(sender: UIButton) {
-        self.pressEventDelegate?.didPressAccessorySendButton(sender, ofToolbar: self)
+        self.inputToolbarDelegate?.didPressAccessorySendButton(sender, ofToolbar: self)
     }
 }
 
