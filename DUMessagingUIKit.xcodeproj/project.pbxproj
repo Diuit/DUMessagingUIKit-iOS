@@ -39,6 +39,8 @@
 		FA2D83E61CFE762B0060A6B8 /* DUMessagingDemoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2D83E51CFE762B0060A6B8 /* DUMessagingDemoUITests.swift */; };
 		FA2D83F11CFEE7700060A6B8 /* DUViewControllerProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2D83F01CFEE7700060A6B8 /* DUViewControllerProtocols.swift */; };
 		FA4638FE1D19203200BF6070 /* WWDC_419.pdf in Resources */ = {isa = PBXBuildFile; fileRef = FA4638FD1D19203200BF6070 /* WWDC_419.pdf */; };
+		FA4639201D1A742B00BF6070 /* DUTypingIndicatorFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA46391E1D1A742B00BF6070 /* DUTypingIndicatorFooterView.swift */; };
+		FA4639211D1A742B00BF6070 /* DUTypingIndicatorFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA46391F1D1A742B00BF6070 /* DUTypingIndicatorFooterView.xib */; };
 		FA481AAA1D187BEC00BC007F /* DUChatData.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA481AA91D187BEC00BC007F /* DUChatData.swift */; };
 		FA481AAE1D187E1400BC007F /* DUUIProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA481AAD1D187E1400BC007F /* DUUIProtocols.swift */; };
 		FA481AB01D187E4C00BC007F /* DUChatCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA481AAF1D187E4C00BC007F /* DUChatCell.swift */; };
@@ -140,6 +142,8 @@
 		FA2D83E71CFE762B0060A6B8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FA2D83F01CFEE7700060A6B8 /* DUViewControllerProtocols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DUViewControllerProtocols.swift; sourceTree = "<group>"; };
 		FA4638FD1D19203200BF6070 /* WWDC_419.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = WWDC_419.pdf; sourceTree = "<group>"; };
+		FA46391E1D1A742B00BF6070 /* DUTypingIndicatorFooterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DUTypingIndicatorFooterView.swift; sourceTree = "<group>"; };
+		FA46391F1D1A742B00BF6070 /* DUTypingIndicatorFooterView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DUTypingIndicatorFooterView.xib; sourceTree = "<group>"; };
 		FA481AA91D187BEC00BC007F /* DUChatData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DUChatData.swift; sourceTree = "<group>"; };
 		FA481AAD1D187E1400BC007F /* DUUIProtocols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DUUIProtocols.swift; sourceTree = "<group>"; };
 		FA481AAF1D187E4C00BC007F /* DUChatCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DUChatCell.swift; sourceTree = "<group>"; };
@@ -311,6 +315,8 @@
 				FA11E24A1D0E4955005C7EEB /* DUEdgeInsetableLabel.swift */,
 				FAD5E1501D173F1200F7521B /* DUMediaPlaceholderView.swift */,
 				FAD5E1541D17505800F7521B /* DUMediaContentView.swift */,
+				FA46391E1D1A742B00BF6070 /* DUTypingIndicatorFooterView.swift */,
+				FA46391F1D1A742B00BF6070 /* DUTypingIndicatorFooterView.xib */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -525,6 +531,7 @@
 				FA2D83561CFE0DE00060A6B8 /* DUChatCell.xib in Resources */,
 				FA6D46CB1D04BD66002F8DEB /* DUMessagingUIKit.podspec in Resources */,
 				FA1FD2321D00A2FF0066BC7C /* DUUserCell.xib in Resources */,
+				FA4639211D1A742B00BF6070 /* DUTypingIndicatorFooterView.xib in Resources */,
 				FA976E901D04152800F844E5 /* DUMessagesViewController.xib in Resources */,
 				FA976E881D03E9AB00F844E5 /* DUInputToolbarContentView.xib in Resources */,
 				FA976E941D04677D00F844E5 /* DUMessageOutGoingCollectionViewCell.xib in Resources */,
@@ -658,6 +665,7 @@
 				FA976EA11D04A34800F844E5 /* DUMessageCollectionViewFlowLayout.swift in Sources */,
 				FA481AAE1D187E1400BC007F /* DUUIProtocols.swift in Sources */,
 				FA976E8A1D03ECFD00F844E5 /* DUMessageInputTextView.swift in Sources */,
+				FA4639201D1A742B00BF6070 /* DUTypingIndicatorFooterView.swift in Sources */,
 				FA1FD2311D00A2FF0066BC7C /* DUUserCell.swift in Sources */,
 				FA11E21E1D0D4FA4005C7EEB /* DUMessageCollectioinViewDataSource.swift in Sources */,
 				FA976E931D04677D00F844E5 /* DUMessageOutGoingCollectionViewCell.swift in Sources */,

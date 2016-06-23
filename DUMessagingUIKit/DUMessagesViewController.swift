@@ -37,6 +37,16 @@ public class DUMessagesViewController: UIViewController, UITextViewDelegate, DUM
         }
     }
     
+    public var displayTypingIndicator: Bool = false
+    {
+        didSet {
+            if displayTypingIndicator != oldValue {
+                self.collectionView?.collectionViewLayout.invalidateLayoutWithContext(UICollectionViewFlowLayoutInvalidationContext())
+                self.collectionView?.collectionViewLayout.invalidateLayout()
+            }
+        }
+    }
+    
     private let outgoingCellIdentifier = DUMessageOutGoingCollectionViewCell.cellReuseIdentifier
     private let outgoingMediaCellIdentifier = DUMessageOutGoingCollectionViewCell.mediaCellReuseIdentifier
     private let incomingCellIdentifier = DUMessageIncomingCollectionViewCell.cellReuseIdentifier
@@ -56,6 +66,7 @@ public class DUMessagesViewController: UIViewController, UITextViewDelegate, DUM
         super.viewDidLoad()
         
         DUMessagesViewController.nib.instantiateWithOwner(self, options: nil)
+        adoptProtocolUIApperance()
         setupMessagesViewController()
         registerForNotification()
         
@@ -68,7 +79,7 @@ public class DUMessagesViewController: UIViewController, UITextViewDelegate, DUM
                 }
                 
                 self?.messageData = messages!.map({$0})
-                self?.messageReceived()
+                self?.endReceivingMessage()
             }
         }
 
@@ -212,12 +223,28 @@ public class DUMessagesViewController: UIViewController, UITextViewDelegate, DUM
         return cell
     }
     
+    public func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
+        let du_collectionView = collectionView as! DUMessageCollectionView
+        return du_collectionView.dequeueTypingIndicatorFooterView(forIndexPath: indexPath)
+    }
+    
     // MARK: UICollectionView Delegate Flow Layout
     public func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
         let du_collectionViewLayout = collectionViewLayout as! DUMessageCollectionViewFlowLayout
         return du_collectionViewLayout.sizeForItem(atIndexPath: indexPath)
     }
 
+    public func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
+        if let du_collectionViewLayout = collectionViewLayout as? DUMessageCollectionViewFlowLayout {
+            if self.displayTypingIndicator {
+                return CGSizeMake(du_collectionViewLayout.itemWidth, DUTypingIndicatorFooterView.itemHeight)
+            } else {
+                return CGSizeZero
+            }
+        }
+        
+        return CGSizeZero
+    }
     
     // MARK: UITextViewDelegate
     public func textViewDidBeginEditing(textView: UITextView) {
@@ -254,7 +281,7 @@ public class DUMessagesViewController: UIViewController, UITextViewDelegate, DUM
     /**
      Override this function with your "loading earlier messages" method. This method is triggered by UIRefreshControl in the message collection view.
      
-     - important: Make sure to call `endLoadingEarlierMessages` after you complete loading earlier messages to end animation of refresh control.
+     - important: Make sure to call `endLoadingEarlierMessages` after you complete loading earlier messages to end animation of refresh control and reload the collection view.
      
      - seealso: `endLoadingEarlierMessages`
      */
@@ -264,28 +291,59 @@ public class DUMessagesViewController: UIViewController, UITextViewDelegate, DUM
     }
     
     /**
-     Make sure this method is called after you complete loading earlier messages
+     You must call this method after you complete loading earlier messages. This method does:
+     1. Hide the refresh control.
+     2. Reload the collection view and layout.
+
+     - important: If you don't do this after loading, the refresh control will always be visibel.
      */
     final public func endLoadingEarlierMessages() {
         refreshControl?.endRefreshing()
+        
+        collectionView?.collectionViewLayout.invalidateLayoutWithContext(UICollectionViewFlowLayoutInvalidationContext())
+        collectionView?.reloadData()
     }
     
-    /// Call this method when you finished receiving message(s). Any demanding of scrolling will be animated.
-    final public func messageReceived() {
-        messageReceived(animated:true)
-    }
-    
-    /// Call this method when you finished receiving message(s).
-    /// - parameter animated: Set this value to enable/disable animation
-    final public func messageReceived(animated animated: Bool) {
+    /**
+     You must call this method after you sent a new message ( append the new message to your message data source ). This method does:
+     1. Hide the typing indicator.
+     3. Reload the collection view and layout.
+     3. Scroll to the latest message location with or without animation, which can be decided by the animated parameter.
+     
+     - parameter animated: Specify the scrolling action to the latest message is anmiated or not. Default value is `true`.
+     */
+    final public func endSendingMessage(animated: Bool = true) {
+        inputToolbar.contentView?.inputTextView.text = nil
+        // FIXME: need to send a notification to input text view to change its frame after sending messages
+        
+        inputToolbar.toggleSendButtonEnabled()
+        
         collectionView?.collectionViewLayout.invalidateLayoutWithContext(UICollectionViewFlowLayoutInvalidationContext())
         collectionView?.reloadData()
         
-        scrollToBottom(animated: animated)
+        scrollToBottom(animated)
+    }
+    /**
+     You must call this method after you receive a new message ( append the new message to your message data source ). This method does:
+     1. Hide the typing indicator.
+     3. Reload the collection view and layout.
+     3. Scroll to the latest message location with or without animation, which can be decided by the animated parameter.
+     
+     - parameter animated: Specify the scrolling action to the latest message is anmiated or not. Default value is `true`.
+     */
+    final public func endReceivingMessage(animated: Bool = true) {
+        displayTypingIndicator = false
+
+        collectionView?.collectionViewLayout.invalidateLayoutWithContext(UICollectionViewFlowLayoutInvalidationContext())
+        collectionView?.reloadData()
+        
+        scrollToBottom(animated)
     }
     
-    /// Scroll to the bottom of message collection view
-    final public func scrollToBottom(animated animated: Bool) {
+    // FIXME: better api name
+    /// Scroll to the bottom of message collection view with or without animation.
+    /// - parameter animated: Set this value to enable or disable animation
+    final public func scrollToBottom(animated: Bool) {
         guard collectionView?.numberOfSections() != 0 else { return }
         guard collectionView?.numberOfItemsInSection(0) != 0 else { return }
         
@@ -300,6 +358,7 @@ public class DUMessagesViewController: UIViewController, UITextViewDelegate, DUM
         
         collectionView?.scrollToItemAtIndexPath(indexPath, atScrollPosition: .Bottom, animated: animated)
     }
+    
 }
 
 

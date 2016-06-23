@@ -17,7 +17,7 @@ class DemoMessagesViewController: DUMessagesViewController {
     override func didPressSendButton(sender: UIButton, withText: String) {
         let newMessage = messageModel(text: withText, isOutgoing: true)
         self.messageData.append(newMessage)
-        self.collectionView?.reloadData()
+        self.endSendingMessage()
     }
     
     override func didPressAccessorySendButton(sender: UIButton) {
@@ -28,6 +28,7 @@ class DemoMessagesViewController: DUMessagesViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.enableRefreshControl = true
+
     }
 }
 
@@ -36,34 +37,62 @@ private extension DemoMessagesViewController {
     func presentActionSheet() {
         let actionController = UIAlertController.init(title: "Media message", message: "Choose one to demo", preferredStyle: .ActionSheet)
         
-        let sendImageAction = UIAlertAction.init(title: "Send image", style: .Default){ action in
+        let sendImageAction = UIAlertAction.init(title: "Send image", style: .Default){ [unowned self] action in
             let newMessage = messageModel(image: UIImage(named:"dna")!, isOutgoing: true)
             self.messageData.append(newMessage)
-            self.collectionView?.reloadData()
+            self.endSendingMessage()
         }
         
-        let sendVideoAction = UIAlertAction.init(title: "Send vidoe", style: .Default){ action in
+        let sendVideoAction = UIAlertAction.init(title: "Send vidoe", style: .Default){ [unowned self] action in
             let newMessage = messageModel(videoURL: "file://", previewImage: UIImage(named: "videoThumbnail"), isOutgoing: true)
             self.messageData.append(newMessage)
-            self.collectionView?.reloadData()
+            self.endSendingMessage()
         }
         
-        let sendURLAction = UIAlertAction.init(title: "Send a link", style: .Default){ action in
+        let sendURLAction = UIAlertAction.init(title: "Send a link", style: .Default){ [unowned self] action in
             let newMessage = messageModel(url: "https://onboardmag.com/videos/web-series/sixty-minute-sessions-karl-anton-svensson.html", isOutgoing: true)
             self.messageData.append(newMessage)
-            self.collectionView?.reloadData()
+            self.endSendingMessage()
         }
         
-        let sendFileAction = UIAlertAction.init(title: "Send a file", style: .Default){ action in
+        let sendFileAction = UIAlertAction.init(title: "Send a file", style: .Default){ [unowned self] action in
             let newMessage = messageModel(fileURL: NSBundle.mainBundle().pathForResource("WWDC_419", ofType: "pdf")!, fileName: "WWDC_419.pdf", fileDescription: "Session 419 slide", isOutgoing: true)
             self.messageData.append(newMessage)
-            self.collectionView?.reloadData()
+            self.endSendingMessage()
         }
         
+        let dummyReceiving = UIAlertAction.init(title: "Simulate receiving message", style: .Default){ [unowned self] action in
+            self.displayTypingIndicator = true
+            self.scrollToBottom(true)
+            
+            var fakeReceivedMessage: messageModel
+            
+            if let lastMessage = self.messageData.last as? messageModel {
+                fakeReceivedMessage = lastMessage
+                fakeReceivedMessage.messageID += 1
+                fakeReceivedMessage.isOutgoingMessage = false
+            } else {
+                fakeReceivedMessage = messageModel.init(text: "Hi, this is your first received message", isOutgoing: false)
+            }
+            fakeReceivedMessage.senderIdentifier = "her"
+            fakeReceivedMessage.senderDisplayName = "Jessica"
+            fakeReceivedMessage.date = NSDate()
+            
+            self.messageData.append(fakeReceivedMessage)
+            
+            // For showing typing indicator
+            let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(2 * Double(NSEC_PER_SEC)))
+            dispatch_after(delayTime, dispatch_get_main_queue()) {
+                self.endReceivingMessage()
+            }
+            
+        }
+
         actionController.addAction(sendImageAction)
         actionController.addAction(sendVideoAction)
         actionController.addAction(sendURLAction)
         actionController.addAction(sendFileAction)
+        actionController.addAction(dummyReceiving)
         actionController.addAction(UIAlertAction.init(title: "Cancel", style: .Cancel) { [unowned self] action in
             self.inputToolbar.contentView?.inputTextView.becomeFirstResponder()
         })

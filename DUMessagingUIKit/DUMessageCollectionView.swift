@@ -30,6 +30,22 @@ public class DUMessageCollectionView: UICollectionView {
     }
 }
 
+// MARK: Typing indicator
+public extension DUMessageCollectionView {
+    /**
+     Returns a `DUTypingIndicatorFooterView` object at given indexPath.
+     
+     - parameter indexPath: The indexPath specifies the location of supplementary footer view.
+     
+     - returns: A `DUTypingIndicatorFooterView` object.
+     */
+    public func dequeueTypingIndicatorFooterView(forIndexPath indexPath: NSIndexPath) -> DUTypingIndicatorFooterView {
+        let footerView: DUTypingIndicatorFooterView = super.dequeueReusableSupplementaryViewOfKind(UICollectionElementKindSectionFooter, withReuseIdentifier: DUTypingIndicatorFooterView.footerViewReuseIdentifier, forIndexPath: indexPath) as! DUTypingIndicatorFooterView
+        
+        return footerView
+    }
+}
+
 private extension DUMessageCollectionView {
     func configureCollectionView() {
         backgroundColor = UIColor.whiteColor()
@@ -42,5 +58,7 @@ private extension DUMessageCollectionView {
         
         registerNib(DUMessageIncomingCollectionViewCell.nib, forCellWithReuseIdentifier: DUMessageIncomingCollectionViewCell.cellReuseIdentifier)
         registerNib(DUMessageIncomingCollectionViewCell.nib, forCellWithReuseIdentifier: DUMessageIncomingCollectionViewCell.mediaCellReuseIdentifier)
+        
+        registerNib(DUTypingIndicatorFooterView.nib, forSupplementaryViewOfKind: UICollectionElementKindSectionFooter, withReuseIdentifier: DUTypingIndicatorFooterView.footerViewReuseIdentifier)
     }
 }

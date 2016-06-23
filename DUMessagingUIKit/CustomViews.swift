@@ -42,3 +42,5 @@ import UIKit
         }
     }
 }
+
+public class RoundUIView: UIView, CircleShapeView { }

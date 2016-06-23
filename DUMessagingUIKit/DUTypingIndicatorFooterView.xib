@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionReusableView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="U6b-Vx-4bR" customClass="DUTypingIndicatorFooterView" customModule="DUMessagingUIKit" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Q20-5w-wT4" customClass="DUMediaContentView" customModule="DUMessagingUIKit" customModuleProvider="target">
+                    <rect key="frame" x="22" y="6" width="57" height="32"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CLG-yN-7KP" customClass="RoundUIView" customModule="DUMessagingUIKit" customModuleProvider="target">
+                            <rect key="frame" x="12" y="12" width="7" height="7"/>
+                            <color key="backgroundColor" red="0.53333333333333333" green="0.53333333333333333" blue="0.53333333333333333" alpha="1" colorSpace="calibratedRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="7" id="4SL-UV-KGc"/>
+                                <constraint firstAttribute="width" constant="7" id="Ft9-iq-ttV"/>
+                            </constraints>
+                        </view>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Jjl-BN-KOV" customClass="RoundUIView" customModule="DUMessagingUIKit" customModuleProvider="target">
+                            <rect key="frame" x="25" y="12" width="7" height="7"/>
+                            <color key="backgroundColor" red="0.53333333329999999" green="0.53333333329999999" blue="0.53333333329999999" alpha="1" colorSpace="calibratedRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="7" id="RQ0-DZ-GM4"/>
+                                <constraint firstAttribute="height" constant="7" id="YsO-dM-mRX"/>
+                            </constraints>
+                        </view>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BLb-KB-F2e" customClass="RoundUIView" customModule="DUMessagingUIKit" customModuleProvider="target">
+                            <rect key="frame" x="38" y="12" width="7" height="7"/>
+                            <color key="backgroundColor" red="0.53333333329999999" green="0.53333333329999999" blue="0.53333333329999999" alpha="1" colorSpace="calibratedRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="width" secondItem="BLb-KB-F2e" secondAttribute="height" multiplier="1:1" id="Bbw-RF-HTu"/>
+                                <constraint firstAttribute="width" constant="7" id="CGd-qP-hT8"/>
+                            </constraints>
+                        </view>
+                    </subviews>
+                    <color key="backgroundColor" red="0.93333333730697632" green="0.93333333730697632" blue="0.93333333730697632" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstItem="CLG-yN-7KP" firstAttribute="centerY" secondItem="Q20-5w-wT4" secondAttribute="centerY" id="Fm4-2U-WAK"/>
+                        <constraint firstItem="Jjl-BN-KOV" firstAttribute="centerY" secondItem="Q20-5w-wT4" secondAttribute="centerY" id="GsS-0N-r9a"/>
+                        <constraint firstAttribute="width" constant="57" id="O8M-Tq-MXs"/>
+                        <constraint firstItem="CLG-yN-7KP" firstAttribute="leading" secondItem="Q20-5w-wT4" secondAttribute="leading" constant="12" id="Pyb-No-wH6"/>
+                        <constraint firstAttribute="height" constant="32" id="WnM-6t-cuf"/>
+                        <constraint firstItem="BLb-KB-F2e" firstAttribute="centerY" secondItem="Q20-5w-wT4" secondAttribute="centerY" id="iBX-Lp-MGm"/>
+                        <constraint firstItem="Jjl-BN-KOV" firstAttribute="leading" secondItem="CLG-yN-7KP" secondAttribute="trailing" constant="6" id="jkJ-DT-flE"/>
+                        <constraint firstItem="BLb-KB-F2e" firstAttribute="leading" secondItem="Jjl-BN-KOV" secondAttribute="trailing" constant="6" id="jsd-cQ-Lir"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <constraints>
+                <constraint firstItem="Q20-5w-wT4" firstAttribute="centerY" secondItem="U6b-Vx-4bR" secondAttribute="centerY" id="F9g-Z2-8me"/>
+                <constraint firstItem="Q20-5w-wT4" firstAttribute="leading" secondItem="U6b-Vx-4bR" secondAttribute="leading" constant="22" id="ijo-Hc-a8V"/>
+            </constraints>
+            <connections>
+                <outlet property="dot1" destination="CLG-yN-7KP" id="Pkv-9q-F49"/>
+                <outlet property="dot2" destination="Jjl-BN-KOV" id="yP7-d0-rOq"/>
+                <outlet property="dot3" destination="BLb-KB-F2e" id="T2l-I0-KZK"/>
+                <outlet property="messageBubbleView" destination="Q20-5w-wT4" id="7Fc-6Z-I9j"/>
+            </connections>
+        </collectionReusableView>
+    </objects>
+</document>
