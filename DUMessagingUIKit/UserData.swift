@@ -25,6 +25,6 @@ struct UserData: DUUserData {
         userDisplayName = name
         self.imagePath = imagePath
         let initial = name.substringToIndex(name.startIndex.advancedBy(1)).uppercaseString
-        placeholderImage = DUAvatarImageFactory.makeAvatarImage(initial, backgroundColor: UIColor.DUAvatarBgDefaultColor(), textColor: UIColor.whiteColor(), font: UIFont.DUUnreadTitleFont()!, diameter: 32.0)!
+        placeholderImage = DUAvatarImageFactory.makeAvatarImage(initial, backgroundColor: UIColor.DUAvatarBgDefaultColor(), textColor: UIColor.whiteColor(), font: UIFont.DUUnreadTitleFont(), diameter: 32.0)!
     }
 }

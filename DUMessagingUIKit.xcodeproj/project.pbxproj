@@ -56,8 +56,8 @@
 		FA976E8C1D03FB7900F844E5 /* DUMessageInputToolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA976E8B1D03FB7900F844E5 /* DUMessageInputToolbar.swift */; };
 		FA976E8F1D04152800F844E5 /* DUMessagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA976E8D1D04152800F844E5 /* DUMessagesViewController.swift */; };
 		FA976E901D04152800F844E5 /* DUMessagesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA976E8E1D04152800F844E5 /* DUMessagesViewController.xib */; };
-		FA976E931D04677D00F844E5 /* DUMessageOutGoingCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA976E911D04677D00F844E5 /* DUMessageOutGoingCollectionViewCell.swift */; };
-		FA976E941D04677D00F844E5 /* DUMessageOutGoingCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA976E921D04677D00F844E5 /* DUMessageOutGoingCollectionViewCell.xib */; };
+		FA976E931D04677D00F844E5 /* DUMessageOutgoingCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA976E911D04677D00F844E5 /* DUMessageOutgoingCollectionViewCell.swift */; };
+		FA976E941D04677D00F844E5 /* DUMessageOutgoingCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA976E921D04677D00F844E5 /* DUMessageOutgoingCollectionViewCell.xib */; };
 		FA976E961D047DE400F844E5 /* DUMessageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA976E951D047DE400F844E5 /* DUMessageCollectionViewCell.swift */; };
 		FA976E981D047F9800F844E5 /* DUMessageCellTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA976E971D047F9800F844E5 /* DUMessageCellTextView.swift */; };
 		FA976E9C1D0492D600F844E5 /* DUMessageData.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA976E9B1D0492D600F844E5 /* DUMessageData.swift */; };
@@ -159,8 +159,8 @@
 		FA976E8B1D03FB7900F844E5 /* DUMessageInputToolbar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DUMessageInputToolbar.swift; sourceTree = "<group>"; };
 		FA976E8D1D04152800F844E5 /* DUMessagesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DUMessagesViewController.swift; sourceTree = "<group>"; };
 		FA976E8E1D04152800F844E5 /* DUMessagesViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DUMessagesViewController.xib; sourceTree = "<group>"; };
-		FA976E911D04677D00F844E5 /* DUMessageOutGoingCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DUMessageOutGoingCollectionViewCell.swift; sourceTree = "<group>"; };
-		FA976E921D04677D00F844E5 /* DUMessageOutGoingCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DUMessageOutGoingCollectionViewCell.xib; sourceTree = "<group>"; };
+		FA976E911D04677D00F844E5 /* DUMessageOutgoingCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DUMessageOutgoingCollectionViewCell.swift; sourceTree = "<group>"; };
+		FA976E921D04677D00F844E5 /* DUMessageOutgoingCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DUMessageOutgoingCollectionViewCell.xib; sourceTree = "<group>"; };
 		FA976E951D047DE400F844E5 /* DUMessageCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DUMessageCollectionViewCell.swift; sourceTree = "<group>"; };
 		FA976E971D047F9800F844E5 /* DUMessageCellTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DUMessageCellTextView.swift; sourceTree = "<group>"; };
 		FA976E9B1D0492D600F844E5 /* DUMessageData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DUMessageData.swift; sourceTree = "<group>"; };
@@ -308,8 +308,8 @@
 				FA976E971D047F9800F844E5 /* DUMessageCellTextView.swift */,
 				FA11E2131D0C562B005C7EEB /* DUMessageCollectionView.swift */,
 				FA976E951D047DE400F844E5 /* DUMessageCollectionViewCell.swift */,
-				FA976E911D04677D00F844E5 /* DUMessageOutGoingCollectionViewCell.swift */,
-				FA976E921D04677D00F844E5 /* DUMessageOutGoingCollectionViewCell.xib */,
+				FA976E911D04677D00F844E5 /* DUMessageOutgoingCollectionViewCell.swift */,
+				FA976E921D04677D00F844E5 /* DUMessageOutgoingCollectionViewCell.xib */,
 				FA11E2171D0CF58C005C7EEB /* DUMessageIncomingCollectionViewCell.swift */,
 				FA11E2181D0CF58C005C7EEB /* DUMessageIncomingCollectionViewCell.xib */,
 				FA11E24A1D0E4955005C7EEB /* DUEdgeInsetableLabel.swift */,
@@ -534,7 +534,7 @@
 				FA4639211D1A742B00BF6070 /* DUTypingIndicatorFooterView.xib in Resources */,
 				FA976E901D04152800F844E5 /* DUMessagesViewController.xib in Resources */,
 				FA976E881D03E9AB00F844E5 /* DUInputToolbarContentView.xib in Resources */,
-				FA976E941D04677D00F844E5 /* DUMessageOutGoingCollectionViewCell.xib in Resources */,
+				FA976E941D04677D00F844E5 /* DUMessageOutgoingCollectionViewCell.xib in Resources */,
 				FA11E21A1D0CF58C005C7EEB /* DUMessageIncomingCollectionViewCell.xib in Resources */,
 				FA1FD22A1D007FF10066BC7C /* DUChatSettingViewController.xib in Resources */,
 				FA2D83581CFE0FAB0060A6B8 /* Resources.xcassets in Resources */,
@@ -668,7 +668,7 @@
 				FA4639201D1A742B00BF6070 /* DUTypingIndicatorFooterView.swift in Sources */,
 				FA1FD2311D00A2FF0066BC7C /* DUUserCell.swift in Sources */,
 				FA11E21E1D0D4FA4005C7EEB /* DUMessageCollectioinViewDataSource.swift in Sources */,
-				FA976E931D04677D00F844E5 /* DUMessageOutGoingCollectionViewCell.swift in Sources */,
+				FA976E931D04677D00F844E5 /* DUMessageOutgoingCollectionViewCell.swift in Sources */,
 				FA481AB21D187E8C00BC007F /* DUChatSettingViewController.swift in Sources */,
 				FA5B994D1D017E3A00786C6B /* DUBlockCell.swift in Sources */,
 				FA2D83441CFE0CAC0060A6B8 /* DURemoteResourceProtocols.swift in Sources */,

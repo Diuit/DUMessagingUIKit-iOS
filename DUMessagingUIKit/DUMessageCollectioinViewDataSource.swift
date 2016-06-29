@@ -92,4 +92,16 @@ public protocol DUMessageCollectionViewDataSource: UICollectionViewDataSource {
      
      */
     func attributedTextForReadLabel(atIndexPath indexPath: NSIndexPath, forCollectionView collectionView: DUMessageCollectionView) -> NSAttributedString?
+    
+    /**
+     Ask for hidden value of `resendButton` in **outgoing** message cell. Just return true if the target cell is `DUMessagingIncomingCollectionViewCell`.
+     
+     - parameter indexPath: The indexPath to specify the cell location.
+     - parameter collectionView: The parent collectionView
+     
+     - returns: A Bool value to determine that `resendButton` is hideen or not.
+     
+     - note: This property only works for `DUMessageOutgoingCollectionViewCell`.
+     */
+    func isHiddenForResendButton(atIndexPath indexPath: NSIndexPath, forCollectionView collectionView: DUMessageCollectionView) -> Bool
 }

@@ -19,6 +19,6 @@ Pod::Spec.new do |s|
 
   s.dependency "DTTableViewManager", "~> 4.7.0"
   s.dependency "DUMessaging", "~> 1.0.2"
-  s.dependency "SDWebImage"
+  s.dependency "URLEmbeddedView", "~> 0.4.0"
 
 end

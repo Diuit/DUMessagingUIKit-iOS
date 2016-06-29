@@ -53,8 +53,8 @@ private extension DUMessageCollectionView {
         alwaysBounceVertical = true
         bounces = true
         
-        registerNib(DUMessageOutGoingCollectionViewCell.nib, forCellWithReuseIdentifier: DUMessageOutGoingCollectionViewCell.cellReuseIdentifier)
-        registerNib(DUMessageOutGoingCollectionViewCell.nib, forCellWithReuseIdentifier: DUMessageOutGoingCollectionViewCell.mediaCellReuseIdentifier)
+        registerNib(DUMessageOutgoingCollectionViewCell.nib, forCellWithReuseIdentifier: DUMessageOutgoingCollectionViewCell.cellReuseIdentifier)
+        registerNib(DUMessageOutgoingCollectionViewCell.nib, forCellWithReuseIdentifier: DUMessageOutgoingCollectionViewCell.mediaCellReuseIdentifier)
         
         registerNib(DUMessageIncomingCollectionViewCell.nib, forCellWithReuseIdentifier: DUMessageIncomingCollectionViewCell.cellReuseIdentifier)
         registerNib(DUMessageIncomingCollectionViewCell.nib, forCellWithReuseIdentifier: DUMessageIncomingCollectionViewCell.mediaCellReuseIdentifier)

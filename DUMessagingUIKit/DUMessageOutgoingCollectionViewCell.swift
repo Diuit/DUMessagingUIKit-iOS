@@ -1,5 +1,5 @@
 //
-//  DUMessageOutGoingCollectionViewCell.swift
+//  DUMessageOutgoingCollectionViewCell.swift
 //  DUMessagingUIKit
 //
 //  Created by Pofat Diuit on 2016/6/5.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-public class DUMessageOutGoingCollectionViewCell: DUMessageCollectionViewCell {
+public class DUMessageOutgoingCollectionViewCell: DUMessageCollectionViewCell {
     /// Button to resend the message.
     @IBOutlet weak var resendButton: UIButton!
     /// Label to indicate the status of message being read
@@ -34,6 +34,7 @@ public class DUMessageOutGoingCollectionViewCell: DUMessageCollectionViewCell {
         messageBubbleTopLabel.textAlignment = .Right
         timeLabel.textAlignment = .Right
         readLabel.textAlignment = .Right
+        cellTextView.textColor = GlobalUISettings.outgoingMessageTextColor
         
         resendButton.hidden = true
     }
@@ -41,5 +42,6 @@ public class DUMessageOutGoingCollectionViewCell: DUMessageCollectionViewCell {
     public override func prepareForReuse() {
         super.prepareForReuse()
         resendButton.hidden = true
+        cellTextView.textColor = GlobalUISettings.outgoingMessageTextColor
     }
 }

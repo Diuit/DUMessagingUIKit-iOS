@@ -33,6 +33,8 @@ public protocol DUMessageData {
     var contentText: String? { get }
     /// Hash value for message layout cache.
     var hashValue: Int { get }
+    /// The users who have read this message. Return nil if you do not need this feature.
+    var reads: [String]? { get }
 }
 
 extension DUMessage: DUMessageData {

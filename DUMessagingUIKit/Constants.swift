@@ -21,7 +21,7 @@ public class GlobalUISettings {
     /// Navigation bar title text color
     static var navBarTitleTextColof: UIColor = UIColor.DUWaterBlueColor()
     /// Navigation bar title font
-    static var navBarTitleFont: UIFont = UIFont.DUNavigationFont()!
+    static var navBarTitleFont: UIFont = UIFont.DUNavigationFont()
     
     /// Tint color for whole app
     static var tintColor: UIColor = UIColor.DUWaterBlueColor()

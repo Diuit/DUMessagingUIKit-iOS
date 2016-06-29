@@ -53,56 +53,60 @@ public extension UIColor {
 }
 
 public extension UIFont {
-    class func DUBodyTimeFriendFont() -> UIFont? {
-        return UIFont(name: "Helvetica", size: 22.0)
+    class func DUBodyTimeFriendFont() -> UIFont {
+        return UIFont(name: "Helvetica", size: 22.0)!
     }
     
-    class func DUNavigationFont() -> UIFont? {
-        return UIFont(name: "Helvetica", size: 17.0)
+    class func DUNavigationFont() -> UIFont {
+        return UIFont(name: "Helvetica", size: 17.0)!
     }
     
-    class func DUSubheadFont() -> UIFont? {
-        return UIFont(name: "Helvetica", size: 16.0)
+    class func DUSubheadFont() -> UIFont {
+        return UIFont(name: "Helvetica", size: 16.0)!
     }
     
-    class func DUMessageSenderFont() -> UIFont? {
-        return UIFont(name: "Helvetica", size: 12.0)
+    class func DUMessageSenderFont() -> UIFont {
+        return UIFont(name: "Helvetica", size: 12.0)!
     }
     
-    class func DUUnreadTitleFont() -> UIFont? {
-        return UIFont(name: "Helvetica-Bold", size: 16.0)
+    class func DUUnreadTitleFont() -> UIFont {
+        return UIFont(name: "Helvetica-Bold", size: 16.0)!
     }
     
-    class func DUSendButtonFont() -> UIFont? {
-        return UIFont(name: "Helvetica-Bold", size: 14.0)
+    class func DUSendButtonFont() -> UIFont {
+        return UIFont(name: "Helvetica-Bold", size: 14.0)!
     }
     
     class func DUFileTitleFont() -> UIFont {
         return UIFont(name: "Helvetica-Bold", size: 15.0)!
     }
     
-    class func DUBodyFont() -> UIFont? {
-        return UIFont(name: "Helvetica", size: 14.0)
+    class func DUBodyFont() -> UIFont {
+        return UIFont(name: "Helvetica", size: 14.0)!
     }
     
-    class func DUChatBodyFriendFont() -> UIFont? {
-        return UIFont(name: "Helvetica", size: 14.0)
+    class func DUChatBodyFriendFont() -> UIFont {
+        return UIFont(name: "Helvetica", size: 14.0)!
     }
     
-    class func DUBodyTimeUnreadFont() -> UIFont? {
-        return UIFont(name: "Helvetica-Bold", size: 11.0)
+    class func DUBodyTimeUnreadFont() -> UIFont {
+        return UIFont(name: "Helvetica-Bold", size: 11.0)!
     }
     
-    class func DUBodyTimeFont() -> UIFont? {
-        return UIFont(name: "Helvetica", size: 11.0)
+    class func DUMessageTimeLabelFont() -> UIFont {
+        return UIFont(name: "Helvetica", size: 11.0)!
     }
     
-    class func DUChatroomDateFont() -> UIFont? {
-        return UIFont(name: "Helvetica-Light", size: 11.0)
+    class func DUFileDescLabelFont() -> UIFont {
+        return UIFont(name: "Helvetica", size: 11.0)!
     }
     
-    class func DUChatAvatarFont() -> UIFont? {
-        return UIFont (name: "Helvetica Neue", size: 30)
+    class func DUChatroomDateFont() -> UIFont {
+        return UIFont(name: "Helvetica-Light", size: 11.0)!
+    }
+    
+    class func DUChatAvatarFont() -> UIFont {
+        return UIFont (name: "Helvetica Neue", size: 30)!
     }
     
     class func DUURLPreviewTitleFont() -> UIFont {
@@ -112,10 +116,11 @@ public extension UIFont {
     class func DUURLPreviewDescriptionFont() -> UIFont {
         return UIFont(name: "Helvetica-Light", size: 10.0)!
     }
+    
 }
 
 // MARK: functions
-extension NSDate {
+public extension NSDate {
     /**
         Convert NSDate instance to a String indicating time with specif format:
             - 7:33PM : Display hour and minute if the time is today
@@ -203,6 +208,13 @@ public extension UIImage {
         UIGraphicsEndImageContext()
         
         return maskedImage
+    }
+}
+
+
+public extension NSAttributedString {
+    class func DUDeliverWarningAttributed(string: String) -> NSAttributedString {
+        return NSAttributedString(string: string, attributes: [NSFontAttributeName : UIFont.DUMessageTimeLabelFont(), NSForegroundColorAttributeName : UIColor.DUWarnigColor()])
     }
 }
 

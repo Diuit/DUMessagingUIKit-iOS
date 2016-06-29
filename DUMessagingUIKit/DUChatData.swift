@@ -53,7 +53,7 @@ extension DUChat: DUChatData {
         case .Direct:
             return UIImage.DUDefaultPersonAvatarImage()
         default:
-            return DUAvatarImageFactory.makeAvatarImage(String(self.chatTitle[chatTitle.startIndex]).uppercaseString, font: UIFont.DUChatAvatarFont()!, diameter: DUAvatarImageFactory.kAvataImageDefaultDiameterInChatsList)!
+            return DUAvatarImageFactory.makeAvatarImage(String(self.chatTitle[chatTitle.startIndex]).uppercaseString, font: UIFont.DUChatAvatarFont(), diameter: DUAvatarImageFactory.kAvataImageDefaultDiameterInChatsList)!
         }
     }
     public var hasUnreadMessage: Bool { return (self.unreadMessageCount > 0) }

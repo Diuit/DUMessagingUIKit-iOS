@@ -33,12 +33,12 @@ class ViewController: UITableViewController, DUChatListProtocolForViewController
         adoptProtocolUIApperance()
         
         // retrieve chat list
-        DUMessaging.loginWithAuthToken("pofat_04") { error, result in
+        DUMessaging.authWithSessionToken("pofat_04") { error, result in
             guard error == nil else {
                 print("aut error:\(error!.localizedDescription)")
                 return
             }
-            DUMessaging.listChatrooms() { [weak self] error, chats in
+            DUMessaging.listAllChatRooms() { [weak self] error, chats in
                 guard let _:[DUChat] = chats where error == nil else {
                     print("list error:\(error!.localizedDescription)")
                     return

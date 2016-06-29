@@ -9,6 +9,7 @@
 import UIKit
 
 public class DUMessageCellTextView: UITextView {
+    
     override public func awakeFromNib() {
         super.awakeFromNib()
         

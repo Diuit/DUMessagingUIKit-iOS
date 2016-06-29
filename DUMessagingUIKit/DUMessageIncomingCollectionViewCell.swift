@@ -13,6 +13,7 @@ public class DUMessageIncomingCollectionViewCell: DUMessageCollectionViewCell {
         super.awakeFromNib()
         messageBubbleTopLabel.textAlignment = .Left
         timeLabel.textAlignment = .Left
+        cellTextView.textColor = GlobalUISettings.incomingMessageTextColor
     }
 
 }

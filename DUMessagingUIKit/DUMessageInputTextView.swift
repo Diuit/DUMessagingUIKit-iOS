@@ -135,7 +135,7 @@ public class DUMessageInputTextView: UITextView {
             paragraphStyle.lineBreakMode = .ByTruncatingTail
             paragraphStyle.alignment = textAlignment
             
-            return [NSFontAttributeName: UIFont.DUBodyFont()!, NSForegroundColorAttributeName: UIColor.DUDarkGreyColor(), NSParagraphStyleAttributeName: paragraphStyle]
+            return [NSFontAttributeName: UIFont.DUBodyFont(), NSForegroundColorAttributeName: UIColor.DUDarkGreyColor(), NSParagraphStyleAttributeName: paragraphStyle]
         }
     }
 }

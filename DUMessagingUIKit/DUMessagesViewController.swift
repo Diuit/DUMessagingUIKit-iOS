@@ -26,7 +26,7 @@ public class DUMessagesViewController: UIViewController, UITextViewDelegate, DUM
             if enableRefreshControl {
                 refreshControl = UIRefreshControl()
                 refreshControl?.tintColor = UIColor.DUDarkGreyColor()
-                refreshControl!.attributedTitle = NSAttributedString(string: "Loading earlier messages", attributes: [NSFontAttributeName: UIFont.DUChatroomDateFont()!, NSForegroundColorAttributeName: UIColor.DUDarkGreyColor()])
+                refreshControl!.attributedTitle = NSAttributedString(string: "Loading earlier messages", attributes: [NSFontAttributeName: UIFont.DUChatroomDateFont(), NSForegroundColorAttributeName: UIColor.DUDarkGreyColor()])
                 refreshControl!.addTarget(self, action: #selector(loadEarlierMessages), forControlEvents: .ValueChanged)
                 collectionView?.addSubview(refreshControl!)
             } else {
@@ -48,8 +48,8 @@ public class DUMessagesViewController: UIViewController, UITextViewDelegate, DUM
         }
     }
     
-    private let outgoingCellIdentifier = DUMessageOutGoingCollectionViewCell.cellReuseIdentifier
-    private let outgoingMediaCellIdentifier = DUMessageOutGoingCollectionViewCell.mediaCellReuseIdentifier
+    private let outgoingCellIdentifier = DUMessageOutgoingCollectionViewCell.cellReuseIdentifier
+    private let outgoingMediaCellIdentifier = DUMessageOutgoingCollectionViewCell.mediaCellReuseIdentifier
     private let incomingCellIdentifier = DUMessageIncomingCollectionViewCell.cellReuseIdentifier
     private let incomingMediaCellIdentifier = DUMessageIncomingCollectionViewCell.mediaCellReuseIdentifier
     // Defualt bubble images
@@ -70,20 +70,6 @@ public class DUMessagesViewController: UIViewController, UITextViewDelegate, DUM
         adoptProtocolUIApperance()
         setupMessagesViewController()
         registerForNotification()
-        
-        // FIXME: for test conveniences, delete this after done
-        if chat != nil {
-            let duChat = chat as! DUChat
-            duChat.listMessagesBefore() { [weak self] error, messages in
-                guard let _ : [DUMessage] = messages where error == nil else {
-                    return
-                }
-                
-                self?.messageData = messages!.map({$0})
-                self?.endReceivingMessage()
-            }
-        }
-
     }
     
     
@@ -177,6 +163,7 @@ public class DUMessagesViewController: UIViewController, UITextViewDelegate, DUM
             cell.messageMediaView = messageItem.mediaItem?.getMediaContentView() ?? messageItem.mediaItem?.placeholderView
         } else {
             cell.cellTextView.text = messageItem.contentText
+            cell.cellTextView.textColor = (messageItem.isOutgoingMessage) ? GlobalUISettings.outgoingMessageTextColor : GlobalUISettings.incomingMessageTextColor
             cell.cellTextView.dataDetectorTypes = .All
         }
         
@@ -214,11 +201,10 @@ public class DUMessagesViewController: UIViewController, UITextViewDelegate, DUM
         cell.timeLabel.attributedText = duDataSource.attributedTextForTiemLabel(atIndexPath: indexPath, forCollectionView: du_collectionView)
 
         if messageItem.isOutgoingMessage {
-            let cell = cell as! DUMessageOutGoingCollectionViewCell
+            let cell = cell as! DUMessageOutgoingCollectionViewCell
             cell.readLabel.attributedText = duDataSource.attributedTextForReadLabel(atIndexPath: indexPath, forCollectionView: du_collectionView)
             cell.messageBubbleTopLabel.textEdgeInsets = UIEdgeInsetsMake(0, 0, 0, messageBubbleTopLabelInset)
-            // FIXME: make this work when API supports
-            cell.resendButton.hidden = true
+            cell.resendButton.hidden = duDataSource.isHiddenForResendButton(atIndexPath: indexPath, forCollectionView: du_collectionView)
         } else {
             cell.messageBubbleTopLabel.textEdgeInsets = UIEdgeInsetsMake(0, messageBubbleTopLabelInset, 0, 0)
         }
@@ -412,7 +398,7 @@ private extension DUMessagesViewController {
         if let animationCurveInt = (userInfo[UIKeyboardAnimationCurveUserInfoKey] as? NSNumber)?.unsignedIntegerValue {
             animateOption = UIViewAnimationOptions(rawValue: animationCurveInt<<16)
         } else {
-            // FIXME: a random default animate option
+            // XXX: I choosse a random default animate option here
             animateOption = UIViewAnimationOptions.CurveEaseOut
         }
         
@@ -448,11 +434,11 @@ public extension DUMessageCollectionViewFlowLayoutDelegate where Self: DUMessage
 // MARK: DUMessageCollectionView DataSource - Default behavior
 public extension DUMessageCollectionViewDataSource where Self: DUMessagesViewController {
     public func messageData(atIndexPath indexPath: NSIndexPath, forCollectionView collectionView: DUMessageCollectionView) -> DUMessageData {
-        return messageData[indexPath.row]
+        return messageData[indexPath.item]
     }
     
     public func messageBubbleImage(atIndexPath indexPath: NSIndexPath, forCollectionView collectionView: DUMessageCollectionView) -> UIImage? {
-        let messageItem = messageData[indexPath.row]
+        let messageItem = messageData[indexPath.item]
         if messageItem.isOutgoingMessage {
             return defaultOutgoingBubbleImage
         } else {
@@ -461,7 +447,7 @@ public extension DUMessageCollectionViewDataSource where Self: DUMessagesViewCon
     }
     
     public func avatarImage(atIndexPath indexPath: NSIndexPath, forCollectionView collectionView: DUMessageCollectionView) -> UIImage? {
-        let messageItem = messageData[indexPath.row]
+        let messageItem = messageData[indexPath.item]
         if messageItem.isOutgoingMessage {
             return nil
         } else {
@@ -471,7 +457,7 @@ public extension DUMessageCollectionViewDataSource where Self: DUMessagesViewCon
             if avatarImageCache[initial] != nil {
                 return avatarImageCache[initial]
             } else {
-                let avatar = DUAvatarImageFactory.makeAvatarImage(initial, font: UIFont.DUChatAvatarFont()!, diameter: DUAvatarImageFactory.kAvatarImageDefualtDiameterInMessags)!
+                let avatar = DUAvatarImageFactory.makeAvatarImage(initial, font: UIFont.DUChatAvatarFont(), diameter: DUAvatarImageFactory.kAvatarImageDefualtDiameterInMessags)!
                 avatarImageCache[initial] = avatar
                 return avatar
             }
@@ -484,7 +470,7 @@ public extension DUMessageCollectionViewDataSource where Self: DUMessagesViewCon
     }
     
     public func attributedTextForMessageBubbleTopLabel(atIndexPath indexPath: NSIndexPath, forCollectionView collectionView: DUMessageCollectionView) -> NSAttributedString? {
-        let messageItem = messageData[indexPath.row]
+        let messageItem = messageData[indexPath.item]
         if messageItem.isOutgoingMessage {
             return nil
         } else { // only display sender for received messages
@@ -493,13 +479,47 @@ public extension DUMessageCollectionViewDataSource where Self: DUMessagesViewCon
     }
     
     public func attributedTextForTiemLabel(atIndexPath indexPath: NSIndexPath, forCollectionView collectionView: DUMessageCollectionView) -> NSAttributedString? {
-        let messageItem = messageData[indexPath.row]
+        var attributedString: NSAttributedString
+        let messageItem = messageData[indexPath.item]
         let dateStr = messageItem.date?.messageTimeLabelString ?? ""
-        return NSAttributedString(string: dateStr)
+        // if DUMessage object and with status of `FailedToSend`, display warning
+        if let du_message = messageItem as? DUMessage {
+            attributedString = (du_message.status == .FailedToSend) ? NSAttributedString.DUDeliverWarningAttributed("Not Delivered") : NSAttributedString(string: dateStr)
+        } else {
+            attributedString = NSAttributedString(string: dateStr)
+        }
+        
+        return attributedString
     }
-    // TODO: complete this when API support read function
+    
     public func attributedTextForReadLabel(atIndexPath indexPath: NSIndexPath, forCollectionView collectionView: DUMessageCollectionView) -> NSAttributedString? {
-        return nil
+        let messageItem = messageData[indexPath.item]
+        if let reads = messageItem.reads {
+            if reads.count == 0 { return nil }
+            
+            let readLabelString = (reads.count > 1) ? String(format: "Read by %d", reads.count) : "Read"
+            return NSAttributedString(string: readLabelString)
+        } else {
+            return nil
+        }
+    }
+    
+    public func isHiddenForResendButton(atIndexPath indexPath: NSIndexPath, forCollectionView collectionView: DUMessageCollectionView) -> Bool {
+        let cell = collectionView.cellForItemAtIndexPath(indexPath) as? DUMessageCollectionViewCell
+        guard let _ = cell as? DUMessageOutgoingCollectionViewCell where cell != nil else {
+            // not outgoing cell, always return true
+            return true
+        }
+
+        let messageItem = messageData[indexPath.item]
+        if let du_message = messageItem as? DUMessage {
+            // show button when not delivered
+            return du_message.status != .NotDelivered
+        } else {
+            // not a DUMessage object, cannot parse
+            return true
+        }
+        
     }
 }
 

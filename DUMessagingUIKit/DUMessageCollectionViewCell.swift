@@ -65,15 +65,18 @@ public class DUMessageCollectionViewCell: UICollectionViewCell {
         }
     }
     /// TextView contains the message text.
-    @IBOutlet public weak var cellTextView: DUMessageCellTextView!  {
+    @IBOutlet public weak var cellTextView: DUMessageCellTextView!
+    /*
+    {
         didSet {
-            if self.isKindOfClass(DUMessageOutGoingCollectionViewCell) {
+            if self.isKindOfClass(DUMessageOutgoingCollectionViewCell) {
                 cellTextView.textColor = GlobalUISettings.outgoingMessageTextColor
             } else {
                 cellTextView.textColor = GlobalUISettings.incomingMessageTextColor
             }
         }
     }
+ */
     /// Label which displays timestamp information.
     @IBOutlet public weak var timeLabel: UILabel!
     
@@ -192,7 +195,7 @@ public extension DUMessageCollectionViewCell {
         update(layoutConstraint: bubbleTopLabelHeightConstraint, withConstant: duLayoutAttributes.messageBubbleTopLabelHeight)
         update(layoutConstraint: bubbleContainerViewWidthConstraint, withConstant: duLayoutAttributes.messageBubbleContainerViewWidth)
         
-        if self.isKindOfClass(DUMessageOutGoingCollectionViewCell) {
+        if self.isKindOfClass(DUMessageOutgoingCollectionViewCell) {
             update(layoutConstraint: avatarContainerViewWidthConstraint, withConstant: duLayoutAttributes.outgoingAvatarImageViewDiameter)
         } else {
             update(layoutConstraint: avatarContainerViewWidthConstraint, withConstant: duLayoutAttributes.incomingAvatarImageViewDiameter)
@@ -215,7 +218,7 @@ private extension DUMessageCollectionViewCell {
         cellTopLabel.font = UIFont.DUChatroomDateFont()
         cellTopLabel.textColor = UIColor.DUDarkGreyColor()
         
-        messageBubbleTopLabel.font = UIFont.DUMessageSenderFont()!
+        messageBubbleTopLabel.font = UIFont.DUMessageSenderFont()
         messageBubbleTopLabel.textColor = UIColor.DUDarkGreyColor()
         
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleGestureOf(_:)))

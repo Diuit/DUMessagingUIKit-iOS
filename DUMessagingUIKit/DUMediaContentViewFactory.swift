@@ -62,7 +62,7 @@ public class DUMediaContentViewFactory {
         textView.editable = false
         textView.backgroundColor = UIColor.DULightgreyColor()
         textView.textContainerInset = UIEdgeInsetsMake(7, 14, 7, 14)
-        textView.font = UIFont.DUBodyFont()!
+        textView.font = UIFont.DUBodyFont()
         
         // FIXME: truncate too long url string, a stupid way
         var truncatedString: String = ""
@@ -75,7 +75,7 @@ public class DUMediaContentViewFactory {
         let underline = NSUnderlineStyle.StyleSingle.rawValue | NSUnderlineStyle.PatternSolid.rawValue
         textView.attributedText = NSAttributedString(string: truncatedString, attributes:
             [  NSForegroundColorAttributeName : UIColor.blueColor(),
-               NSFontAttributeName: UIFont.DUBodyFont()!,
+               NSFontAttributeName: UIFont.DUBodyFont(),
                NSUnderlineStyleAttributeName: underline])
         
         return contentView
@@ -104,7 +104,7 @@ public class DUMediaContentViewFactory {
         fileNameLabel.text = name
         
         let fileDescLabel = UILabel.init()
-        fileDescLabel.font = UIFont.DUBodyTimeFont()!
+        fileDescLabel.font = UIFont.DUFileDescLabelFont()
         fileDescLabel.text = description ?? ""
         
         contentView.addLayoutSubview(imageView, andConstraints:

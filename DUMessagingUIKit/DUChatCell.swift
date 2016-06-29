@@ -54,7 +54,7 @@ public class DUChatCell: UITableViewCell, ModelTransfer {
             self.chatTitleLabel.font = UIFont.DUSubheadFont()
             self.chatTitleLabel.textColor = UIColor.blackColor()
             
-            self.chatAccessoryLabel.font = UIFont.DUBodyTimeFont()
+            self.chatAccessoryLabel.font = UIFont.DUMessageTimeLabelFont()
             self.chatAccessoryLabel.textColor = UIColor.DUDarkGreyColor()
             
             self.unreadView.hidden = true

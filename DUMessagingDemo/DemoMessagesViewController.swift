@@ -28,7 +28,12 @@ class DemoMessagesViewController: DUMessagesViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.enableRefreshControl = true
-
+        if let c = self.chat as? DUChat {
+            c.listMessages() { [weak self] error, messages in
+                self?.messageData = messages!.map({$0})
+                self?.endReceivingMessage()
+            }
+        }
     }
 }
 
@@ -113,6 +118,7 @@ struct messageModel: DUMessageData {
     var contentText: String?
     var hashValue: Int
     var duChatInstance: DUChat?
+    var reads: [String]? = ["1"]
     
     init(text: String?, isOutgoing: Bool) {
         messageID = id
