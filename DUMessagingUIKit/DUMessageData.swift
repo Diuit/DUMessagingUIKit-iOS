@@ -37,6 +37,7 @@ public protocol DUMessageData {
     var reads: [String]? { get }
 }
 
+// Make DUMessage conform to DUMessageData
 extension DUMessage: DUMessageData {
     public var messageID: Int { return self.id }
     public var senderIdentifier: String { return self.senderUser?.serial ?? "Diuit-System-Sender" }
@@ -48,21 +49,34 @@ extension DUMessage: DUMessageData {
         }
     }
     public var date: NSDate? { return self.createdAt }
-    // FIXME: use MIMEType struct
+    
     public var isMediaMessage: Bool {
         // no MIME type will be regarded as text message
         guard self.mime != nil else {
             return true
         }
+        
+        // if MIME is not Media message but content text is an URL, return true
         switch self.mime! {
-        case DUMIMEType.textPlain, DUMIMEType.system:
+        case DUMIMEType.textPlain:
+            if let _ = contentText {
+                return (contentText!.isValidURL())
+            }
+            return false
+        case DUMIMEType.system:
             return false
         case DUMIMEType.imageBMP, DUMIMEType.imageGIF, DUMIMEType.imageJPG, DUMIMEType.imagePNG, DUMIMEType.imageTIFF:
             return true
         // FIXME: general file is now regarded as text message
         case DUMIMEType.general:
+            if let _ = contentText {
+                return (contentText!.isValidURL())
+            }
             return false
         default:
+            if let _ = contentText {
+                return (contentText!.isValidURL())
+            }
             return false
         }
     }
@@ -74,14 +88,25 @@ extension DUMessage: DUMessageData {
             }
             
             switch self.mime! {
-            case DUMIMEType.textPlain, DUMIMEType.system:
+            case DUMIMEType.textPlain:
+                if let _ = contentText {
+                    return (contentText!.isValidURL()) ? DUMediaItem.init(fromURL: contentText!) : nil
+                }
+                return nil
+            case DUMIMEType.system:
                 return nil
             case DUMIMEType.imageBMP, DUMIMEType.imageGIF, DUMIMEType.imageJPG, DUMIMEType.imagePNG, DUMIMEType.imageTIFF:
                 return DUMediaItem.init(fromImage: nil)
             // FIXME: general file is now regarded as text message
             case DUMIMEType.general:
+                if let _ = contentText {
+                    return (contentText!.isValidURL()) ? DUMediaItem.init(fromURL: contentText!) : nil
+                }
                 return nil
             default:
+                if let _ = contentText {
+                    return (contentText!.isValidURL()) ? DUMediaItem.init(fromURL: contentText!) : nil
+                }
                 return nil
             }
         }

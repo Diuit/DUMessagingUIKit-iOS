@@ -20,7 +20,7 @@ public class DUMessageOutgoingCollectionViewCell: DUMessageCollectionViewCell {
             messageBubbleTopLabel.backgroundColor = backgroundColor
             timeLabel.backgroundColor = backgroundColor
             readLabel.backgroundColor = backgroundColor
-            
+              
             bubbleImageView.backgroundColor = backgroundColor
             avatarImageView.backgroundColor = backgroundColor
             
@@ -34,7 +34,6 @@ public class DUMessageOutgoingCollectionViewCell: DUMessageCollectionViewCell {
         messageBubbleTopLabel.textAlignment = .Right
         timeLabel.textAlignment = .Right
         readLabel.textAlignment = .Right
-        cellTextView.textColor = GlobalUISettings.outgoingMessageTextColor
         
         resendButton.hidden = true
     }
@@ -42,6 +41,5 @@ public class DUMessageOutgoingCollectionViewCell: DUMessageCollectionViewCell {
     public override func prepareForReuse() {
         super.prepareForReuse()
         resendButton.hidden = true
-        cellTextView.textColor = GlobalUISettings.outgoingMessageTextColor
     }
 }

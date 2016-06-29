@@ -233,15 +233,37 @@ public extension UIView {
 }
 
 public extension String {
-    /// Return a `String` with all white space trimmed
+    /**
+     Return a `String` object with all white all spaces trimmed
+     
+     - returns: Trimmed String
+     */
     func du_trimingWhitespace() -> String {
         return self.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
     }
-    /// Calculate the minimum rectangle which contains the given text, with given width and font.
+    /**
+     Calculate the minimum rectangle which contains the given text, with given width and font.
+     
+     - parameter width: The maximum width of the text.
+     - parameter font:  UIFont of the text
+     
+     - returns: A CGRect structure of calculated result.
+     */
     func rectWithConstrainedWidth(width: CGFloat, font: UIFont) -> CGRect {
         let constraintRect = CGSize(width: width, height: CGFloat.max)
         let boundingRect = self.boundingRectWithSize(constraintRect, options: .UsesLineFragmentOrigin, attributes: [NSFontAttributeName: font], context: nil)
         return CGRectIntegral(boundingRect)
+    }
+    
+    /**
+     To verify if this string is a valid HTTP URL
+     
+     - returns: A Bool to indicate if this is a HTTP URL
+     */
+    func isValidURL() -> Bool {
+        let urlRegEx = "(?i)https?://(?:www\\.)?\\S+(?:/|\\b)"
+        let predicate: NSPredicate = NSPredicate(format: "SELF MATCHES %@", argumentArray: [urlRegEx])
+        return predicate.evaluateWithObject(self)
     }
 }
 
