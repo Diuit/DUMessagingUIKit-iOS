@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  DemoChatListViewController.swift
 //  DUMessagingDemo
 //
 //  Created by Pofat Diuit on 2016/6/1.
@@ -10,13 +10,13 @@ import UIKit
 import DUMessagingUIKit
 import DUMessaging
 
-class ViewController: UITableViewController, DUChatListProtocolForViewController {
+class DemoChatListViewController: UITableViewController, DUChatListProtocolForViewController {
     // MARK: followings are propeties and methods that you should implement
     var chatData: [DUChatData] = []
     
     func didClickRightBarButton(sender: UIBarButtonItem?) {
         // handle righbtBarButton click event
-        self.performSegueWithIdentifier("toSettingSegue", sender: nil)
+        print("Right bar button clicked")
     }
     
     func didSelectCell(atIndexPath indexPath: NSIndexPath) {
@@ -35,26 +35,33 @@ class ViewController: UITableViewController, DUChatListProtocolForViewController
         // retrieve chat list
         DUMessaging.authWithSessionToken("pofat_04") { error, result in
             guard error == nil else {
-                print("aut error:\(error!.localizedDescription)")
+                print("auth error:\(error!.localizedDescription)")
                 return
             }
-            DUMessaging.listAllChatRooms() { [weak self] error, chats in
+            DUMessaging.listAllChatRooms() { [unowned self] error, chats in
                 guard let _:[DUChat] = chats where error == nil else {
                     print("list error:\(error!.localizedDescription)")
                     return
                 }
-                print("fetch chat list from client")
-                // You must use .map to assign array, for Swift still cannot check type one by one in an array before bridging to NSArray
-                self?.chatData = chats!.map({$0 as DUChatData})
-                self?.finishGettingChatData()
+
+                // You must use .map to assign array, or you will get a runtime errro.
+                // For Swift still has to bridge to NSArray in runtime to deal with collection, and NSArray can not handle protocol type.
+                self.chatData = chats!.map({$0 as DUChatData})
+                
+                // Call this after you done retrieving data
+                self.endGettingChatData()
             }
         }
+        
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        self.endGettingChatData()
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if let vc = segue.destinationViewController as? DUChatSettingViewController {
-            vc.chatDataForSetting = selectedChat
-        } else if let vc = segue.destinationViewController as? DemoMessagesViewController {
+        if let vc = segue.destinationViewController as? DemoMessagesViewController {
             vc.chat = selectedChat
         }
     }

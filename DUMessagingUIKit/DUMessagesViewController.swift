@@ -9,7 +9,7 @@
 import UIKit
 import DUMessaging
 
-public class DUMessagesViewController: UIViewController, UITextViewDelegate, DUMessagInputToolbarDelegate, DUMessagesUIProtocol, DUMessageCollectionViewFlowLayoutDelegate, DUMessageCollectionViewDataSource, DUMessageCollectionViewCellDelegate {
+public class DUMessagesViewController: UIViewController, UITextViewDelegate, DUMessagInputToolbarDelegate, DUMessageCollectionViewFlowLayoutDelegate, DUMessageCollectionViewDataSource {
     /// Input tool bar object
     @IBOutlet public weak var inputToolbar: DUMessageInputToolbar!
     /// Messages collection view object
@@ -257,182 +257,7 @@ public class DUMessagesViewController: UIViewController, UITextViewDelegate, DUM
         textView.resignFirstResponder()
     }
     
-    // MARK: DUMessages ViewController
-    /**
-     This method is called when you clicked send text button in the `inputToolbar`. Overriding this is required.
-     
-     - parameter sender:   The send button clicked.
-     - parameter withText: The text contnet in `inputTextView`.
-     */
-    public func didPress(sendButton button: UIButton, withText: String) {
-        assert(false, "Error! You must override this method: \(#function)")
-    }
-    /**
-     This method is called when you clicked accessory button in the `inputToolbar`. Overriding this is required.
-     
-     - parameter sender: The accessory button clicked.
-     */
-    public func didPress(accessoryButton button: UIButton) {
-        assert(false, "Error! You must override this method: \(#function)")
-    }
-    
-    /**
-     Override this function with your "loading earlier messages" method. This method is triggered by UIRefreshControl in the message collection view.
-     
-     - important: Make sure to call `endLoadingEarlierMessages` after you complete loading earlier messages to end animation of refresh control and reload the collection view.
-     
-     - seealso: `endLoadingEarlierMessages`
-     */
-    public func loadEarlierMessages() {
-        print("loading earlier messages")
-        endLoadingEarlierMessages()
-    }
-    
-    /**
-     You must call this method after you complete loading earlier messages. This method does:
-     1. Hide the refresh control.
-     2. Reload the collection view and layout.
-
-     - important: If you don't do this after loading, the refresh control will always be visibel.
-     */
-    final public func endLoadingEarlierMessages() {
-        refreshControl?.endRefreshing()
-        
-        collectionView?.collectionViewLayout.invalidateLayoutWithContext(UICollectionViewFlowLayoutInvalidationContext())
-        collectionView?.reloadData()
-    }
-    
-    /**
-     You must call this method after you sent a new message ( append the new message to your message data source ). This method does:
-     1. Hide the typing indicator.
-     3. Reload the collection view and layout.
-     3. Scroll to the latest message location with or without animation, which can be decided by the animated parameter.
-     
-     - parameter animated: Specify the scrolling action to the latest message is anmiated or not. Default value is `true`.
-     */
-    final public func endSendingMessage(animated: Bool = true) {
-        inputToolbar.contentView?.inputTextView.text = nil
-        // FIXME: need to send a notification to input text view to change its frame after sending messages
-        
-        inputToolbar.toggleSendButtonEnabled()
-        
-        collectionView?.collectionViewLayout.invalidateLayoutWithContext(UICollectionViewFlowLayoutInvalidationContext())
-        collectionView?.reloadData()
-        
-        scrollToBottom(animated)
-    }
-    
-    /**
-     You must call this method after you receive a new message ( append the new message to your message data source ). This method does:
-     1. Hide the typing indicator.
-     3. Reload the collection view and layout.
-     3. Scroll to the latest message location with or without animation, which can be decided by the animated parameter.
-     
-     - parameter animated: Specify the scrolling action to the latest message is anmiated or not. Default value is `true`.
-     */
-    final public func endReceivingMessage(animated: Bool = true) {
-        displayTypingIndicator = false
-
-        collectionView?.collectionViewLayout.invalidateLayoutWithContext(UICollectionViewFlowLayoutInvalidationContext())
-        collectionView?.reloadData()
-        
-        scrollToBottom(animated)
-    }
-    
-    /// Scroll to the bottom of message collection view with or without animation.
-    /// - parameter animated: Set this value to enable or disable animation
-    final public func scrollToBottom(animated: Bool) {
-        guard collectionView?.numberOfSections() != 0 else { return }
-        guard collectionView?.numberOfItemsInSection(0) != 0 else { return }
-        
-        let lastIndexPath: NSIndexPath = NSIndexPath(forItem: collectionView!.numberOfItemsInSection(0) - 1, inSection: 0)
-        scrollTo(indexPath: lastIndexPath, animated: animated)
-    }
-    
-    private func scrollTo(indexPath indexPath: NSIndexPath, animated: Bool) {
-        guard collectionView?.numberOfSections() > indexPath.section else {
-            return
-        }
-        
-        // XXX: When the content height is smaller than collection view height, scoll to indexPath does not work well.
-        //      so scroll to the bootom instead.
-        let layout = collectionView?.collectionViewLayout as! DUMessageCollectionViewFlowLayout
-        if layout.collectionViewContentSize().height < collectionView?.bounds.size.height {
-            collectionView?.scrollRectToVisible(CGRectMake(0, layout.collectionViewContentSize().height - 1, 1, 1), animated: animated)
-            return
-        }
-        
-        collectionView?.scrollToItemAtIndexPath(indexPath, atScrollPosition: .Top, animated: animated)
-    }
-}
-
-
-// MARK: Class method
-public extension DUMessagesViewController {
-    /// Return UINib object of `DUMessagesViewController`.
-    static var nib: UINib { return UINib.init(nibName: self.nameOfClass, bundle: NSBundle(identifier: Constants.bundleIdentifier)) }
-}
-
-// MARK: private helper
-private extension DUMessagesViewController {
-    func updateCollectionViewInsets(top top: CGFloat, bottom: CGFloat) {
-        let insets: UIEdgeInsets = UIEdgeInsetsMake(top, 0.0, bottom, 0.0)
-        self.collectionView?.contentInset = insets
-        self.collectionView?.scrollIndicatorInsets = insets
-    }
-    
-    func registerForNotification() {
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(didReceiveKeyboardWillChangeFrame(_:)), name: UIKeyboardWillChangeFrameNotification, object: nil)
-    }
-    
-    func clearForNotification() {
-        NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillChangeFrameNotification, object: nil)
-    }
-    
-    @objc func didReceiveKeyboardWillChangeFrame(notification: NSNotification) {
-        let userInfo = notification.userInfo!
-        let keyboardFinalFrame: CGRect? = userInfo[UIKeyboardFrameEndUserInfoKey]!.CGRectValue
-        if keyboardFinalFrame == nil { return }
-        
-        var animateOption: UIViewAnimationOptions
-        if let animationCurveInt = (userInfo[UIKeyboardAnimationCurveUserInfoKey] as? NSNumber)?.unsignedIntegerValue {
-            animateOption = UIViewAnimationOptions(rawValue: animationCurveInt<<16)
-        } else {
-            // XXX: I choosse a random default animate option here
-            animateOption = UIViewAnimationOptions.CurveEaseOut
-        }
-        
-        let animateDuration = (userInfo[UIKeyboardAnimationDurationUserInfoKey] as? NSNumber)?.doubleValue
-        
-        UIView.animateWithDuration(animateDuration!, delay: 0.0, options: animateOption, animations: { [unowned self] in
-            self.updateCollectionViewInsets(top: self.collectionView!.contentInset.top, bottom: CGRectGetHeight(keyboardFinalFrame!))
-            }, completion: nil)
-    }
-}
-
-
-// MARK: DUMessageCollectionViewFlowLayout Delegate - Default behavior
-public extension DUMessageCollectionViewFlowLayoutDelegate where Self: DUMessagesViewController {
-    public func heightForCellTopLabel(at indexPath: NSIndexPath, with layout: DUMessageCollectionViewFlowLayout, collectionView: DUMessageCollectionView) -> CGFloat {
-        return 0.0
-    }
-    
-    public func heightForMessageBubbleTopLabel(at indexPath: NSIndexPath, with layout: DUMessageCollectionViewFlowLayout, collectionView: DUMessageCollectionView) -> CGFloat {
-        let messageItem = messageData[indexPath.item]
-        if messageItem.isOutgoingMessage { return 0.0 }
-        else { return 20.0 }
-    }
-    
-    public func diameterForAvatarContainer(at indexPath: NSIndexPath, with layout: DUMessageCollectionViewFlowLayout, collectionView: DUMessageCollectionView) -> CGFloat {
-        let messageItem = messageData[indexPath.item]
-        if messageItem.isOutgoingMessage { return 0.0 }
-        else { return DUAvatarImageFactory.kAvatarImageDefualtDiameterInMessags }
-    }
-}
-
-
-// MARK: DUMessageCollectionView DataSource - Default behavior
-public extension DUMessageCollectionViewDataSource where Self: DUMessagesViewController {
+    // MARK: DUMessageCollectionViewDataSource - Default behavior
     public func messageData(atIndexPath indexPath: NSIndexPath, forCollectionView collectionView: DUMessageCollectionView) -> DUMessageData {
         return messageData[indexPath.item]
     }
@@ -510,7 +335,7 @@ public extension DUMessageCollectionViewDataSource where Self: DUMessagesViewCon
             // not outgoing cell, always return true
             return true
         }
-
+        
         let messageItem = messageData[indexPath.item]
         if let du_message = messageItem as? DUMessage {
             // show button when not delivered
@@ -521,20 +346,210 @@ public extension DUMessageCollectionViewDataSource where Self: DUMessagesViewCon
         }
         
     }
+    // MARK: DUMessages ViewController
+    /**
+     This method is called when you clicked send text button in the `inputToolbar`. Overriding this is required.
+     
+     - parameter sender:   The send button clicked.
+     - parameter withText: The text contnet in `inputTextView`.
+     */
+    public func didPress(sendButton button: UIButton, withText: String) {
+        assert(false, "Error! You must override this method: \(#function)")
+    }
+    /**
+     This method is called when you clicked accessory button in the `inputToolbar`. Overriding this is required.
+     
+     - parameter sender: The accessory button clicked.
+     */
+    public func didPress(accessoryButton button: UIButton) {
+        assert(false, "Error! You must override this method: \(#function)")
+    }
+    
+    /**
+     Override this function with your "loading earlier messages" method. This method is triggered by UIRefreshControl in the message collection view.
+     
+     - important: Make sure to call `endLoadingEarlierMessages` after you complete loading earlier messages to end animation of refresh control and reload the collection view.
+     
+     - seealso: `endLoadingEarlierMessages`
+     */
+    public func loadEarlierMessages() {
+        print("loading earlier messages")
+        endLoadingEarlierMessages()
+    }
+    
+    /**
+     You must call this method after you complete loading earlier messages. This method does:
+     1. Hide the refresh control.
+     2. Reload the collection view and layout.
+
+     - important: If you don't do this after loading, the refresh control will always be visibel.
+     */
+    final public func endLoadingEarlierMessages() {
+        refreshControl?.endRefreshing()
+        
+        collectionView?.collectionViewLayout.invalidateLayoutWithContext(UICollectionViewFlowLayoutInvalidationContext())
+        collectionView?.reloadData()
+    }
+    
+    /**
+     You must call this method after you sent a new message ( append the new message to your message data source ). This method does:
+     1. Hide the typing indicator.
+     3. Reload the collection view and layout.
+     3. Scroll to the latest message location with or without animation, which can be decided by the animated parameter.
+     
+     - parameter animated: Specify the scrolling action to the latest message is anmiated or not. Default value is `true`.
+     */
+    final public func endSendingMessage(animated: Bool = true) {
+        inputToolbar.contentView?.inputTextView.text = nil
+        // FIXME: need to send a notification to input text view to change its frame after sending messages
+        
+        inputToolbar.toggleSendButtonEnabled()
+        
+        collectionView?.collectionViewLayout.invalidateLayoutWithContext(UICollectionViewFlowLayoutInvalidationContext())
+        collectionView?.reloadData()
+        
+        // set last message if using duchat object
+        if let du_hcat = chat as? DUChat  {
+            if let du_message = messageData.last as? DUMessage {
+                du_hcat.lastMessage = du_message
+            }
+        }
+        scrollToBottom(animated)
+    }
+    
+    /**
+     You must call this method after you receive a new message ( append the new message to your message data source ). This method does:
+     1. Hide the typing indicator.
+     3. Reload the collection view and layout.
+     3. Scroll to the latest message location with or without animation, which can be decided by the animated parameter.
+     
+     - parameter animated: Specify the scrolling action to the latest message is anmiated or not. Default value is `true`.
+     */
+    final public func endReceivingMessage(animated: Bool = true) {
+        displayTypingIndicator = false
+
+        collectionView?.collectionViewLayout.invalidateLayoutWithContext(UICollectionViewFlowLayoutInvalidationContext())
+        collectionView?.reloadData()
+        
+        // update last message if useing duchat
+        if let du_chat = chat as? DUChat {
+            if let du_message = messageData.last as? DUMessage {
+                du_chat.lastMessage = du_message
+            }
+        }
+        
+        scrollToBottom(animated)
+    }
+    
+    /// Scroll to the bottom of message collection view with or without animation.
+    /// - parameter animated: Set this value to enable or disable animation
+    final public func scrollToBottom(animated: Bool) {
+        guard collectionView?.numberOfSections() != 0 else { return }
+        guard collectionView?.numberOfItemsInSection(0) != 0 else { return }
+        
+        let lastIndexPath: NSIndexPath = NSIndexPath(forItem: collectionView!.numberOfItemsInSection(0) - 1, inSection: 0)
+        scrollTo(indexPath: lastIndexPath, animated: animated)
+    }
+    
+    private func scrollTo(indexPath indexPath: NSIndexPath, animated: Bool) {
+        guard collectionView?.numberOfSections() > indexPath.section else {
+            return
+        }
+        
+        // XXX: When the content height is smaller than collection view height, scoll to indexPath or recttovisible does not work well.(bug, huh?)
+        //      So if the difference height is less than 44 (navigation bar height), we manually set the offset.
+        //      If you know how to solve this, send a PR please.
+        let layout = collectionView?.collectionViewLayout as! DUMessageCollectionViewFlowLayout
+        if layout.collectionViewContentSize().height < collectionView?.bounds.size.height {
+            if abs(collectionView!.bounds.size.height - layout.collectionViewContentSize().height) <= 44 {
+                collectionView?.setContentOffset(CGPointMake(0, 44 - abs(collectionView!.bounds.size.height - layout.collectionViewContentSize().height)), animated: animated)
+            } else {
+                collectionView?.scrollRectToVisible(CGRectMake(0, layout.collectionViewContentSize().height - 1, 1, 1), animated: animated)
+            }
+            return
+        }
+        
+        collectionView?.scrollToItemAtIndexPath(indexPath, atScrollPosition: .Top, animated: animated)
+    }
 }
 
+
+// MARK: Class method
+public extension DUMessagesViewController {
+    /// Return UINib object of `DUMessagesViewController`.
+    static var nib: UINib { return UINib.init(nibName: self.nameOfClass, bundle: NSBundle(identifier: Constants.bundleIdentifier)) }
+}
+
+// MARK: private helper
+private extension DUMessagesViewController {
+    func updateCollectionViewInsets(top top: CGFloat, bottom: CGFloat) {
+        let insets: UIEdgeInsets = UIEdgeInsetsMake(top, 0.0, bottom, 0.0)
+        self.collectionView?.contentInset = insets
+        self.collectionView?.scrollIndicatorInsets = insets
+    }
+    
+    func registerForNotification() {
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(didReceiveKeyboardWillChangeFrame(_:)), name: UIKeyboardWillChangeFrameNotification, object: nil)
+    }
+    
+    func clearForNotification() {
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillChangeFrameNotification, object: nil)
+    }
+    
+    @objc func didReceiveKeyboardWillChangeFrame(notification: NSNotification) {
+        let userInfo = notification.userInfo!
+        let keyboardFinalFrame: CGRect? = userInfo[UIKeyboardFrameEndUserInfoKey]!.CGRectValue
+        if keyboardFinalFrame == nil { return }
+        
+        var animateOption: UIViewAnimationOptions
+        if let animationCurveInt = (userInfo[UIKeyboardAnimationCurveUserInfoKey] as? NSNumber)?.unsignedIntegerValue {
+            animateOption = UIViewAnimationOptions(rawValue: animationCurveInt<<16)
+        } else {
+            // XXX: I choosse a random default animate option here
+            animateOption = UIViewAnimationOptions.CurveEaseOut
+        }
+        
+        let animateDuration = (userInfo[UIKeyboardAnimationDurationUserInfoKey] as? NSNumber)?.doubleValue
+        
+        UIView.animateWithDuration(animateDuration!, delay: 0.0, options: animateOption, animations: { [unowned self] in
+            self.updateCollectionViewInsets(top: self.collectionView!.contentInset.top, bottom: CGRectGetHeight(keyboardFinalFrame!))
+            }, completion: nil)
+    }
+}
+
+
+// MARK: DUMessageCollectionViewFlowLayout Delegate - Default behavior
+public extension DUMessageCollectionViewFlowLayoutDelegate where Self: DUMessagesViewController {
+    public func heightForCellTopLabel(at indexPath: NSIndexPath, with layout: DUMessageCollectionViewFlowLayout, collectionView: DUMessageCollectionView) -> CGFloat {
+        return 0.0
+    }
+    
+    public func heightForMessageBubbleTopLabel(at indexPath: NSIndexPath, with layout: DUMessageCollectionViewFlowLayout, collectionView: DUMessageCollectionView) -> CGFloat {
+        let messageItem = messageData[indexPath.item]
+        if messageItem.isOutgoingMessage { return 0.0 }
+        else { return 20.0 }
+    }
+    
+    public func diameterForAvatarContainer(at indexPath: NSIndexPath, with layout: DUMessageCollectionViewFlowLayout, collectionView: DUMessageCollectionView) -> CGFloat {
+        let messageItem = messageData[indexPath.item]
+        if messageItem.isOutgoingMessage { return 0.0 }
+        else { return DUAvatarImageFactory.kAvatarImageDefualtDiameterInMessags }
+    }
+}
+
+
 // MARK: DUMessageCollectionViewCell Delegate - default behavior
-public extension DUMessageCollectionViewCellDelegate where Self: DUMessagesViewController {
-    func didTapAvatar(ofMessageCollectionViewCell cell: DUMessageCollectionViewCell) {
-        print("tapped avatar, please implement '\(#function)' to deal with this event.")
+extension DUMessagesViewController: DUMessageCollectionViewCellDelegate{
+    public func didTapAvatar(ofMessageCollectionViewCell cell: DUMessageCollectionViewCell) {
+        //print("tapped avatar, please implement '\(#function)' to deal with this event.")
     }
 
-    func didTapMessageBubble(ofMessageCollectionViewCell cell: DUMessageCollectionViewCell) {
-        print("tapped message bubble, please implement '\(#function)' to deal with this event.")
+    public func didTapMessageBubble(ofMessageCollectionViewCell cell: DUMessageCollectionViewCell) {
+        //print("tapped message bubble, please implement '\(#function)' to deal with this event.")
     }
 
-    func didTap(messageCollectionViewCell cell: DUMessageCollectionViewCell) {
-        print("tapped message cell, please implement '\(#function)' to deal with this event.")
+    public func didTap(messageCollectionViewCell cell: DUMessageCollectionViewCell) {
+        //print("tapped message cell, please implement '\(#function)' to deal with this event.")
     }
 }
 
@@ -559,10 +574,17 @@ public extension DUMessageData {
     }
 }
 
-// MARK: UI Protocol
-public protocol DUMessagesUIProtocol: GlobalUIProtocol, UIProtocolAdoption, NavigationBarTitle {}
-extension DUMessagesUIProtocol {
+// MARK: Gathering UI Protocol
+public protocol DUMessagesUIProtocol: GlobalUIProtocol, UIProtocolAdoption, NavigationBarTitle, RightBarButton {}
+extension DUMessagesViewController: DUMessagesUIProtocol {
     public var myBarTitle: String { return "Messages" }
+    
+    public var rightBarButtonText: String? { return nil }
+    public var rightBarButtonImage: UIImage? { return UIImage.DUSettingsIcon() }
+    public var myBarButtonType: UIBarButtonType { return .imageButton }
+    public func didClickRightBarButton(sender: UIBarButtonItem?) {
+        assert(false, "Error! You must override this function : \(#function)")
+    }
     
     public func adoptProtocolUIApperance() {
         // setup all inherited UI protocols

@@ -177,6 +177,9 @@ public extension UIImage {
         return UIImage(named:"playIcon", inBundle: NSBundle(identifier: Constants.bundleIdentifier) , compatibleWithTraitCollection: nil)!
     }
     
+    class func DUSettingsIcon() -> UIImage {
+        return UIImage(named:"setting", inBundle: NSBundle(identifier: Constants.bundleIdentifier) , compatibleWithTraitCollection: nil)!
+    }
     /**
         Return an UIImage instance with size 1.0 * 1.0 of given background UIColor
      */
@@ -275,6 +278,55 @@ public extension NSObject {
     /// Return dynamic type string of the instance
     public var nameOfClass: String{
         return NSStringFromClass(self.dynamicType).componentsSeparatedByString(".").last!
+    }
+}
+
+
+public extension NSURL {
+    /**
+     Get complete asset file name, e.g. 'image1.jpg'
+     
+     - returns: A String of complte file name.
+     */
+    func getAssetFullFileName() -> String? {
+        guard self.scheme == "assets-library" else {
+            return nil
+        }
+        let absoluePath = self.absoluteString
+        let idRange = absoluePath.rangeOfString("id=")
+        let extRange = absoluePath.rangeOfString("&ext=")
+        let fileName = absoluePath.substringWithRange(idRange!.endIndex..<extRange!.startIndex)
+        let ext = absoluePath.substringWithRange(extRange!.endIndex..<absoluePath.endIndex)
+        return fileName+"."+ext
+    }
+    
+    /**
+     Get asset file extentsion, e.g. 'jpg'
+     
+     - returns: A String of file extenstion.
+     */
+    func getAssetFileExt() -> String? {
+        guard self.scheme == "assets-library" else {
+            return nil
+        }
+        let absoluePath = self.absoluteString
+        let extRange = absoluePath.rangeOfString("&ext=")
+        return absoluePath.substringWithRange(extRange!.endIndex..<absoluePath.endIndex)
+    }
+    
+    /**
+     Get asset file name without extension, e.g. 'image1'
+     
+     - returns: A String of file name.
+     */
+    func getAssetFileName() -> String? {
+        guard self.scheme == "assets-library" else {
+            return nil
+        }
+        let absoluePath = self.absoluteString
+        let idRange = absoluePath.rangeOfString("id=")
+        let extRange = absoluePath.rangeOfString("&ext=")
+        return absoluePath.substringWithRange(idRange!.endIndex..<extRange!.startIndex)
     }
 }
 

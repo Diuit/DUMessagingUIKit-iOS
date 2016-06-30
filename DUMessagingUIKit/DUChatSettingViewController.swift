@@ -51,7 +51,7 @@ public class DUChatSettingViewController: UIViewController, DUChatSettingUIProto
     // MARK: life cycle
     override public func viewDidLoad() {
         super.viewDidLoad()
-        print("view did load")
+
         DUChatSettingViewController.nib.instantiateWithOwner(self, options: nil)
         // adopt ui protocol
         adoptProtocolUIApperance()
@@ -83,7 +83,6 @@ public class DUChatSettingViewController: UIViewController, DUChatSettingUIProto
         tableView.tableFooterView = UIView()
         tableView.backgroundColor = UIColor.clearColor()
     }
-    
     
     public func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
         guard self.chatDataForSetting?.chatSettingPageType == .Group && indexPath.section == 1 else {

@@ -10,9 +10,11 @@ import UIKit
 import URLEmbeddedView
 import MisterFusion
 
-let kMaximumURLCharacterNumbersInURLMediaContentView: Int = 23
+
 /// Generate media content views for each media message type.
 public class DUMediaContentViewFactory {
+    /// Maximum characters in the title label of URL media view
+    static let kMaximumURLCharacterNumbersInURLMediaContentView: Int = 23
     /**
      Generate content view of image message.
      

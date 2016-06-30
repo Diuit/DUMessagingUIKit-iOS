@@ -20,7 +20,7 @@ import DTTableViewManager
 public protocol DUChatListProtocolForViewController: GlobalUIProtocol, UIProtocolAdoption, NavigationBarTitle, RightBarButton, DTTableViewManageable {
     
     /**
-        Pass an array of chat data source which conforms to protocol `DUChatData` to correctly display information of each chat room.
+        Pass an array of chat data source which conforms to protocol `DUChatData` to correctly display informati@objc on of each chat room.
         
         - attention: Since protocol is ** not AnyObject-compatible **, you can not directly cast any array of class to array of `DUChatData`. Even though such class conforms to the protocol. It will arise a runtime crash while casting the array. To assign values to `chatData`, use map to mirror each elements:
                 
@@ -56,6 +56,7 @@ public extension DUChatListProtocolForViewController where Self: UIViewControlle
         // FIXME: customizable?
         tableView.rowHeight = 92.0
         tableView.tableFooterView = UIView()
+
     }
     
     func didSelectCell(atIndexPath indexPath: NSIndexPath) {
@@ -63,7 +64,7 @@ public extension DUChatListProtocolForViewController where Self: UIViewControlle
     }
     
     /// Execute this method after your data source is set to refresh UI
-    final func finishGettingChatData() {
+    final func endGettingChatData() {
         manager.memoryStorage.setItems(chatData)
     }
 }

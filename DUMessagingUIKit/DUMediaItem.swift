@@ -50,7 +50,13 @@ public struct DUMediaItem {
     ///  An UIView instance for placeholder.
     public var placeholderView: UIView { return _cachedPlaceholderView }
     /// Instance of media content, may be an UIImage
-    public var mediaContentData: AnyObject? = nil
+    public var mediaContentData: AnyObject?
+        {
+        didSet {
+            print("media content data : \(mediaContentData)")
+            print("media content data oldValue: \(oldValue)")
+        }
+    }
     /// URL of media source. Used by file, URL, video and audio message.
     public var mediaSourceURL: String? = nil
     /// Display name of the file on media content view.
@@ -72,6 +78,21 @@ public struct DUMediaItem {
     public init(fromImage image: UIImage?) {
         self.type = .Image
         self.mediaContentData = image
+        _cachedPlaceholderView = DUMediaPlaceholderView.init(frame:CGRectZero)
+        _cachedPlaceholderView.frame = CGRectMake(0, 0, mediaDisplaySize.width, mediaDisplaySize.height)
+    }
+    
+    /**
+     Init an image mediaItem from URL string
+     
+     - parameter url: URL string of the image resource.
+     
+     - returns: An instance of `DUMediaItem` of image type
+     */
+    public init(fromImageURL url: String) {
+        self.type = .Image
+        self.mediaContentData = nil
+        self.mediaSourceURL = url
         _cachedPlaceholderView = DUMediaPlaceholderView.init(frame:CGRectZero)
         _cachedPlaceholderView.frame = CGRectMake(0, 0, mediaDisplaySize.width, mediaDisplaySize.height)
     }

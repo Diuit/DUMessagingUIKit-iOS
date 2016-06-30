@@ -8,7 +8,7 @@
         <!--Root View Controller-->
         <scene sceneID="P18-vT-xmF">
             <objects>
-                <tableViewController id="oCW-Kt-z8s" customClass="ViewController" customModule="DUMessagingDemo" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="oCW-Kt-z8s" customClass="DemoChatListViewController" customModule="DUMessagingDemo" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="LSw-fq-EAH">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -20,7 +20,6 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Root View Controller" id="Pht-v1-uva"/>
                     <connections>
-                        <segue destination="Tst-YQ-FcY" kind="show" identifier="toSettingSegue" id="DNf-zv-rnO"/>
                         <segue destination="YW2-ge-ipD" kind="show" identifier="toMessagesSegue" id="2NJ-t0-QUd"/>
                     </connections>
                 </tableViewController>
@@ -28,10 +27,10 @@
             </objects>
             <point key="canvasLocation" x="991" y="458"/>
         </scene>
-        <!--Chat Setting View Controller-->
+        <!--Demo Chat Setting View Controller-->
         <scene sceneID="qVn-ZR-elw">
             <objects>
-                <viewController id="Tst-YQ-FcY" customClass="DUChatSettingViewController" customModule="DUMessagingUIKit" sceneMemberID="viewController">
+                <viewController id="Tst-YQ-FcY" customClass="DemoChatSettingViewController" customModule="DUMessagingDemo" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="iPE-yx-ASK"/>
                         <viewControllerLayoutGuide type="bottom" id="6HZ-67-Nma"/>
@@ -44,7 +43,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wCH-uq-5VW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1644" y="451"/>
+            <point key="canvasLocation" x="2643" y="458"/>
         </scene>
         <!--Demo Messages View Controller-->
         <scene sceneID="LAx-fW-xl2">
@@ -59,10 +58,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <connections>
+                        <segue destination="Tst-YQ-FcY" kind="show" identifier="toSettingSegue" id="9Tu-CZ-wQG"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BYr-Wb-2im" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1644" y="-223"/>
+            <point key="canvasLocation" x="1822" y="458"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="F2V-DD-RT1">

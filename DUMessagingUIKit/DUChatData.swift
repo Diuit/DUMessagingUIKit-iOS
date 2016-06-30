@@ -68,7 +68,17 @@ extension DUChat: DUChatData {
         }
     }
     public var chatDetailText: String {
-        return self.lastMessage?.data ?? ""
+        if let m = self.lastMessage {
+            if m.mime!.containsString("image") {
+                return m.meta!["name"] as? String ?? "Unnamed image"
+            } else if m.mime! == DUMIMEType.general {
+                return m.meta!["name"] as? String ?? "Unnamed file"
+            } else {
+                return m.data ?? ""
+            }
+        } else {
+            return ""
+        }
     }
     public var chatAccessoryText: String {
         return self.lastMessage?.createdAt?.messageTimeLabelString ?? ""

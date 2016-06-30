@@ -69,16 +69,13 @@ public extension UIProtocolAdoption where Self: UIViewController {
         if let mySelf = self as? RightBarButton {
             switch mySelf.myBarButtonType {
             case .imageButton:
-                navigationItem.rightBarButtonItem = UIBarButtonItem.init(image: mySelf.rightBarButtonImage?.imageWithRenderingMode(.AlwaysOriginal) , style: .Plain, target: Self().self, action: nil)
+                navigationItem.rightBarButtonItem = UIBarButtonItem.init(image: mySelf.rightBarButtonImage?.imageWithRenderingMode(.AlwaysOriginal) , style: .Plain, target: self, action: #selector(mySelf.didClickRightBarButton(_:)))
             case .textButton:
-                navigationItem.rightBarButtonItem = UIBarButtonItem.init(title: mySelf.rightBarButtonText, style: .Plain, target: Self().self, action: nil)
+                navigationItem.rightBarButtonItem = UIBarButtonItem.init(title: mySelf.rightBarButtonText, style: .Plain, target: self, action: #selector(mySelf.didClickRightBarButton(_:)))
             default:
                 navigationItem.rightBarButtonItem = nil
             }
             
-            if navigationItem.rightBarButtonItem != nil { // add click event
-                navigationItem.rightBarButtonItem?.action = #selector(mySelf.didClickRightBarButton(_:))
-            }
         }
         // TintColor
         if let mySelf = self as? TintColor {

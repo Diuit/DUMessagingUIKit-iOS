@@ -38,7 +38,8 @@ public protocol DUMessageData {
 }
 
 // Make DUMessage conform to DUMessageData
-extension DUMessage: DUMessageData {
+extension DUMessage: DUMessageData, DUImageResource {
+    public var imagePath: String? { return mediaItem?.mediaSourceURL ?? nil }
     public var messageID: Int { return self.id }
     public var senderIdentifier: String { return self.senderUser?.serial ?? "Diuit-System-Sender" }
     public var senderDisplayName: String {
@@ -56,7 +57,7 @@ extension DUMessage: DUMessageData {
             return true
         }
         
-        // if MIME is not Media message but content text is an URL, return true
+        // if MIME is not Media message but content text is an URL, return true (web mediat message)
         switch self.mime! {
         case DUMIMEType.textPlain:
             if let _ = contentText {
@@ -69,10 +70,7 @@ extension DUMessage: DUMessageData {
             return true
         // FIXME: general file is now regarded as text message
         case DUMIMEType.general:
-            if let _ = contentText {
-                return (contentText!.isValidURL())
-            }
-            return false
+            return true
         default:
             if let _ = contentText {
                 return (contentText!.isValidURL())
@@ -80,6 +78,7 @@ extension DUMessage: DUMessageData {
             return false
         }
     }
+    
     public var mediaItem: DUMediaItem? {
         get {
             // no MIME type will be regarded as text message
@@ -96,13 +95,27 @@ extension DUMessage: DUMessageData {
             case DUMIMEType.system:
                 return nil
             case DUMIMEType.imageBMP, DUMIMEType.imageGIF, DUMIMEType.imageJPG, DUMIMEType.imagePNG, DUMIMEType.imageTIFF:
-                return DUMediaItem.init(fromImage: nil)
-            // FIXME: general file is now regarded as text message
-            case DUMIMEType.general:
-                if let _ = contentText {
-                    return (contentText!.isValidURL()) ? DUMediaItem.init(fromURL: contentText!) : nil
+                if self.localImage != nil {
+                    return DUMediaItem.init(fromImage: self.localImage!)
+                } else {
+                    // FIXME: is it possible to load image source here and trigger collecion view reload here?
+                    // Because i don't know how to do it yet, set nil here and load image in `DUCollectionViewDataSource`
+                    if let content = self.data {
+                        if content.isValidURL() { return DUMediaItem.init(fromImageURL: content) }
+                        else { return DUMediaItem.init(fromImage: nil) }
+                    } else {
+                        return DUMediaItem.init(fromImage: nil)
+                    }
                 }
-                return nil
+            // FIXME: file is broken
+            case DUMIMEType.general:
+                if self.status == .Delivered || self.status == .Received {
+                    let fileName: String = self.meta?["name"] as? String ?? "Unnamed file"
+                    let fileDesc: String = self.meta?["description"] as? String ?? "No description"
+                    return DUMediaItem.init(fromFileURL: self.data!, fileName: fileName, fileDescription: fileDesc)
+                } else {
+                    return DUMediaItem.init(fromFileURL: "", fileName: "", fileDescription: "")
+                }
             default:
                 if let _ = contentText {
                     return (contentText!.isValidURL()) ? DUMediaItem.init(fromURL: contentText!) : nil
