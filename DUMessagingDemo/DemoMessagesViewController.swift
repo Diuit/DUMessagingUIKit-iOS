@@ -66,7 +66,6 @@ class DemoMessagesViewController: DUMessagesViewController {
             vc.chatDataForSetting = self.chat
         }
     }
-
 }
 
 

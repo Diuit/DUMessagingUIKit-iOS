@@ -51,12 +51,6 @@ public struct DUMediaItem {
     public var placeholderView: UIView { return _cachedPlaceholderView }
     /// Instance of media content, may be an UIImage
     public var mediaContentData: AnyObject?
-        {
-        didSet {
-            print("media content data : \(mediaContentData)")
-            print("media content data oldValue: \(oldValue)")
-        }
-    }
     /// URL of media source. Used by file, URL, video and audio message.
     public var mediaSourceURL: String? = nil
     /// Display name of the file on media content view.
