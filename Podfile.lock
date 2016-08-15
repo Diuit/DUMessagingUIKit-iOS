@@ -1,14 +1,14 @@
 PODS:
-  - CryptoSwift (0.5.1)
+  - CryptoSwift (0.5.2)
   - DTModelStorage (2.6.2):
     - DTModelStorage/Core (= 2.6.2)
   - DTModelStorage/Core (2.6.2)
   - DTTableViewManager (4.7.0):
     - DTModelStorage (~> 2.6.0)
-  - DUMessaging (1.1.6):
+  - DUMessaging (1.1.8):
     - Socket.IO-Client-Swift (~> 6.1.0)
   - Kanna (1.1.0)
-  - MisterFusion (1.2.1)
+  - MisterFusion (1.2.2)
   - Socket.IO-Client-Swift (6.1.6)
   - URLEmbeddedView (0.4.1):
     - CryptoSwift (~> 0.2)
@@ -21,12 +21,12 @@ DEPENDENCIES:
   - URLEmbeddedView
 
 SPEC CHECKSUMS:
-  CryptoSwift: df42dda18baf6c76347a94e227dbcc0a341304bd
+  CryptoSwift: c1ef79f901b86099a6fe8b3c7524cf9f3f3c8c40
   DTModelStorage: afd736e5309f374c29dcd7e4364e7571e32e5db1
   DTTableViewManager: 4a961b5ffaa9a57387ccff7f9280d001c9c64082
-  DUMessaging: f82b08a6e3fe38c4055cc1c1729cdd74a0966f46
+  DUMessaging: 5b564b49f4d9d50e8bfb66adba54b6f554478fd0
   Kanna: 355ed0193e5d8caf4fd996856b5bc98d586c11b6
-  MisterFusion: cd2e79aaa9e2a0f525d79568409b34fa76d574bc
+  MisterFusion: f979335323ddd5fb13c889e98ce34fe30489b8d7
   Socket.IO-Client-Swift: 5eddbfafd3c035a77d365d5b58da93cc488af11f
   URLEmbeddedView: 3ecd18f2e405ecc82fce4f7ee6bd6286060a32a4
 

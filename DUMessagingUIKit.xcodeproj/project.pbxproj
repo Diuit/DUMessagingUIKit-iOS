@@ -23,7 +23,7 @@
 		FA1FD2311D00A2FF0066BC7C /* DUUserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA1FD22F1D00A2FF0066BC7C /* DUUserCell.swift */; };
 		FA1FD2321D00A2FF0066BC7C /* DUUserCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA1FD2301D00A2FF0066BC7C /* DUUserCell.xib */; };
 		FA236D8E1D24C22B0092854E /* DemoChatSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA236D8D1D24C22B0092854E /* DemoChatSettingViewController.swift */; };
-		FA236D901D24C2E40092854E /* MessageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA236D8F1D24C2E40092854E /* MessageModel.swift */; };
+		FA236D901D24C2E40092854E /* MockMessageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA236D8F1D24C2E40092854E /* MockMessageModel.swift */; };
 		FA2D83271CFE0BE20060A6B8 /* DUMessagingUIKit.h in Headers */ = {isa = PBXBuildFile; fileRef = FA2D83261CFE0BE20060A6B8 /* DUMessagingUIKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		FA2D832E1CFE0BE30060A6B8 /* DUMessagingUIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA2D83231CFE0BE20060A6B8 /* DUMessagingUIKit.framework */; };
 		FA2D83331CFE0BE30060A6B8 /* DUMessagingUIKitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2D83321CFE0BE30060A6B8 /* DUMessagingUIKitTests.swift */; };
@@ -64,6 +64,8 @@
 		FA976E981D047F9800F844E5 /* DUMessageCellTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA976E971D047F9800F844E5 /* DUMessageCellTextView.swift */; };
 		FA976E9C1D0492D600F844E5 /* DUMessageData.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA976E9B1D0492D600F844E5 /* DUMessageData.swift */; };
 		FA976EA11D04A34800F844E5 /* DUMessageCollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA976EA01D04A34800F844E5 /* DUMessageCollectionViewFlowLayout.swift */; };
+		FAC64C2E1D61B57C00730B0C /* MockChatModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC64C2D1D61B57C00730B0C /* MockChatModel.swift */; };
+		FAC64C341D61D17100730B0C /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = FAC64C361D61D17100730B0C /* Localizable.strings */; };
 		FAD5E14F1D173A6E00F7521B /* DUMediaItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD5E14E1D173A6E00F7521B /* DUMediaItem.swift */; };
 		FAD5E1511D173F1200F7521B /* DUMediaPlaceholderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD5E1501D173F1200F7521B /* DUMediaPlaceholderView.swift */; };
 		FAD5E1551D17505800F7521B /* DUMediaContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD5E1541D17505800F7521B /* DUMediaContentView.swift */; };
@@ -121,7 +123,7 @@
 		FA1FD22F1D00A2FF0066BC7C /* DUUserCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DUUserCell.swift; sourceTree = "<group>"; };
 		FA1FD2301D00A2FF0066BC7C /* DUUserCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DUUserCell.xib; sourceTree = "<group>"; };
 		FA236D8D1D24C22B0092854E /* DemoChatSettingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DemoChatSettingViewController.swift; sourceTree = "<group>"; };
-		FA236D8F1D24C2E40092854E /* MessageModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageModel.swift; sourceTree = "<group>"; };
+		FA236D8F1D24C2E40092854E /* MockMessageModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockMessageModel.swift; sourceTree = "<group>"; };
 		FA2D83231CFE0BE20060A6B8 /* DUMessagingUIKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = DUMessagingUIKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA2D83261CFE0BE20060A6B8 /* DUMessagingUIKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DUMessagingUIKit.h; sourceTree = "<group>"; };
 		FA2D83281CFE0BE20060A6B8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -169,6 +171,10 @@
 		FA976E971D047F9800F844E5 /* DUMessageCellTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DUMessageCellTextView.swift; sourceTree = "<group>"; };
 		FA976E9B1D0492D600F844E5 /* DUMessageData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DUMessageData.swift; sourceTree = "<group>"; };
 		FA976EA01D04A34800F844E5 /* DUMessageCollectionViewFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DUMessageCollectionViewFlowLayout.swift; sourceTree = "<group>"; };
+		FAC64C2D1D61B57C00730B0C /* MockChatModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockChatModel.swift; sourceTree = "<group>"; };
+		FAC64C311D61D11000730B0C /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Main.strings"; sourceTree = "<group>"; };
+		FAC64C351D61D17100730B0C /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		FAC64C371D61D17900730B0C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		FAD5E14E1D173A6E00F7521B /* DUMediaItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DUMediaItem.swift; sourceTree = "<group>"; };
 		FAD5E1501D173F1200F7521B /* DUMediaPlaceholderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DUMediaPlaceholderView.swift; sourceTree = "<group>"; };
 		FAD5E1541D17505800F7521B /* DUMediaContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DUMediaContentView.swift; sourceTree = "<group>"; };
@@ -359,7 +365,9 @@
 				FA4638FD1D19203200BF6070 /* WWDC_419.pdf */,
 				FA2D83D91CFE762B0060A6B8 /* LaunchScreen.storyboard */,
 				FA2D83DC1CFE762B0060A6B8 /* Info.plist */,
-				FA236D8F1D24C2E40092854E /* MessageModel.swift */,
+				FA236D8F1D24C2E40092854E /* MockMessageModel.swift */,
+				FAC64C2D1D61B57C00730B0C /* MockChatModel.swift */,
+				FAC64C361D61D17100730B0C /* Localizable.strings */,
 			);
 			path = DUMessagingDemo;
 			sourceTree = "<group>";
@@ -559,6 +567,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FAC64C341D61D17100730B0C /* Localizable.strings in Resources */,
 				FA2D83DB1CFE762B0060A6B8 /* LaunchScreen.storyboard in Resources */,
 				FA2D83D81CFE762B0060A6B8 /* Assets.xcassets in Resources */,
 				FA4638FE1D19203200BF6070 /* WWDC_419.pdf in Resources */,
@@ -708,7 +717,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FA236D901D24C2E40092854E /* MessageModel.swift in Sources */,
+				FA236D901D24C2E40092854E /* MockMessageModel.swift in Sources */,
+				FAC64C2E1D61B57C00730B0C /* MockChatModel.swift in Sources */,
 				FA236D8E1D24C22B0092854E /* DemoChatSettingViewController.swift in Sources */,
 				FA2D83D31CFE762B0060A6B8 /* DemoChatListViewController.swift in Sources */,
 				FA11E2261D0DA84B005C7EEB /* DemoMessagesViewController.swift in Sources */,
@@ -744,6 +754,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				FA2D83D51CFE762B0060A6B8 /* Base */,
+				FAC64C311D61D11000730B0C /* zh-Hant */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -754,6 +765,15 @@
 				FA2D83DA1CFE762B0060A6B8 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		FAC64C361D61D17100730B0C /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FAC64C351D61D17100730B0C /* zh-Hant */,
+				FAC64C371D61D17900730B0C /* en */,
+			);
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

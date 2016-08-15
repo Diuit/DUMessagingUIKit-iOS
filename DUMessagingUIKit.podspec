@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "DUMessagingUIKit"
-  s.version      = "0.1.0"
+  s.version      = "0.1.1"
   s.summary      = "An easy way to build a chat app within seconds"
   s.homepage     = "http://api.diuit.com/"
 
@@ -18,7 +18,7 @@ Pod::Spec.new do |s|
   s.requires_arc = true
 
   s.dependency "DTTableViewManager", "~> 4.7.0"
-  s.dependency "DUMessaging", "~> 1.0.2"
+  s.dependency "DUMessaging", "~> 1.1.8"
   s.dependency "URLEmbeddedView", "~> 0.4.0"
 
 end

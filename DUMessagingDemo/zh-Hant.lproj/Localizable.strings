@@ -1,0 +1,21 @@
+/* 
+  Localizable.strings
+  DUMessagingUIKit
+
+  Created by Pofat Diuit on 2016/8/15.
+  Copyright © 2016年 duolC. All rights reserved.
+*/
+
+FIRST_HINT="Hi，這是 Diuit 的 UIKit demo app，展示使用 Diuit 開發聊天功能後，對話介面的呈現方式";
+SECOND_HINT="透過此 demo app 你可以做到幾件事：";
+THIRD_HINT="1. 傳送文字訊息\n2. 點擊加號傳送預設的照片，影片或檔案。與你的 App 整合後可連結至使用者手機的相簿\n3. 點擊「模擬接收訊息」會模擬接收到其他人傳送的訊息的呈現方式";
+FORTH_HINT="背景顏色，泡泡顏色，大小，字型等等，都可以客製成你想要的樣式";
+FIFTH_HINT="接下來我們也會推出新版的 demo app，除了 UI 介面外，讓兩個裝置可以互傳訊息";
+
+MEDIA_MESSAGE="多媒體訊息";
+CHOOSE_TO_DEMO="選擇一個以demo";
+SEND_IMAGE="傳送圖片";
+SEND_VIDEO="傳送影片";
+SEND_LINK="傳送連結";
+SEND_FILE="傳送檔案";
+SIMULATE_RECEIVING="模擬接收訊息";

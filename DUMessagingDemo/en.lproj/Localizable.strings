@@ -1,0 +1,21 @@
+/* 
+  Localizable.strings
+  DUMessagingUIKit
+
+  Created by Pofat Diuit on 2016/8/15.
+  Copyright © 2016年 duolC. All rights reserved.
+*/
+
+FIRST_HINT="Hi, this is our UIKit demo app, giving you a peak into the conversational interface after integrating Diuit’s in-app messaging API into your app.";
+SECOND_HINT="This app demonstrates 3 things:";
+THIRD_HINT="1. Sending text messages\n2. Click the “plus” button and send picture, video or other files. When completing integration it will connect to user’s album.\n3. By clicking \"Simulate Receiving Message\” it shows the interface when receiving messages from other users.";
+FORTH_HINT="When integrating into your app, you can also customarize the UI and make it fit into your app design";
+FIFTH_HINT="We’ll launch another demo app soon. Not only showing standard UI, it will let you send messages between two devices. Stay tuned. ";
+
+MEDIA_MESSAGE="Media message";
+CHOOSE_TO_DEMO="Choose one to demo";
+SEND_IMAGE="Send image";
+SEND_VIDEO="Send video";
+SEND_LINK="Send a link";
+SEND_FILE="Send file";
+SIMULATE_RECEIVING="Simulate receiving message";

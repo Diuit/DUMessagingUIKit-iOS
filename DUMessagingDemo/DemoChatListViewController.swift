@@ -13,6 +13,8 @@ import DUMessaging
 class DemoChatListViewController: UITableViewController, DUChatListProtocolForViewController {
     // MARK: followings are propeties and methods that you should implement
     var chatData: [DUChatData] = []
+    // For hint localizations
+    private let hints: [String] = ["FIRST_HINT", "SECOND_HINT", "THIRD_HINT", "FORTH_HINT", "FIFTH_HINT"]
     
     func didClickRightBarButton(sender: UIBarButtonItem?) {
         // handle righbtBarButton click event
@@ -32,32 +34,20 @@ class DemoChatListViewController: UITableViewController, DUChatListProtocolForVi
         // adopt UI protocol
         adoptProtocolUIApperance()
         
-        // retrieve chat list
-        DUMessaging.authWithSessionToken("pofat_04") { error, result in
-            guard error == nil else {
-                print("auth error:\(error!.localizedDescription)")
-                return
-            }
-            DUMessaging.listAllChatRooms() { [unowned self] error, chats in
-                guard let _:[DUChat] = chats where error == nil else {
-                    print("list error:\(error!.localizedDescription)")
-                    return
-                }
-
-                // You must use .map to assign array, or you will get a runtime errro.
-                // For Swift still has to bridge to NSArray in runtime to deal with collection, and NSArray can not handle protocol type.
-                self.chatData = chats!.map({$0 as DUChatData})
-                
-                // Call this after you done retrieving data
-                self.endGettingChatData()
-            }
+        var hintMessages: [DUMessageData] = []
+        for hint in hints {
+            var mockHinMessage = MockMessageModel(text: NSLocalizedString(hint, comment: "hint"), isOutgoing: false)
+            mockHinMessage.senderIdentifier = "her"
+            mockHinMessage.senderDisplayName = "Bot"
+            hintMessages.append(mockHinMessage)
         }
+        self.chatData.append(MockChatModel.init(withMessages: hintMessages))
+        self.endGettingChatData()
         
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        self.endGettingChatData()
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {

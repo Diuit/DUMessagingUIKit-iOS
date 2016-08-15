@@ -11,8 +11,7 @@ import DUMessagingUIKit
 import DUMessaging
 
 
-// FIXME: This is a test-only class, delete when test done
-struct MessageModel: DUMessageData {
+struct MockMessageModel: DUMessageData {
     var senderIdentifier: String = "me"
     var senderDisplayName: String = "MySelf"
     var messageID: Int
