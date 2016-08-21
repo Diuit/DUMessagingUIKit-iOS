@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "DUMessagingUIKit"
-  s.version      = "0.1.1"
+  s.version      = "0.1.2"
   s.summary      = "An easy way to build a chat app within seconds"
   s.homepage     = "http://api.diuit.com/"
 
@@ -14,6 +14,8 @@ Pod::Spec.new do |s|
   s.source       = { :git => "https://github.com/Diuit/DUMessagingUIKit-iOS.git", :tag => s.version }
 
   s.source_files  = 'DUMessagingUIKit/*.swift'
+  s.resource_bundle = { 'DUMessagingUIKit' => 'DUMessagingUIKit/*.xcassets' }
+  s.resources = ['DUMessagingUIKit/*.{xib}']
 
   s.requires_arc = true
 
