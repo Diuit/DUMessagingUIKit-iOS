@@ -9,16 +9,21 @@
 import UIKit
 
 public class DUAvatarImageFactory: NSObject {
-    // constants
+    /// Defualt avatar image diameter in DUChatList table view
     public static let kAvataImageDefaultDiameterInChatsList: CGFloat = 66.0
+    /// Default avatar image diameter in DUMessagesCollectionView
     public static let kAvatarImageDefualtDiameterInMessags: CGFloat = 32.0
     
-    /// return an UIImage instance of default user avatar
-    //public static let defaultUserAvatarImage: UIImage = UIImage.DUDefaultUserAvatarImage()!
-    
-    public static func avatarImageWithString(text: String, backgroundColor: UIColor = UIColor.DUAvatarBgDefaultColor(), textColor: UIColor = UIColor.whiteColor(), font: UIFont, diameter: CGFloat) -> UIImage? {
-        //assert(text != nil, "Source string can not be nil")
-        //assert(font != nil, "Font can not be nil")
+    /**
+        Create an UIImage instance of avatar with given text and diameter
+        
+        - parameters:
+            - text: The displaying text at the center of avatar image. Better use short and uppercasted text.
+     
+        - returns:
+            An UIImage instance of avatar, or `nil` if creation failed
+     */
+    public static func makeAvatarImage(text: String, backgroundColor: UIColor = UIColor.DUAvatarBgDefaultColor(), textColor: UIColor = UIColor.whiteColor(), font: UIFont, diameter: CGFloat) -> UIImage? {
         assert(diameter > 0, "diameter of avatar image must be greater than 0")
         
         let frame: CGRect = CGRectMake(0.0, 0.0, diameter, diameter)

@@ -16,12 +16,6 @@
                 <rect key="frame" x="0.0" y="0.0" width="375" height="92"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="qse-nj-laj">
-                        <rect key="frame" x="14" y="14" width="66" height="66"/>
-                        <constraints>
-                            <constraint firstAttribute="width" secondItem="qse-nj-laj" secondAttribute="height" multiplier="1:1" id="O5t-HZ-71Q"/>
-                        </constraints>
-                    </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="WWWWWWWWWWW" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tJs-SG-l3G">
                         <rect key="frame" x="94" y="14" width="163" height="18"/>
                         <constraints>
@@ -58,6 +52,12 @@
                             <constraint firstAttribute="width" secondItem="Ouz-7r-aVi" secondAttribute="height" multiplier="1:1" id="xel-Mx-m78"/>
                         </constraints>
                     </imageView>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="defaultAvatar" translatesAutoresizingMaskIntoConstraints="NO" id="qse-nj-laj" customClass="DUAvatarImageView" customModule="DUMessagingUIKit" customModuleProvider="target">
+                        <rect key="frame" x="14" y="14" width="66" height="66"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="qse-nj-laj" secondAttribute="height" multiplier="1:1" id="O5t-HZ-71Q"/>
+                        </constraints>
+                    </imageView>
                 </subviews>
                 <constraints>
                     <constraint firstItem="sKq-Je-ySy" firstAttribute="leading" secondItem="qse-nj-laj" secondAttribute="trailing" constant="14" id="2tu-UW-9J7"/>
@@ -84,4 +84,7 @@
             <point key="canvasLocation" x="182.5" y="214.5"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="defaultAvatar" width="66" height="66"/>
+    </resources>
 </document>

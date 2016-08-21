@@ -7,21 +7,52 @@
 //
 
 import Foundation
-import SDWebImage
+
+let imageCache = NSCache()
 
 /// Base protocol for remote resources
 public protocol DURemoteResource {
     func load(url: String, completion: (Bool -> Void)? )
 }
 
-// protocol for loading mediat resource
+/// Protocol for loading image resource
 public protocol DUImageResource: DURemoteResource {
-    var imagePath: String { get }
-    var placeholderImage: UIImage { get }
+    /// URL of image resource
+    var imagePath: String? { get }
+    /// Placeholder image for displaying before image is fully loaded
+    //var placeholderImage: UIImage { get }
 }
 extension DUImageResource {
+    /// Load the image resource from imagePath
     public func load(url: String, completion: (Bool -> Void)? ) {
+        guard imagePath != nil && imagePath != "" else {
+            print("image path is nil or empty")
+            completion?(false)
+            return
+        }
         print("Fetching remote resources from \(url)")
+        
+        if let _ = imageCache.objectForKey(url) as? NSData {
+            completion?(true)
+        } else {
+            let session = NSURLSession.sharedSession()
+            let u = NSURL(string: url)
+            let downloadTask = session.dataTaskWithURL(u!, completionHandler: { data, response, error in
+                guard error == nil else {
+                    completion?(false)
+                    return
+                }
+                if data != nil {
+                    imageCache.setObject(data!, forKey: url)
+                    completion?(true)
+                }
+            })
+            downloadTask.resume()
+        }
+        
+        
+        
+        /*
         let imgManager = SDWebImageManager.sharedManager()
         let indexKey = imgManager.cacheKeyForURL(NSURL(string: url))
         let cachedImage = imgManager.imageCache.imageFromMemoryCacheForKey(indexKey)
@@ -43,30 +74,42 @@ extension DUImageResource {
                 }
             }
         }
+ */
     }
     
-    /// Beware your completion closure will be executed in main queue, so do not deal with time-consuming stuff here
+    /// Send a completion handler to this function and trigger the image loading procedure.
+    /// Beware your completion closure will be executed in main queue, so do not deal with time-consuming stuff here.
     func loadImage(completion: (Void -> Void)? ) {
-        self.load(self.imagePath) { success in
+        guard self.imagePath != nil else { return }
+        self.load(self.imagePath!) { success in
             if let c = completion {
                 dispatch_async(dispatch_get_main_queue(), c)
             }
         }
     }
     
-    /// return cached image for given URL
+    /// Return cached image for given URL
     func imageForURL(url: String) -> UIImage? {
+        let cachedData = imageCache.objectForKey(url) as? NSData
+        if let _ = cachedData {
+            return UIImage(data: cachedData!)
+        } else {
+            return nil
+        }
+        /*
         let imgManager = SDWebImageManager.sharedManager()
         let indexKey = imgManager.cacheKeyForURL(NSURL(string: url))
         return imgManager.imageCache.imageFromMemoryCacheForKey(indexKey)
+ */
     }
     
-    /// get UIImage value
+    /// get UIImage instance, return placeholderImage if remote resource failed to load
     var imageValue: UIImage? {
-        if let img = self.imageForURL(self.imagePath) {
+        if self.imagePath == nil { return nil }
+        if let img = self.imageForURL(self.imagePath!) {
             return img
         } else {
-            return self.placeholderImage
+            return nil
         }
         
     }

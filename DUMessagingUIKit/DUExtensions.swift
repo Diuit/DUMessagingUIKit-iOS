@@ -53,57 +53,80 @@ public extension UIColor {
 }
 
 public extension UIFont {
-    class func DUBodyTimeFriendFont() -> UIFont? {
-        //TODO: fix custom font return nil
-        //return UIFont(name: "Roboto-Regular", size: 22.0)
-        return UIFont(name: "Helvetica", size: 22.0)
+    class func DUBodyTimeFriendFont() -> UIFont {
+        return UIFont(name: "Helvetica", size: 22.0)!
     }
     
-    class func DUNavigationFont() -> UIFont? {
-        return UIFont(name: "Helvetica", size: 17.0)
+    class func DUNavigationFont() -> UIFont {
+        return UIFont(name: "Helvetica", size: 17.0)!
     }
     
-    class func DUSubheadFont() -> UIFont? {
-        return UIFont(name: "Helvetica", size: 16.0)
+    class func DUSubheadFont() -> UIFont {
+        return UIFont(name: "Helvetica", size: 16.0)!
     }
     
-    class func DUUnreadTitleFont() -> UIFont? {
-        //TODO: fix custom font return nil
-        //return UIFont(name: "Roboto-Bold", size: 16.0)
-        return UIFont(name: "Helvetica-Bold", size: 16.0)
+    class func DUMessageSenderFont() -> UIFont {
+        return UIFont(name: "Helvetica", size: 12.0)!
     }
     
-    class func DUSendButtonFont() -> UIFont? {
-        return UIFont(name: "Helvetica-Bold", size: 14.0)
+    class func DUUnreadTitleFont() -> UIFont {
+        return UIFont(name: "Helvetica-Bold", size: 16.0)!
     }
     
-    class func DUBodyFont() -> UIFont? {
-        return UIFont(name: "Helvetica", size: 14.0)
+    class func DUSendButtonFont() -> UIFont {
+        return UIFont(name: "Helvetica-Bold", size: 14.0)!
     }
     
-    class func DUChatBodyFriendFont() -> UIFont? {
-        return UIFont(name: "Helvetica", size: 14.0)
+    class func DUFileTitleFont() -> UIFont {
+        return UIFont(name: "Helvetica-Bold", size: 15.0)!
     }
     
-    class func DUBodyTimeUnreadFont() -> UIFont? {
-        return UIFont(name: "Helvetica-Bold", size: 11.0)
+    class func DUBodyFont() -> UIFont {
+        return UIFont(name: "Helvetica", size: 14.0)!
     }
     
-    class func DUBodyTimeFont() -> UIFont? {
-        return UIFont(name: "Helvetica", size: 11.0)
+    class func DUChatBodyFriendFont() -> UIFont {
+        return UIFont(name: "Helvetica", size: 14.0)!
     }
     
-    class func DUChatroomDateFont() -> UIFont? {
-        return UIFont(name: "Helvetica-Light", size: 11.0)
+    class func DUBodyTimeUnreadFont() -> UIFont {
+        return UIFont(name: "Helvetica-Bold", size: 11.0)!
     }
     
-    class func DUChatAvatarFont() -> UIFont? {
-        return UIFont (name: "Helvetica Neue", size: 30)
+    class func DUMessageTimeLabelFont() -> UIFont {
+        return UIFont(name: "Helvetica", size: 11.0)!
     }
+    
+    class func DUFileDescLabelFont() -> UIFont {
+        return UIFont(name: "Helvetica", size: 11.0)!
+    }
+    
+    class func DUChatroomDateFont() -> UIFont {
+        return UIFont(name: "Helvetica-Light", size: 11.0)!
+    }
+    
+    class func DUChatAvatarFont() -> UIFont {
+        return UIFont (name: "Helvetica Neue", size: 30)!
+    }
+    
+    class func DUURLPreviewTitleFont() -> UIFont {
+        return UIFont(name: "Helvetica", size: 12.0)!
+    }
+
+    class func DUURLPreviewDescriptionFont() -> UIFont {
+        return UIFont(name: "Helvetica-Light", size: 10.0)!
+    }
+    
 }
 
 // MARK: functions
-extension NSDate {
+public extension NSDate {
+    /**
+        Convert NSDate instance to a String indicating time with specif format:
+            - 7:33PM : Display hour and minute if the time is today
+            - April 11 : Display date if the time lies in this year
+            - 2015/04/11 : Display complete date if the time is even earlier
+     */
     var messageTimeLabelString: String {
         get {
             let cal = NSCalendar.currentCalendar()
@@ -142,7 +165,25 @@ public extension UIImage {
         return UIImage(named: "defaultAvatar", inBundle: NSBundle(identifier: Constants.bundleIdentifier) , compatibleWithTraitCollection: nil)!
     }
     
-    class func imageWithColor(color: UIColor) -> UIImage {
+    class func DUAddUserImage() -> UIImage {
+        return UIImage(named: "addUser", inBundle: NSBundle(identifier: Constants.bundleIdentifier) , compatibleWithTraitCollection: nil)!
+    }
+    
+    class func DUFileIconImage() -> UIImage {
+        return UIImage(named: "fileIcon", inBundle: NSBundle(identifier: Constants.bundleIdentifier) , compatibleWithTraitCollection: nil)!
+    }
+    
+    class func DUPlayIcon() -> UIImage {
+        return UIImage(named:"playIcon", inBundle: NSBundle(identifier: Constants.bundleIdentifier) , compatibleWithTraitCollection: nil)!
+    }
+    
+    class func DUSettingsIcon() -> UIImage {
+        return UIImage(named:"setting", inBundle: NSBundle(identifier: Constants.bundleIdentifier) , compatibleWithTraitCollection: nil)!
+    }
+    /**
+        Return an UIImage instance with size 1.0 * 1.0 of given background UIColor
+     */
+    class func imageWith(backgroundColor color: UIColor) -> UIImage {
         let rect: CGRect = CGRectMake(0.0, 0.0, 1.0, 1.0)
         UIGraphicsBeginImageContext(rect.size)
         let context = UIGraphicsGetCurrentContext()
@@ -153,17 +194,141 @@ public extension UIImage {
         UIGraphicsEndImageContext()
         return resultImage
     }
+    
+    func masked(withColor color: UIColor) -> UIImage {
+        let imageRect = CGRectMake(0, 0, self.size.width, self.size.height)
+        var maskedImage: UIImage! = nil
+        
+        UIGraphicsBeginImageContextWithOptions(imageRect.size, false, self.scale)
+        let context = UIGraphicsGetCurrentContext()
+        CGContextScaleCTM(context, 1.0, -1.0)
+        
+        CGContextClipToMask(context, imageRect, self.CGImage)
+        CGContextSetFillColorWithColor(context, color.CGColor)
+        CGContextFillRect(context, imageRect)
+        
+        maskedImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        return maskedImage
+    }
 }
 
-// NSStringFromClass for Swift version
-public extension NSObject{
+
+public extension NSAttributedString {
+    class func DUDeliverWarningAttributed(string: String) -> NSAttributedString {
+        return NSAttributedString(string: string, attributes: [NSFontAttributeName : UIFont.DUMessageTimeLabelFont(), NSForegroundColorAttributeName : UIColor.DUWarnigColor()])
+    }
+}
+
+public extension UIView {
+    /// Add NSLayoutConstraints to make subview as same as current view in size
+    func pingAlledge(ofSubview subview: UIView) {
+        self.ping(subview: subview, toEdge: .Top)
+        self.ping(subview: subview, toEdge: .Leading)
+        self.ping(subview: subview, toEdge: .Bottom)
+        self.ping(subview: subview, toEdge: .Trailing)
+    }
+    /// Ping one edge of subview with given attribut onto current view's edge
+    func ping(subview subview:UIView, toEdge attribute: NSLayoutAttribute) {
+        self.addConstraint(NSLayoutConstraint(item: self, attribute: attribute, relatedBy: .Equal, toItem: subview, attribute: attribute, multiplier: 1.0, constant: 0.0))
+    }
+}
+
+public extension String {
+    /**
+     Return a `String` object with all white all spaces trimmed
+     
+     - returns: Trimmed String
+     */
+    func du_trimingWhitespace() -> String {
+        return self.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
+    }
+    /**
+     Calculate the minimum rectangle which contains the given text, with given width and font.
+     
+     - parameter width: The maximum width of the text.
+     - parameter font:  UIFont of the text
+     
+     - returns: A CGRect structure of calculated result.
+     */
+    func rectWithConstrainedWidth(width: CGFloat, font: UIFont) -> CGRect {
+        let constraintRect = CGSize(width: width, height: CGFloat.max)
+        let boundingRect = self.boundingRectWithSize(constraintRect, options: .UsesLineFragmentOrigin, attributes: [NSFontAttributeName: font], context: nil)
+        return CGRectIntegral(boundingRect)
+    }
+    
+    /**
+     To verify if this string is a valid HTTP URL
+     
+     - returns: A Bool to indicate if this is a HTTP URL
+     */
+    func isValidURL() -> Bool {
+        let urlRegEx = "(?i)https?://(?:www\\.)?\\S+(?:/|\\b)"
+        let predicate: NSPredicate = NSPredicate(format: "SELF MATCHES %@", argumentArray: [urlRegEx])
+        return predicate.evaluateWithObject(self)
+    }
+}
+
+public extension NSObject {
+    /// Return class string
     public class var nameOfClass: String{
         return NSStringFromClass(self).componentsSeparatedByString(".").last!
     }
-    
+    /// Return dynamic type string of the instance
     public var nameOfClass: String{
         return NSStringFromClass(self.dynamicType).componentsSeparatedByString(".").last!
     }
 }
+
+
+public extension NSURL {
+    /**
+     Get complete asset file name, e.g. 'image1.jpg'
+     
+     - returns: A String of complte file name.
+     */
+    func getAssetFullFileName() -> String? {
+        guard self.scheme == "assets-library" else {
+            return nil
+        }
+        let absoluePath = self.absoluteString
+        let idRange = absoluePath.rangeOfString("id=")
+        let extRange = absoluePath.rangeOfString("&ext=")
+        let fileName = absoluePath.substringWithRange(idRange!.endIndex..<extRange!.startIndex)
+        let ext = absoluePath.substringWithRange(extRange!.endIndex..<absoluePath.endIndex)
+        return fileName+"."+ext
+    }
+    
+    /**
+     Get asset file extentsion, e.g. 'jpg'
+     
+     - returns: A String of file extenstion.
+     */
+    func getAssetFileExt() -> String? {
+        guard self.scheme == "assets-library" else {
+            return nil
+        }
+        let absoluePath = self.absoluteString
+        let extRange = absoluePath.rangeOfString("&ext=")
+        return absoluePath.substringWithRange(extRange!.endIndex..<absoluePath.endIndex)
+    }
+    
+    /**
+     Get asset file name without extension, e.g. 'image1'
+     
+     - returns: A String of file name.
+     */
+    func getAssetFileName() -> String? {
+        guard self.scheme == "assets-library" else {
+            return nil
+        }
+        let absoluePath = self.absoluteString
+        let idRange = absoluePath.rangeOfString("id=")
+        let extRange = absoluePath.rangeOfString("&ext=")
+        return absoluePath.substringWithRange(idRange!.endIndex..<extRange!.startIndex)
+    }
+}
+
 
 
