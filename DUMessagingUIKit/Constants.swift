@@ -8,12 +8,6 @@
 
 import Foundation
 
-/// For global constants
-public struct Constants {
-    static let bundleIdentifier = "com.duolc.DUMessagingUIKit"
-}
-
-
 /// Global Theme setting
 public class GlobalUISettings {
     /// Navigation bar tint color

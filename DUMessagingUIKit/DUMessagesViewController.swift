@@ -161,6 +161,14 @@ public class DUMessagesViewController: UIViewController, UITextViewDelegate, DUM
 
         if messageItem.isMediaMessage {
             cell.messageMediaView = messageItem.mediaItem?.getMediaContentView() ?? messageItem.mediaItem?.placeholderView
+            if let du_messagItem = messageItem as? DUMessage {
+                if messageItem.mediaItem?.type == .Image && du_messagItem.localImage == nil {
+                    du_messagItem.loadImage() { [weak self] in
+                        du_messagItem.localImage = du_messagItem.imageValue
+                        self?.collectionView?.reloadItemsAtIndexPaths([indexPath])
+                    }
+                }
+            }
         } else {
             cell.cellTextView.text = messageItem.contentText
             cell.cellTextView.textColor = (messageItem.isOutgoingMessage) ? GlobalUISettings.outgoingMessageTextColor : GlobalUISettings.incomingMessageTextColor
@@ -306,7 +314,7 @@ public class DUMessagesViewController: UIViewController, UITextViewDelegate, DUM
     public func attributedTextForTiemLabel(atIndexPath indexPath: NSIndexPath, forCollectionView collectionView: DUMessageCollectionView) -> NSAttributedString? {
         var attributedString: NSAttributedString
         let messageItem = messageData[indexPath.item]
-        let dateStr = messageItem.date?.messageTimeLabelString ?? ""
+        let dateStr = messageItem.date?.messageTimeLabelString ?? NSDate().messageTimeLabelString
         // if DUMessage object and with status of `FailedToSend`, display warning
         if let du_message = messageItem as? DUMessage {
             attributedString = (du_message.status == .FailedToSend) ? NSAttributedString.DUDeliverWarningAttributed("Not Delivered") : NSAttributedString(string: dateStr)
@@ -477,7 +485,7 @@ public class DUMessagesViewController: UIViewController, UITextViewDelegate, DUM
 // MARK: Class method
 public extension DUMessagesViewController {
     /// Return UINib object of `DUMessagesViewController`.
-    static var nib: UINib { return UINib.init(nibName: self.nameOfClass, bundle: NSBundle(identifier: Constants.bundleIdentifier)) }
+    static var nib: UINib { return UINib.init(nibName: self.nameOfClass, bundle: NSBundle.du_messagingUIKitBundle) }
 }
 
 // MARK: private helper

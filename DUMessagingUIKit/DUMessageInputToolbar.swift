@@ -40,7 +40,7 @@ public class DUMessageInputToolbar: UIToolbar {
     override public func awakeFromNib() {
         super.awakeFromNib()
         
-        let toolbarContentView = NSBundle(identifier: Constants.bundleIdentifier)?.loadNibNamed(String(DUInputToolbarContentView), owner: nil, options: nil).first as? DUInputToolbarContentView
+        let toolbarContentView = NSBundle.du_messagingUIKitBundle.loadNibNamed(String(DUInputToolbarContentView), owner: nil, options: nil).first as? DUInputToolbarContentView
         
         guard toolbarContentView != nil else {
             assert(false, "contentView has loaded failed")
