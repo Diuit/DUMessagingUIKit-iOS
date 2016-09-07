@@ -96,11 +96,6 @@ extension DUImageResource {
         } else {
             return nil
         }
-        /*
-        let imgManager = SDWebImageManager.sharedManager()
-        let indexKey = imgManager.cacheKeyForURL(NSURL(string: url))
-        return imgManager.imageCache.imageFromMemoryCacheForKey(indexKey)
- */
     }
     
     /// get UIImage instance, return placeholderImage if remote resource failed to load

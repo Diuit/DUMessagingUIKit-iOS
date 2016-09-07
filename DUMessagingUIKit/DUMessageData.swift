@@ -101,7 +101,14 @@ extension DUMessage: DUMessageData, DUImageResource {
                     // FIXME: is it possible to load image source here and trigger collecion view reload here?
                     // Because i don't know how to do it yet, set nil here and load image in `DUCollectionViewDataSource`
                     if let content = self.data {
-                        if content.isValidURL() { return DUMediaItem.init(fromImageURL: content) }
+                        //if content.isValidURL() { return DUMediaItem.init(fromImageURL: content) }
+                        if content.isValidURL() {
+                            if let img = self.imageForURL(content) {
+                                return DUMediaItem.init(fromImage: img)
+                            } else {
+                                return DUMediaItem.init(fromImageURL: content)
+                            }
+                        }
                         else { return DUMediaItem.init(fromImage: nil) }
                     } else {
                         return DUMediaItem.init(fromImage: nil)
