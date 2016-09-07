@@ -68,7 +68,7 @@ public class DUTypingIndicatorFooterView: UICollectionReusableView {
 
 public extension DUTypingIndicatorFooterView {
     /// Return UINib object of `DUTypingIndicatorFooterView` for collection reusable footer view.
-    public static var nib: UINib { return UINib.init(nibName: self.nameOfClass, bundle: NSBundle(identifier: Constants.bundleIdentifier)) }
+    public static var nib: UINib { return UINib.init(nibName: self.nameOfClass, bundle: NSBundle.du_messagingUIKitBundle) }
     /// Return the string to identify reuable footer view.
     public static var footerViewReuseIdentifier: String { return self.nameOfClass }
 }

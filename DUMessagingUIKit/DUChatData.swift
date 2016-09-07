@@ -70,9 +70,9 @@ extension DUChat: DUChatData {
     public var chatDetailText: String {
         if let m = self.lastMessage {
             if m.mime!.containsString("image") {
-                return m.meta!["name"] as? String ?? "Unnamed image"
+                return m.meta?["name"] as? String ?? "Unnamed image"
             } else if m.mime! == DUMIMEType.general {
-                return m.meta!["name"] as? String ?? "Unnamed file"
+                return m.meta?["name"] as? String ?? "Unnamed file"
             } else {
                 return m.data ?? ""
             }

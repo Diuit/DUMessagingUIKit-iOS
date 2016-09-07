@@ -158,27 +158,27 @@ public extension NSDate {
 
 public extension UIImage {
     class func DUNewChatButtonImage() -> UIImage {
-        return UIImage(named: "CreateChat_n", inBundle: NSBundle(identifier: Constants.bundleIdentifier) , compatibleWithTraitCollection: nil)!
+        return UIImage(named: "CreateChat_n", inBundle: NSBundle.du_messagingUIKitBundle , compatibleWithTraitCollection: nil)!
     }
     
     class func DUDefaultPersonAvatarImage() -> UIImage {
-        return UIImage(named: "defaultAvatar", inBundle: NSBundle(identifier: Constants.bundleIdentifier) , compatibleWithTraitCollection: nil)!
+        return UIImage(named: "defaultAvatar", inBundle: NSBundle.du_messagingUIKitBundle , compatibleWithTraitCollection: nil)!
     }
     
     class func DUAddUserImage() -> UIImage {
-        return UIImage(named: "addUser", inBundle: NSBundle(identifier: Constants.bundleIdentifier) , compatibleWithTraitCollection: nil)!
+        return UIImage(named: "addUser", inBundle: NSBundle.du_messagingUIKitBundle , compatibleWithTraitCollection: nil)!
     }
     
     class func DUFileIconImage() -> UIImage {
-        return UIImage(named: "fileIcon", inBundle: NSBundle(identifier: Constants.bundleIdentifier) , compatibleWithTraitCollection: nil)!
+        return UIImage(named: "fileIcon", inBundle: NSBundle.du_messagingUIKitBundle , compatibleWithTraitCollection: nil)!
     }
     
     class func DUPlayIcon() -> UIImage {
-        return UIImage(named:"playIcon", inBundle: NSBundle(identifier: Constants.bundleIdentifier) , compatibleWithTraitCollection: nil)!
+        return UIImage(named:"playIcon", inBundle: NSBundle.du_messagingUIKitBundle , compatibleWithTraitCollection: nil)!
     }
     
     class func DUSettingsIcon() -> UIImage {
-        return UIImage(named:"setting", inBundle: NSBundle(identifier: Constants.bundleIdentifier) , compatibleWithTraitCollection: nil)!
+        return UIImage(named:"setting", inBundle: NSBundle.du_messagingUIKitBundle , compatibleWithTraitCollection: nil)!
     }
     /**
         Return an UIImage instance with size 1.0 * 1.0 of given background UIColor
@@ -327,6 +327,12 @@ public extension NSURL {
         let idRange = absoluePath.rangeOfString("id=")
         let extRange = absoluePath.rangeOfString("&ext=")
         return absoluePath.substringWithRange(idRange!.endIndex..<extRange!.startIndex)
+    }
+}
+
+public extension NSBundle {
+    static var du_messagingUIKitBundle: NSBundle {
+        return NSBundle(forClass: DUMessagesViewController.classForCoder())
     }
 }
 

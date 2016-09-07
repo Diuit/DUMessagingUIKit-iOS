@@ -46,7 +46,7 @@ public class DUChatSettingViewController: UIViewController, DUChatSettingUIProto
     @IBOutlet weak public var tableView: UITableView!
     
     public var chatDataForSetting: DUChatData? = nil
-    static var nib: UINib { return UINib.init(nibName: String(DUChatSettingViewController), bundle: NSBundle(identifier: Constants.bundleIdentifier)) }
+    static var nib: UINib { return UINib.init(nibName: String(DUChatSettingViewController), bundle: NSBundle.du_messagingUIKitBundle) }
     
     // MARK: life cycle
     override public func viewDidLoad() {
@@ -58,7 +58,7 @@ public class DUChatSettingViewController: UIViewController, DUChatSettingUIProto
 
         // setup tableView
         manager.startManagingWithDelegate(self)
-        manager.viewBundle = NSBundle(identifier: Constants.bundleIdentifier)!
+        manager.viewBundle = NSBundle.du_messagingUIKitBundle
         
         if self.chatDataForSetting?.chatSettingPageType == .Direct {
             manager.registerCellClass(DUBlockCell.self)

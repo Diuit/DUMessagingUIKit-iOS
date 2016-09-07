@@ -477,7 +477,7 @@ public class DUMessagesViewController: UIViewController, UITextViewDelegate, DUM
 // MARK: Class method
 public extension DUMessagesViewController {
     /// Return UINib object of `DUMessagesViewController`.
-    static var nib: UINib { return UINib.init(nibName: self.nameOfClass, bundle: NSBundle(identifier: Constants.bundleIdentifier)) }
+    static var nib: UINib { return UINib.init(nibName: self.nameOfClass, bundle: NSBundle.du_messagingUIKitBundle) }
 }
 
 // MARK: private helper

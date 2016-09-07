@@ -151,7 +151,7 @@ public class DUMessageCollectionViewCell: UICollectionViewCell {
 // Class method
 public extension DUMessageCollectionViewCell {
     
-    static var nib: UINib { return UINib.init(nibName: self.nameOfClass, bundle: NSBundle(identifier: Constants.bundleIdentifier)) }
+    static var nib: UINib { return UINib.init(nibName: self.nameOfClass, bundle: NSBundle.du_messagingUIKitBundle) }
     
     public static var cellReuseIdentifier: String { return self.nameOfClass }
     

@@ -17,6 +17,6 @@ public class DUInputToolbarContentView: UIView {
         }
     }
     
-    static public let nib: UINib = UINib.init(nibName: String(DUInputToolbarContentView), bundle: NSBundle(identifier: Constants.bundleIdentifier))
+    static public let nib: UINib = UINib.init(nibName: String(DUInputToolbarContentView), bundle: NSBundle.du_messagingUIKitBundle)
     
 }

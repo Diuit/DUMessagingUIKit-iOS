@@ -48,7 +48,7 @@ public extension DUChatListProtocolForViewController where Self: UIViewControlle
         
         // TODO: possible to customize NSBundle? register Cell? and register nibName?
         manager.startManagingWithDelegate(self)
-        manager.viewBundle = NSBundle(identifier: Constants.bundleIdentifier)!
+        manager.viewBundle = NSBundle.du_messagingUIKitBundle
         manager.registerCellClass(DUChatCell.self) { [weak self] (_, model, indexPath) in
             self?.didSelectCell(atIndexPath:indexPath)
         }
