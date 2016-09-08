@@ -73,7 +73,7 @@ public class DUMessagesViewController: UIViewController, UITextViewDelegate, DUM
     }
     
     
-    // FIXME: for current controller can not be released due to unfound retain cycle, we remove notification in viewDidDisappear for temporary
+    // FIXME: we remove notification in viewDidDisappear for temporary
     override public func viewDidDisappear(animated: Bool) {
         super.viewDidDisappear(animated)
         clearForNotification()
@@ -96,6 +96,9 @@ public class DUMessagesViewController: UIViewController, UITextViewDelegate, DUM
         
         collectionView?.dataSource = self
         collectionView?.delegate = self
+        // add a tap gesture for colleciotnview
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(didTap(messageCollectionView:)))
+        collectionView?.addGestureRecognizer(tapGesture)
         
         updateCollectionViewInsets(top: self.topLayoutGuide.length, bottom: CGRectGetMaxY(collectionView!.frame) - CGRectGetMinY(self.inputToolbar!.frame))
     }
@@ -558,6 +561,19 @@ extension DUMessagesViewController: DUMessageCollectionViewCellDelegate{
 
     public func didTap(messageCollectionViewCell cell: DUMessageCollectionViewCell) {
         assert(false, "tapped message cell, please implement '\(#function)' to deal with this event.")
+    }
+}
+
+// MARK: DUMessageCollectionView
+extension DUMessagesViewController {
+    private func messageCollectionViewTapHandler(sender: UITapGestureRecognizer) {
+        if let _ = self.collectionView {
+            didTap(messageCollectionView: self.collectionView!)
+        }
+    }
+    
+    public func didTap(messageCollectionView view: DUMessageCollectionView) {
+        print("Tapped messageCollectionView, please implemnt '\(#function)' to deal with this event.")
     }
 }
 
