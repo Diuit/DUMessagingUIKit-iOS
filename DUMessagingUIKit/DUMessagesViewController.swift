@@ -549,15 +549,15 @@ public extension DUMessageCollectionViewFlowLayoutDelegate where Self: DUMessage
 // MARK: DUMessageCollectionViewCell Delegate - default behavior
 extension DUMessagesViewController: DUMessageCollectionViewCellDelegate{
     public func didTapAvatar(ofMessageCollectionViewCell cell: DUMessageCollectionViewCell) {
-        //print("tapped avatar, please implement '\(#function)' to deal with this event.")
+        assert(false, "tapped avatar, please implement '\(#function)' to deal with this event.")
     }
 
     public func didTapMessageBubble(ofMessageCollectionViewCell cell: DUMessageCollectionViewCell) {
-        //print("tapped message bubble, please implement '\(#function)' to deal with this event.")
+        assert(false, "tapped message bubble, please implement '\(#function)' to deal with this event.")
     }
 
     public func didTap(messageCollectionViewCell cell: DUMessageCollectionViewCell) {
-        //print("tapped message cell, please implement '\(#function)' to deal with this event.")
+        assert(false, "tapped message cell, please implement '\(#function)' to deal with this event.")
     }
 }
 
