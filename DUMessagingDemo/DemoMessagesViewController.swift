@@ -35,6 +35,12 @@ class DemoMessagesViewController: DUMessagesViewController {
     
     override func didTap(messageCollectionViewCell cell: DUMessageCollectionViewCell) {
         print(" did tap cell in demo app")
+        dismissKeyboard()
+    }
+    
+    override func didTap(messageCollectionView view: DUMessageCollectionView) {
+        print("did tap message collectionview")
+        dismissKeyboard()
     }
 
     override func didClickRightBarButton(sender: UIBarButtonItem?) {
@@ -44,11 +50,20 @@ class DemoMessagesViewController: DUMessagesViewController {
     // MARK: life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.enableRefreshControl = true
-        
+        self.enableRefreshControl = false
         // cast chat data to get last message
         let chatModel = self.chat as! MockChatModel
         self.messageData = chatModel.messageDatas
+        //self.endReceivingMessage()
+        
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
         self.endReceivingMessage()
     }
     
@@ -59,17 +74,58 @@ class DemoMessagesViewController: DUMessagesViewController {
     }
 }
 
+// MARK: UIImagePickerDelegate
+extension DemoMessagesViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
+        let imageURL = info[UIImagePickerControllerReferenceURL] as! NSURL
+        var meta:[String: AnyObject] = [String:AnyObject]()
+        
+        if let imageName = imageURL.getAssetFullFileName() {
+            print("choose image name: \(imageName)")
+            meta["name"] = imageName
+        } else {
+            meta["name"] = "Unnamed image"
+        }
+        
+        let image = info[UIImagePickerControllerOriginalImage] as! UIImage
+        picker.dismissViewControllerAnimated(true) {
+            let newMessage = MockMessageModel(image: image, isOutgoing: true)
+            self.messageData.append(newMessage)
+            self.endSendingMessage()
+        }
+    }
+}
+
 // MARK: private methods
 private extension DemoMessagesViewController {
-    // present action sheet
+    func dismissKeyboard() {
+        guard inputToolbar.contentView?.inputTextView != nil else {
+            return
+        }
+        
+        if inputToolbar.contentView!.inputTextView.isFirstResponder() {
+            inputToolbar.contentView!.inputTextView.resignFirstResponder()
+        }
+    }
     
+    // present action sheet
     func presentActionSheet() {
         let actionController = UIAlertController.init(title: NSLocalizedString("MEDIA_MESSAGE", comment: "Media message"), message: NSLocalizedString("CHOOSE_TO_DEMO", comment: "Choose to demo"), preferredStyle: .ActionSheet)
         
         let sendImageAction = UIAlertAction.init(title: NSLocalizedString("SEND_IMAGE", comment: "Send image"), style: .Default){ [unowned self] action in
-            let newMessage = MockMessageModel(image: UIImage(named:"dna")!, isOutgoing: true)
-            self.messageData.append(newMessage)
-            self.endSendingMessage()
+//            let newMessage = MockMessageModel(image: UIImage(named:"dna")!, isOutgoing: true)
+//            self.messageData.append(newMessage)
+//            self.endSendingMessage()
+            if UIImagePickerController.isSourceTypeAvailable(.PhotoLibrary){
+                let picker = UIImagePickerController()
+                picker.delegate = self
+                picker.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
+                self.presentViewController(picker, animated: true, completion: {
+                    () -> Void in
+                })
+            }else{
+                print("Read album error!")
+            }
         }
         
         let sendVideoAction = UIAlertAction.init(title: NSLocalizedString("SEND_VIDEO", comment: "Send video"), style: .Default){ [unowned self] action in

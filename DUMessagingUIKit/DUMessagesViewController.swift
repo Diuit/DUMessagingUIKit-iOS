@@ -69,22 +69,30 @@ public class DUMessagesViewController: UIViewController, UITextViewDelegate, DUM
         DUMessagesViewController.nib.instantiateWithOwner(self, options: nil)
         adoptProtocolUIApperance()
         setupMessagesViewController()
+    }
+    
+    override public func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
         registerForNotification()
+        // FIXME: workaround for #1 https://github.com/Diuit/DUMessagingUIKit-iOS/issues/1
+        updateCollectionViewInsets(top: self.collectionView!.contentInset.top, bottom: self.inputToolbar.contentView!.bounds.size.height)
     }
     
     
-    // FIXME: for current controller can not be released due to unfound retain cycle, we remove notification in viewDidDisappear for temporary
+    // FIXME: we remove notification in viewDidDisappear for temporary
     override public func viewDidDisappear(animated: Bool) {
         super.viewDidDisappear(animated)
         clearForNotification()
     }
+    
     deinit {
         collectionView?.delegate = nil
         collectionView?.dataSource = nil
 
-        inputToolbar.inputToolbarDelegate = self
+        inputToolbar.inputToolbarDelegate = nil
         inputToolbar.contentView?.inputTextView.delegate = nil
     }
+
     
     // MARK: Initialization
     private func setupMessagesViewController() {
@@ -96,6 +104,9 @@ public class DUMessagesViewController: UIViewController, UITextViewDelegate, DUM
         
         collectionView?.dataSource = self
         collectionView?.delegate = self
+        // add a tap gesture for colleciotnview
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(didTap(messageCollectionView:)))
+        collectionView?.addGestureRecognizer(tapGesture)
         
         updateCollectionViewInsets(top: self.topLayoutGuide.length, bottom: CGRectGetMaxY(collectionView!.frame) - CGRectGetMinY(self.inputToolbar!.frame))
     }
@@ -549,15 +560,28 @@ public extension DUMessageCollectionViewFlowLayoutDelegate where Self: DUMessage
 // MARK: DUMessageCollectionViewCell Delegate - default behavior
 extension DUMessagesViewController: DUMessageCollectionViewCellDelegate{
     public func didTapAvatar(ofMessageCollectionViewCell cell: DUMessageCollectionViewCell) {
-        //print("tapped avatar, please implement '\(#function)' to deal with this event.")
+        assert(false, "tapped avatar, please implement '\(#function)' to deal with this event.")
     }
 
     public func didTapMessageBubble(ofMessageCollectionViewCell cell: DUMessageCollectionViewCell) {
-        //print("tapped message bubble, please implement '\(#function)' to deal with this event.")
+        assert(false, "tapped message bubble, please implement '\(#function)' to deal with this event.")
     }
 
     public func didTap(messageCollectionViewCell cell: DUMessageCollectionViewCell) {
-        //print("tapped message cell, please implement '\(#function)' to deal with this event.")
+        assert(false, "tapped message cell, please implement '\(#function)' to deal with this event.")
+    }
+}
+
+// MARK: DUMessageCollectionView
+extension DUMessagesViewController {
+    private func messageCollectionViewTapHandler(sender: UITapGestureRecognizer) {
+        if let _ = self.collectionView {
+            didTap(messageCollectionView: self.collectionView!)
+        }
+    }
+    
+    public func didTap(messageCollectionView view: DUMessageCollectionView) {
+        print("Tapped messageCollectionView, please implemnt '\(#function)' to deal with this event.")
     }
 }
 
