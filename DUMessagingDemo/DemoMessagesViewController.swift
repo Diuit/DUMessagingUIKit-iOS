@@ -54,8 +54,6 @@ class DemoMessagesViewController: DUMessagesViewController {
         // cast chat data to get last message
         let chatModel = self.chat as! MockChatModel
         self.messageData = chatModel.messageDatas
-        //self.endReceivingMessage()
-        
     }
     
     override func viewWillAppear(animated: Bool) {

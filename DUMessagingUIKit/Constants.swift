@@ -27,3 +27,8 @@ public class GlobalUISettings {
     static var incomingMessageBubbleBackgroundColor: UIColor = UIColor.DULightgreyColor()
     static var incomingMessageTextColor: UIColor = UIColor.blackColor()
 }
+
+extension GlobalUISettings {
+    /// This property can add extra bottom content inset to your message collection view, the default is 0.0
+    public static var extraMessageCollectionViewBottomInset: CGFloat = 0.0
+}

@@ -476,12 +476,13 @@ public class DUMessagesViewController: UIViewController, UITextViewDelegate, DUM
         }
         
         // XXX: When the content height is smaller than collection view height, scoll to indexPath or recttovisible does not work well.(bug, huh?)
-        //      So if the difference height is less than 44 (navigation bar height), we manually set the offset.
+        //      So if the difference height is less than input toolbar height, we manually set the offset.
         //      If you know how to solve this, send a PR please.
         let layout = collectionView?.collectionViewLayout as! DUMessageCollectionViewFlowLayout
         if layout.collectionViewContentSize().height < collectionView?.bounds.size.height {
-            if abs(collectionView!.bounds.size.height - layout.collectionViewContentSize().height) <= 44 {
-                collectionView?.setContentOffset(CGPointMake(0, 44 - abs(collectionView!.bounds.size.height - layout.collectionViewContentSize().height)), animated: animated)
+            // XXX: Also need to consider extraMessageCollectionViewBottomInset height
+            if abs(collectionView!.bounds.size.height - layout.collectionViewContentSize().height) <= inputToolbar.bounds.height + GlobalUISettings.extraMessageCollectionViewBottomInset {
+                collectionView?.setContentOffset(CGPointMake(0, inputToolbar.bounds.height + GlobalUISettings.extraMessageCollectionViewBottomInset - abs(collectionView!.bounds.size.height - layout.collectionViewContentSize().height)), animated: animated)
             } else {
                 collectionView?.scrollRectToVisible(CGRectMake(0, layout.collectionViewContentSize().height - 1, 1, 1), animated: animated)
             }
@@ -502,7 +503,7 @@ public extension DUMessagesViewController {
 // MARK: private helper
 private extension DUMessagesViewController {
     func updateCollectionViewInsets(top top: CGFloat, bottom: CGFloat) {
-        let insets: UIEdgeInsets = UIEdgeInsetsMake(top, 0.0, bottom, 0.0)
+        let insets: UIEdgeInsets = UIEdgeInsetsMake(top, 0.0, bottom + GlobalUISettings.extraMessageCollectionViewBottomInset, 0.0)
         self.collectionView?.contentInset = insets
         self.collectionView?.scrollIndicatorInsets = insets
     }
