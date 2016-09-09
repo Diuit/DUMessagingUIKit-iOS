@@ -69,7 +69,13 @@ public class DUMessagesViewController: UIViewController, UITextViewDelegate, DUM
         DUMessagesViewController.nib.instantiateWithOwner(self, options: nil)
         adoptProtocolUIApperance()
         setupMessagesViewController()
+    }
+    
+    override public func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
         registerForNotification()
+        // FIXME: workaround for #1 https://github.com/Diuit/DUMessagingUIKit-iOS/issues/1
+        updateCollectionViewInsets(top: self.collectionView!.contentInset.top, bottom: self.inputToolbar.contentView!.bounds.size.height)
     }
     
     
@@ -78,13 +84,15 @@ public class DUMessagesViewController: UIViewController, UITextViewDelegate, DUM
         super.viewDidDisappear(animated)
         clearForNotification()
     }
+    
     deinit {
         collectionView?.delegate = nil
         collectionView?.dataSource = nil
 
-        inputToolbar.inputToolbarDelegate = self
+        inputToolbar.inputToolbarDelegate = nil
         inputToolbar.contentView?.inputTextView.delegate = nil
     }
+
     
     // MARK: Initialization
     private func setupMessagesViewController() {
