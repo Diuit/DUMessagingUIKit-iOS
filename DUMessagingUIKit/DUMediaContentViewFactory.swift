@@ -29,6 +29,7 @@ public class DUMediaContentViewFactory {
             return nil
         }
         let imageView = DUMediaContentImageView.init(frame: frame ?? CGRectZero)
+        imageView.contentMode = .ScaleAspectFill
         imageView.image = image
         imageView.highlightedImage = highlightedImage
         return imageView
@@ -37,7 +38,7 @@ public class DUMediaContentViewFactory {
      Generate content view of an URL message.
      
      - parameter url:   URL string of the web page.
-     - parameter frame: The frame size of this content view.
+     - parameter frame: The frame size of dthis content view.
      
      - returns: A composed UIView of URL preview result.
      */
