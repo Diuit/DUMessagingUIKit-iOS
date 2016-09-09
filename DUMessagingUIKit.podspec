@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "DUMessagingUIKit"
-  s.version      = "0.1.3"
+  s.version      = "0.1.4"
   s.summary      = "An easy way to build a chat app within seconds"
   s.homepage     = "http://api.diuit.com/"
 
