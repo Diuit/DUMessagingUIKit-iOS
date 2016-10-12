@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MisterFusion
 
 private var kDUMessageInputToolbarKeyValueObserverContext = 0
 /**
@@ -34,11 +35,19 @@ protocol DUMessagInputToolbarDelegate {
 
 public class DUMessageInputToolbar: UIToolbar {
     
-    public internal(set) weak var contentView: DUInputToolbarContentView?
+    public weak var contentView: DUInputToolbarContentView?
+    public var hideAccessorySendButton: Bool = false {
+        didSet {
+            contentView?.hideAccessorySendButton = hideAccessorySendButton
+        }
+    }
     var inputToolbarDelegate: DUMessagInputToolbarDelegate?
     
     override public func awakeFromNib() {
         super.awakeFromNib()
+        
+
+        
         
         let toolbarContentView = NSBundle.du_messagingUIKitBundle.loadNibNamed(String(DUInputToolbarContentView), owner: nil, options: nil).first as? DUInputToolbarContentView
         
@@ -46,14 +55,22 @@ public class DUMessageInputToolbar: UIToolbar {
             assert(false, "contentView has loaded failed")
             return
         }
+        
         toolbarContentView?.frame = bounds
         addSubview(toolbarContentView!)
         pingAlledge(ofSubview: toolbarContentView!)
+        
         setNeedsUpdateConstraints()
+        
         contentView = toolbarContentView
         //TODO: should let user customize in the future
         contentView?.sendButton.addTarget(self, action: #selector(sendButtonPressed(_:)), forControlEvents: .TouchUpInside)
         contentView?.accessorySendButton.addTarget(self, action: #selector(accessorySendButtonPressed(_:)), forControlEvents: .TouchUpInside)
+        
+        // upper border view
+        let topBorderView = UIView(frame: CGRectMake(0, 0, UIScreen.mainScreen().bounds.width, 0.5))
+        topBorderView.backgroundColor = UIColor(white: 180/255.0, alpha: 1.0)
+        addSubview(topBorderView)
     }
 
 
@@ -70,6 +87,7 @@ public class DUMessageInputToolbar: UIToolbar {
     @objc private func accessorySendButtonPressed(sender: UIButton) {
         self.inputToolbarDelegate?.didPressAccessorySendButton(sender, ofToolbar: self)
     }
+
 }
 
 

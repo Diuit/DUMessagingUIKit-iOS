@@ -17,6 +17,20 @@ public class DUInputToolbarContentView: UIView {
         }
     }
     
+    @IBOutlet weak var accessoryBtnWidthConstraint: NSLayoutConstraint!
+
+    var hideAccessorySendButton: Bool = false {
+        didSet {
+            if hideAccessorySendButton {
+                accessoryBtnWidthConstraint.constant = 0
+                accessorySendButton.hidden = true
+            } else {
+                accessoryBtnWidthConstraint.constant = 32
+                accessorySendButton.hidden = false
+            }
+        }
+    }
+    
     static public let nib: UINib = UINib.init(nibName: String(DUInputToolbarContentView), bundle: NSBundle.du_messagingUIKitBundle)
     
 }

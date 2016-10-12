@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -54,6 +54,7 @@
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
+                <outlet property="accessoryBtnWidthConstraint" destination="RI5-Y5-N26" id="f1T-hl-fCG"/>
                 <outlet property="accessorySendButton" destination="j2l-Zh-D2d" id="mOI-P5-qpN"/>
                 <outlet property="inputTextView" destination="Pwo-0L-vI6" id="3wg-uw-5H6"/>
                 <outlet property="sendButton" destination="DXp-gx-2iP" id="nWx-Zl-PBw"/>
