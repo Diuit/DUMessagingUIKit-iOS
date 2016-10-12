@@ -59,6 +59,9 @@ public class DUMessagesViewController: UIViewController, UITextViewDelegate, DUM
     private var avatarImageCache: [String: UIImage] = [:]
     // Cache for cell top label. The first message of the date will have its cell top label display the date. Still this is an easy way.
     private var theseDatesHaveMessagesCache: [String] = []
+    
+    // save keyboard height 
+    private var keyboardFinalFrame: CGRect? = CGRectZero
 
     var refreshControl: UIRefreshControl? = nil
 
@@ -75,7 +78,8 @@ public class DUMessagesViewController: UIViewController, UITextViewDelegate, DUM
         super.viewWillAppear(animated)
         registerForNotification()
         // FIXME: workaround for #1 https://github.com/Diuit/DUMessagingUIKit-iOS/issues/1
-        updateCollectionViewInsets(top: self.collectionView!.contentInset.top, bottom: self.inputToolbar.contentView!.bounds.size.height)
+        let keyboardHeight: CGFloat = (keyboardFinalFrame != nil) ? CGRectGetHeight(keyboardFinalFrame!) : self.inputToolbar.bounds.size.height
+        updateCollectionViewInsets(top: self.collectionView!.contentInset.top, bottom: keyboardHeight)
     }
     
     
@@ -491,6 +495,23 @@ public class DUMessagesViewController: UIViewController, UITextViewDelegate, DUM
         
         collectionView?.scrollToItemAtIndexPath(indexPath, atScrollPosition: .Top, animated: animated)
     }
+    
+    // MARK: DUMessageCollectionViewFlowLayout Delegate - Default behavior
+    public func heightForCellTopLabel(at indexPath: NSIndexPath, with layout: DUMessageCollectionViewFlowLayout, collectionView: DUMessageCollectionView) -> CGFloat {
+        return 0.0
+    }
+    
+    public func heightForMessageBubbleTopLabel(at indexPath: NSIndexPath, with layout: DUMessageCollectionViewFlowLayout, collectionView: DUMessageCollectionView) -> CGFloat {
+        let messageItem = messageData[indexPath.item]
+        if messageItem.isOutgoingMessage { return 0.0 }
+        else { return 20.0 }
+    }
+    
+    public func diameterForAvatarContainer(at indexPath: NSIndexPath, with layout: DUMessageCollectionViewFlowLayout, collectionView: DUMessageCollectionView) -> CGFloat {
+        let messageItem = messageData[indexPath.item]
+        if messageItem.isOutgoingMessage { return 0.0 }
+        else { return DUAvatarImageFactory.kAvatarImageDefualtDiameterInMessags }
+    }
 }
 
 
@@ -518,7 +539,7 @@ private extension DUMessagesViewController {
     
     @objc func didReceiveKeyboardWillChangeFrame(notification: NSNotification) {
         let userInfo = notification.userInfo!
-        let keyboardFinalFrame: CGRect? = userInfo[UIKeyboardFrameEndUserInfoKey]!.CGRectValue
+        keyboardFinalFrame = userInfo[UIKeyboardFrameEndUserInfoKey]!.CGRectValue
         if keyboardFinalFrame == nil { return }
         
         var animateOption: UIViewAnimationOptions
@@ -532,28 +553,8 @@ private extension DUMessagesViewController {
         let animateDuration = (userInfo[UIKeyboardAnimationDurationUserInfoKey] as? NSNumber)?.doubleValue
         
         UIView.animateWithDuration(animateDuration!, delay: 0.0, options: animateOption, animations: { [unowned self] in
-            self.updateCollectionViewInsets(top: self.collectionView!.contentInset.top, bottom: CGRectGetHeight(keyboardFinalFrame!))
+            self.updateCollectionViewInsets(top: self.collectionView!.contentInset.top, bottom: CGRectGetHeight(self.keyboardFinalFrame!))
             }, completion: nil)
-    }
-}
-
-
-// MARK: DUMessageCollectionViewFlowLayout Delegate - Default behavior
-public extension DUMessageCollectionViewFlowLayoutDelegate where Self: DUMessagesViewController {
-    public func heightForCellTopLabel(at indexPath: NSIndexPath, with layout: DUMessageCollectionViewFlowLayout, collectionView: DUMessageCollectionView) -> CGFloat {
-        return 0.0
-    }
-    
-    public func heightForMessageBubbleTopLabel(at indexPath: NSIndexPath, with layout: DUMessageCollectionViewFlowLayout, collectionView: DUMessageCollectionView) -> CGFloat {
-        let messageItem = messageData[indexPath.item]
-        if messageItem.isOutgoingMessage { return 0.0 }
-        else { return 20.0 }
-    }
-    
-    public func diameterForAvatarContainer(at indexPath: NSIndexPath, with layout: DUMessageCollectionViewFlowLayout, collectionView: DUMessageCollectionView) -> CGFloat {
-        let messageItem = messageData[indexPath.item]
-        if messageItem.isOutgoingMessage { return 0.0 }
-        else { return DUAvatarImageFactory.kAvatarImageDefualtDiameterInMessags }
     }
 }
 
