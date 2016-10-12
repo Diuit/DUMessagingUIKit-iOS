@@ -330,6 +330,21 @@ public extension NSURL {
     }
 }
 
+public extension Int {
+    var convertedByteSizeString: String {
+        var convertedValue = Double(self)
+        var multiplyFactor = 0
+        let sizeUnits = ["bytes", "KB", "MB", "GB", "TB"]
+        
+        while convertedValue > 1024 {
+            convertedValue /= 1024
+            multiplyFactor += 1
+        }
+        
+        return String(format: "%4.2f\(sizeUnits[multiplyFactor])", convertedValue)
+    }
+}
+
 public extension NSBundle {
     static var du_messagingUIKitBundle: NSBundle {
         return NSBundle(forClass: DUMessagesViewController.classForCoder())
