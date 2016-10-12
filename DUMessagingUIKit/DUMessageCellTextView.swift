@@ -27,7 +27,7 @@ public class DUMessageCellTextView: UITextView {
         scrollIndicatorInsets = UIEdgeInsetsZero
         contentOffset = CGPointZero
         let underline = NSUnderlineStyle.StyleSingle.rawValue | NSUnderlineStyle.PatternSolid.rawValue
-        linkTextAttributes = [  NSForegroundColorAttributeName : UIColor.whiteColor(),
+        linkTextAttributes = [  NSForegroundColorAttributeName : GlobalUISettings.tintColor,
                                 NSUnderlineStyleAttributeName: underline]
         
     }

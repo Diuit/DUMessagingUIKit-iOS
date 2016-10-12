@@ -11,7 +11,7 @@ import Foundation
 /// Global Theme setting
 public class GlobalUISettings {
     /// Navigation bar tint color
-    static var navBarTintColor: UIColor? = nil
+    public static var navBarTintColor: UIColor? = nil
     /// Navigation bar title text color
     static var navBarTitleTextColof: UIColor = UIColor.DUWaterBlueColor()
     /// Navigation bar title font
@@ -22,10 +22,10 @@ public class GlobalUISettings {
     static var indicatingStatusColor: UIColor = UIColor.DUWaterBlueColor()
     
     // Message bubble color
-    static var outgoingMessageBubbleBackgroundColor: UIColor = UIColor.DUWaterBlueColor()
-    static var outgoingMessageTextColor: UIColor = UIColor.whiteColor()
-    static var incomingMessageBubbleBackgroundColor: UIColor = UIColor.DULightgreyColor()
-    static var incomingMessageTextColor: UIColor = UIColor.blackColor()
+    public static var outgoingMessageBubbleBackgroundColor: UIColor = UIColor.DUWaterBlueColor()
+    public static var outgoingMessageTextColor: UIColor = UIColor.whiteColor()
+    public static var incomingMessageBubbleBackgroundColor: UIColor = UIColor.DULightgreyColor()
+    public static var incomingMessageTextColor: UIColor = UIColor.blackColor()
 }
 
 extension GlobalUISettings {
