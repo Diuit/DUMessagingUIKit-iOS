@@ -72,6 +72,9 @@ extension DUMessage: DUMessageData, DUImageResource {
         case DUMIMEType.general:
             return true
         default:
+            // binary encoding regards as file
+            if self.encoding == "binary" {  return true }
+            
             if let _ = contentText {
                 return (contentText!.isValidURL())
             }
@@ -118,12 +121,25 @@ extension DUMessage: DUMessageData, DUImageResource {
             case DUMIMEType.general:
                 if self.status == .Delivered || self.status == .Received {
                     let fileName: String = self.meta?["name"] as? String ?? "Unnamed file"
-                    let fileDesc: String = self.meta?["description"] as? String ?? "No description"
+                    var fileDesc: String = "Unkown size"
+                    if let _ = self.meta?["size"] {
+                        let sizeInt = self.meta!["size"] as! Int
+                        fileDesc = (sizeInt > 0) ? sizeInt.convertedByteSizeString : "Unkown size"
+                    }
                     return DUMediaItem.init(fromFileURL: self.data!, fileName: fileName, fileDescription: fileDesc)
                 } else {
                     return DUMediaItem.init(fromFileURL: "", fileName: "", fileDescription: "")
                 }
             default:
+                if self.encoding == "binary" {
+                    let fileName: String = self.meta?["name"] as? String ?? "Unnamed file"
+                    var fileDesc: String = "Unkown size"
+                    if let _ = self.meta?["size"] {
+                        let sizeInt = self.meta!["size"] as! Int
+                        fileDesc = (sizeInt > 0) ? sizeInt.convertedByteSizeString : "Unkown size"
+                    }
+                    return DUMediaItem.init(fromFileURL: self.data!, fileName: fileName, fileDescription: fileDesc)
+                }
                 if let _ = contentText {
                     return (contentText!.isValidURL()) ? DUMediaItem.init(fromURL: contentText!) : nil
                 }
