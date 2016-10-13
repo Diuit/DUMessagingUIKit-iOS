@@ -1,33 +1,52 @@
 PODS:
-  - CryptoSwift (0.5.2)
-  - DTModelStorage (2.6.2):
-    - DTModelStorage/Core (= 2.6.2)
-  - DTModelStorage/Core (2.6.2)
-  - DTTableViewManager (4.7.0):
-    - DTModelStorage (~> 2.6.0)
-  - DUMessaging (1.1.8):
-    - Socket.IO-Client-Swift (~> 6.1.0)
-  - Kanna (1.1.1)
-  - MisterFusion (1.3.0)
-  - Socket.IO-Client-Swift (6.1.6)
-  - URLEmbeddedView (0.4.1):
-    - CryptoSwift (~> 0.2)
-    - Kanna (~> 1.0)
-    - MisterFusion (~> 1.0)
+  - CryptoSwift (0.6.1)
+  - DTModelStorage (3.0.0-beta.3):
+    - DTModelStorage/Core (= 3.0.0-beta.3)
+  - DTModelStorage/Core (3.0.0-beta.3)
+  - DTTableViewManager (5.0.0-beta.3):
+    - DTModelStorage (~> 3.0.0-beta.3)
+  - DUMessaging (2.0.1):
+    - Socket.IO-Client-Swift
+  - Kanna (2.0.0)
+  - MisterFusion (2.0.1)
+  - Socket.IO-Client-Swift (8.0.2)
+  - URLEmbeddedView (0.6.0):
+    - CryptoSwift (~> 0.6.0)
+    - Kanna
+    - MisterFusion (~> 2.0.0)
 
 DEPENDENCIES:
-  - DTTableViewManager (~> 4.7.0)
+  - DTTableViewManager (~> 5.0.0-beta.1)
   - DUMessaging
-  - URLEmbeddedView
+  - Kanna (from `https://github.com/tid-kijyun/Kanna.git`, branch `swift3.0`)
+  - URLEmbeddedView (from `https://github.com/marty-suzuki/URLEmbeddedView.git`, tag `0.6.0`)
+
+EXTERNAL SOURCES:
+  Kanna:
+    :branch: swift3.0
+    :git: https://github.com/tid-kijyun/Kanna.git
+  URLEmbeddedView:
+    :git: https://github.com/marty-suzuki/URLEmbeddedView.git
+    :tag: 0.6.0
+
+CHECKOUT OPTIONS:
+  Kanna:
+    :commit: 109249451c32e14dac541bfbfeaa91b4dcb47a87
+    :git: https://github.com/tid-kijyun/Kanna.git
+  URLEmbeddedView:
+    :git: https://github.com/marty-suzuki/URLEmbeddedView.git
+    :tag: 0.6.0
 
 SPEC CHECKSUMS:
-  CryptoSwift: c1ef79f901b86099a6fe8b3c7524cf9f3f3c8c40
-  DTModelStorage: afd736e5309f374c29dcd7e4364e7571e32e5db1
-  DTTableViewManager: 4a961b5ffaa9a57387ccff7f9280d001c9c64082
-  DUMessaging: 5b564b49f4d9d50e8bfb66adba54b6f554478fd0
-  Kanna: 9d3118cff609bd21eb374be5be590b544941160f
-  MisterFusion: e61d3f06ff297f22a3ca42058ca17d963fc500a9
-  Socket.IO-Client-Swift: 5eddbfafd3c035a77d365d5b58da93cc488af11f
-  URLEmbeddedView: 3ecd18f2e405ecc82fce4f7ee6bd6286060a32a4
+  CryptoSwift: abdbc1bf32c89117c6b403810a7b30f742d86e68
+  DTModelStorage: 4e24417e8a7957c6513d9149883b296dadb85cb9
+  DTTableViewManager: d77a5bb5b1b4fbe8b08c92b8f8ffdf25cf4dd53e
+  DUMessaging: cc32b42a7becd53458de501b585f9712161c12f9
+  Kanna: 8d60d86a3580f7dee732811e5163a5e3e41a32a7
+  MisterFusion: d42cac7afe8318c282bcda93396eba0aef45d30e
+  Socket.IO-Client-Swift: 136598e4a81a42b0e6855e7f94a0e5a6efdc5ff8
+  URLEmbeddedView: 870f7c9b92d05f1e477c28ee9c3081e4f4118db4
 
-COCOAPODS: 0.39.0
+PODFILE CHECKSUM: 2abb34cb60803065f8876ebe14f075cbb06ff54d
+
+COCOAPODS: 1.1.0.rc.2

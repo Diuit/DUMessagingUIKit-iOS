@@ -23,7 +23,7 @@ public protocol DUMessageCollectionViewDataSource: UICollectionViewDataSource {
      
         - seeaslo: `DUMessageData`
      */
-    func messageData(atIndexPath indexPath: NSIndexPath, forCollectionView collectionView: DUMessageCollectionView) -> DUMessageData
+    func messageData(atIndexPath indexPath: IndexPath, forCollectionView collectionView: DUMessageCollectionView) -> DUMessageData
     /**
         Ask for the image that is used as the bubble image of the message cell.
      
@@ -35,7 +35,7 @@ public protocol DUMessageCollectionViewDataSource: UICollectionViewDataSource {
      
         - Note: It's highly recommended to use `DUBubbleImageFactory` to create bubble message image.
      */
-    func messageBubbleImage(atIndexPath indexPath: NSIndexPath, forCollectionView collectionView: DUMessageCollectionView) -> UIImage?
+    func messageBubbleImage(atIndexPath indexPath: IndexPath, forCollectionView collectionView: DUMessageCollectionView) -> UIImage?
     /**
         Ask for the image that is used as the avatar image of the message cell.
      
@@ -47,7 +47,7 @@ public protocol DUMessageCollectionViewDataSource: UICollectionViewDataSource {
      
         - Note: It's highly recommended to use `DUAvatarImageFactory` to create avatar image.
      */
-    func avatarImage(atIndexPath indexPath: NSIndexPath, forCollectionView collectionView: DUMessageCollectionView) -> UIImage?
+    func avatarImage(atIndexPath indexPath: IndexPath, forCollectionView collectionView: DUMessageCollectionView) -> UIImage?
     /**
         Ask for the attributed text to be displayed in `cellTopLabel` at certain collevtionView cell.
      
@@ -58,7 +58,7 @@ public protocol DUMessageCollectionViewDataSource: UICollectionViewDataSource {
         - returns: An attributed string to be displayed. Return `nil` if you don't watn to display.
 
      */
-    func attributedTextForCellTopLabel(atIndexPath indexPath: NSIndexPath, forCollectionView collectionView: DUMessageCollectionView) -> NSAttributedString?
+    func attributedTextForCellTopLabel(atIndexPath indexPath: IndexPath, forCollectionView collectionView: DUMessageCollectionView) -> NSAttributedString?
     /**
         Ask for the attributed text to be displayed in `messageBubbleTopLabel` at certain collevtionView cell.
      
@@ -69,7 +69,7 @@ public protocol DUMessageCollectionViewDataSource: UICollectionViewDataSource {
         - returns: An attributed string to be displayed. Return `nil` if you don't watn to display.
      
      */
-    func attributedTextForMessageBubbleTopLabel(atIndexPath indexPath: NSIndexPath, forCollectionView collectionView: DUMessageCollectionView) -> NSAttributedString?
+    func attributedTextForMessageBubbleTopLabel(atIndexPath indexPath: IndexPath, forCollectionView collectionView: DUMessageCollectionView) -> NSAttributedString?
     /**
         Ask for the attributed text to be displayed in `timeLabel` at certain collevtionView cell.
      
@@ -80,7 +80,7 @@ public protocol DUMessageCollectionViewDataSource: UICollectionViewDataSource {
         - returns: An attributed string to be displayed. Return `nil` if you don't watn to display.
      
      */
-    func attributedTextForTiemLabel(atIndexPath indexPath: NSIndexPath, forCollectionView collectionView: DUMessageCollectionView) -> NSAttributedString?
+    func attributedTextForTiemLabel(atIndexPath indexPath: IndexPath, forCollectionView collectionView: DUMessageCollectionView) -> NSAttributedString?
     /**
         Ask for the attributed text to be displayed in `readLabel` at certain collevtionView cell.
      
@@ -91,7 +91,7 @@ public protocol DUMessageCollectionViewDataSource: UICollectionViewDataSource {
         - returns: An attributed string to be displayed. Return `nil` if you don't watn to display.
      
      */
-    func attributedTextForReadLabel(atIndexPath indexPath: NSIndexPath, forCollectionView collectionView: DUMessageCollectionView) -> NSAttributedString?
+    func attributedTextForReadLabel(atIndexPath indexPath: IndexPath, forCollectionView collectionView: DUMessageCollectionView) -> NSAttributedString?
     
     /**
      Ask for hidden value of `resendButton` in **outgoing** message cell. Just return true if the target cell is `DUMessagingIncomingCollectionViewCell`.
@@ -103,5 +103,5 @@ public protocol DUMessageCollectionViewDataSource: UICollectionViewDataSource {
      
      - note: This property only works for `DUMessageOutgoingCollectionViewCell`.
      */
-    func isHiddenForResendButton(atIndexPath indexPath: NSIndexPath, forCollectionView collectionView: DUMessageCollectionView) -> Bool
+    func isHiddenForResendButton(atIndexPath indexPath: IndexPath, forCollectionView collectionView: DUMessageCollectionView) -> Bool
 }

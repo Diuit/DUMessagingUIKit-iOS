@@ -8,9 +8,9 @@
 
 import UIKit
 
-public class DUAvatarImageFactory: NSObject {
+open class DUAvatarImageFactory: NSObject {
     /// Defualt avatar image diameter in DUChatList table view
-    public static let kAvataImageDefaultDiameterInChatsList: CGFloat = 66.0
+    public static let kAvatarImageDefaultDiameterInChatList: CGFloat = 66.0
     /// Default avatar image diameter in DUMessagesCollectionView
     public static let kAvatarImageDefualtDiameterInMessags: CGFloat = 32.0
     
@@ -23,26 +23,26 @@ public class DUAvatarImageFactory: NSObject {
         - returns:
             An UIImage instance of avatar, or `nil` if creation failed
      */
-    public static func makeAvatarImage(text: String, backgroundColor: UIColor = UIColor.DUAvatarBgDefaultColor(), textColor: UIColor = UIColor.whiteColor(), font: UIFont, diameter: CGFloat) -> UIImage? {
+    public static func makeTextAvatarImage(text: String, backgroundColor: UIColor = UIColor.DUAvatarBgDefaultColor(), textColor: UIColor = UIColor.white, font: UIFont, diameter: CGFloat) -> UIImage? {
         assert(diameter > 0, "diameter of avatar image must be greater than 0")
         
-        let frame: CGRect = CGRectMake(0.0, 0.0, diameter, diameter)
+        let frame: CGRect = CGRect(x: 0.0, y: 0.0, width: diameter, height: diameter)
         let attributes:[String: AnyObject] = [NSForegroundColorAttributeName: textColor, NSFontAttributeName: font]
         let NSText = text as NSString
-        let textRect = NSText.sizeWithAttributes(attributes)
+        let textRect = NSText.size(attributes: attributes)
         
-        let frameCenter: CGPoint = CGPointMake(CGRectGetMidX(frame), CGRectGetMidY(frame))
-        let textCenter: CGPoint = CGPointMake(textRect.width/2, textRect.height/2)
+        let frameCenter: CGPoint = CGPoint(x: frame.midX, y: frame.midY)
+        let textCenter: CGPoint = CGPoint(x: textRect.width/2, y: textRect.height/2)
         
-        let drawOrigin: CGPoint = CGPointMake(frameCenter.x - textCenter.x, frameCenter.y - textCenter.y)
+        let drawOrigin: CGPoint = CGPoint(x: frameCenter.x - textCenter.x, y: frameCenter.y - textCenter.y)
         
         var resultImage: UIImage? = nil
         
-        UIGraphicsBeginImageContextWithOptions(frame.size, false, UIScreen.mainScreen().scale)
-        let context: CGContextRef = UIGraphicsGetCurrentContext()!
-        CGContextSetFillColorWithColor(context, backgroundColor.CGColor)
-        CGContextFillRect(context, frame)
-        NSText.drawAtPoint( drawOrigin, withAttributes: attributes)
+        UIGraphicsBeginImageContextWithOptions(frame.size, false, UIScreen.main.scale)
+        let context: CGContext = UIGraphicsGetCurrentContext()!
+        context.setFillColor(backgroundColor.cgColor)
+        context.fill(frame)
+        NSText.draw( at: drawOrigin, withAttributes: attributes)
         resultImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         

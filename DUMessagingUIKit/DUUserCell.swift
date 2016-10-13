@@ -15,9 +15,9 @@ class DUUserCell: UITableViewCell, ModelTransfer {
     @IBOutlet weak var userAvatarImage: DUAvatarImageView!
     @IBOutlet weak var userNameLabel: UILabel!
 
-    func updateWithModel(model: DUUserData) {
+    func update(with model: DUUserData) {
         if model.userDisplayName != "Add People" {
-            self.selectionStyle = .None
+            self.selectionStyle = .none
         }
         userNameLabel.text = model.userDisplayName
         if model.imagePath != nil {

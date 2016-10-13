@@ -16,7 +16,7 @@ struct MockChatModel: DUChatData {
     var chatTitle: String = "Demo Chat Room"
     var chatDetailText: String
     var chatAccessoryText: String
-    var chatSettingPageType: DUChatType = .Group
+    var chatSettingPageType: DUChatType = .group
     var chatMembers: [String] = ["Bot", "myself"]
     var isBlocked: Bool = false
     var imagePath: String? = ""

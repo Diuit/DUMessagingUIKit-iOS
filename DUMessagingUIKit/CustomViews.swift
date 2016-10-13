@@ -10,29 +10,29 @@ import Foundation
 import UIKit
 
 /// This is a customized UILabel where their text alway align in top vertically
-@IBDesignable public class TopAlignedLabel: UILabel {
-    override public func drawTextInRect(rect: CGRect) {
+@IBDesignable open class TopAlignedLabel: UILabel {
+    override open func drawText(in rect: CGRect) {
         if let stringText = text {
             let stringTextAsNSString = stringText as NSString
-            let labelStringSize = stringTextAsNSString.boundingRectWithSize(CGSizeMake(CGRectGetWidth(self.frame), CGFloat.max),
-                                                                            options: NSStringDrawingOptions.UsesLineFragmentOrigin,
+            let labelStringSize = stringTextAsNSString.boundingRect(with: CGSize(width: self.frame.width, height: CGFloat.greatestFiniteMagnitude),
+                                                                            options: NSStringDrawingOptions.usesLineFragmentOrigin,
                                                                             attributes: [NSFontAttributeName: font],
                                                                             context: nil).size
-            super.drawTextInRect(CGRectMake(0, 0, CGRectGetWidth(self.frame), ceil(labelStringSize.height)))
+            super.drawText(in: CGRect(x: 0, y: 0, width: self.frame.width, height: ceil(labelStringSize.height)))
         } else {
-            super.drawTextInRect(rect)
+            super.drawText(in: rect)
         }
     }
-    override public func prepareForInterfaceBuilder() {
+    override open func prepareForInterfaceBuilder() {
         super.prepareForInterfaceBuilder()
         layer.borderWidth = 1
-        layer.borderColor = UIColor.blackColor().CGColor
+        layer.borderColor = UIColor.black.cgColor
     }
 }
 
-@IBDesignable public class DUAvatarImageView: UIImageView, CircleShapeView, DUImageResource {
+@IBDesignable open class DUAvatarImageView: UIImageView, CircleShapeView, DUImageResource {
     // Automatically load the image right after its url is set
-    public var imagePath: String? = "" {
+    open var imagePath: String? = "" {
         didSet {
             if self.imagePath != "" {
                 self.loadImage() { [weak self] in
@@ -43,4 +43,4 @@ import UIKit
     }
 }
 
-public class RoundUIView: UIView, CircleShapeView { }
+open class RoundUIView: UIView, CircleShapeView { }

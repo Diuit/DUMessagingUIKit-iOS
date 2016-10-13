@@ -22,19 +22,19 @@ public class DUEdgeInsetableLabel: UILabel {
     }
     
     override public init(frame: CGRect) {
-        textEdgeInsets = UIEdgeInsetsZero
+        textEdgeInsets = UIEdgeInsets.zero
         super.init(frame: frame)
         translatesAutoresizingMaskIntoConstraints = false
     }
     
     required public init?(coder aDecoder: NSCoder) {
-        textEdgeInsets = UIEdgeInsetsZero
+        textEdgeInsets = UIEdgeInsets.zero
         super.init(coder: aDecoder)
         
     }
 
-    override public func drawTextInRect(rect: CGRect) {
-        super.drawTextInRect(UIEdgeInsetsInsetRect(rect, textEdgeInsets))
+    override public func drawText(in rect: CGRect) {
+        super.drawText(in: UIEdgeInsetsInsetRect(rect, textEdgeInsets))
     }
 
 }

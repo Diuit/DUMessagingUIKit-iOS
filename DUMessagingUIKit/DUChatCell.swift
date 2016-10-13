@@ -12,7 +12,7 @@ import DUMessaging
 import DTModelStorage
 
 /// Custom UITableViewCell for displaying information of a DUChat instance
-public class DUChatCell: UITableViewCell, ModelTransfer {
+open class DUChatCell: UITableViewCell, ModelTransfer {
     @IBOutlet weak var chatAvatarImageView: DUAvatarImageView!
     @IBOutlet weak var chatTitleLabel: UILabel!
     @IBOutlet weak var chatDetailLabel: UILabel!
@@ -29,7 +29,7 @@ public class DUChatCell: UITableViewCell, ModelTransfer {
         self.setSelectedBackgroundView()
     }
     
-    public func updateWithModel(model: DUChatData) {
+    open func update(with model: DUChatData) {
         self.chatAvatarImageView.image = model.avatarPlaceholderImage
         self.chatAvatarImageView.imagePath = model.imagePath
 
@@ -46,24 +46,24 @@ public class DUChatCell: UITableViewCell, ModelTransfer {
             self.chatAccessoryLabel.font = UIFont.DUBodyTimeUnreadFont()
             self.chatAccessoryLabel.textColor = UIColor.DUWaterBlueColor()
             
-            self.unreadView.hidden = false
+            self.unreadView.isHidden = false
             self.unreadView.layer.cornerRadius = self.unreadView.frame.size.width/2
             self.unreadView.clipsToBounds = true
             self.unreadView.image = UIImage.imageWith(backgroundColor: UIColor.DUWaterBlueColor())
         } else {
             self.chatTitleLabel.font = UIFont.DUSubheadFont()
-            self.chatTitleLabel.textColor = UIColor.blackColor()
+            self.chatTitleLabel.textColor = UIColor.black
             
             self.chatAccessoryLabel.font = UIFont.DUMessageTimeLabelFont()
             self.chatAccessoryLabel.textColor = UIColor.DUDarkGreyColor()
             
-            self.unreadView.hidden = true
+            self.unreadView.isHidden = true
         }
  
     }
     
     // MARK: private method
-    private func setSelectedBackgroundView() {
+    fileprivate func setSelectedBackgroundView() {
         let selectedBgView = UIView()
         selectedBgView.backgroundColor = UIColor.DULightgreyColor()
         self.selectedBackgroundView = selectedBgView

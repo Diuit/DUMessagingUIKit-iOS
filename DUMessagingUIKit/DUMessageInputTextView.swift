@@ -8,43 +8,43 @@
 
 import UIKit
 
-public class DUMessageInputTextView: UITextView {
+open class DUMessageInputTextView: UITextView {
     
     // TODO: add localization here and to be customizable
     let placeholder: String = "Write a message..."
     
-    private weak var heightConstraint: NSLayoutConstraint? = nil
-    private weak var minHeightConstraint: NSLayoutConstraint? = nil
-    private weak var maxHeightConstraint: NSLayoutConstraint? = nil
+    fileprivate weak var heightConstraint: NSLayoutConstraint? = nil
+    fileprivate weak var minHeightConstraint: NSLayoutConstraint? = nil
+    fileprivate weak var maxHeightConstraint: NSLayoutConstraint? = nil
     
     
     // MARK: UITextView
-    override public var text: String! {
+    override open var text: String! {
         didSet {
             setNeedsDisplay()
         }
     }
     
-    override public func hasText() -> Bool {
+    override open var hasText : Bool {
         return (text.du_trimingWhitespace().characters.count > 0)
     }
     // MARK: UIView life cycle
-    override public func awakeFromNib() {
+    override open func awakeFromNib() {
         super.awakeFromNib()
         setupTextView()
     }
     
     // draw placeholder if no text in textView
-    override public func drawRect(rect: CGRect) {
-        super.drawRect(rect)
+    override open func draw(_ rect: CGRect) {
+        super.draw(rect)
         
         if text == "" {
             let p = placeholder as NSString
-            p.drawInRect(CGRectInset(rect, 7.0, 7.0), withAttributes: placeholderAttributes)
+            p.draw(in: rect.insetBy(dx: 7.0, dy: 7.0), withAttributes: placeholderAttributes)
         }
     }
     
-    override public func layoutSubviews() {
+    override open func layoutSubviews() {
         super.layoutSubviews()
         
         let sizeThatFits = self.sizeThatFits(frame.size)
@@ -65,23 +65,23 @@ public class DUMessageInputTextView: UITextView {
     }
     
     // MARK: UI methods
-    private func setupTextView() {
+    fileprivate func setupTextView() {
         translatesAutoresizingMaskIntoConstraints = false
-        backgroundColor = UIColor.whiteColor()
+        backgroundColor = UIColor.white
         textContainerInset = UIEdgeInsetsMake(5.0, 2.0, 5.0, 2.0)
         contentInset = UIEdgeInsetsMake(2.0, 0.0, 2.0, 0.0)
-        scrollEnabled = true
+        isScrollEnabled = true
         scrollsToTop = false
-        userInteractionEnabled = true
+        isUserInteractionEnabled = true
         
         font = UIFont.DUChatBodyFriendFont()
-        textColor = UIColor.blackColor()
-        textAlignment = .Natural
+        textColor = UIColor.black
+        textAlignment = .natural
         
-        dataDetectorTypes = .None
-        keyboardAppearance = .Default
-        keyboardType = .Default
-        returnKeyType = .Default
+        dataDetectorTypes = UIDataDetectorTypes()
+        keyboardAppearance = .default
+        keyboardType = .default
+        returnKeyType = .default
         
         text = nil
         
@@ -96,15 +96,15 @@ public class DUMessageInputTextView: UITextView {
     }
     
     // iterate all constraints in xib and link variable with correct constrains
-    private func bindConstraints() {
+    fileprivate func bindConstraints() {
         for c in constraints {
-            if c.firstAttribute == .Height {
+            if c.firstAttribute == .height {
                 switch c.relation {
-                case .Equal:
+                case .equal:
                     heightConstraint = c
-                case .GreaterThanOrEqual:
+                case .greaterThanOrEqual:
                     minHeightConstraint = c
-                case .LessThanOrEqual:
+                case .lessThanOrEqual:
                     maxHeightConstraint = c
                 }
             }
@@ -112,27 +112,27 @@ public class DUMessageInputTextView: UITextView {
     }
     
     // MARK: NSNotifications
-    private func addTextViewNotificationObservers() {
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(DUMessageInputTextView.didReceiveTextViewNotification), name: UITextViewTextDidChangeNotification, object: self)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(DUMessageInputTextView.didReceiveTextViewNotification), name: UITextViewTextDidBeginEditingNotification, object: self)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(DUMessageInputTextView.didReceiveTextViewNotification), name: UITextViewTextDidEndEditingNotification, object: self)
+    fileprivate func addTextViewNotificationObservers() {
+        NotificationCenter.default.addObserver(self, selector: #selector(DUMessageInputTextView.didReceiveTextViewNotification), name: NSNotification.Name.UITextViewTextDidChange, object: self)
+        NotificationCenter.default.addObserver(self, selector: #selector(DUMessageInputTextView.didReceiveTextViewNotification), name: NSNotification.Name.UITextViewTextDidBeginEditing, object: self)
+        NotificationCenter.default.addObserver(self, selector: #selector(DUMessageInputTextView.didReceiveTextViewNotification), name: NSNotification.Name.UITextViewTextDidEndEditing, object: self)
     }
     
-    private func removeTextViewNotificationObservers() {
-        NSNotificationCenter.defaultCenter().removeObserver(self, name: UITextViewTextDidChangeNotification, object: self)
-        NSNotificationCenter.defaultCenter().removeObserver(self, name: UITextViewTextDidBeginEditingNotification, object: self)
-        NSNotificationCenter.defaultCenter().removeObserver(self, name: UITextViewTextDidEndEditingNotification, object: self)
+    fileprivate func removeTextViewNotificationObservers() {
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UITextViewTextDidChange, object: self)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UITextViewTextDidBeginEditing, object: self)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UITextViewTextDidEndEditing, object: self)
     }
     
-    @objc private func didReceiveTextViewNotification() {
+    @objc fileprivate func didReceiveTextViewNotification() {
         setNeedsDisplay()
     }
     
     // MARK: private helper
-    private var placeholderAttributes: [String: AnyObject] {
+    fileprivate var placeholderAttributes: [String: AnyObject] {
         get {
             let paragraphStyle: NSMutableParagraphStyle = NSMutableParagraphStyle()
-            paragraphStyle.lineBreakMode = .ByTruncatingTail
+            paragraphStyle.lineBreakMode = .byTruncatingTail
             paragraphStyle.alignment = textAlignment
             
             return [NSFontAttributeName: UIFont.DUBodyFont(), NSForegroundColorAttributeName: UIColor.DUDarkGreyColor(), NSParagraphStyleAttributeName: paragraphStyle]

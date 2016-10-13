@@ -10,7 +10,7 @@ import UIKit
 
 
 /// This collection view holds and displays message items with given customized layout.
-public class DUMessageCollectionView: UICollectionView {
+open class DUMessageCollectionView: UICollectionView {
     
     //public weak var du_dataSource: DUMessageCollectionViewDataSource?
     //public weak var layoutDelegate: DUMessageCollectionViewFlowLayoutDelegate?
@@ -24,7 +24,7 @@ public class DUMessageCollectionView: UICollectionView {
         super.init(coder: aDecoder)
     }
     
-    override public func awakeFromNib() {
+    override open func awakeFromNib() {
         super.awakeFromNib()
         configureCollectionView()
     }
@@ -39,8 +39,8 @@ public extension DUMessageCollectionView {
      
      - returns: A `DUTypingIndicatorFooterView` object.
      */
-    public func dequeueTypingIndicatorFooterView(forIndexPath indexPath: NSIndexPath) -> DUTypingIndicatorFooterView {
-        let footerView: DUTypingIndicatorFooterView = super.dequeueReusableSupplementaryViewOfKind(UICollectionElementKindSectionFooter, withReuseIdentifier: DUTypingIndicatorFooterView.footerViewReuseIdentifier, forIndexPath: indexPath) as! DUTypingIndicatorFooterView
+    public func dequeueTypingIndicatorFooterView(forIndexPath indexPath: IndexPath) -> DUTypingIndicatorFooterView {
+        let footerView: DUTypingIndicatorFooterView = super.dequeueReusableSupplementaryView(ofKind: UICollectionElementKindSectionFooter, withReuseIdentifier: DUTypingIndicatorFooterView.footerViewReuseIdentifier, for: indexPath) as! DUTypingIndicatorFooterView
         
         return footerView
     }
@@ -48,17 +48,17 @@ public extension DUMessageCollectionView {
 
 private extension DUMessageCollectionView {
     func configureCollectionView() {
-        backgroundColor = UIColor.whiteColor()
-        keyboardDismissMode = .Interactive
+        backgroundColor = UIColor.white
+        keyboardDismissMode = .interactive
         alwaysBounceVertical = true
         bounces = true
         
-        registerNib(DUMessageOutgoingCollectionViewCell.nib, forCellWithReuseIdentifier: DUMessageOutgoingCollectionViewCell.cellReuseIdentifier)
-        registerNib(DUMessageOutgoingCollectionViewCell.nib, forCellWithReuseIdentifier: DUMessageOutgoingCollectionViewCell.mediaCellReuseIdentifier)
+        register(DUMessageOutgoingCollectionViewCell.nib, forCellWithReuseIdentifier: DUMessageOutgoingCollectionViewCell.cellReuseIdentifier)
+        register(DUMessageOutgoingCollectionViewCell.nib, forCellWithReuseIdentifier: DUMessageOutgoingCollectionViewCell.mediaCellReuseIdentifier)
         
-        registerNib(DUMessageIncomingCollectionViewCell.nib, forCellWithReuseIdentifier: DUMessageIncomingCollectionViewCell.cellReuseIdentifier)
-        registerNib(DUMessageIncomingCollectionViewCell.nib, forCellWithReuseIdentifier: DUMessageIncomingCollectionViewCell.mediaCellReuseIdentifier)
+        register(DUMessageIncomingCollectionViewCell.nib, forCellWithReuseIdentifier: DUMessageIncomingCollectionViewCell.cellReuseIdentifier)
+        register(DUMessageIncomingCollectionViewCell.nib, forCellWithReuseIdentifier: DUMessageIncomingCollectionViewCell.mediaCellReuseIdentifier)
         
-        registerNib(DUTypingIndicatorFooterView.nib, forSupplementaryViewOfKind: UICollectionElementKindSectionFooter, withReuseIdentifier: DUTypingIndicatorFooterView.footerViewReuseIdentifier)
+        register(DUTypingIndicatorFooterView.nib, forSupplementaryViewOfKind: UICollectionElementKindSectionFooter, withReuseIdentifier: DUTypingIndicatorFooterView.footerViewReuseIdentifier)
     }
 }

@@ -43,8 +43,8 @@ class DemoMessagesViewController: DUMessagesViewController {
         dismissKeyboard()
     }
 
-    override func didClickRightBarButton(sender: UIBarButtonItem?) {
-        self.performSegueWithIdentifier("toSettingSegue", sender: nil)
+    override func didClick(rightBarButton: UIBarButtonItem?) {
+        self.performSegue(withIdentifier: "toSettingSegue", sender: nil)
     }
 
     // MARK: life cycle
@@ -56,17 +56,17 @@ class DemoMessagesViewController: DUMessagesViewController {
         self.messageData = chatModel.messageDatas
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         self.endReceivingMessage()
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if let vc = segue.destinationViewController as? DemoChatSettingViewController {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let vc = segue.destination as? DemoChatSettingViewController {
             vc.chatDataForSetting = self.chat
         }
     }
@@ -74,19 +74,19 @@ class DemoMessagesViewController: DUMessagesViewController {
 
 // MARK: UIImagePickerDelegate
 extension DemoMessagesViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
-        let imageURL = info[UIImagePickerControllerReferenceURL] as! NSURL
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        let imageURL = info[UIImagePickerControllerReferenceURL] as! URL
         var meta:[String: AnyObject] = [String:AnyObject]()
         
         if let imageName = imageURL.getAssetFullFileName() {
             print("choose image name: \(imageName)")
-            meta["name"] = imageName
+            meta["name"] = imageName as AnyObject
         } else {
-            meta["name"] = "Unnamed image"
+            meta["name"] = "Unnamed image" as AnyObject
         }
         
         let image = info[UIImagePickerControllerOriginalImage] as! UIImage
-        picker.dismissViewControllerAnimated(true) {
+        picker.dismiss(animated: true) {
             let newMessage = MockMessageModel(image: image, isOutgoing: true)
             self.messageData.append(newMessage)
             self.endSendingMessage()
@@ -101,24 +101,21 @@ private extension DemoMessagesViewController {
             return
         }
         
-        if inputToolbar.contentView!.inputTextView.isFirstResponder() {
+        if inputToolbar.contentView!.inputTextView.isFirstResponder {
             inputToolbar.contentView!.inputTextView.resignFirstResponder()
         }
     }
     
     // present action sheet
     func presentActionSheet() {
-        let actionController = UIAlertController.init(title: NSLocalizedString("MEDIA_MESSAGE", comment: "Media message"), message: NSLocalizedString("CHOOSE_TO_DEMO", comment: "Choose to demo"), preferredStyle: .ActionSheet)
+        let actionController = UIAlertController.init(title: NSLocalizedString("MEDIA_MESSAGE", comment: "Media message"), message: NSLocalizedString("CHOOSE_TO_DEMO", comment: "Choose to demo"), preferredStyle: .actionSheet)
         
-        let sendImageAction = UIAlertAction.init(title: NSLocalizedString("SEND_IMAGE", comment: "Send image"), style: .Default){ [unowned self] action in
-//            let newMessage = MockMessageModel(image: UIImage(named:"dna")!, isOutgoing: true)
-//            self.messageData.append(newMessage)
-//            self.endSendingMessage()
-            if UIImagePickerController.isSourceTypeAvailable(.PhotoLibrary){
+        let sendImageAction = UIAlertAction.init(title: NSLocalizedString("SEND_IMAGE", comment: "Send image"), style: .default){ [unowned self] action in
+            if UIImagePickerController.isSourceTypeAvailable(.photoLibrary){
                 let picker = UIImagePickerController()
                 picker.delegate = self
-                picker.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
-                self.presentViewController(picker, animated: true, completion: {
+                picker.sourceType = UIImagePickerControllerSourceType.photoLibrary
+                self.present(picker, animated: true, completion: {
                     () -> Void in
                 })
             }else{
@@ -126,25 +123,25 @@ private extension DemoMessagesViewController {
             }
         }
         
-        let sendVideoAction = UIAlertAction.init(title: NSLocalizedString("SEND_VIDEO", comment: "Send video"), style: .Default){ [unowned self] action in
+        let sendVideoAction = UIAlertAction.init(title: NSLocalizedString("SEND_VIDEO", comment: "Send video"), style: .default){ [unowned self] action in
             let newMessage = MockMessageModel(videoURL: "file://", previewImage: UIImage(named: "videoThumbnail"), isOutgoing: true)
             self.messageData.append(newMessage)
             self.endSendingMessage()
         }
         
-        let sendURLAction = UIAlertAction.init(title: NSLocalizedString("SEND_LINK", comment: "Send a link"), style: .Default){ [unowned self] action in
+        let sendURLAction = UIAlertAction.init(title: NSLocalizedString("SEND_LINK", comment: "Send a link"), style: .default){ [unowned self] action in
             let newMessage = MockMessageModel(url: "http://www.nytimes.com/2016/08/14/sports/olympics/michael-phelps-23-gold-medals-swimming-4x100-relay.html?_r=0", isOutgoing: true)
             self.messageData.append(newMessage)
             self.endSendingMessage()
         }
         
-        let sendFileAction = UIAlertAction.init(title: NSLocalizedString("SEND_FILE", comment: "Send file"), style: .Default){ [unowned self] action in
-            let newMessage = MockMessageModel(fileURL: NSBundle.mainBundle().pathForResource("WWDC_419", ofType: "pdf")!, fileName: "WWDC_419.pdf", fileDescription: "Session 419 slide", isOutgoing: true)
+        let sendFileAction = UIAlertAction.init(title: NSLocalizedString("SEND_FILE", comment: "Send file"), style: .default){ [unowned self] action in
+            let newMessage = MockMessageModel(fileURL: Bundle.main.path(forResource: "WWDC_419", ofType: "pdf")!, fileName: "WWDC_419.pdf", fileDescription: "Session 419 slide", isOutgoing: true)
             self.messageData.append(newMessage)
             self.endSendingMessage()
         }
         
-        let dummyReceiving = UIAlertAction.init(title: NSLocalizedString("SIMULATE_RECEIVING", comment: "Simulate Receiving"), style: .Default){ [unowned self] action in
+        let dummyReceiving = UIAlertAction.init(title: NSLocalizedString("SIMULATE_RECEIVING", comment: "Simulate Receiving"), style: .default){ [unowned self] action in
             self.displayTypingIndicator = true
             self.scrollToBottom(true)
             
@@ -159,13 +156,12 @@ private extension DemoMessagesViewController {
             }
             fakeReceivedMessage.senderIdentifier = "her"
             fakeReceivedMessage.senderDisplayName = "Bot"
-            fakeReceivedMessage.date = NSDate()
+            fakeReceivedMessage.date = Date()
             
             self.messageData.append(fakeReceivedMessage)
             
             // For showing typing indicator
-            let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(2 * Double(NSEC_PER_SEC)))
-            dispatch_after(delayTime, dispatch_get_main_queue()) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                 self.endReceivingMessage()
             }
             
@@ -176,11 +172,11 @@ private extension DemoMessagesViewController {
         actionController.addAction(sendURLAction)
         actionController.addAction(sendFileAction)
         actionController.addAction(dummyReceiving)
-        actionController.addAction(UIAlertAction.init(title: "Cancel", style: .Cancel) { [unowned self] action in
+        actionController.addAction(UIAlertAction.init(title: "Cancel", style: .cancel) { [unowned self] action in
             self.inputToolbar.contentView?.inputTextView.becomeFirstResponder()
         })
         
-        self.presentViewController(actionController, animated: true, completion: nil)
+        self.present(actionController, animated: true, completion: nil)
     }
 
 }

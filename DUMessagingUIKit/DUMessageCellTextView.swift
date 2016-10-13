@@ -8,31 +8,31 @@
 
 import UIKit
 
-public class DUMessageCellTextView: UITextView {
+open class DUMessageCellTextView: UITextView {
     
-    override public func awakeFromNib() {
+    override open func awakeFromNib() {
         super.awakeFromNib()
         
-        editable = false
-        selectable = true
-        userInteractionEnabled = true
-        dataDetectorTypes = .None
+        isEditable = false
+        isSelectable = true
+        isUserInteractionEnabled = true
+        dataDetectorTypes = UIDataDetectorTypes()
         showsHorizontalScrollIndicator = false
         showsVerticalScrollIndicator = false
-        scrollEnabled = false
-        backgroundColor = UIColor.clearColor()
-        textContainerInset = UIEdgeInsetsZero
+        isScrollEnabled = false
+        backgroundColor = UIColor.clear
+        textContainerInset = UIEdgeInsets.zero
         textContainer.lineFragmentPadding = 0
-        contentInset = UIEdgeInsetsZero
-        scrollIndicatorInsets = UIEdgeInsetsZero
-        contentOffset = CGPointZero
-        let underline = NSUnderlineStyle.StyleSingle.rawValue | NSUnderlineStyle.PatternSolid.rawValue
+        contentInset = UIEdgeInsets.zero
+        scrollIndicatorInsets = UIEdgeInsets.zero
+        contentOffset = CGPoint.zero
+        let underline = NSUnderlineStyle.styleSingle.rawValue | NSUnderlineStyle.patternSolid.rawValue
         linkTextAttributes = [  NSForegroundColorAttributeName : GlobalUISettings.tintColor,
                                 NSUnderlineStyleAttributeName: underline]
         
     }
     
-    override public func gestureRecognizerShouldBegin(gestureRecognizer: UIGestureRecognizer) -> Bool {
+    override open func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
         
         // ignore double tap to prevent unrelevatn menu showing
         if let gr = gestureRecognizer as? UITapGestureRecognizer {

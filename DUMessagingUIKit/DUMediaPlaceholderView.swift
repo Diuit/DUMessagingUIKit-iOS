@@ -8,11 +8,11 @@
 
 import UIKit
 
-public class DUMediaPlaceholderView: UIView, PlaceholderStyle {
+open class DUMediaPlaceholderView: UIView, PlaceholderStyle {
     var spinner: UIActivityIndicatorView
     
     public override init(frame: CGRect) {
-        spinner = UIActivityIndicatorView.init(activityIndicatorStyle: .Gray)
+        spinner = UIActivityIndicatorView.init(activityIndicatorStyle: .gray)
         super.init(frame: frame)
         adoptProtocolUIApperance()
         self.addSubview(spinner)
@@ -24,7 +24,7 @@ public class DUMediaPlaceholderView: UIView, PlaceholderStyle {
         fatalError("init(coder:) has not been implemented")
     }
     
-    public override func layoutSubviews() {
+    open override func layoutSubviews() {
         super.layoutSubviews()
         spinner.center = self.center
     }

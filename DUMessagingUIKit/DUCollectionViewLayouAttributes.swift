@@ -11,7 +11,7 @@ import UIKit
 /**
     This class holds all layout attributes related in `DUMessageCollectionView`
  */
-public class DUCollectionViewLayouAttributes: UICollectionViewLayoutAttributes {
+open class DUCollectionViewLayouAttributes: UICollectionViewLayoutAttributes {
     /**
         This value defines the height of top label for the message cell in the collectionView
      
@@ -72,17 +72,17 @@ public class DUCollectionViewLayouAttributes: UICollectionViewLayoutAttributes {
         }
     }
     /// The font of textView within the message cell.
-    public var messageBubbleFont: UIFont = UIFont.DUChatBodyFriendFont()
+    open var messageBubbleFont: UIFont = UIFont.DUChatBodyFriendFont()
     /// The inset of the frame of the textView in `DUMessageCollectionViewCell`
-    public var cellTextViewFrameInset: UIEdgeInsets =  UIEdgeInsetsMake(0, 0, 0, 0)
+    open var cellTextViewFrameInset: UIEdgeInsets =  UIEdgeInsetsMake(0, 0, 0, 0)
     /// The inset of the text container in textView of `DUMessageCollectionViewCell`
-    public var textViewTextContainerInsets: UIEdgeInsets = UIEdgeInsetsMake(7.0, 14.0, 7.0, 14.0)
+    open var textViewTextContainerInsets: UIEdgeInsets = UIEdgeInsetsMake(7.0, 14.0, 7.0, 14.0)
     
     // MARK: NSCopying
-    override public func copyWithZone(zone: NSZone) -> AnyObject {
-        let copy = super.copyWithZone(zone) as! DUCollectionViewLayouAttributes
+    override open func copy(with zone: NSZone?) -> Any {
+        let copy = super.copy(with: zone) as! DUCollectionViewLayouAttributes
         
-        guard copy.representedElementCategory == .Cell else {
+        guard copy.representedElementCategory == .cell else {
             return copy
         }
         
@@ -98,14 +98,15 @@ public class DUCollectionViewLayouAttributes: UICollectionViewLayoutAttributes {
         return copy
     }
     
-    override public func isEqual(object: AnyObject?) -> Bool {
+    override open func isEqual(_ object: Any?) -> Bool {
         guard object is DUCollectionViewLayouAttributes else {
             return false
         }
         
-        if object === self { return true }
+        let castedObject = object as! DUCollectionViewLayouAttributes
+        if castedObject === self { return true }
         
-        if self.representedElementCategory == .Cell {
+        if self.representedElementCategory == .cell {
             let layoutAttributes = object as! DUCollectionViewLayouAttributes
             let condition: Bool = (Int(layoutAttributes.cellTopLabelHeight) != Int(self.cellTopLabelHeight)) ||
                                   (Int(layoutAttributes.messageBubbleTopLabelHeight) != Int(self.messageBubbleTopLabelHeight)) ||

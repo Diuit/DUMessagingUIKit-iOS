@@ -14,13 +14,13 @@ internal let kDUMEssageCollectionViewCellAvatarSizeDefault: CGFloat = 32.0
 // TODO: 1. dynamically overrid super property collectionView? or use another way
 //       2. automaticllay adopt to font changing
 
-public class DUMessageCollectionViewFlowLayout: UICollectionViewFlowLayout {
+open class DUMessageCollectionViewFlowLayout: UICollectionViewFlowLayout {
     /**
         Font to display message text in the message bubble 
         
         - warning: This value must not be `nil`. The defualt view is `DUChatBodyFriendFont`
      */
-    public var messageBodyFont: UIFont = UIFont.DUChatBodyFriendFont() ?? UIFont.preferredFontForTextStyle(UIFontTextStyleBody)
+    public var messageBodyFont: UIFont = UIFont.DUChatBodyFriendFont()
     /**
         This value specifies the horizontal spacing betweeen the `messageBubbleContainerView` edge, which is opposite to the avatar side, and the edge of collectionView. 
      
@@ -33,13 +33,13 @@ public class DUMessageCollectionViewFlowLayout: UICollectionViewFlowLayout {
     public var messageBubbleHorizontalMargin: CGFloat = 72.0
     {
         didSet {
-            invalidateLayoutWithContext(UICollectionViewFlowLayoutInvalidationContext())
+            invalidateLayout(with: UICollectionViewFlowLayoutInvalidationContext())
         }
     }
     /**
         This inset of the textView frame which lies in the bubble container view, default value is `UIEdgeInsetsZero`. The texView will exactly overrlap with the bubble container view.
      */
-    public var messageBubbleTextViewFrameInsets = UIEdgeInsetsZero
+    public var messageBubbleTextViewFrameInsets = UIEdgeInsets.zero
     /**
         The inset of the text container in the textView which lies in the `messageBubbleContainerView`.
      */
@@ -48,7 +48,7 @@ public class DUMessageCollectionViewFlowLayout: UICollectionViewFlowLayout {
         didSet {
             if !UIEdgeInsetsEqualToEdgeInsets(oldValue, messageBubbleTextViewTextContainerInsets) {
                 // TODO: do we need a customized context?
-                invalidateLayoutWithContext(UICollectionViewFlowLayoutInvalidationContext())
+                invalidateLayout(with: UICollectionViewFlowLayoutInvalidationContext())
             }
         }
     }
@@ -61,7 +61,7 @@ public class DUMessageCollectionViewFlowLayout: UICollectionViewFlowLayout {
     {
         didSet {
             if incomingAvatarImageViewDiameter != oldValue {
-                invalidateLayoutWithContext(UICollectionViewFlowLayoutInvalidationContext())
+                invalidateLayout(with: UICollectionViewFlowLayoutInvalidationContext())
             }
         }
     }
@@ -74,7 +74,7 @@ public class DUMessageCollectionViewFlowLayout: UICollectionViewFlowLayout {
     {
         didSet {
             if outgoingAvatarImageViewDiameter != oldValue {
-                invalidateLayoutWithContext(UICollectionViewFlowLayoutInvalidationContext())
+                invalidateLayout(with: UICollectionViewFlowLayoutInvalidationContext())
             }
         }
     }
@@ -84,7 +84,7 @@ public class DUMessageCollectionViewFlowLayout: UICollectionViewFlowLayout {
             return 0.0
         }
         
-        return CGRectGetWidth(collectionView!.frame) - sectionInset.left - sectionInset.right
+        return collectionView!.frame.width - sectionInset.left - sectionInset.right
     }
     /// Message bubble size calculator
     var bubbleSizeCalculator: DUMessageSizeCalculator = DUMessageSizeCalculator()
@@ -100,78 +100,75 @@ public class DUMessageCollectionViewFlowLayout: UICollectionViewFlowLayout {
         super.init(coder: aDecoder)
     }
     
-    override public func awakeFromNib() {
+    override open func awakeFromNib() {
         super.awakeFromNib()
         setupFlowLayout()
     }
     // return customized attributes class
-    public override class func layoutAttributesClass() -> AnyClass {
+    open override class var layoutAttributesClass : AnyClass {
         return DUCollectionViewLayouAttributes.self
     }
-}
-
-
-// UICollectionViewFlowLayout method
-public extension DUMessageCollectionViewFlowLayout {
     
-    override func shouldInvalidateLayoutForBoundsChange(newBounds: CGRect) -> Bool {
+    
+    // MARK: UICollectionViewFlowLayout
+    override open func shouldInvalidateLayout(forBoundsChange newBounds: CGRect) -> Bool {
         let oldBounds: CGRect = self.collectionView!.bounds
-        if CGRectGetWidth(newBounds) != CGRectGetWidth(oldBounds) {
+        if newBounds.width != oldBounds.width {
             return true
         }
         
         return false
     }
     
-    override func layoutAttributesForElementsInRect(rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
-        let attributesInRect = super.layoutAttributesForElementsInRect(rect)
+    override open func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
+        let attributesInRect = super.layoutAttributesForElements(in: rect)
         for attributesItem in attributesInRect! {
-            if attributesItem.representedElementCategory == .Cell {
+            if attributesItem.representedElementCategory == .cell {
                 let attr = attributesItem as! DUCollectionViewLayouAttributes
                 configure(cellLayoutAttributes: attr)
             } else {
                 attributesItem.zIndex = -1
             }
         }
-    
+        
         return attributesInRect
     }
     
-    override func layoutAttributesForItemAtIndexPath(indexPath: NSIndexPath) -> UICollectionViewLayoutAttributes? {
-        let myAttributes: DUCollectionViewLayouAttributes = super.layoutAttributesForItemAtIndexPath(indexPath)?.copy() as! DUCollectionViewLayouAttributes
-        if myAttributes.representedElementCategory == .Cell {
+    override open func layoutAttributesForItem(at indexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
+        let myAttributes: DUCollectionViewLayouAttributes = super.layoutAttributesForItem(at: indexPath)?.copy() as! DUCollectionViewLayouAttributes
+        if myAttributes.representedElementCategory == .cell {
             configure(cellLayoutAttributes: myAttributes)
         }
         
         return myAttributes
     }
     
-    override func prepareForCollectionViewUpdates(updateItems: [UICollectionViewUpdateItem]) {
-        super.prepareForCollectionViewUpdates(updateItems)
+    override open func prepare(forCollectionViewUpdates updateItems: [UICollectionViewUpdateItem]) {
+        super.prepare(forCollectionViewUpdates: updateItems)
         
         for item: UICollectionViewUpdateItem in updateItems {
-            if item.updateAction == .Insert {
-                let colletionViewHeight: CGFloat = CGRectGetHeight(collectionView!.bounds)
-                let attributes: DUCollectionViewLayouAttributes = DUCollectionViewLayouAttributes(forCellWithIndexPath: item.indexPathAfterUpdate!)
+            if item.updateAction == .insert {
+                let colletionViewHeight: CGFloat = collectionView!.bounds.height
+                let attributes: DUCollectionViewLayouAttributes = DUCollectionViewLayouAttributes(forCellWith: item.indexPathAfterUpdate!)
                 
-                if attributes.representedElementCategory == .Cell {
+                if attributes.representedElementCategory == .cell {
                     configure(cellLayoutAttributes: attributes)
                 }
                 
-                attributes.frame = CGRectMake(0.0, colletionViewHeight + CGRectGetHeight(attributes.frame), CGRectGetWidth(attributes.frame), CGRectGetHeight(attributes.frame))
+                attributes.frame = CGRect(x: 0.0, y: colletionViewHeight + attributes.frame.height, width: attributes.frame.width, height: attributes.frame.height)
             }
         }
     }
     
-    func messageBubbleSizeForItem(atIndexPath indexPath: NSIndexPath) -> CGSize {
+    func messageBubbleSizeForItem(atIndexPath indexPath: IndexPath) -> CGSize {
         guard self.collectionView != nil else {
             print("collectionView does not exist")
-            return CGSizeZero
+            return CGSize.zero
         }
         
-        guard self.collectionView!.isKindOfClass(DUMessageCollectionView) else {
+        guard self.collectionView!.isKind(of: DUMessageCollectionView.self) else {
             print("The collectionView this layout belongs to is not an instance of `DUMessageCollectionView`")
-            return CGSizeZero
+            return CGSize.zero
         }
         
         let du_collectionView = self.collectionView as! DUMessageCollectionView
@@ -181,24 +178,24 @@ public extension DUMessageCollectionViewFlowLayout {
         return bubbleSizeCalculator.messageBubbleSize(forMessageData: messageItem, atIndexPath: indexPath, withLayout: self)
     }
     
-    func sizeForItem(atIndexPath indexPath: NSIndexPath) -> CGSize {
+    func sizeForItem(atIndexPath indexPath: IndexPath) -> CGSize {
         let messageBubbleSize = self.messageBubbleSizeForItem(atIndexPath: indexPath)
         
-        let attributes: DUCollectionViewLayouAttributes = self.layoutAttributesForItemAtIndexPath(indexPath) as! DUCollectionViewLayouAttributes
+        let attributes: DUCollectionViewLayouAttributes = self.layoutAttributesForItem(at: indexPath) as! DUCollectionViewLayouAttributes
         let finalHeight = messageBubbleSize.height + attributes.cellTopLabelHeight + attributes.messageBubbleTopLabelHeight
         
-        return CGSizeMake(itemWidth, finalHeight)
+        return CGSize(width: itemWidth, height: finalHeight)
     }
+    
 }
 
-// message cell layouts
 
 // MARK: Private methods
 private extension DUMessageCollectionViewFlowLayout {
     func setupFlowLayout() {
         // TODO: delete itemSize later
-        itemSize = CGSizeMake(250.0, 154.0)
-        scrollDirection = .Vertical
+        itemSize = CGSize(width: 250.0, height: 154.0)
+        scrollDirection = .vertical
         sectionInset = UIEdgeInsetsMake(10.0, 15.0, 10.0, 15.0)
         minimumLineSpacing = 15.0
     }

@@ -44,7 +44,7 @@ public protocol DUMessageCollectionViewCellDelegate: class {
     
     - seealos: `DUMessageOutgoingCollectionViewCell` and `DUMessageIncomingCollectionViewCell`
  */
-public class DUMessageCollectionViewCell: UICollectionViewCell {
+open class DUMessageCollectionViewCell: UICollectionViewCell {
     /// The label locates at the top of the cell, normally for timestamp display.
     @IBOutlet public weak var cellTopLabel: UILabel!
     /// The label beneath `cellTopLabel` and above message bubble container view, normally for sender information display.
@@ -81,7 +81,7 @@ public class DUMessageCollectionViewCell: UICollectionViewCell {
     @IBOutlet public weak var timeLabel: UILabel!
     
     /// Delegate for all cell tap events.
-    public weak var delegate: DUMessageCollectionViewCellDelegate?
+    open weak var delegate: DUMessageCollectionViewCellDelegate?
     /// This view weill be displayed when the message is a media message.
     public var messageMediaView: UIView? = nil
     {
@@ -97,7 +97,7 @@ public class DUMessageCollectionViewCell: UICollectionViewCell {
                 bubbleContainer.pingAlledge(ofSubview: messageMediaView!)
                 
                 // For the reason of cell reuse, there may already be an antoher media view. Remove all message media subviews except current one.
-                dispatch_async(dispatch_get_main_queue(), {[weak self] in
+                DispatchQueue.main.async(execute: {[weak self] in
                     if let _ = self?.bubbleContainer.subviews {
                         for sv in self!.bubbleContainer.subviews {
                             if sv != self?.messageMediaView {
@@ -110,7 +110,7 @@ public class DUMessageCollectionViewCell: UICollectionViewCell {
         }
     }
 
-    override public var backgroundColor: UIColor?
+    override open var backgroundColor: UIColor?
     {
         didSet {
             cellTopLabel.backgroundColor = backgroundColor
@@ -131,10 +131,10 @@ public class DUMessageCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var bubbleContainerViewWidthConstraint: NSLayoutConstraint!
     @IBOutlet weak var avatarContainerViewWidthConstraint: NSLayoutConstraint!
     
-    private weak var tapGestureRecognize: UITapGestureRecognizer?
+    fileprivate weak var tapGestureRecognize: UITapGestureRecognizer?
     
     // MARK: life cycle
-    override public func awakeFromNib() {
+    override open func awakeFromNib() {
         super.awakeFromNib()
         translatesAutoresizingMaskIntoConstraints = false
         setupCellViews()
@@ -146,42 +146,30 @@ public class DUMessageCollectionViewCell: UICollectionViewCell {
         tapGestureRecognize?.removeTarget(nil, action: nil)
         tapGestureRecognize = nil
     }
-}
-
-// Class method
-public extension DUMessageCollectionViewCell {
     
-    static var nib: UINib { return UINib.init(nibName: self.nameOfClass, bundle: NSBundle.du_messagingUIKitBundle) }
     
-    public static var cellReuseIdentifier: String { return self.nameOfClass }
-    
-    public static var mediaCellReuseIdentifier: String { return self.nameOfClass + "_Media" }
-    
-}
-
-// Collection view cell
-public extension DUMessageCollectionViewCell {
-    override func prepareForReuse() {
+    // Collection view cell
+    override open func prepareForReuse() {
         super.prepareForReuse()
         
         cellTopLabel.text = nil
         messageBubbleTopLabel.text = nil
-        messageBubbleTopLabel.textEdgeInsets = UIEdgeInsetsZero
+        messageBubbleTopLabel.textEdgeInsets = UIEdgeInsets.zero
         timeLabel.text = nil
         
-        cellTextView?.dataDetectorTypes = .None
+        cellTextView?.dataDetectorTypes = UIDataDetectorTypes()
         cellTextView?.text = nil
         cellTextView?.attributedText = nil
         
         avatarImageView.image = nil
     }
-
-    override func preferredLayoutAttributesFittingAttributes(layoutAttributes: UICollectionViewLayoutAttributes) -> UICollectionViewLayoutAttributes {
+    
+    override open func preferredLayoutAttributesFitting(_ layoutAttributes: UICollectionViewLayoutAttributes) -> UICollectionViewLayoutAttributes {
         return layoutAttributes
     }
     
-    override func applyLayoutAttributes(layoutAttributes: UICollectionViewLayoutAttributes) {
-        super.applyLayoutAttributes(layoutAttributes)
+    override open func apply(_ layoutAttributes: UICollectionViewLayoutAttributes) {
+        super.apply(layoutAttributes)
         
         let duLayoutAttributes = layoutAttributes as! DUCollectionViewLayouAttributes
         
@@ -195,33 +183,43 @@ public extension DUMessageCollectionViewCell {
         update(layoutConstraint: bubbleTopLabelHeightConstraint, withConstant: duLayoutAttributes.messageBubbleTopLabelHeight)
         update(layoutConstraint: bubbleContainerViewWidthConstraint, withConstant: duLayoutAttributes.messageBubbleContainerViewWidth)
         
-        if self.isKindOfClass(DUMessageOutgoingCollectionViewCell) {
+        if self.isKind(of: DUMessageOutgoingCollectionViewCell.self) {
             update(layoutConstraint: avatarContainerViewWidthConstraint, withConstant: duLayoutAttributes.outgoingAvatarImageViewDiameter)
         } else {
             update(layoutConstraint: avatarContainerViewWidthConstraint, withConstant: duLayoutAttributes.incomingAvatarImageViewDiameter)
         }
         
     }
+}
 
+// Class method
+public extension DUMessageCollectionViewCell {
+    
+    static var nib: UINib { return UINib.init(nibName: self.nameOfClass, bundle: Bundle.du_messagingUIKitBundle) }
+    
+    public static var cellReuseIdentifier: String { return self.nameOfClass }
+    
+    public static var mediaCellReuseIdentifier: String { return self.nameOfClass + "_Media" }
+    
 }
 
 // Private methods
 private extension DUMessageCollectionViewCell {
     func setupCellViews() {
         translatesAutoresizingMaskIntoConstraints = false
-        backgroundColor = UIColor.whiteColor()
+        backgroundColor = UIColor.white
         
         cellTopLabelHeightConstraint.constant = 0.0
         bubbleTopLabelHeightConstraint.constant = 0.0
         
-        cellTopLabel.textAlignment = .Center
+        cellTopLabel.textAlignment = .center
         cellTopLabel.font = UIFont.DUChatroomDateFont()
         cellTopLabel.textColor = UIColor.DUDarkGreyColor()
         
         messageBubbleTopLabel.font = UIFont.DUMessageSenderFont()
         messageBubbleTopLabel.textColor = UIColor.DUDarkGreyColor()
         
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleGestureOf(_:)))
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleGestureOf(tap:)))
         self.addGestureRecognizer(tap)
         tapGestureRecognize = tap
     }
@@ -234,11 +232,11 @@ private extension DUMessageCollectionViewCell {
     
     // Check where the tap gesture happened
     @objc func handleGestureOf(tap: UITapGestureRecognizer) {
-        let touchPoint: CGPoint = tap.locationInView(self)
+        let touchPoint: CGPoint = tap.location(in: self)
         
-        if CGRectContainsPoint(avatarContainer.frame, touchPoint) {
+        if avatarContainer.frame.contains(touchPoint) {
             delegate?.didTapAvatar(ofMessageCollectionViewCell: self)
-        } else if CGRectContainsPoint(bubbleContainer.frame, touchPoint) {
+        } else if bubbleContainer.frame.contains(touchPoint) {
             delegate?.didTapMessageBubble(ofMessageCollectionViewCell: self)
         } else {
             delegate?.didTap(messageCollectionViewCell: self)

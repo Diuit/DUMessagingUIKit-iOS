@@ -22,15 +22,15 @@ class DUBlockCell: UITableViewCell, ModelTransfer {
     
     internal var delegate: DUBlockDelegate?
     
-    @IBAction func stateChanged(switchState: UISwitch) {
-        if blockSwitch.on {
+    @IBAction func stateChanged(sender: UISwitch) {
+        if blockSwitch.isOn {
             delegate?.block()
         } else {
             delegate?.unblock()
         }
     }
-    func updateWithModel(model: Bool) {
-        self.selectionStyle = .None
-        blockSwitch.on = model
+    func update(with model: Bool) {
+        self.selectionStyle = .none
+        blockSwitch.isOn = model
     }
 }
