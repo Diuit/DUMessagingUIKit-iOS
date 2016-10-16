@@ -38,7 +38,6 @@
 		FA2D83D61CFE762B0060A6B8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA2D83D41CFE762B0060A6B8 /* Main.storyboard */; };
 		FA2D83D81CFE762B0060A6B8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FA2D83D71CFE762B0060A6B8 /* Assets.xcassets */; };
 		FA2D83DB1CFE762B0060A6B8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA2D83D91CFE762B0060A6B8 /* LaunchScreen.storyboard */; };
-		FA2D83E61CFE762B0060A6B8 /* DUMessagingDemoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2D83E51CFE762B0060A6B8 /* DUMessagingDemoUITests.swift */; };
 		FA2D83F11CFEE7700060A6B8 /* DUViewControllerProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2D83F01CFEE7700060A6B8 /* DUViewControllerProtocols.swift */; };
 		FA4638FE1D19203200BF6070 /* WWDC_419.pdf in Resources */ = {isa = PBXBuildFile; fileRef = FA4638FD1D19203200BF6070 /* WWDC_419.pdf */; };
 		FA4639201D1A742B00BF6070 /* DUTypingIndicatorFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA46391E1D1A742B00BF6070 /* DUTypingIndicatorFooterView.swift */; };
@@ -79,13 +78,6 @@
 			proxyType = 1;
 			remoteGlobalIDString = FA2D83221CFE0BE20060A6B8;
 			remoteInfo = DUMessagingUIKit;
-		};
-		FA2D83E21CFE762B0060A6B8 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = FA2D831A1CFE0BE20060A6B8 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = FA2D83CD1CFE762B0060A6B8;
-			remoteInfo = DUMessagingDemo;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -143,9 +135,6 @@
 		FA2D83D71CFE762B0060A6B8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FA2D83DA1CFE762B0060A6B8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FA2D83DC1CFE762B0060A6B8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		FA2D83E11CFE762B0060A6B8 /* DUMessagingDemoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DUMessagingDemoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		FA2D83E51CFE762B0060A6B8 /* DUMessagingDemoUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DUMessagingDemoUITests.swift; sourceTree = "<group>"; };
-		FA2D83E71CFE762B0060A6B8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FA2D83F01CFEE7700060A6B8 /* DUViewControllerProtocols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DUViewControllerProtocols.swift; sourceTree = "<group>"; };
 		FA4638FD1D19203200BF6070 /* WWDC_419.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = WWDC_419.pdf; sourceTree = "<group>"; };
 		FA46391E1D1A742B00BF6070 /* DUTypingIndicatorFooterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DUTypingIndicatorFooterView.swift; sourceTree = "<group>"; };
@@ -206,13 +195,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		FA2D83DE1CFE762B0060A6B8 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -243,7 +225,6 @@
 				FA2D83251CFE0BE20060A6B8 /* DUMessagingUIKit */,
 				FA2D83311CFE0BE30060A6B8 /* DUMessagingUIKitTests */,
 				FA2D83CF1CFE762B0060A6B8 /* DUMessagingDemo */,
-				FA2D83E41CFE762B0060A6B8 /* DUMessagingDemoUITests */,
 				FA2D83241CFE0BE20060A6B8 /* Products */,
 				372F51F139D1D3957F3250A3 /* Pods */,
 				5B5DB69426393531234D1CCC /* Frameworks */,
@@ -256,7 +237,6 @@
 				FA2D83231CFE0BE20060A6B8 /* DUMessagingUIKit.framework */,
 				FA2D832D1CFE0BE30060A6B8 /* DUMessagingUIKitTests.xctest */,
 				FA2D83CE1CFE762B0060A6B8 /* DUMessagingDemo.app */,
-				FA2D83E11CFE762B0060A6B8 /* DUMessagingDemoUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -372,15 +352,6 @@
 			path = DUMessagingDemo;
 			sourceTree = "<group>";
 		};
-		FA2D83E41CFE762B0060A6B8 /* DUMessagingDemoUITests */ = {
-			isa = PBXGroup;
-			children = (
-				FA2D83E51CFE762B0060A6B8 /* DUMessagingDemoUITests.swift */,
-				FA2D83E71CFE762B0060A6B8 /* Info.plist */,
-			);
-			path = DUMessagingDemoUITests;
-			sourceTree = "<group>";
-		};
 		FA5B99511D01857E00786C6B /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -473,24 +444,6 @@
 			productReference = FA2D83CE1CFE762B0060A6B8 /* DUMessagingDemo.app */;
 			productType = "com.apple.product-type.application";
 		};
-		FA2D83E01CFE762B0060A6B8 /* DUMessagingDemoUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = FA2D83EB1CFE762B0060A6B8 /* Build configuration list for PBXNativeTarget "DUMessagingDemoUITests" */;
-			buildPhases = (
-				FA2D83DD1CFE762B0060A6B8 /* Sources */,
-				FA2D83DE1CFE762B0060A6B8 /* Frameworks */,
-				FA2D83DF1CFE762B0060A6B8 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				FA2D83E31CFE762B0060A6B8 /* PBXTargetDependency */,
-			);
-			name = DUMessagingDemoUITests;
-			productName = DUMessagingDemoUITests;
-			productReference = FA2D83E11CFE762B0060A6B8 /* DUMessagingDemoUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -512,10 +465,6 @@
 					FA2D83CD1CFE762B0060A6B8 = {
 						CreatedOnToolsVersion = 7.3.1;
 					};
-					FA2D83E01CFE762B0060A6B8 = {
-						CreatedOnToolsVersion = 7.3.1;
-						TestTargetID = FA2D83CD1CFE762B0060A6B8;
-					};
 				};
 			};
 			buildConfigurationList = FA2D831D1CFE0BE20060A6B8 /* Build configuration list for PBXProject "DUMessagingUIKit" */;
@@ -534,7 +483,6 @@
 				FA2D83221CFE0BE20060A6B8 /* DUMessagingUIKit */,
 				FA2D832C1CFE0BE30060A6B8 /* DUMessagingUIKitTests */,
 				FA2D83CD1CFE762B0060A6B8 /* DUMessagingDemo */,
-				FA2D83E01CFE762B0060A6B8 /* DUMessagingDemoUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -574,13 +522,6 @@
 				FA2D83D81CFE762B0060A6B8 /* Assets.xcassets in Resources */,
 				FA4638FE1D19203200BF6070 /* WWDC_419.pdf in Resources */,
 				FA2D83D61CFE762B0060A6B8 /* Main.storyboard in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		FA2D83DF1CFE762B0060A6B8 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -728,14 +669,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		FA2D83DD1CFE762B0060A6B8 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				FA2D83E61CFE762B0060A6B8 /* DUMessagingDemoUITests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -743,11 +676,6 @@
 			isa = PBXTargetDependency;
 			target = FA2D83221CFE0BE20060A6B8 /* DUMessagingUIKit */;
 			targetProxy = FA2D832F1CFE0BE30060A6B8 /* PBXContainerItemProxy */;
-		};
-		FA2D83E31CFE762B0060A6B8 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = FA2D83CD1CFE762B0060A6B8 /* DUMessagingDemo */;
-			targetProxy = FA2D83E21CFE762B0060A6B8 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -986,28 +914,6 @@
 			};
 			name = Release;
 		};
-		FA2D83EC1CFE762B0060A6B8 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				INFOPLIST_FILE = DUMessagingDemoUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.duolc.DUMessagingDemoUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_TARGET_NAME = DUMessagingDemo;
-			};
-			name = Debug;
-		};
-		FA2D83ED1CFE762B0060A6B8 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				INFOPLIST_FILE = DUMessagingDemoUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.duolc.DUMessagingDemoUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_TARGET_NAME = DUMessagingDemo;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1043,15 +949,6 @@
 			buildConfigurations = (
 				FA2D83E91CFE762B0060A6B8 /* Debug */,
 				FA2D83EA1CFE762B0060A6B8 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		FA2D83EB1CFE762B0060A6B8 /* Build configuration list for PBXNativeTarget "DUMessagingDemoUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				FA2D83EC1CFE762B0060A6B8 /* Debug */,
-				FA2D83ED1CFE762B0060A6B8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
