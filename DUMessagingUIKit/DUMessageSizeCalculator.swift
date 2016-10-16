@@ -14,13 +14,14 @@ private let defaultMinimumBubbleWidth: CGFloat = 28.0
 private let defaultMinimumBubbleHeight: CGFloat = 32.0
 
 
-public class DUMessageSizeCalculator: NSObject {
+open class DUMessageSizeCalculator: NSObject {
     
-    private var sizeCache: NSCache
-    private var minBubbleWidth: CGFloat
-    private var minBubbleHeight: CGFloat
+    // FIXME: use this cache to store calculated results
+    fileprivate var sizeCache: NSCache<AnyObject, AnyObject>
+    fileprivate var minBubbleWidth: CGFloat
+    fileprivate var minBubbleHeight: CGFloat
     
-    public init(cache: NSCache, minimumBubbleWidth: CGFloat, minimumBubbleHeight: CGFloat) {
+    public init(cache: NSCache<AnyObject, AnyObject>, minimumBubbleWidth: CGFloat, minimumBubbleHeight: CGFloat) {
         assert(minimumBubbleWidth > 0, "minimum message bubble width can not be less than 0")
         
         sizeCache = cache
@@ -30,7 +31,7 @@ public class DUMessageSizeCalculator: NSObject {
     }
     
     override convenience init() {
-        let cache = NSCache()
+        let cache = NSCache<AnyObject, AnyObject>()
         cache.name = "DUMessageSizeCalculator.cache"
         cache.countLimit = 200
         self.init(cache: cache, minimumBubbleWidth: defaultMinimumBubbleWidth, minimumBubbleHeight: defaultMinimumBubbleHeight)
@@ -54,13 +55,13 @@ public extension DUMessageSizeCalculator {
      
         - Note: This is not the size of entier collectionViewCell, just the message bubble.
      */
-    func messageBubbleSize(forMessageData messageData: DUMessageData, atIndexPath indexPath: NSIndexPath, withLayout layout: DUMessageCollectionViewFlowLayout) -> CGSize {
-        let cachedSize = sizeCache.objectForKey(messageData.hashValue) as? CGSize
-        if cachedSize != nil {
-            return cachedSize!
-        }
+    func messageBubbleSize(forMessageData messageData: DUMessageData, atIndexPath indexPath: IndexPath, withLayout layout: DUMessageCollectionViewFlowLayout) -> CGSize {
+//        let cachedSize = sizeCache.object(forKey: messageData.hashValue as AnyObject)
+//        if cachedSize != nil {
+//            return cachedSize!
+//        }
         
-        var finalSize = CGSizeZero
+        var finalSize = CGSize.zero
         let avatarImageDiameter: CGFloat = (messageData.isOutgoingMessage) ? layout.outgoingAvatarImageViewDiameter : layout.incomingAvatarImageViewDiameter
         
         if messageData.isMediaMessage {
@@ -76,7 +77,7 @@ public extension DUMessageSizeCalculator {
             let maxTextWidth = layout.itemWidth - avatarImageDiameter - layout.messageBubbleHorizontalMargin - totalHorizontalInsets
             
             let textRect = messageData.contentText!.rectWithConstrainedWidth(maxTextWidth, font: layout.messageBodyFont)
-            let textSize = CGSizeMake(textRect.size.width, textRect.size.height)
+            let textSize = CGSize(width: textRect.size.width, height: textRect.size.height)
             
             let totalTextFrameVerticalInsets: CGFloat = layout.messageBubbleTextViewFrameInsets.top + layout.messageBubbleTextViewFrameInsets.bottom
             let totalTextContainerVerticalInsets: CGFloat = layout.messageBubbleTextViewTextContainerInsets.top + layout.messageBubbleTextViewTextContainerInsets.bottom
@@ -84,7 +85,7 @@ public extension DUMessageSizeCalculator {
             let totalVerticalInsets = totalTextFrameVerticalInsets + totalTextContainerVerticalInsets
             let finalWidth: CGFloat = max(textSize.width + totalHorizontalInsets, self.minBubbleWidth)
             let finalHeight: CGFloat = max(textSize.height + totalVerticalInsets, self.minBubbleHeight)
-            finalSize = CGSizeMake(finalWidth, finalHeight)
+            finalSize = CGSize(width: finalWidth, height: finalHeight)
         }
         
         return finalSize
@@ -92,5 +93,5 @@ public extension DUMessageSizeCalculator {
 }
 
 extension DUMessageSizeCalculator {
-    override public var description: String { return String(format: "[%@ uses cache: %@, with minimumBubbleWidth: %@]", self.nameOfClass, self.sizeCache, self.minBubbleWidth) }
+    override open var description: String { return String(format: "[%@ uses cache: %@, with minimumBubbleWidth: %@]", self.nameOfClass, self.sizeCache, self.minBubbleWidth) }
 }

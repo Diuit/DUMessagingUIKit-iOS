@@ -1,0 +1,33 @@
+{
+  "name": "dumessaginguikit",
+  "version": "0.1.4",
+  "description": "Build an instant message app can be so easy",
+  "scripts": {
+    "changelog": "conventional-changelog -p angular -o CHANGELOG.md -w",
+    "commitcount": "git rev-list --all --count"
+  },
+  "config": {
+    "ghooks": {
+      "commit-msg": "./validate-commit-msg.js"
+    }
+  },
+  "devDependencies": {
+    "conventional-commit-types": "^2.0.0",
+    "findup": "0.1.5",
+    "ghooks": "^1.3.2",
+    "semver-regex": "1.0.0"
+  },
+  "keywords": [
+    "Diuit",
+    "IM",
+    "Chat",
+    "Message",
+    "UIKit"
+  ],
+  "author": "Pofat Tseng",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Diuit/DUMessagingUIKit-iOS/issues"
+  },
+  "homepage": "https://github.com/Diuit/DUMessagingUIKit-iOS"
+}

@@ -34,7 +34,7 @@ public protocol DUChatListProtocolForViewController: GlobalUIProtocol, UIProtoco
         
         - parameter indexPath indexPath of cell which get selected
      */
-    func didSelectCell(atIndexPath indexPath: NSIndexPath)
+    func didSelectCell(at indexPath: IndexPath)
 }
 public extension DUChatListProtocolForViewController where Self: UIViewController {
     var myBarTitle: String { return "Chats" }
@@ -47,19 +47,19 @@ public extension DUChatListProtocolForViewController where Self: UIViewControlle
         setupInheritedProtocolUI()
         
         // TODO: possible to customize NSBundle? register Cell? and register nibName?
-        manager.startManagingWithDelegate(self)
-        manager.viewBundle = NSBundle.du_messagingUIKitBundle
-        manager.registerCellClass(DUChatCell.self) { [weak self] (_, model, indexPath) in
-            self?.didSelectCell(atIndexPath:indexPath)
+        manager.startManaging(withDelegate: self)
+        manager.register(DUChatCell.self)
+        manager.registerNibNamed("DUChatCell", for: DUChatCell.self)
+        manager.didSelect(DUChatCell.self) { [weak self] (_, _, indexPath) in
+            self?.didSelectCell(at: indexPath)
         }
-        manager.registerNibNamed("DUChatCell", forCellClass: DUChatCell.self)
-        // FIXME: customizable?
+        
         tableView.rowHeight = 92.0
         tableView.tableFooterView = UIView()
 
     }
     
-    func didSelectCell(atIndexPath indexPath: NSIndexPath) {
+    func didSelectCell(at indexPath: IndexPath) {
         assert(false, "Error! You must implement method: \(#function)")
     }
     

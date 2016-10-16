@@ -8,11 +8,11 @@
 
 import UIKit
 
-public class DUMessageIncomingCollectionViewCell: DUMessageCollectionViewCell {
-    public override func awakeFromNib() {
+open class DUMessageIncomingCollectionViewCell: DUMessageCollectionViewCell {
+    open override func awakeFromNib() {
         super.awakeFromNib()
-        messageBubbleTopLabel.textAlignment = .Left
-        timeLabel.textAlignment = .Left
+        messageBubbleTopLabel.textAlignment = .left
+        timeLabel.textAlignment = .left
         cellTextView.textColor = GlobalUISettings.incomingMessageTextColor
     }
 

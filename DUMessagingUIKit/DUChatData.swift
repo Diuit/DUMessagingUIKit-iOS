@@ -50,10 +50,10 @@ extension DUChat: DUChatData {
     /// if chat room type is Direct, placeholer will be a person avatar; otherwise will be text avatar of uppercase initial
     public var placeholderImage: UIImage {
         switch self.type {
-        case .Direct:
+        case .direct:
             return UIImage.DUDefaultPersonAvatarImage()
         default:
-            return DUAvatarImageFactory.makeAvatarImage(String(self.chatTitle[chatTitle.startIndex]).uppercaseString, font: UIFont.DUChatAvatarFont(), diameter: DUAvatarImageFactory.kAvataImageDefaultDiameterInChatsList)!
+            return DUAvatarImageFactory.makeTextAvatarImage(text: String(self.chatTitle[chatTitle.startIndex]).uppercased(), font: .DUChatAvatarFont(), diameter: DUAvatarImageFactory.kAvatarImageDefaultDiameterInChatList)!
         }
     }
     public var hasUnreadMessage: Bool { return (self.unreadMessageCount > 0) }
@@ -62,15 +62,23 @@ extension DUChat: DUChatData {
     }
     public var chatTitle: String {
         if let m = self.meta {
-            return (m["name"] ?? String(self.id)) as! String
+            if let mName = m["name"] as? String {
+                return mName
+            } else {
+                return String(self.id)
+            }
         } else {
             return String(self.id)
         }
     }
     public var chatDetailText: String {
         if let m = self.lastMessage {
-            if m.mime!.containsString("image") {
-                return m.meta?["name"] as? String ?? "Unnamed image"
+            if m.mime!.contains("image") {
+                if let imageName = m.meta?["name"] as? String {
+                    return imageName
+                } else {
+                    return "Unnamed image"
+                }
             } else if m.mime! == DUMIMEType.general {
                 return m.meta?["name"] as? String ?? "Unnamed file"
             } else {

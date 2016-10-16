@@ -43,3 +43,11 @@ Pods/
 #
 # Ignore output
 _Archive
+
+# Fastlane
+fastlane/report.xml
+fastlane/test-output
+fastlane/README.md
+
+# npm
+node_modules/

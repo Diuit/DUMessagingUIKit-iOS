@@ -9,9 +9,9 @@
 import Foundation
 
 /// Global Theme setting
-public class GlobalUISettings {
+open class GlobalUISettings {
     /// Navigation bar tint color
-    static var navBarTintColor: UIColor? = nil
+    open static var navBarTintColor: UIColor? = nil
     /// Navigation bar title text color
     static var navBarTitleTextColof: UIColor = UIColor.DUWaterBlueColor()
     /// Navigation bar title font
@@ -22,8 +22,13 @@ public class GlobalUISettings {
     static var indicatingStatusColor: UIColor = UIColor.DUWaterBlueColor()
     
     // Message bubble color
-    static var outgoingMessageBubbleBackgroundColor: UIColor = UIColor.DUWaterBlueColor()
-    static var outgoingMessageTextColor: UIColor = UIColor.whiteColor()
-    static var incomingMessageBubbleBackgroundColor: UIColor = UIColor.DULightgreyColor()
-    static var incomingMessageTextColor: UIColor = UIColor.blackColor()
+    open static var outgoingMessageBubbleBackgroundColor: UIColor = UIColor.DUWaterBlueColor()
+    open static var outgoingMessageTextColor: UIColor = UIColor.white
+    open static var incomingMessageBubbleBackgroundColor: UIColor = UIColor.DULightgreyColor()
+    open static var incomingMessageTextColor: UIColor = UIColor.black
+}
+
+extension GlobalUISettings {
+    /// This property can add extra bottom content inset to your message collection view, the default is 0.0
+    public static var extraMessageCollectionViewBottomInset: CGFloat = 0.0
 }

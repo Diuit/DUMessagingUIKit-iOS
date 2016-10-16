@@ -22,7 +22,7 @@ public protocol DUMessageData {
     /// The display name of the sender
     var senderDisplayName: String { get }
     /// The NSDate instance indicating when the message created.
-    var date: NSDate? { get }
+    var date: Date? { get }
     /// If this message is a media message.
     var isMediaMessage: Bool { get }
     /// Return an instance of `DUMediaItem` if this is a mediat message.
@@ -49,7 +49,7 @@ extension DUMessage: DUMessageData, DUImageResource {
             return "System"
         }
     }
-    public var date: NSDate? { return self.createdAt }
+    public var date: Date? { return self.createdAt }
     
     public var isMediaMessage: Bool {
         // no MIME type will be regarded as text message
@@ -72,6 +72,9 @@ extension DUMessage: DUMessageData, DUImageResource {
         case DUMIMEType.general:
             return true
         default:
+            // binary encoding regards as file
+            if self.encoding == "binary" {  return true }
+            
             if let _ = contentText {
                 return (contentText!.isValidURL())
             }
@@ -103,7 +106,7 @@ extension DUMessage: DUMessageData, DUImageResource {
                     if let content = self.data {
                         //if content.isValidURL() { return DUMediaItem.init(fromImageURL: content) }
                         if content.isValidURL() {
-                            if let img = self.imageForURL(content) {
+                            if let img = self.imageFor(url: content) {
                                 return DUMediaItem.init(fromImage: img)
                             } else {
                                 return DUMediaItem.init(fromImageURL: content)
@@ -116,14 +119,27 @@ extension DUMessage: DUMessageData, DUImageResource {
                 }
             // FIXME: file is broken
             case DUMIMEType.general:
-                if self.status == .Delivered || self.status == .Received {
+                if self.status == .delivered || self.status == .received {
                     let fileName: String = self.meta?["name"] as? String ?? "Unnamed file"
-                    let fileDesc: String = self.meta?["description"] as? String ?? "No description"
+                    var fileDesc: String = "Unkown size"
+                    if let _ = self.meta?["size"] {
+                        let sizeInt = self.meta!["size"] as! Int
+                        fileDesc = (sizeInt > 0) ? sizeInt.convertedByteSizeString : "Unkown size"
+                    }
                     return DUMediaItem.init(fromFileURL: self.data!, fileName: fileName, fileDescription: fileDesc)
                 } else {
                     return DUMediaItem.init(fromFileURL: "", fileName: "", fileDescription: "")
                 }
             default:
+                if self.encoding == "binary" {
+                    let fileName: String = self.meta?["name"] as? String ?? "Unnamed file"
+                    var fileDesc: String = "Unkown size"
+                    if let _ = self.meta?["size"] {
+                        let sizeInt = self.meta!["size"] as! Int
+                        fileDesc = (sizeInt > 0) ? sizeInt.convertedByteSizeString : "Unkown size"
+                    }
+                    return DUMediaItem.init(fromFileURL: self.data!, fileName: fileName, fileDescription: fileDesc)
+                }
                 if let _ = contentText {
                     return (contentText!.isValidURL()) ? DUMediaItem.init(fromURL: contentText!) : nil
                 }
@@ -135,5 +151,5 @@ extension DUMessage: DUMessageData, DUImageResource {
         }
     }
     public var contentText: String? { return self.data }
-    override public var hashValue: Int { return messageID.hashValue }
+    override open var hashValue: Int { return messageID.hashValue }
 }

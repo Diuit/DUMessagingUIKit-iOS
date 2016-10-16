@@ -16,7 +16,7 @@ public let DUTableViewCellReuseIdentifier = "DUTableViewCellReuseIdentifier"
 /**
     The `DUChatSettingViewController` class is an abstract class for displaying information of a chat room and configuring chat data with customize methods.
  */
-public class DUChatSettingViewController: UIViewController, DUChatSettingUIProtocol, DTTableViewManageable, DUBlockDelegate {
+open class DUChatSettingViewController: UIViewController, DUChatSettingUIProtocol, DTTableViewManageable, DUBlockDelegate {
 
     @IBOutlet weak var chatAvatarImageView: DUAvatarImageView! {
         didSet {
@@ -30,81 +30,81 @@ public class DUChatSettingViewController: UIViewController, DUChatSettingUIProto
             // set text
             chatNameLabel.text = chatDataForSetting?.chatTitle ?? "Chat room"
             // add tap listener
-            let recognizer = UITapGestureRecognizer(target: self, action: #selector(DUChatSettingViewController.didTapChatTitleLabel(_:)))
+            let recognizer = UITapGestureRecognizer(target: self, action: #selector(DUChatSettingViewController.didTapChatTitleLabel(sender:)))
             chatNameLabel.addGestureRecognizer(recognizer)
-            chatNameLabel.userInteractionEnabled = true
+            chatNameLabel.isUserInteractionEnabled = true
         }
     }
     @IBOutlet weak var leaveChatButton: UIButton! {
         didSet {
-            leaveChatButton.addTarget(self, action: #selector(self.didPressLeaveChatButton(_:)), forControlEvents: .TouchUpInside)
-            if chatDataForSetting?.chatSettingPageType == .Direct {
-                leaveChatButton.hidden = true
+            leaveChatButton.addTarget(self, action: #selector(self.didPressLeaveChatButton(_:)), for: .touchUpInside)
+            if chatDataForSetting?.chatSettingPageType == .direct {
+                leaveChatButton.isHidden = true
             }
         }
     }
     @IBOutlet weak public var tableView: UITableView!
     
     public var chatDataForSetting: DUChatData? = nil
-    static var nib: UINib { return UINib.init(nibName: String(DUChatSettingViewController), bundle: NSBundle.du_messagingUIKitBundle) }
+    static var nib: UINib { return UINib.init(nibName: String(describing: DUChatSettingViewController.self), bundle: Bundle.du_messagingUIKitBundle) }
     
     // MARK: life cycle
-    override public func viewDidLoad() {
+    override open func viewDidLoad() {
         super.viewDidLoad()
 
-        DUChatSettingViewController.nib.instantiateWithOwner(self, options: nil)
+        DUChatSettingViewController.nib.instantiate(withOwner: self, options: nil)
         // adopt ui protocol
         adoptProtocolUIApperance()
 
         // setup tableView
-        manager.startManagingWithDelegate(self)
-        manager.viewBundle = NSBundle.du_messagingUIKitBundle
+        manager.startManaging(withDelegate: self)
         
-        if self.chatDataForSetting?.chatSettingPageType == .Direct {
-            manager.registerCellClass(DUBlockCell.self)
-            manager.registerNibNamed("DUBlockCell", forCellClass: DUBlockCell.self)
-            manager.memoryStorage.setItems([chatDataForSetting?.isBlocked ?? false], forSectionIndex: 0)
-            let c: DUBlockCell = manager.tableView(tableView, cellForRowAtIndexPath: NSIndexPath(forRow: 0, inSection: 0)) as! DUBlockCell
+        
+        if self.chatDataForSetting?.chatSettingPageType == .direct {
+            manager.register(DUBlockCell.self)
+            manager.registerNibNamed("DUBlockCell", for: DUBlockCell.self)
+            manager.memoryStorage.setItems([chatDataForSetting?.isBlocked ?? false], forSection: 0)
+            let c: DUBlockCell = manager.tableView(tableView, cellForRowAt: IndexPath(row: 0, section: 0)) as! DUBlockCell
                 //manager.itemForCellClass(DUBlockCell.self, atIndexPath: NSIndexPath(forRow: 0, inSection: 0))
             c.delegate = self
         } else {
-            manager.registerCellClass(DUUserCell.self)
-            manager.registerNibNamed("DUUserCell", forCellClass: DUUserCell.self)
+            manager.register(DUUserCell.self)
+            manager.registerNibNamed("DUUserCell", for: DUUserCell.self)
             var addUser: UserData = UserData.init(name: "Add People", imagePath: nil)
             addUser.placeholderImage = UIImage.DUAddUserImage()
-            manager.memoryStorage.setItems([addUser], forSectionIndex: 0)
+            manager.memoryStorage.setItems([addUser], forSection: 0)
             var membersArray: [UserData] = []
             for member in self.chatDataForSetting!.chatMembers {
                 membersArray.append(UserData.init(name: member, imagePath: nil))
             }
-            manager.memoryStorage.setItems(membersArray, forSectionIndex: 1)
+            manager.memoryStorage.setItems(membersArray, forSection: 1)
         }
         
         tableView.tableFooterView = UIView()
-        tableView.backgroundColor = UIColor.clearColor()
+        tableView.backgroundColor = UIColor.clear
     }
     
-    public func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
-        guard self.chatDataForSetting?.chatSettingPageType == .Group && indexPath.section == 1 else {
+    open func tableView(_ tableView: UITableView, editActionsForRowAtIndexPath indexPath: IndexPath) -> [UITableViewRowAction]? {
+        guard self.chatDataForSetting?.chatSettingPageType == .group && indexPath.section == 1 else {
             return nil
         }
-        let block = UITableViewRowAction(style: .Normal, title: "Block") { [weak self] action, index in
+        let block = UITableViewRowAction(style: .normal, title: "Block") { [weak self] action, index in
             // TODO: protocol function here
             self?.didPressCellBlockAction(atIndexPath: indexPath)
         }
-        block.backgroundColor = UIColor.lightGrayColor()
+        block.backgroundColor = UIColor.lightGray
         
-        let remove = UITableViewRowAction(style: .Normal, title: "Remove") { [weak self] action, index in
+        let remove = UITableViewRowAction(style: .normal, title: "Remove") { [weak self] action, index in
             // TODO: function here
             self?.didPressCellRemoveAction(atIndexPath: indexPath)
         }
-        remove.backgroundColor = UIColor.redColor()
+        remove.backgroundColor = UIColor.red
         
         return [remove, block]
     }
     
-    public func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        guard self.chatDataForSetting?.chatSettingPageType == .Group && indexPath.section == 1 else {
+    open func tableView(_ tableView: UITableView, canEditRowAtIndexPath indexPath: IndexPath) -> Bool {
+        guard self.chatDataForSetting?.chatSettingPageType == .group && indexPath.section == 1 else {
             return false
         }
         return true
@@ -113,46 +113,46 @@ public class DUChatSettingViewController: UIViewController, DUChatSettingUIProto
     // MARK: Chat Setting view controller events
 
     /// Click event of Leave Group button
-    public func didPressLeaveChatButton(sender: UIButton) {
+    open func didPressLeaveChatButton(_ sender: UIButton) {
         assert(false, "Error! You must override this function : \(#function)")
     }
     /// Block action of user tableViewCell in a group chat room
-    public func didPressCellBlockAction(atIndexPath indexPath: NSIndexPath) {
+    open func didPressCellBlockAction(atIndexPath indexPath: IndexPath) {
         assert(false, "Error! You must override this function : \(#function)")
     }
     /// Remove action of user tableViewCell in a group chat room
-    public func didPressCellRemoveAction(atIndexPath indexPath: NSIndexPath) {
+    open func didPressCellRemoveAction(atIndexPath indexPath: IndexPath) {
         assert(false, "Error! You must override this function : \(#function)")
     }
     /// OK alertAction in chat-title-changing AlertController
-    public func didPressOKForChangingChatTitle() {
+    open func didPressOKForChangingChatTitle() {
         assert(false, "Error! You must override this function : \(#function)")
     }
     /// Implement how to block this user
-    public func block() {
+    open func block() {
         assert(false, "Error! You must override this function : \(#function)")
     }
     /// Implement how to unblock this user
-    public func unblock() {
+    open func unblock() {
         assert(false, "Error! You must override this function : \(#function)")
     }
     
     /// Tap gesture handler of chat title label
-    public func didTapChatTitleLabel(gesture: UITapGestureRecognizer) {
-        if gesture.state == .Ended {
-            let alertController = UIAlertController(title: "Change Name", message: "Enter a name for this chat", preferredStyle: .Alert)
-            let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
+    open func didTapChatTitleLabel(sender: UITapGestureRecognizer) {
+        if sender.state == .ended {
+            let alertController = UIAlertController(title: "Change Name", message: "Enter a name for this chat", preferredStyle: .alert)
+            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
             // FIXME: replace with protocol
-            let okAction = UIAlertAction(title: "OK", style: .Default, handler: { [weak self] alerAction in
+            let okAction = UIAlertAction(title: "OK", style: .default, handler: { [weak self] alerAction in
                 self?.didPressOKForChangingChatTitle()
             })
             alertController.addAction(cancelAction)
             alertController.addAction(okAction)
-            alertController.addTextFieldWithConfigurationHandler({ textField in
+            alertController.addTextField(configurationHandler: { textField in
                 textField.placeholder = "New name"
                 textField.text = self.chatDataForSetting?.chatTitle ?? ""
             })
-            self.presentViewController(alertController, animated: true, completion: nil)
+            self.present(alertController, animated: true, completion: nil)
         }
     }
 }
@@ -163,7 +163,7 @@ public protocol DUChatSettingUIProtocol: GlobalUIProtocol, UIProtocolAdoption, N
 }
 public extension DUChatSettingUIProtocol where Self: DUChatSettingViewController {
     var myBarTitle: String {
-        if self.chatDataForSetting?.chatSettingPageType == .Direct {
+        if self.chatDataForSetting?.chatSettingPageType == .direct {
             return "Detail"
         } else {
             return "Group"

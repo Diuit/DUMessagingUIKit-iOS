@@ -23,7 +23,7 @@ public struct DUMediaItem {
      - location: A location message.
      - URL:      If your text message contains only URL, it will be transformed to an URL media message.
      */
-    public enum Type: String {
+    public enum MediaType: String {
         case Image
         case Video
         case File
@@ -36,17 +36,17 @@ public struct DUMediaItem {
     public var mediaDisplaySize: CGSize {
         switch self.type {
         case .Image, .Video, .Location:
-            return CGSizeMake(212, 158)
+            return CGSize(width: 212, height: 158)
         case .Audio, .File:
-            return CGSizeMake(212, 53)
+            return CGSize(width: 212, height: 53)
         case .URL:
-            return CGSizeMake(204, 109)
+            return CGSize(width: 204, height: 109)
         }
     }
     
     // MARK: Stored Properties
     /// Type of the media message
-    public var type: Type
+    public var type: MediaType
     ///  An UIView instance for placeholder.
     public var placeholderView: UIView { return _cachedPlaceholderView }
     /// Instance of media content, may be an UIImage
@@ -58,8 +58,8 @@ public struct DUMediaItem {
     /// Detail description of file, default value is `nil`.
     public var fileDescription: String? = nil
     
-    private var _cachedMediaContentView: UIView? = nil
-    private var _cachedPlaceholderView: DUMediaPlaceholderView
+    fileprivate var _cachedMediaContentView: UIView? = nil
+    fileprivate var _cachedPlaceholderView: DUMediaPlaceholderView
     
     // MARK: Initialize
     /**
@@ -72,8 +72,8 @@ public struct DUMediaItem {
     public init(fromImage image: UIImage?) {
         self.type = .Image
         self.mediaContentData = image
-        _cachedPlaceholderView = DUMediaPlaceholderView.init(frame:CGRectZero)
-        _cachedPlaceholderView.frame = CGRectMake(0, 0, mediaDisplaySize.width, mediaDisplaySize.height)
+        _cachedPlaceholderView = DUMediaPlaceholderView.init(frame:CGRect.zero)
+        _cachedPlaceholderView.frame = CGRect(x: 0, y: 0, width: mediaDisplaySize.width, height: mediaDisplaySize.height)
     }
     
     /**
@@ -87,8 +87,8 @@ public struct DUMediaItem {
         self.type = .Image
         self.mediaContentData = nil
         self.mediaSourceURL = url
-        _cachedPlaceholderView = DUMediaPlaceholderView.init(frame:CGRectZero)
-        _cachedPlaceholderView.frame = CGRectMake(0, 0, mediaDisplaySize.width, mediaDisplaySize.height)
+        _cachedPlaceholderView = DUMediaPlaceholderView.init(frame:CGRect.zero)
+        _cachedPlaceholderView.frame = CGRect(x: 0, y: 0, width: mediaDisplaySize.width, height: mediaDisplaySize.height)
     }
     /**
      Init a video mediaItem
@@ -105,8 +105,8 @@ public struct DUMediaItem {
         self.mediaSourceURL = url
         self.mediaContentData = image
         
-        _cachedPlaceholderView = DUMediaPlaceholderView.init(frame:CGRectZero)
-        _cachedPlaceholderView.frame = CGRectMake(0, 0, mediaDisplaySize.width, mediaDisplaySize.height)
+        _cachedPlaceholderView = DUMediaPlaceholderView.init(frame:CGRect.zero)
+        _cachedPlaceholderView.frame = CGRect(x: 0, y: 0, width: mediaDisplaySize.width, height: mediaDisplaySize.height)
     }
     
     /**
@@ -126,8 +126,8 @@ public struct DUMediaItem {
         self.fileDisplayName = fileName
         self.fileDescription = fileDescription
         
-        _cachedPlaceholderView = DUMediaPlaceholderView.init(frame:CGRectZero)
-        _cachedPlaceholderView.frame = CGRectMake(0, 0, mediaDisplaySize.width, mediaDisplaySize.height)
+        _cachedPlaceholderView = DUMediaPlaceholderView.init(frame:CGRect.zero)
+        _cachedPlaceholderView.frame = CGRect(x: 0, y: 0, width: mediaDisplaySize.width, height: mediaDisplaySize.height)
     }
     
     /**
@@ -143,8 +143,8 @@ public struct DUMediaItem {
         self.type = .URL
         self.mediaSourceURL = url
         
-        _cachedPlaceholderView = DUMediaPlaceholderView.init(frame:CGRectZero)
-        _cachedPlaceholderView.frame = CGRectMake(0, 0, mediaDisplaySize.width, mediaDisplaySize.height)
+        _cachedPlaceholderView = DUMediaPlaceholderView.init(frame:CGRect.zero)
+        _cachedPlaceholderView.frame = CGRect(x: 0, y: 0, width: mediaDisplaySize.width, height: mediaDisplaySize.height)
     }
 
     /**
@@ -163,16 +163,16 @@ public struct DUMediaItem {
         
         switch type {
         case .Image:
-            _cachedMediaContentView = DUMediaContentViewFactory.makeImageContentView(mediaContentData as? UIImage, frame:CGRectMake(0, 0, mediaDisplaySize.width, mediaDisplaySize.height))
+            _cachedMediaContentView = DUMediaContentViewFactory.makeImageContentView(image: mediaContentData as? UIImage, frame:CGRect(x: 0, y: 0, width: mediaDisplaySize.width, height: mediaDisplaySize.height))
             return _cachedMediaContentView
         case .URL:
-            _cachedMediaContentView = DUMediaContentViewFactory.makeURLContentView(mediaSourceURL!, frame: CGRectMake(0, 0, mediaDisplaySize.width, mediaDisplaySize.height))
+            _cachedMediaContentView = DUMediaContentViewFactory.makeURLContentView(url: mediaSourceURL!, frame: CGRect(x: 0, y: 0, width: mediaDisplaySize.width, height: mediaDisplaySize.height))
             return _cachedMediaContentView
         case .File:
-            _cachedMediaContentView = DUMediaContentViewFactory.makeFileContentView(fileDisplayName ?? "File", description: fileDescription, frame: CGRectMake(0, 0, mediaDisplaySize.width, mediaDisplaySize.height))
+            _cachedMediaContentView = DUMediaContentViewFactory.makeFileContentView(name: fileDisplayName ?? "File", description: fileDescription, frame: CGRect(x: 0, y: 0, width: mediaDisplaySize.width, height: mediaDisplaySize.height))
             return _cachedMediaContentView
         case .Video:
-            _cachedMediaContentView = DUMediaContentViewFactory.makeVideoContentView(mediaContentData as? UIImage, frame: CGRectMake(0, 0, mediaDisplaySize.width, mediaDisplaySize.height))
+            _cachedMediaContentView = DUMediaContentViewFactory.makeVideoContentView(previewImage: mediaContentData as? UIImage, frame: CGRect(x: 0, y: 0, width: mediaDisplaySize.width, height: mediaDisplaySize.height))
             return _cachedMediaContentView
         default:
             return nil

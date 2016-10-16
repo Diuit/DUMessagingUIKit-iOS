@@ -16,15 +16,15 @@ class DemoChatListViewController: UITableViewController, DUChatListProtocolForVi
     // For hint localizations
     private let hints: [String] = ["FIRST_HINT", "SECOND_HINT", "THIRD_HINT", "FORTH_HINT", "FIFTH_HINT"]
     
-    func didClickRightBarButton(sender: UIBarButtonItem?) {
+    func didClick(rightBarButton: UIBarButtonItem?) {
         // handle righbtBarButton click event
         print("Right bar button clicked")
     }
     
-    func didSelectCell(atIndexPath indexPath: NSIndexPath) {
+    func didSelectCell(at indexPath: IndexPath) {
         // handle cell selection event
         selectedChat = chatData[indexPath.row]
-         self.performSegueWithIdentifier("toMessagesSegue", sender: nil)
+        self.performSegue(withIdentifier: "toMessagesSegue", sender: nil)
     }
     
     var selectedChat: DUChatData? = nil
@@ -46,12 +46,12 @@ class DemoChatListViewController: UITableViewController, DUChatListProtocolForVi
         
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if let vc = segue.destinationViewController as? DemoMessagesViewController {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let vc = segue.destination as? DemoMessagesViewController {
             vc.chat = selectedChat
         }
     }

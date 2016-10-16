@@ -8,13 +8,13 @@
 
 import UIKit
 
-public class DUMessageOutgoingCollectionViewCell: DUMessageCollectionViewCell {
+open class DUMessageOutgoingCollectionViewCell: DUMessageCollectionViewCell {
     /// Button to resend the message.
     @IBOutlet weak var resendButton: UIButton!
     /// Label to indicate the status of message being read
     @IBOutlet weak var readLabel: UILabel!
     
-    override public var backgroundColor: UIColor? {
+    override open var backgroundColor: UIColor? {
         didSet {
             cellTopLabel.backgroundColor = backgroundColor
             messageBubbleTopLabel.backgroundColor = backgroundColor
@@ -29,17 +29,17 @@ public class DUMessageOutgoingCollectionViewCell: DUMessageCollectionViewCell {
         }
     }
 
-    public override func awakeFromNib() {
+    open override func awakeFromNib() {
         super.awakeFromNib()
-        messageBubbleTopLabel.textAlignment = .Right
-        timeLabel.textAlignment = .Right
-        readLabel.textAlignment = .Right
+        messageBubbleTopLabel.textAlignment = .right
+        timeLabel.textAlignment = .right
+        readLabel.textAlignment = .right
         
-        resendButton.hidden = true
+        resendButton.isHidden = true
     }
     
-    public override func prepareForReuse() {
+    open override func prepareForReuse() {
         super.prepareForReuse()
-        resendButton.hidden = true
+        resendButton.isHidden = true
     }
 }

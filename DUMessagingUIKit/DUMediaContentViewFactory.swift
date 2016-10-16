@@ -12,7 +12,7 @@ import MisterFusion
 
 
 /// Generate media content views for each media message type.
-public class DUMediaContentViewFactory {
+open class DUMediaContentViewFactory {
     /// Maximum characters in the title label of URL media view
     static let kMaximumURLCharacterNumbersInURLMediaContentView: Int = 23
     /**
@@ -24,11 +24,12 @@ public class DUMediaContentViewFactory {
      
      - returns: UIImageView instance with image of the message. Return `nil` if image is nil
      */
-    public static func makeImageContentView(image: UIImage?, highlightedImage: UIImage? = nil, frame: CGRect? = CGRectMake(0,0, 212, 158)) -> DUMediaContentImageView? {
+    public static func makeImageContentView(image: UIImage?, highlightedImage: UIImage? = nil, frame: CGRect? = CGRect(x: 0,y: 0, width: 212, height: 158)) -> DUMediaContentImageView? {
         guard image != nil else {
             return nil
         }
-        let imageView = DUMediaContentImageView.init(frame: frame ?? CGRectZero)
+        let imageView = DUMediaContentImageView.init(frame: frame ?? CGRect.zero)
+        imageView.contentMode = .scaleAspectFill
         imageView.image = image
         imageView.highlightedImage = highlightedImage
         return imageView
@@ -37,7 +38,7 @@ public class DUMediaContentViewFactory {
      Generate content view of an URL message.
      
      - parameter url:   URL string of the web page.
-     - parameter frame: The frame size of this content view.
+     - parameter frame: The frame size of dthis content view.
      
      - returns: A composed UIView of URL preview result.
      */
@@ -45,23 +46,23 @@ public class DUMediaContentViewFactory {
         // FIXME: size of each subviews are fixed. UI will go nuts when using customized frame.
         let contentView = DUURLMediaContentView.init(frame: frame)
         
-        let urlFrame: CGRect = CGRectMake(0, 33, frame.size.width, frame.size.height - 33)
+        let urlFrame: CGRect = CGRect(x: 0, y: 33, width: frame.size.width, height: frame.size.height - 33)
         let urlView = URLEmbeddedView.init(frame: urlFrame)
         contentView.addSubview(urlView)
         
         urlView.cornerRaidus = 0
-        urlView.backgroundColor = UIColor.whiteColor()
+        urlView.backgroundColor = .white
         urlView.borderWidth = 0
-        urlView.textProvider[.Title].font = UIFont.DUURLPreviewTitleFont()
-        urlView.textProvider[.Description].font = UIFont.DUURLPreviewDescriptionFont()
+        urlView.textProvider[.title].font = UIFont.DUURLPreviewTitleFont()
+        urlView.textProvider[.description].font = UIFont.DUURLPreviewDescriptionFont()
         urlView.loadURL(url)
         
-        let textFrame: CGRect = CGRectMake(0, 0, frame.size.width, 33)
+        let textFrame: CGRect = CGRect(x: 0, y: 0, width: frame.size.width, height: 33)
         let textView: UITextView = UITextView.init(frame: textFrame)
         contentView.addSubview(textView)
         
-        textView.scrollEnabled = false
-        textView.editable = false
+        textView.isScrollEnabled = false
+        textView.isEditable = false
         textView.backgroundColor = UIColor.DULightgreyColor()
         textView.textContainerInset = UIEdgeInsetsMake(7, 14, 7, 14)
         textView.font = UIFont.DUBodyFont()
@@ -69,14 +70,14 @@ public class DUMediaContentViewFactory {
         // FIXME: truncate too long url string, a stupid way
         var truncatedString: String = ""
         if url.characters.count > kMaximumURLCharacterNumbersInURLMediaContentView {
-            truncatedString = url.substringToIndex(url.startIndex.advancedBy(kMaximumURLCharacterNumbersInURLMediaContentView - 1))
+            truncatedString = url.substring(to: url.characters.index(url.startIndex, offsetBy: kMaximumURLCharacterNumbersInURLMediaContentView - 1))
             truncatedString += "..."
         } else {
             truncatedString = url
         }
-        let underline = NSUnderlineStyle.StyleSingle.rawValue | NSUnderlineStyle.PatternSolid.rawValue
+        let underline = NSUnderlineStyle.styleSingle.rawValue | NSUnderlineStyle.patternSolid.rawValue
         textView.attributedText = NSAttributedString(string: truncatedString, attributes:
-            [  NSForegroundColorAttributeName : UIColor.blueColor(),
+            [  NSForegroundColorAttributeName : UIColor.blue,
                NSFontAttributeName: UIFont.DUBodyFont(),
                NSUnderlineStyleAttributeName: underline])
         
@@ -99,7 +100,7 @@ public class DUMediaContentViewFactory {
         let contentView = DUFileMediaContentView.init(frame: frame)
         
         let imageView = UIImageView.init(image: UIImage.DUFileIconImage())
-        imageView.contentMode = .ScaleAspectFill
+        imageView.contentMode = .scaleAspectFill
         
         let fileNameLabel = UILabel.init()
         fileNameLabel.font = UIFont.DUFileTitleFont()
@@ -110,24 +111,24 @@ public class DUMediaContentViewFactory {
         fileDescLabel.text = description ?? ""
         
         contentView.addLayoutSubview(imageView, andConstraints:
-            imageView.CenterY |==| contentView.CenterY,
-            imageView.Left    |+| 12,
-            imageView.Width   |==| 32,
-            imageView.Height  |==| 36
+            imageView.centerY |==| contentView.centerY,
+            imageView.left    |+| 12,
+            imageView.width   |==| 32,
+            imageView.height  |==| 36
         )
         
         contentView.addLayoutSubview(fileNameLabel, andConstraints:
-            fileNameLabel.Top    |==| imageView.Top,
-            fileNameLabel.Left   |==| imageView.Right |+| 18,
-            fileNameLabel.Right  |-| 12,
-            fileNameLabel.Height |==| 20
+            fileNameLabel.top    |==| imageView.top,
+            fileNameLabel.left   |==| imageView.right |+| 18,
+            fileNameLabel.right  |-| 12,
+            fileNameLabel.height |==| 20
         )
         
         contentView.addLayoutSubview(fileDescLabel, andConstraints:
-            fileDescLabel.Top    |==| fileNameLabel.Bottom |+| 2,
-            fileDescLabel.Left   |==| imageView.Right |+| 18,
-            fileDescLabel.Right  |-| 12,
-            fileDescLabel.Height |==| 14
+            fileDescLabel.top    |==| fileNameLabel.bottom |+| 2,
+            fileDescLabel.left   |==| imageView.right |+| 18,
+            fileDescLabel.right  |-| 12,
+            fileDescLabel.height |==| 14
         )
         
         return contentView
@@ -145,20 +146,20 @@ public class DUMediaContentViewFactory {
         let contentView = DUMediaContentView.init(frame: frame)
         
         let playIconImageView = UIImageView.init(image: UIImage.DUPlayIcon())
-        playIconImageView.contentMode = .Center
-        playIconImageView.frame = CGRectMake(0, 0, frame.size.width, frame.size.height)
+        playIconImageView.contentMode = .center
+        playIconImageView.frame = CGRect(x: 0, y: 0, width: frame.size.width, height: frame.size.height)
         
         if previewImage != nil {
             let backgroundImageView = UIImageView.init(image: previewImage!)
-            backgroundImageView.frame = CGRectMake(0, 0, frame.size.width, frame.size.height)
-            backgroundImageView.contentMode = .ScaleAspectFill
+            backgroundImageView.frame = CGRect(x: 0, y: 0, width: frame.size.width, height: frame.size.height)
+            backgroundImageView.contentMode = .scaleAspectFill
             
-            playIconImageView.backgroundColor = UIColor.clearColor()
+            playIconImageView.backgroundColor = UIColor.clear
             backgroundImageView.addSubview(playIconImageView)
             
             contentView.addSubview(backgroundImageView)
         } else {
-            playIconImageView.backgroundColor = UIColor.blackColor()
+            playIconImageView.backgroundColor = UIColor.black
             contentView.addSubview(playIconImageView)
         }
         

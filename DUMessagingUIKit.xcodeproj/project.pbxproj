@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1D97D9442B13464E3C7A4E9A /* Pods_DUMessagingDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 908723A5F6D7335D2D163909 /* Pods_DUMessagingDemo.framework */; };
-		32D3036D83E377447BDC9E26 /* Pods_DUMessagingUIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C94C116F7733CBBCE78BE9 /* Pods_DUMessagingUIKit.framework */; };
+		0245152D12B9738D968BD995 /* Pods_DUMessagingDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD2BDD1C6C721FAA273488F1 /* Pods_DUMessagingDemo.framework */; };
+		D1A10557F6BDB1D4D6FC7C1A /* Pods_DUMessagingUIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A32619535CF4F476474C9A3 /* Pods_DUMessagingUIKit.framework */; };
 		FA11E20C1D0BC7BE005C7EEB /* DUCollectionViewLayouAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA11E20B1D0BC7BE005C7EEB /* DUCollectionViewLayouAttributes.swift */; };
 		FA11E2141D0C562B005C7EEB /* DUMessageCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA11E2131D0C562B005C7EEB /* DUMessageCollectionView.swift */; };
 		FA11E2191D0CF58C005C7EEB /* DUMessageIncomingCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA11E2171D0CF58C005C7EEB /* DUMessageIncomingCollectionViewCell.swift */; };
@@ -38,7 +38,6 @@
 		FA2D83D61CFE762B0060A6B8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA2D83D41CFE762B0060A6B8 /* Main.storyboard */; };
 		FA2D83D81CFE762B0060A6B8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FA2D83D71CFE762B0060A6B8 /* Assets.xcassets */; };
 		FA2D83DB1CFE762B0060A6B8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA2D83D91CFE762B0060A6B8 /* LaunchScreen.storyboard */; };
-		FA2D83E61CFE762B0060A6B8 /* DUMessagingDemoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2D83E51CFE762B0060A6B8 /* DUMessagingDemoUITests.swift */; };
 		FA2D83F11CFEE7700060A6B8 /* DUViewControllerProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2D83F01CFEE7700060A6B8 /* DUViewControllerProtocols.swift */; };
 		FA4638FE1D19203200BF6070 /* WWDC_419.pdf in Resources */ = {isa = PBXBuildFile; fileRef = FA4638FD1D19203200BF6070 /* WWDC_419.pdf */; };
 		FA4639201D1A742B00BF6070 /* DUTypingIndicatorFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA46391E1D1A742B00BF6070 /* DUTypingIndicatorFooterView.swift */; };
@@ -80,17 +79,10 @@
 			remoteGlobalIDString = FA2D83221CFE0BE20060A6B8;
 			remoteInfo = DUMessagingUIKit;
 		};
-		FA2D83E21CFE762B0060A6B8 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = FA2D831A1CFE0BE20060A6B8 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = FA2D83CD1CFE762B0060A6B8;
-			remoteInfo = DUMessagingDemo;
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		FA5542E91D17CE6200150513 /* Embed Frameworks */ = {
+		FA895CB41DB36C820046A738 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
@@ -103,12 +95,12 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		00C94C116F7733CBBCE78BE9 /* Pods_DUMessagingUIKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DUMessagingUIKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		0BF73D5FEEF48118C97C3F49 /* Pods-DUMessagingDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DUMessagingDemo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DUMessagingDemo/Pods-DUMessagingDemo.debug.xcconfig"; sourceTree = "<group>"; };
-		6F3776EECC3FCAF3025A9124 /* Pods-DUMessagingUIKit.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DUMessagingUIKit.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DUMessagingUIKit/Pods-DUMessagingUIKit.debug.xcconfig"; sourceTree = "<group>"; };
-		71F8DFD4B69502C2E61060B1 /* Pods-DUMessagingUIKit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DUMessagingUIKit.release.xcconfig"; path = "Pods/Target Support Files/Pods-DUMessagingUIKit/Pods-DUMessagingUIKit.release.xcconfig"; sourceTree = "<group>"; };
-		908723A5F6D7335D2D163909 /* Pods_DUMessagingDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DUMessagingDemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		A163F8A2822A07A54571279E /* Pods-DUMessagingDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DUMessagingDemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-DUMessagingDemo/Pods-DUMessagingDemo.release.xcconfig"; sourceTree = "<group>"; };
+		5A32619535CF4F476474C9A3 /* Pods_DUMessagingUIKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DUMessagingUIKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		BE6833C1980C5C15A690B88B /* Pods-DUMessagingDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DUMessagingDemo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DUMessagingDemo/Pods-DUMessagingDemo.debug.xcconfig"; sourceTree = "<group>"; };
+		CD2BDD1C6C721FAA273488F1 /* Pods_DUMessagingDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DUMessagingDemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D5EEC5293A597444E3DEDE09 /* Pods-DUMessagingUIKit.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DUMessagingUIKit.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DUMessagingUIKit/Pods-DUMessagingUIKit.debug.xcconfig"; sourceTree = "<group>"; };
+		E2C40F4068807F27FBC938D2 /* Pods-DUMessagingUIKit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DUMessagingUIKit.release.xcconfig"; path = "Pods/Target Support Files/Pods-DUMessagingUIKit/Pods-DUMessagingUIKit.release.xcconfig"; sourceTree = "<group>"; };
+		E6521875D5EA41BC1EED7C3B /* Pods-DUMessagingDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DUMessagingDemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-DUMessagingDemo/Pods-DUMessagingDemo.release.xcconfig"; sourceTree = "<group>"; };
 		FA11E20B1D0BC7BE005C7EEB /* DUCollectionViewLayouAttributes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DUCollectionViewLayouAttributes.swift; sourceTree = "<group>"; };
 		FA11E2131D0C562B005C7EEB /* DUMessageCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DUMessageCollectionView.swift; sourceTree = "<group>"; };
 		FA11E2171D0CF58C005C7EEB /* DUMessageIncomingCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DUMessageIncomingCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -143,9 +135,6 @@
 		FA2D83D71CFE762B0060A6B8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FA2D83DA1CFE762B0060A6B8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FA2D83DC1CFE762B0060A6B8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		FA2D83E11CFE762B0060A6B8 /* DUMessagingDemoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DUMessagingDemoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		FA2D83E51CFE762B0060A6B8 /* DUMessagingDemoUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DUMessagingDemoUITests.swift; sourceTree = "<group>"; };
-		FA2D83E71CFE762B0060A6B8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FA2D83F01CFEE7700060A6B8 /* DUViewControllerProtocols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DUViewControllerProtocols.swift; sourceTree = "<group>"; };
 		FA4638FD1D19203200BF6070 /* WWDC_419.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = WWDC_419.pdf; sourceTree = "<group>"; };
 		FA46391E1D1A742B00BF6070 /* DUTypingIndicatorFooterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DUTypingIndicatorFooterView.swift; sourceTree = "<group>"; };
@@ -186,7 +175,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				32D3036D83E377447BDC9E26 /* Pods_DUMessagingUIKit.framework in Frameworks */,
+				D1A10557F6BDB1D4D6FC7C1A /* Pods_DUMessagingUIKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -202,38 +191,31 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1D97D9442B13464E3C7A4E9A /* Pods_DUMessagingDemo.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		FA2D83DE1CFE762B0060A6B8 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
+				0245152D12B9738D968BD995 /* Pods_DUMessagingDemo.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		9829AF0A1702FAC3380D7BB0 /* Frameworks */ = {
+		372F51F139D1D3957F3250A3 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				00C94C116F7733CBBCE78BE9 /* Pods_DUMessagingUIKit.framework */,
-				908723A5F6D7335D2D163909 /* Pods_DUMessagingDemo.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		F00DA5E024206A6D98427B42 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				6F3776EECC3FCAF3025A9124 /* Pods-DUMessagingUIKit.debug.xcconfig */,
-				71F8DFD4B69502C2E61060B1 /* Pods-DUMessagingUIKit.release.xcconfig */,
-				0BF73D5FEEF48118C97C3F49 /* Pods-DUMessagingDemo.debug.xcconfig */,
-				A163F8A2822A07A54571279E /* Pods-DUMessagingDemo.release.xcconfig */,
+				BE6833C1980C5C15A690B88B /* Pods-DUMessagingDemo.debug.xcconfig */,
+				E6521875D5EA41BC1EED7C3B /* Pods-DUMessagingDemo.release.xcconfig */,
+				D5EEC5293A597444E3DEDE09 /* Pods-DUMessagingUIKit.debug.xcconfig */,
+				E2C40F4068807F27FBC938D2 /* Pods-DUMessagingUIKit.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		5B5DB69426393531234D1CCC /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				CD2BDD1C6C721FAA273488F1 /* Pods_DUMessagingDemo.framework */,
+				5A32619535CF4F476474C9A3 /* Pods_DUMessagingUIKit.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		FA2D83191CFE0BE20060A6B8 = {
@@ -243,10 +225,9 @@
 				FA2D83251CFE0BE20060A6B8 /* DUMessagingUIKit */,
 				FA2D83311CFE0BE30060A6B8 /* DUMessagingUIKitTests */,
 				FA2D83CF1CFE762B0060A6B8 /* DUMessagingDemo */,
-				FA2D83E41CFE762B0060A6B8 /* DUMessagingDemoUITests */,
 				FA2D83241CFE0BE20060A6B8 /* Products */,
-				F00DA5E024206A6D98427B42 /* Pods */,
-				9829AF0A1702FAC3380D7BB0 /* Frameworks */,
+				372F51F139D1D3957F3250A3 /* Pods */,
+				5B5DB69426393531234D1CCC /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -256,7 +237,6 @@
 				FA2D83231CFE0BE20060A6B8 /* DUMessagingUIKit.framework */,
 				FA2D832D1CFE0BE30060A6B8 /* DUMessagingUIKitTests.xctest */,
 				FA2D83CE1CFE762B0060A6B8 /* DUMessagingDemo.app */,
-				FA2D83E11CFE762B0060A6B8 /* DUMessagingDemoUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -372,15 +352,6 @@
 			path = DUMessagingDemo;
 			sourceTree = "<group>";
 		};
-		FA2D83E41CFE762B0060A6B8 /* DUMessagingDemoUITests */ = {
-			isa = PBXGroup;
-			children = (
-				FA2D83E51CFE762B0060A6B8 /* DUMessagingDemoUITests.swift */,
-				FA2D83E71CFE762B0060A6B8 /* Info.plist */,
-			);
-			path = DUMessagingDemoUITests;
-			sourceTree = "<group>";
-		};
 		FA5B99511D01857E00786C6B /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -418,12 +389,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = FA2D83371CFE0BE30060A6B8 /* Build configuration list for PBXNativeTarget "DUMessagingUIKit" */;
 			buildPhases = (
-				D8F4843CF5806F63A64316F6 /* Check Pods Manifest.lock */,
+				70E32D35BCD6ACAC5AE10779 /* [CP] Check Pods Manifest.lock */,
 				FA2D831E1CFE0BE20060A6B8 /* Sources */,
 				FA2D831F1CFE0BE20060A6B8 /* Frameworks */,
 				FA2D83201CFE0BE20060A6B8 /* Headers */,
 				FA2D83211CFE0BE20060A6B8 /* Resources */,
-				FCC6129A4A94D385B3D8D2BF /* Copy Pods Resources */,
+				2A212A0BCE5203E743620C7E /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -456,13 +427,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = FA2D83E81CFE762B0060A6B8 /* Build configuration list for PBXNativeTarget "DUMessagingDemo" */;
 			buildPhases = (
-				F15A43F8B3856A88FCB4F71B /* Check Pods Manifest.lock */,
+				200BB1945991712BC02A48A2 /* [CP] Check Pods Manifest.lock */,
 				FA2D83CA1CFE762B0060A6B8 /* Sources */,
 				FA2D83CB1CFE762B0060A6B8 /* Frameworks */,
 				FA2D83CC1CFE762B0060A6B8 /* Resources */,
-				B481F916A491C108B12D966A /* Embed Pods Frameworks */,
-				66C2F630835D67315148A5DE /* Copy Pods Resources */,
-				FA5542E91D17CE6200150513 /* Embed Frameworks */,
+				7FE1E41D81C676870F711AB5 /* [CP] Embed Pods Frameworks */,
+				9F011E3DF4718D47A4E3AE8E /* [CP] Copy Pods Resources */,
+				FA895CB41DB36C820046A738 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -473,24 +444,6 @@
 			productReference = FA2D83CE1CFE762B0060A6B8 /* DUMessagingDemo.app */;
 			productType = "com.apple.product-type.application";
 		};
-		FA2D83E01CFE762B0060A6B8 /* DUMessagingDemoUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = FA2D83EB1CFE762B0060A6B8 /* Build configuration list for PBXNativeTarget "DUMessagingDemoUITests" */;
-			buildPhases = (
-				FA2D83DD1CFE762B0060A6B8 /* Sources */,
-				FA2D83DE1CFE762B0060A6B8 /* Frameworks */,
-				FA2D83DF1CFE762B0060A6B8 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				FA2D83E31CFE762B0060A6B8 /* PBXTargetDependency */,
-			);
-			name = DUMessagingDemoUITests;
-			productName = DUMessagingDemoUITests;
-			productReference = FA2D83E11CFE762B0060A6B8 /* DUMessagingDemoUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -498,21 +451,19 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0730;
-				LastUpgradeCheck = 0730;
+				LastUpgradeCheck = 0800;
 				ORGANIZATIONNAME = duolC;
 				TargetAttributes = {
 					FA2D83221CFE0BE20060A6B8 = {
 						CreatedOnToolsVersion = 7.3.1;
+						LastSwiftMigration = 0800;
 					};
 					FA2D832C1CFE0BE30060A6B8 = {
 						CreatedOnToolsVersion = 7.3.1;
+						LastSwiftMigration = 0800;
 					};
 					FA2D83CD1CFE762B0060A6B8 = {
 						CreatedOnToolsVersion = 7.3.1;
-					};
-					FA2D83E01CFE762B0060A6B8 = {
-						CreatedOnToolsVersion = 7.3.1;
-						TestTargetID = FA2D83CD1CFE762B0060A6B8;
 					};
 				};
 			};
@@ -532,7 +483,6 @@
 				FA2D83221CFE0BE20060A6B8 /* DUMessagingUIKit */,
 				FA2D832C1CFE0BE30060A6B8 /* DUMessagingUIKitTests */,
 				FA2D83CD1CFE762B0060A6B8 /* DUMessagingDemo */,
-				FA2D83E01CFE762B0060A6B8 /* DUMessagingDemoUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -575,39 +525,62 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		FA2D83DF1CFE762B0060A6B8 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		66C2F630835D67315148A5DE /* Copy Pods Resources */ = {
+		200BB1945991712BC02A48A2 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Copy Pods Resources";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-DUMessagingDemo/Pods-DUMessagingDemo-resources.sh\"\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		B481F916A491C108B12D966A /* Embed Pods Frameworks */ = {
+		2A212A0BCE5203E743620C7E /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Embed Pods Frameworks";
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-DUMessagingUIKit/Pods-DUMessagingUIKit-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		70E32D35BCD6ACAC5AE10779 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		7FE1E41D81C676870F711AB5 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -615,49 +588,19 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-DUMessagingDemo/Pods-DUMessagingDemo-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		D8F4843CF5806F63A64316F6 /* Check Pods Manifest.lock */ = {
+		9F011E3DF4718D47A4E3AE8E /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Check Pods Manifest.lock";
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-		F15A43F8B3856A88FCB4F71B /* Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-		FCC6129A4A94D385B3D8D2BF /* Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-DUMessagingUIKit/Pods-DUMessagingUIKit-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-DUMessagingDemo/Pods-DUMessagingDemo-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -726,14 +669,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		FA2D83DD1CFE762B0060A6B8 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				FA2D83E61CFE762B0060A6B8 /* DUMessagingDemoUITests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -741,11 +676,6 @@
 			isa = PBXTargetDependency;
 			target = FA2D83221CFE0BE20060A6B8 /* DUMessagingUIKit */;
 			targetProxy = FA2D832F1CFE0BE30060A6B8 /* PBXContainerItemProxy */;
-		};
-		FA2D83E31CFE762B0060A6B8 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = FA2D83CD1CFE762B0060A6B8 /* DUMessagingDemo */;
-			targetProxy = FA2D83E21CFE762B0060A6B8 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -783,6 +713,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -793,8 +724,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -822,6 +755,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -832,6 +766,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -842,8 +777,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -863,6 +800,8 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -872,9 +811,10 @@
 		};
 		FA2D83381CFE0BE30060A6B8 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6F3776EECC3FCAF3025A9124 /* Pods-DUMessagingUIKit.debug.xcconfig */;
+			baseConfigurationReference = D5EEC5293A597444E3DEDE09 /* Pods-DUMessagingUIKit.debug.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -890,14 +830,16 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
 		FA2D83391CFE0BE30060A6B8 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 71F8DFD4B69502C2E61060B1 /* Pods-DUMessagingUIKit.release.xcconfig */;
+			baseConfigurationReference = E2C40F4068807F27FBC938D2 /* Pods-DUMessagingUIKit.release.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -912,6 +854,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.duolc.DUMessagingUIKit;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
@@ -922,6 +865,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.duolc.DUMessagingUIKitTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -932,14 +876,16 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.duolc.DUMessagingUIKitTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
 		FA2D83E91CFE762B0060A6B8 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0BF73D5FEEF48118C97C3F49 /* Pods-DUMessagingDemo.debug.xcconfig */;
+			baseConfigurationReference = BE6833C1980C5C15A690B88B /* Pods-DUMessagingDemo.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ENABLE_BITCODE = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -953,9 +899,10 @@
 		};
 		FA2D83EA1CFE762B0060A6B8 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A163F8A2822A07A54571279E /* Pods-DUMessagingDemo.release.xcconfig */;
+			baseConfigurationReference = E6521875D5EA41BC1EED7C3B /* Pods-DUMessagingDemo.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ENABLE_BITCODE = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -964,28 +911,6 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.duolc.DUMessagingDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Release;
-		};
-		FA2D83EC1CFE762B0060A6B8 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				INFOPLIST_FILE = DUMessagingDemoUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.duolc.DUMessagingDemoUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_TARGET_NAME = DUMessagingDemo;
-			};
-			name = Debug;
-		};
-		FA2D83ED1CFE762B0060A6B8 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				INFOPLIST_FILE = DUMessagingDemoUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.duolc.DUMessagingDemoUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_TARGET_NAME = DUMessagingDemo;
 			};
 			name = Release;
 		};
@@ -1024,15 +949,6 @@
 			buildConfigurations = (
 				FA2D83E91CFE762B0060A6B8 /* Debug */,
 				FA2D83EA1CFE762B0060A6B8 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		FA2D83EB1CFE762B0060A6B8 /* Build configuration list for PBXNativeTarget "DUMessagingDemoUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				FA2D83EC1CFE762B0060A6B8 /* Debug */,
-				FA2D83ED1CFE762B0060A6B8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

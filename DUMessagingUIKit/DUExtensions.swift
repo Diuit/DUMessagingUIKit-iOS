@@ -120,7 +120,7 @@ public extension UIFont {
 }
 
 // MARK: functions
-public extension NSDate {
+public extension Date {
     /**
         Convert NSDate instance to a String indicating time with specif format:
             - 7:33PM : Display hour and minute if the time is today
@@ -129,83 +129,83 @@ public extension NSDate {
      */
     var messageTimeLabelString: String {
         get {
-            let cal = NSCalendar.currentCalendar()
-            var components = cal.components([.Era, .Year, .Month, .Day], fromDate: NSDate())
+            let cal = Calendar.current
+            var components = (cal as NSCalendar).components([.era, .year, .month, .day], from: Date())
             let currentYear = components.year
-            let today = cal.dateFromComponents(components)!
-            components = cal.components([.Era, .Year, .Month, .Day], fromDate: self)
+            let today = cal.date(from: components)!
+            components = (cal as NSCalendar).components([.era, .year, .month, .day], from: self)
             let thisYear = components.year
-            let thisDate = cal.dateFromComponents(components)!
+            let thisDate = cal.date(from: components)!
             
-            let dateFormatter = NSDateFormatter()
-            dateFormatter.locale = NSLocale.currentLocale()
-            if today.isEqualToDate(thisDate) { // today, print out time only
-                dateFormatter.dateStyle = .NoStyle
-                dateFormatter.timeStyle = .ShortStyle
+            let dateFormatter = DateFormatter()
+            dateFormatter.locale = Locale.current
+            if today == thisDate { // today, print out time only
+                dateFormatter.dateStyle = .none
+                dateFormatter.timeStyle = .short
             } else { // not today, print out date
                 if thisYear == currentYear {
                     dateFormatter.dateFormat = "MMM dd"
                 } else {
-                    dateFormatter.dateStyle = .ShortStyle
-                    dateFormatter.timeStyle = .NoStyle
+                    dateFormatter.dateStyle = .short
+                    dateFormatter.timeStyle = .none
                 }
             }
             
-            return dateFormatter.stringFromDate(self)
+            return dateFormatter.string(from: self)
         }
     }
 }
 
 public extension UIImage {
     class func DUNewChatButtonImage() -> UIImage {
-        return UIImage(named: "CreateChat_n", inBundle: NSBundle.du_messagingUIKitBundle , compatibleWithTraitCollection: nil)!
+        return UIImage(named: "CreateChat_n", in: Bundle.du_messagingUIKitBundle , compatibleWith: nil)!
     }
     
     class func DUDefaultPersonAvatarImage() -> UIImage {
-        return UIImage(named: "defaultAvatar", inBundle: NSBundle.du_messagingUIKitBundle , compatibleWithTraitCollection: nil)!
+        return UIImage(named: "defaultAvatar", in: Bundle.du_messagingUIKitBundle , compatibleWith: nil)!
     }
     
     class func DUAddUserImage() -> UIImage {
-        return UIImage(named: "addUser", inBundle: NSBundle.du_messagingUIKitBundle , compatibleWithTraitCollection: nil)!
+        return UIImage(named: "addUser", in: Bundle.du_messagingUIKitBundle , compatibleWith: nil)!
     }
     
     class func DUFileIconImage() -> UIImage {
-        return UIImage(named: "fileIcon", inBundle: NSBundle.du_messagingUIKitBundle , compatibleWithTraitCollection: nil)!
+        return UIImage(named: "fileIcon", in: Bundle.du_messagingUIKitBundle , compatibleWith: nil)!
     }
     
     class func DUPlayIcon() -> UIImage {
-        return UIImage(named:"playIcon", inBundle: NSBundle.du_messagingUIKitBundle , compatibleWithTraitCollection: nil)!
+        return UIImage(named:"playIcon", in: Bundle.du_messagingUIKitBundle , compatibleWith: nil)!
     }
     
     class func DUSettingsIcon() -> UIImage {
-        return UIImage(named:"setting", inBundle: NSBundle.du_messagingUIKitBundle , compatibleWithTraitCollection: nil)!
+        return UIImage(named:"setting", in: Bundle.du_messagingUIKitBundle , compatibleWith: nil)!
     }
     /**
         Return an UIImage instance with size 1.0 * 1.0 of given background UIColor
      */
     class func imageWith(backgroundColor color: UIColor) -> UIImage {
-        let rect: CGRect = CGRectMake(0.0, 0.0, 1.0, 1.0)
+        let rect: CGRect = CGRect(x: 0.0, y: 0.0, width: 1.0, height: 1.0)
         UIGraphicsBeginImageContext(rect.size)
         let context = UIGraphicsGetCurrentContext()
-        CGContextSetFillColorWithColor(context, color.CGColor)
-        CGContextFillRect(context, rect)
+        context?.setFillColor(color.cgColor)
+        context?.fill(rect)
         
         let resultImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
-        return resultImage
+        return resultImage!
     }
     
     func masked(withColor color: UIColor) -> UIImage {
-        let imageRect = CGRectMake(0, 0, self.size.width, self.size.height)
+        let imageRect = CGRect(x: 0, y: 0, width: self.size.width, height: self.size.height)
         var maskedImage: UIImage! = nil
         
         UIGraphicsBeginImageContextWithOptions(imageRect.size, false, self.scale)
         let context = UIGraphicsGetCurrentContext()
-        CGContextScaleCTM(context, 1.0, -1.0)
+        context?.scaleBy(x: 1.0, y: -1.0)
         
-        CGContextClipToMask(context, imageRect, self.CGImage)
-        CGContextSetFillColorWithColor(context, color.CGColor)
-        CGContextFillRect(context, imageRect)
+        context?.clip(to: imageRect, mask: self.cgImage!)
+        context?.setFillColor(color.cgColor)
+        context?.fill(imageRect)
         
         maskedImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
@@ -216,7 +216,7 @@ public extension UIImage {
 
 
 public extension NSAttributedString {
-    class func DUDeliverWarningAttributed(string: String) -> NSAttributedString {
+    class func DUDeliverWarningAttributed(_ string: String) -> NSAttributedString {
         return NSAttributedString(string: string, attributes: [NSFontAttributeName : UIFont.DUMessageTimeLabelFont(), NSForegroundColorAttributeName : UIColor.DUWarnigColor()])
     }
 }
@@ -224,14 +224,14 @@ public extension NSAttributedString {
 public extension UIView {
     /// Add NSLayoutConstraints to make subview as same as current view in size
     func pingAlledge(ofSubview subview: UIView) {
-        self.ping(subview: subview, toEdge: .Top)
-        self.ping(subview: subview, toEdge: .Leading)
-        self.ping(subview: subview, toEdge: .Bottom)
-        self.ping(subview: subview, toEdge: .Trailing)
+        self.ping(subview: subview, toEdge: .top)
+        self.ping(subview: subview, toEdge: .leading)
+        self.ping(subview: subview, toEdge: .bottom)
+        self.ping(subview: subview, toEdge: .trailing)
     }
     /// Ping one edge of subview with given attribut onto current view's edge
-    func ping(subview subview:UIView, toEdge attribute: NSLayoutAttribute) {
-        self.addConstraint(NSLayoutConstraint(item: self, attribute: attribute, relatedBy: .Equal, toItem: subview, attribute: attribute, multiplier: 1.0, constant: 0.0))
+    func ping(subview:UIView, toEdge attribute: NSLayoutAttribute) {
+        self.addConstraint(NSLayoutConstraint(item: self, attribute: attribute, relatedBy: .equal, toItem: subview, attribute: attribute, multiplier: 1.0, constant: 0.0))
     }
 }
 
@@ -242,7 +242,7 @@ public extension String {
      - returns: Trimmed String
      */
     func du_trimingWhitespace() -> String {
-        return self.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
+        return self.trimmingCharacters(in: CharacterSet.whitespaces)
     }
     /**
      Calculate the minimum rectangle which contains the given text, with given width and font.
@@ -252,10 +252,10 @@ public extension String {
      
      - returns: A CGRect structure of calculated result.
      */
-    func rectWithConstrainedWidth(width: CGFloat, font: UIFont) -> CGRect {
-        let constraintRect = CGSize(width: width, height: CGFloat.max)
-        let boundingRect = self.boundingRectWithSize(constraintRect, options: .UsesLineFragmentOrigin, attributes: [NSFontAttributeName: font], context: nil)
-        return CGRectIntegral(boundingRect)
+    func rectWithConstrainedWidth(_ width: CGFloat, font: UIFont) -> CGRect {
+        let constraintRect = CGSize(width: width, height: CGFloat.greatestFiniteMagnitude)
+        let boundingRect = self.boundingRect(with: constraintRect, options: .usesLineFragmentOrigin, attributes: [NSFontAttributeName: font], context: nil)
+        return boundingRect.integral
     }
     
     /**
@@ -266,23 +266,23 @@ public extension String {
     func isValidURL() -> Bool {
         let urlRegEx = "(?i)https?://(?:www\\.)?\\S+(?:/|\\b)"
         let predicate: NSPredicate = NSPredicate(format: "SELF MATCHES %@", argumentArray: [urlRegEx])
-        return predicate.evaluateWithObject(self)
+        return predicate.evaluate(with: self)
     }
 }
 
 public extension NSObject {
     /// Return class string
     public class var nameOfClass: String{
-        return NSStringFromClass(self).componentsSeparatedByString(".").last!
+        return NSStringFromClass(self).components(separatedBy: ".").last!
     }
     /// Return dynamic type string of the instance
     public var nameOfClass: String{
-        return NSStringFromClass(self.dynamicType).componentsSeparatedByString(".").last!
+        return NSStringFromClass(type(of: self)).components(separatedBy: ".").last!
     }
 }
 
 
-public extension NSURL {
+public extension URL {
     /**
      Get complete asset file name, e.g. 'image1.jpg'
      
@@ -293,10 +293,10 @@ public extension NSURL {
             return nil
         }
         let absoluePath = self.absoluteString
-        let idRange = absoluePath.rangeOfString("id=")
-        let extRange = absoluePath.rangeOfString("&ext=")
-        let fileName = absoluePath.substringWithRange(idRange!.endIndex..<extRange!.startIndex)
-        let ext = absoluePath.substringWithRange(extRange!.endIndex..<absoluePath.endIndex)
+        let idRange = absoluePath.range(of: "id=")
+        let extRange = absoluePath.range(of: "&ext=")
+        let fileName = absoluePath.substring(with: idRange!.upperBound..<extRange!.lowerBound)
+        let ext = absoluePath.substring(with: extRange!.upperBound..<absoluePath.endIndex)
         return fileName+"."+ext
     }
     
@@ -310,8 +310,8 @@ public extension NSURL {
             return nil
         }
         let absoluePath = self.absoluteString
-        let extRange = absoluePath.rangeOfString("&ext=")
-        return absoluePath.substringWithRange(extRange!.endIndex..<absoluePath.endIndex)
+        let extRange = absoluePath.range(of: "&ext=")
+        return absoluePath.substring(with: extRange!.upperBound..<absoluePath.endIndex)
     }
     
     /**
@@ -324,15 +324,30 @@ public extension NSURL {
             return nil
         }
         let absoluePath = self.absoluteString
-        let idRange = absoluePath.rangeOfString("id=")
-        let extRange = absoluePath.rangeOfString("&ext=")
-        return absoluePath.substringWithRange(idRange!.endIndex..<extRange!.startIndex)
+        let idRange = absoluePath.range(of: "id=")
+        let extRange = absoluePath.range(of: "&ext=")
+        return absoluePath.substring(with: idRange!.upperBound..<extRange!.lowerBound)
     }
 }
 
-public extension NSBundle {
-    static var du_messagingUIKitBundle: NSBundle {
-        return NSBundle(forClass: DUMessagesViewController.classForCoder())
+public extension Int {
+    var convertedByteSizeString: String {
+        var convertedValue = Double(self)
+        var multiplyFactor = 0
+        let sizeUnits = ["bytes", "KB", "MB", "GB", "TB"]
+        
+        while convertedValue > 1024 {
+            convertedValue /= 1024
+            multiplyFactor += 1
+        }
+        
+        return String(format: "%4.2f\(sizeUnits[multiplyFactor])", convertedValue)
+    }
+}
+
+public extension Bundle {
+    static var du_messagingUIKitBundle: Bundle {
+        return Bundle(for: DUMessagesViewController.classForCoder())
     }
 }
 

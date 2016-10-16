@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 /// This factory is in charge of generating UIImage instance for message bubble image.
-public class DUMessageBubbleImageFactory: NSObject {
+open class DUMessageBubbleImageFactory: NSObject {
     /// Build a message bubble image with given color
     /// - parameter color: Background color of the message bubble
     public static func makeMessageBubbleImage(color:UIColor) -> UIImage {

@@ -8,11 +8,11 @@
 
 import Foundation
 
-let imageCache = NSCache()
+let imageCache = NSCache<AnyObject, AnyObject>()
 
 /// Base protocol for remote resources
 public protocol DURemoteResource {
-    func load(url: String, completion: (Bool -> Void)? )
+    func load(url: String, completion: ((Bool) -> Void)? )
 }
 
 /// Protocol for loading image resource
@@ -24,7 +24,7 @@ public protocol DUImageResource: DURemoteResource {
 }
 extension DUImageResource {
     /// Load the image resource from imagePath
-    public func load(url: String, completion: (Bool -> Void)? ) {
+    public func load(url: String, completion: ((Bool) -> Void)? ) {
         guard imagePath != nil && imagePath != "" else {
             print("image path is nil or empty")
             completion?(false)
@@ -32,65 +32,40 @@ extension DUImageResource {
         }
         print("Fetching remote resources from \(url)")
         
-        if let _ = imageCache.objectForKey(url) as? NSData {
+        if let _ = imageCache.object(forKey: url as AnyObject) as? Data {
             completion?(true)
         } else {
-            let session = NSURLSession.sharedSession()
-            let u = NSURL(string: url)
-            let downloadTask = session.dataTaskWithURL(u!, completionHandler: { data, response, error in
+            let session = URLSession.shared
+            let u = URL(string: url)
+            let downloadTask = session.dataTask(with: u!, completionHandler: { data, response, error in
                 guard error == nil else {
                     completion?(false)
                     return
                 }
                 if data != nil {
-                    imageCache.setObject(data!, forKey: url)
+                    imageCache.setObject(data! as AnyObject, forKey: url as AnyObject)
                     completion?(true)
                 }
             })
             downloadTask.resume()
         }
-        
-        
-        
-        /*
-        let imgManager = SDWebImageManager.sharedManager()
-        let indexKey = imgManager.cacheKeyForURL(NSURL(string: url))
-        let cachedImage = imgManager.imageCache.imageFromMemoryCacheForKey(indexKey)
-        if cachedImage != nil {
-            completion?(true)
-        } else {
-            let downloader = SDWebImageDownloader.sharedDownloader()
-            downloader.downloadImageWithURL(NSURL(string: url), options: .AllowInvalidSSLCertificates, progress: { (received, expected) in
-                // do nothing about progress status
-            }) { image, data, error, finished in
-                if image != nil && finished {
-                    // image downloaded
-                    imgManager.saveImageToCache(image, forURL: NSURL(string: url))
-                    completion?(true)
-                } else {
-                    // download failed
-                    print("Request error! \(error!.localizedDescription)")
-                    completion?(false)
-                }
-            }
-        }
- */
+
     }
     
     /// Send a completion handler to this function and trigger the image loading procedure.
     /// Beware your completion closure will be executed in main queue, so do not deal with time-consuming stuff here.
-    func loadImage(completion: (Void -> Void)? ) {
+    func loadImage(onCompletion completion: ((Void) -> Void)? ) {
         guard self.imagePath != nil else { return }
-        self.load(self.imagePath!) { success in
+        self.load(url: self.imagePath!) { success in
             if let c = completion {
-                dispatch_async(dispatch_get_main_queue(), c)
+                DispatchQueue.main.async(execute: c)
             }
         }
     }
     
     /// Return cached image for given URL
-    func imageForURL(url: String) -> UIImage? {
-        let cachedData = imageCache.objectForKey(url) as? NSData
+    func imageFor(url: String) -> UIImage? {
+        let cachedData = imageCache.object(forKey: url as AnyObject) as? Data
         if let _ = cachedData {
             return UIImage(data: cachedData!)
         } else {
@@ -101,7 +76,7 @@ extension DUImageResource {
     /// get UIImage instance, return placeholderImage if remote resource failed to load
     var imageValue: UIImage? {
         if self.imagePath == nil { return nil }
-        if let img = self.imageForURL(self.imagePath!) {
+        if let img = self.imageFor(url: self.imagePath!) {
             return img
         } else {
             return nil

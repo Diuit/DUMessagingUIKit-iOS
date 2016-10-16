@@ -28,7 +28,7 @@ public enum UIBarButtonType {
     case imageButton, textButton, noButton
 }
 @objc public protocol BarButtonReaction {
-    func didClickRightBarButton(sender: UIBarButtonItem?)
+    func didClick(rightBarButton: UIBarButtonItem?)
 }
 public protocol BarButton {
     var myBarButtonType: UIBarButtonType { get }
@@ -69,9 +69,9 @@ public extension UIProtocolAdoption where Self: UIViewController {
         if let mySelf = self as? RightBarButton {
             switch mySelf.myBarButtonType {
             case .imageButton:
-                navigationItem.rightBarButtonItem = UIBarButtonItem.init(image: mySelf.rightBarButtonImage?.imageWithRenderingMode(.AlwaysOriginal) , style: .Plain, target: self, action: #selector(mySelf.didClickRightBarButton(_:)))
+                navigationItem.rightBarButtonItem = UIBarButtonItem.init(image: mySelf.rightBarButtonImage?.withRenderingMode(.alwaysOriginal) , style: .plain, target: self, action: #selector(mySelf.didClick(rightBarButton:)))
             case .textButton:
-                navigationItem.rightBarButtonItem = UIBarButtonItem.init(title: mySelf.rightBarButtonText, style: .Plain, target: self, action: #selector(mySelf.didClickRightBarButton(_:)))
+                navigationItem.rightBarButtonItem = UIBarButtonItem.init(title: mySelf.rightBarButtonText, style: .plain, target: self, action: #selector(mySelf.didClick(rightBarButton:)))
             default:
                 navigationItem.rightBarButtonItem = nil
             }
@@ -79,7 +79,7 @@ public extension UIProtocolAdoption where Self: UIViewController {
         }
         // TintColor
         if let mySelf = self as? TintColor {
-            UIApplication.sharedApplication().delegate?.window??.tintColor = mySelf.myTintColor
+            UIApplication.shared.delegate?.window??.tintColor = mySelf.myTintColor
             navigationItem.rightBarButtonItem?.tintColor = mySelf.myTintColor
         }
     }
@@ -120,13 +120,13 @@ public protocol URLMediaContentStyle: MediaContentStyle, BorderWidth, BorderColo
 extension URLMediaContentStyle {
     public var myBorderColor: UIColor     { return UIColor.DULightgreyColor() }
     public var myBorderWidth: CGFloat     { return 1.0 }
-    public var myBackgroundColor: UIColor { return UIColor.whiteColor() }
+    public var myBackgroundColor: UIColor { return UIColor.white }
 }
 
 // MARK: adoption method for ecah UIKit
 extension UIView: UIProtocolAdoption {
     
-    public override func awakeFromNib() {
+    open override func awakeFromNib() {
         
         super.awakeFromNib()
         adoptProtocolUIApperance()
@@ -137,7 +137,7 @@ extension UIView: UIProtocolAdoption {
         if let mySelf = self as? BackgroundColor   { backgroundColor       = mySelf.myBackgroundColor }
         if let mySelf = self as? TintColor         { tintColor             = mySelf.myTintColor   }
         if let mySelf = self as? BorderWidth       { layer.borderWidth     = mySelf.myBorderWidth }
-        if let mySelf = self as? BorderColor       { layer.borderColor     = mySelf.myBorderColor.CGColor }
+        if let mySelf = self as? BorderColor       { layer.borderColor     = mySelf.myBorderColor.cgColor }
         if let mySelf = self as? CornerRadius      { layer.cornerRadius    = mySelf.myCornerRadius}
         if self is MasksToBoundsTRUE               { layer.masksToBounds = true }
         
@@ -146,7 +146,7 @@ extension UIView: UIProtocolAdoption {
     public func setupInheritedProtocolUI() {
         // do nothing for UIView
     }
-    public override func prepareForInterfaceBuilder() {
+    open override func prepareForInterfaceBuilder() {
         adoptProtocolUIApperance()
     }
 }

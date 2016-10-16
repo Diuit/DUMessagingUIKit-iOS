@@ -18,7 +18,7 @@ struct MockMessageModel: DUMessageData {
     var isMediaMessage: Bool
     var mediaItem: DUMediaItem?
     var isOutgoingMessage: Bool
-    var date: NSDate?
+    var date: Date?
     var contentText: String?
     var hashValue: Int
     var reads: [String]? = ["1"]
@@ -26,7 +26,7 @@ struct MockMessageModel: DUMessageData {
     init(text: String?, isOutgoing: Bool) {
         messageID = id
         id += 1
-        date = NSDate()
+        date = Date()
         contentText = text
         hashValue = id.hashValue
         isOutgoingMessage = isOutgoing
@@ -37,7 +37,7 @@ struct MockMessageModel: DUMessageData {
     init(url: String, isOutgoing: Bool) {
         messageID = id
         id += 1
-        date = NSDate()
+        date = Date()
         contentText = nil
         hashValue = id.hashValue
         isOutgoingMessage = isOutgoing
@@ -48,7 +48,7 @@ struct MockMessageModel: DUMessageData {
     init(image: UIImage, isOutgoing: Bool) {
         messageID = id
         id += 1
-        date = NSDate()
+        date = Date()
         contentText = nil
         hashValue = id.hashValue
         isOutgoingMessage = isOutgoing
@@ -59,7 +59,7 @@ struct MockMessageModel: DUMessageData {
     init(fileURL: String, fileName: String, fileDescription: String?, isOutgoing: Bool) {
         messageID = id
         id += 1
-        date = NSDate()
+        date = Date()
         contentText = nil
         hashValue = id.hashValue
         isOutgoingMessage = isOutgoing
@@ -70,7 +70,7 @@ struct MockMessageModel: DUMessageData {
     init(videoURL: String, previewImage: UIImage?, isOutgoing: Bool) {
         messageID = id
         id += 1
-        date = NSDate()
+        date = Date()
         contentText = nil
         hashValue = id.hashValue
         isOutgoingMessage = isOutgoing
