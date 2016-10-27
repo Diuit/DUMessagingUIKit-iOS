@@ -645,11 +645,11 @@ public extension DUMessageData {
 // MARK: Gathering UI Protocol
 public protocol DUMessagesUIProtocol: GlobalUIProtocol, UIProtocolAdoption, NavigationBarTitle, RightBarButton {}
 extension DUMessagesViewController: DUMessagesUIProtocol {
-    public var myBarTitle: String { return "Messages" }
+    open var myBarTitle: String { return "Messages" }
     
-    public var rightBarButtonText: String? { return nil }
-    public var rightBarButtonImage: UIImage? { return UIImage.DUSettingsIcon() }
-    public var myBarButtonType: UIBarButtonType { return .imageButton }
+    open var rightBarButtonText: String? { return nil }
+    open var rightBarButtonImage: UIImage? { return UIImage.DUSettingsIcon() }
+    open var myBarButtonType: UIBarButtonType { return .imageButton }
     open func didClick(rightBarButton: UIBarButtonItem?) {
         assert(false, "Error! You must override this function : \(#function)")
     }

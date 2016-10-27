@@ -1,10 +1,10 @@
 PODS:
-  - CryptoSwift (0.6.1)
-  - DTModelStorage (3.0.0-beta.3):
-    - DTModelStorage/Core (= 3.0.0-beta.3)
-  - DTModelStorage/Core (3.0.0-beta.3)
-  - DTTableViewManager (5.0.0-beta.3):
-    - DTModelStorage (~> 3.0.0-beta.3)
+  - CryptoSwift (0.6.4)
+  - DTModelStorage (3.0.0):
+    - DTModelStorage/Core (= 3.0.0)
+  - DTModelStorage/Core (3.0.0)
+  - DTTableViewManager (5.0.0):
+    - DTModelStorage (~> 3.0.0)
   - DUMessaging (2.0.1):
     - Socket.IO-Client-Swift
   - Kanna (2.0.0)
@@ -38,9 +38,9 @@ CHECKOUT OPTIONS:
     :tag: 0.6.0
 
 SPEC CHECKSUMS:
-  CryptoSwift: abdbc1bf32c89117c6b403810a7b30f742d86e68
-  DTModelStorage: 4e24417e8a7957c6513d9149883b296dadb85cb9
-  DTTableViewManager: d77a5bb5b1b4fbe8b08c92b8f8ffdf25cf4dd53e
+  CryptoSwift: 2cb9a11b942b443ca3316bdac2733ed6c6e16d4e
+  DTModelStorage: ebae17aed693e1c3f1ac80e604f0645bbb2b6a97
+  DTTableViewManager: 61dce865d35166e0063a58472bc9037e08cd4602
   DUMessaging: cc32b42a7becd53458de501b585f9712161c12f9
   Kanna: 8d60d86a3580f7dee732811e5163a5e3e41a32a7
   MisterFusion: d42cac7afe8318c282bcda93396eba0aef45d30e
@@ -49,4 +49,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: 2abb34cb60803065f8876ebe14f075cbb06ff54d
 
-COCOAPODS: 1.1.0.rc.2
+COCOAPODS: 1.1.1
